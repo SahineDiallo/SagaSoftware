@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e-i!&=$ccux%brlrz^kh)liuiparvsecr&qzn(j-okp$kprn8$'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #Installed apps
+    'accounts',
+    'tracker',
+    'crispy_forms',
 ]
+
+AUTH_USER_MODEL = (
+    "accounts.User"  # Using our costum user model instead of the built-in one
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +67,7 @@ ROOT_URLCONF = 'SagaSoftware.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        "DIRS": [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'tracker.templateprocessors.get_universalForms',
             ],
         },
     },
@@ -112,10 +126,26 @@ USE_I18N = True
 USE_TZ = True
 
 
+# these are the configurations of the email messages
+
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# # EMAIL_USE_SSL = False
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = BASE_DIR / "static_root"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media_root"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

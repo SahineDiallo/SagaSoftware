@@ -1,0 +1,65 @@
+{% load static %}
+
+<div class="main-sidebar">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="index.html">Saga Software</a>
+          </div>
+          <div class="sidebar-user">
+            <div class="sidebar-user-picture">
+              <img alt="image" src="{% static 'tracker/dist/img/avatar/avatar-1.jpeg' %}">
+            </div>
+            <div class="sidebar-user-details">
+              <div class="user-name">{{request.user}}</div>
+              <div class="user-role">
+                Administrator
+              </div>
+            </div>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="active">
+              <a href="index.html"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+            </li>
+            <li class="menu-header">Board</li> 
+            <li>
+              <a href="#" class="has-dropdown"><i class="ion ion-ios-list-outline"></i><span>WPH-board</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="general.html"><i class="ion ion-ios-circle-outline"></i> Basic</a></li>
+                <li><a href="components.html"><i class="ion ion-ios-circle-outline"></i> Main Components</a></li>
+                <li><a href="buttons.html"><i class="ion ion-ios-circle-outline"></i> View all boards</a></li>
+                <li><a href="toastr.html"><i class="ion ion-ios-circle-outline"></i> Create Board</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown"><i class="ion ion-flag"></i><span>Issues and filters</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="ion-icons.html"><i class="ion ion-ios-circle-outline"></i>All issues</a></li>
+                <li><a href="fontawesome.html"><i class="ion ion-ios-circle-outline"></i> Issues Reported by me</a></li>
+                <li><a href="flag.html"><i class="ion ion-ios-circle-outline"></i> Done issues</a></li>
+                <li><a href="flag.html"><i class="ion ion-ios-circle-outline"></i> Let me filter</a></li>
+              </ul>
+            </li>
+            
+            <li>
+              <a href="table.html"><i class="fas fa-bars"></i><span>backlog</span></a>
+            </li>
+            <li>
+              <a href="simple.html"><i class="fas fa-list"></i><span>Active Sprints</span></a>
+            </li>
+            <li>
+              <a href="chartjs.html"><i class="fas fa-shopping-bag"></i><span>Components</span></a>
+            </li>
+            <li>
+              <a href="chartjs.html"><i class="fas fa-chart-line"></i><span>Reports</span></a>
+            </li>
+
+            <li class="menu-header">More</li>
+            <li>
+              <a href="#"><i class="fas fa-cog"></i> Project Settings <div class="badge badge-primary">10</div></a>
+            </li>
+            <li>
+              <a href="credits.html"><i class="ion ion-ios-information-outline"></i> Credits</a>
+            </li>
+          </ul>
+        </aside>
+      </div>

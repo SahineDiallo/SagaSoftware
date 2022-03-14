@@ -1,0 +1,220 @@
+{% extends 'tracker/partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="project-edit">
+    <div class="ssc ssc-card">
+        <div class="ssc-wrapper">
+            {% comment %} <div class="ssc-square mb"></div> {% endcomment %}
+            <div class="flex align-center justify-between">
+                <div class="w-40">
+                    <div class="ssc-head-line w-100"></div>
+                </div>
+                <div class="flex">
+                    <div class="ssc-circle"></div>
+                    <div class="ssc-circle"></div>
+                    <div class="ssc-circle"></div>
+                    <div class="ssc-circle"></div>
+                </div>
+            </div>
+        </div>
+        <div class="ssc-hr"></div>
+        <div class="ssc-wrapper">
+            <div class="d-flex justify-content-center">
+                <div class="ssc-head-line w-70 mb-5"></div>
+            </div>
+            <div class="mb-5">
+                <div class="ssc-line w-20"></div>
+                <div class="ssc-head-line w-40 mb"></div>
+            </div>
+
+            <div class="mb-5">
+                <div class="ssc-line w-20"></div>
+                <div class="ssc-head-line w-40 mb"></div>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+    <div class="over_header card-header py-1 px-2" style="padding: 0;">
+        <div class="d-flex">
+            <div class="d-flex align-items-center">
+                <div class="default-profile-picture2">
+                    <span class="active_project_icon" style="color:{{project_color}}"><i class="mdi {{project_icon}} mdi-36px"></i></span>
+                </div>
+                <div class="d-flex ml-2 mt-1 flex-column">
+                    <p class="lead2 m-0" style="font-size: 17px;">
+                        <span class="active_project" style="font-weight: 500;">{{project.name}}</span>
+                        <span class="active_project_key" style="font-style:italic;"> ({{project.key}})</span>
+                    </p>
+                    <span class="m-0 text-muted proj_type" style="font-size: 13px;">Project Management </span>
+                </div> 
+            </div>
+            <div class="ml-auto d-flex align-items-center">
+                <span class="mr-2">members</span>
+                <span class="badge badge-danger mr-3">20</span>
+                {% if not request.user.is_developer %}
+                  <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary btn-sm mr-2">Invite New members</button>
+                {% endif %}
+              </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 13px; padding: 0;">
+
+    <div class="col-3 col-sm-2 .proj_settings_nav  p-0">
+            <div class="nav flex-column nav-tabs nav-tabs-right h-100" id="vert-tabs-right-tab" role="tablist" aria-orientation="vertical" style=" border: none;">
+                <span class="set_head align-center"><i class="mdi mdi-settings mr-2"></i>Project Settings</span>
+              <a class="nav-link active" id="vert-tabs-right-home-tab" data-toggle="pill" href="#vert-tabs-right-home" role="tab" aria-controls="vert-tabs-right-home" aria-selected="true">General</a>
+              <a class="nav-link" id="vert-tabs-right-members-tab" data-toggle="pill" href="#vert-tabs-right-members" role="tab" aria-controls="vert-tabs-right-members" aria-selected="false">Members</a>
+              <a class="nav-link" id="vert-tabs-right-milestone-tab" data-toggle="pill" href="#vert-tabs-right-milestone" role="tab" aria-controls="vert-tabs-right-milestone" aria-selected="false">Milestones</a>
+              <a class="nav-link" id="vert-tabs-right-comments-tab" data-toggle="pill" href="#vert-tabs-right-comments" role="tab" aria-controls="vert-tabs-right-comments" aria-selected="false">Comments</a>
+              <a class="nav-link" id="vert-tabs-right-history-tab" data-toggle="pill" href="#vert-tabs-right-history" role="tab" aria-controls="vert-tabs-right-history" aria-selected="false">History</a>
+            </div>
+          </div>
+        <div class="col-9 col-sm-10 proj_set_body">
+          <div class="tab-content" id="vert-tabs-right-tabContent">
+            <div class="tab-pane fade active show" id="vert-tabs-right-home" role="tabpanel" aria-labelledby="vert-tabs-right-home-tab">
+                {% crispy form %}
+            </div>
+            <div class="tab-pane fade" id="vert-tabs-right-members" role="tabpanel" aria-labelledby="vert-tabs-right-members-tab">
+                <div class="row">
+                    <h3>Project Members</h3>
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-header">          
+                          <div class="card-tools d-flex align-items-center">
+                            <div class="input-group input-group-sm" style="width: 450px;">
+                              <input type="text" name="table_search" class="form-control float-right" placeholder="Search by email or last name">
+                              <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                  <i class="fas fa-search"></i>
+                                </button>
+                              </div>
+                              
+                            </div>
+                            {% comment %} <input type="text" name="table_search_role" class="form-control float-right" placeholder="Search by email, role, or last name"> {% endcomment %}
+                          </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                          <table class="table table-hover text-nowrap">
+                            <thead>
+                              <tr>
+                                <th>LAST NAME</th>
+                                <th>FIRST NAME</th>
+                                <th>EMAIL</th>
+                                <th>ROLE</th>
+                                <th>JOINED ON</th>
+                                <th>LAST LOGIN</th>
+                                <th>ACTIONS</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for member in members %}
+                              <tr>
+                                <td>{{member.last_name}}</td>
+                                <td>{{member.first_name}}</td>
+                                <td>{{member.email}}</td>
+                                <td><span class="tag tag-success">{{member.get_user_role}}</span></td>
+                                <td>{{member.create_on|date:"M d, Y"}}</td>
+                                <td>{{member.last_login|date:"M d, Y"}}</td>
+                                <td>
+                                  <span class="d-flex align-items-center justify-content-around">
+                                    <span><i class="mdi mdi-pencil" ></i></span>
+                                    <span><i class="mdi mdi-trash-can"></i></span>
+                                  </span>
+                                </td>
+                              </tr>
+                              {% empty %}
+                              <h4> this project has no members currently. PLease invite members or add existing one</h4>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                    </div>
+                  </div>
+            </div>
+            <div class="tab-pane fade" id="vert-tabs-right-milestone" role="tabpanel" aria-labelledby="vert-tabs-right-milestone-tab">
+                <div class="d-flex align-items-center justify-content-between py-3">
+                  <h3 class="card-title m-0">Project Milestones</h3>
+                  <button type="button" id="add_mil" class="btn btn-success btn-sm mr-2">
+                    Add Milestone
+                  </button>
+                  <button type="button" id="edit_mil" class="btn btn-success btn-sm mr-2">
+                    Edit Milestone
+                  </button>
+                </div>
+                <div class="card my-4 p-3 edit_mil_section" style="background: #f3f3f3;">
+                  <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
+                  
+                </div>
+                <div class="card my-4 p-3 add_mil_section" style="background: #f3f3f3;">
+                  <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
+                  {% crispy mile_form %}
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-body table-responsive p-0">
+                          <table class="table table-hover text-nowrap">
+                            <thead>
+                              <tr>
+                              <th>MILESTONE NAME</th>
+                                <th>START DATE</th>
+                                <th>END DATE</th>
+                                <th>CREATED BY</th>
+                                <th>ACTIONS</th>
+                              </tr>
+                            </thead>
+
+                            <tbody class="milestones_body">
+                              {% for milestone in milestones %}
+                              <tr data-reg={{milestone.id}}>
+                                <td>{{milestone.name_milestone}}</td>
+                                <td>{{milestone.start_date|date:"M d, Y"}}</td>
+                                <td>{{milestone.end_date|date:"M d, Y"}}</td>
+                                <td><span class="tag tag-success">{{milestone.created_by}}</span></td>
+                                <td>
+                                  <span class="d-flex align-items-center justify-content-around">
+                                    <span data-mil-id-ed="{{milestone.id}}"><i class="mdi mdi-pencil" ></i></span>
+                                    <span data-mil-id-de="{{milestone.id}}" data-toggle="modal" data-target="#del_milestone"><i class="mdi mdi-trash-can"></i></span>
+                                  </span>                                
+                                </td>
+                              </tr>
+                              {% empty %}   
+                                  <div>                            
+                                    <span class="d-flex flex-column align-items-center justify-content-center p-4 empty">
+                                      <h4 class="text-center mt-1">This project has no on going milestones</h4>
+                                    </span>
+                                  </div>                                 
+                              {% endfor %}
+                              
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
+                    </div>
+                  </div>
+            </div>
+            <div class="tab-pane fade" id="vert-tabs-right-comments" role="tabpanel" aria-labelledby="vert-tabs-right-comments-tab">
+               comments parts
+            </div>
+            <div class="tab-pane fade" id="vert-tabs-right-history" role="tabpanel" aria-labelledby="vert-tabs-right-history-tab">
+                history part
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
+      {{project.name}}
+      {{project.due_date}}
+
+{% endblock content %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    {% include 'tracker/partials/head.html' %}
+    <body style="background: white;">
+    <div class="container mt-3">
+    <a href=""><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+    <div class="container" style="margin-top: 10rem; margin-bottom: 3rem;">
+        <div class="row d-flex justify-content-center">
+        <div class="col-md-4 ">
+            <div>
+                <img class="img-fluid" src="{% static 'tracker/dist/img/site-creation1.png' %}" alt="first-site" />
+            </div>
+            <p class="text-muted mt-3">
+                Create your projects, Manage yours sagas and 
+                organize all your tickets, tasks and subtasks in one 
+                environment.
+            <p>
+        </div>
+        <div class="col-md-6 offset-1">
+            <p class="lead first-site">Ready to create your first site</p>
+            <div class="">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_Site_name">{{form.site_name.label}}</label>
+                    <div class="input-group">
+                        {{form.site_name}}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success float-right">Create</button>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+        {% include 'tracker/partials/scripts.html' %}
+    </body>
+</html>

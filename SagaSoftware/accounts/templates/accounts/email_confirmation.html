@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    {% include 'tracker/partials/head.html' %}
+    <body>
+    <div class="myForms">
+        <div class="">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <h3 class="text-center m-3"><strong>Saga</strong>Software</h3>
+        </div>
+        <div class="card col-md-6 login-widget">
+        <h3 class="lead text-center m-3">Please Confirm your email</h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="">Confirmation Code*</label>
+                <input type="text"
+                  class="form-control" name="entered_Code" id="" aria-describedby="helpId" placeholder="Enter confirmation code">
+                <small id="helpId" class="form-text text-muted">Please make user to enter the sent code to your email</small>
+            </div>
+
+
+            <button type="submit" class="btn btn-block btn-success">Submit</button>
+        </form>
+    </div>       
+    </div>       
+        {% include 'tracker/partials/scripts.html' %}
+    </body>
+</html>

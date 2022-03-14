@@ -1,0 +1,175 @@
+{% extends 'tracker/partials/base.html' %}
+{% block content %}
+    <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary mb-3">Invite New members</button>
+
+<!-- the project issues and trending row-->
+<div class="row mr-3">
+    <!-- project issues div-->
+    <div class="col-md-6">
+        <div>
+            <div class="_header">
+                <h4> <i class="mdi mdi-label-outline mr-2"></i>Projects </h4>
+                <button type="button" data-toggle="modal" data-target="#createProject" class="btn btn-light bg-white btn-icon mb-2 mt-2 mt-xl-0">
+                <i class="mdi mdi-plus text-muted"></i>
+                </button>
+            </div>
+            <div class="card dashboard-projects-container">
+                {% for project in projects %}
+                    <div class="project-instance d-flex align-items-center p-2">
+                        <a href="{% url 'project_details' site_slug=site_slug project_key=project.key %}">
+                            <div class="project-icon dashboard-icon-{{project.key}} mr-3" style="background: {{project.project_color}}">
+                                <span><i class="mdi mdi-24px {{project.project_icon}} "></i></span>
+                            </div>
+                        </a>
+                        <div class="project-details">
+                            <p class="project-name"><a href="">{{project.name}}</a></p>
+                            <div>
+                                <div class="hidden-actions">
+                                    <div class="align-items-center d-flex mt-1 project-actions">                
+                                        <a href="#" class="event-title">Add ticket</a>
+                                        <a href="#" class="event-title">See Tickets</a>
+                                        <a href="#" class="event-title">Board</a>
+                                    </div>
+                                </div>
+                                <div class="project-instance-key">
+                                    <span class="project-key">{{project.key}}</span>
+                                </div>
+                            </a>
+                            </div>
+                        </div>
+                        <div class="item-thumbnail ml-auto position-relative">
+                            <a href="{% url 'project_details' site_slug=site_slug project_key=project.key %}" class="stretched-link">                                
+                                <span class="dash-set-proj-icon">
+                                    <i class="mdi mdi-settings"></i>
+                                </span>
+                            </a>                        
+                        </div>
+                    </div>
+                {% empty %}
+                <div class="d-flex align-items-center p-2 flex-column m-auto empty-projects">
+                    <div class="project-icon mr-3 mb-1" style="color: #6493ff;"><i class="mdi mdi-folder-open mdi-48px"></i></div>
+                    <div class="project-details">
+                        <p class="project-name">
+                            You currently have no projects
+                        </p>
+                    </div>
+                    <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#createProject" >Add New Project</button>
+                </div>
+                
+                {% endfor %}
+            </div>
+
+        </div>
+        <div class="">
+            <div class="_header">
+                <h4> <i class="mdi mdi-label-outline mr-2"></i>Tickets </h4>
+                <button type="button" class="btn btn-light bg-white btn-icon mb-2 mt-2 mt-xl-0">
+                <i class="mdi mdi-plus text-muted"></i>
+                </button>
+            </div>
+            <div class="card">
+
+                <div class="card-header filter py-1">
+                    <div class="tickets-assigned-filter">
+                        <div class="d-flex align-items-center">
+                            <span><i class="mdi mdi-filter-outline"></i></span>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons" role="group" id="priority-filter">
+                                <label class="btn btn-outline-primary btn-sm active" for="1">
+                                    <input type="radio" class="btn-check" name="priority" checked id="1" autocomplete="off"/>All
+                                </label>
+                                
+                                <label class="btn btn-outline-primary btn-sm" for="2">
+                                    <input type="radio" class="btn-check" name="priority" id="2" autocomplete="off"/>
+                                    Assigned to me ()
+                                </label>
+
+                                <label class="btn btn-outline-primary btn-sm" for="3">
+                                    <input type="radio" class="btn-check" name="priority" id="3" autocomplete="off"/>
+                                    Reported by me ()
+                                </label>
+                                
+                            </div>
+
+                            <select class="form-control" id="sort-by-filter">
+                                <option selected="true" value = "All">Priority </option>
+                                <option selected="true" value = "All">Status </option>
+                                <option selected="true" value = "All">Due date </option>
+                            </select>
+                        </div>
+                    
+                    </div>
+
+                </div>
+                <div class="card-body p-0">
+                    {% if not projects %}
+                        <p class="project-name text-center mt-5">
+                            You do not have projects for now!
+                        </p>
+
+                    {% else %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                        <thead>
+                            <tr>
+                            <th class="ticket_key">User</th>
+                            <th class="ticket_summary">Product</th>
+                            <th class="ticket_status">Sale</th>
+                            <th class="ticket_priority">Status</th>
+                            </tr>
+                        </thead>
+                            
+
+                            <tbody>
+                                    
+                            </tbody>
+
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- trending div-->
+    <div class="col-md-6">
+
+        <div class="_header">
+            <h4><i class="mdi mdi-label-outline mr-2"></i>Trendings</h4>
+        </div>
+        <div class="card trendings">
+            <div class="card-header">
+                <span> sept 12, 2021</span>
+            </div>
+            <div class="card-body">
+                    {% if not projects %}                   
+                        <p class="project-name" style="text-align: center;"> create projects first and follow their updates here</p>
+                    
+                    {% else %}
+                        <div class="trending d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-column">
+                                <div class="item-thumbnail">
+                                    <img src="/static/projectManagement/images/faces/face4.jpg" alt="image" class="profile-pic">
+                                    <span class="trending-action ml-2"> username updated the status of:
+                                </div>
+                                <div class="trending-values ml-5">
+                                    <span>somethong to another thing</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span> 30 minutes ago </span>
+                            </div>
+                        </div>
+                    {% endif %}
+            </div>
+        </div>
+        <div class="show-only position-absolute">
+            <span class="show-only-item">Today</span>
+            <span class="show-only-item">All Week</span>
+            <span class="show-only-item">This Month</span>
+            <span class="show-only-item">Oldest</span>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

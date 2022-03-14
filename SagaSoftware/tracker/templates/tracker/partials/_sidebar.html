@@ -1,0 +1,80 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar" style="background: {{activeProjectBg}}">
+  <ul class="nav">
+    <li class="nav-item {% if 'dashbaord' in request.get_full_path %}active{% endif %}">
+      <a class="nav-link" href="#">
+        <i class="mdi mdi-chart-bar-stacked menu-icon"></i>
+        <span class="menu-title">Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item borderBottom">
+      <a class="nav-link" data-toggle="collapse" href="#projects" aria-expanded="false" aria-controls="ui-basic">
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
+        <span class="menu-title">projects</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="projects">
+        <ul class="nav flex-column sub-menu">
+          {% for project in request.user.projects.all %}
+          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">{{project.name}}</a></li>
+          {% empty %}
+          <span>You have no projects</span>
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+    {% if not dashboard_page %}
+    <li class="nav-item {% if 'home' in request.get_full_path %}active{% endif %}" id="activeProjectLi">
+      <a class="nav-link" href="pages/forms/basic_elements.html">
+        <i class="mdi menu-icon {{project_icon}}"></i>
+        <span class="menu-title active-project">
+          Home
+        </span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#buckets" aria-expanded="false" aria-controls="auth">
+        <i class="mdi mdi-folder menu-icon project-child"></i>
+        <span class="menu-title">Tickets</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="buckets">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Bucket 1 </a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Bucket 2 </a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Bucket 3 </a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Bucket 4 </a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item {% if 'backlog' in request.get_full_path %}active{% endif %}">
+      <a class="nav-link" href="documentation/documentation.html">
+        <i class="mdi mdi-check-all menu-icon project-child"></i>
+        <span class="menu-title">Backlog</span>
+      </a>
+    </li>
+
+
+    <li class="nav-item {% if 'board' in request.get_full_path %}active{% endif %}">
+      <a class="nav-link" href="documentation/documentation.html">
+        <i class="mdi mdi-view-week menu-icon project-child"></i>
+        <span class="menu-title">Board</span>
+      </a>
+    </li>
+
+    <li class="nav-item borderBottom {% if 'filters' in request.get_full_path %}active{% endif %}">
+      <a class="nav-link" href="documentation/documentation.html">
+        <i class="mdi mdi-account-multiple-plus menu-icon project-child"></i>
+        <span class="menu-title">Filters</span>
+      </a>
+    </li>
+    <li class="nav-item {% if 'settings' in request.get_full_path %}active{% endif %}">
+      <a class="nav-link" href="documentation/documentation.html">
+        <i class="mdi mdi-settings menu-icon"></i>
+        <span class="menu-title">Project Settings</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>

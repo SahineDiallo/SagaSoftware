@@ -1,0 +1,24 @@
+<html ng-app="ionicApp">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="https://code.ionicframework.com/1.2.4/css/ionic.min.css" rel="stylesheet"></link>
+  <script src="https://code.ionicframework.com/1.2.4/js/ionic.bundle.min.js" type="text/javascript"></script>
+</head>
+<body ng-controller="MyCtrl">
+  <ion-header-bar class="bar-balanced"><h1 class="title">You've been invited  by {{ inviter }} to be a part of {{ site }} organization</h1></ion-header-bar>
+  <ion-nav-view>
+    <ion-view>
+      <ion-content>
+        <div class="padding text-center">
+          <h4>
+            You got an invite to join {{project}} as a {{role}}!
+          </h4>
+          <p>Please make sure to copy and paste the link below into a new tab to finally join the project:<br>
+            link: <strong>{{url}}</strong></p>
+        </div>
+      </ion-content>
+    </ion-view>
+  </ion-nav-view>
+</body>
+</html>

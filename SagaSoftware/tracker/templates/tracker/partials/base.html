@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+{% comment %} {% load getFormField %} {% endcomment %}
+{% load crispy_forms_tags %}
+<html lang="en"
+{% include 'tracker/partials/head.html' %}
+<body>
+  {% include 'tracker/modals.html' %}
+ 
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    {% include 'tracker/partials/_navbar.html' %}
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        {% include 'tracker/partials/_sidebar.html' %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper position-relative">
+          {% block content %}
+          
+          {% endblock content %}
+        </div>
+        <!-- content-wrapper ends -->
+
+        <!-- tracker:partials/_footer.html -->
+        {% include 'tracker/partials/_footer.html' %}
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <symbol id="highest" class="highest" viewBox="0 0 16 16" style="">
+        <path d="M7.984436 3.200867l-4.5 2.7c-.5.3-1.1.1-1.3-.4s-.2-1.1.3-1.3l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.3.5-.9.6-1.4.3l-4.4-2.7z" fill="#ff5630"/>
+        <path d="M3.484436 10.200867c-.5.3-1.1.1-1.3-.3s-.2-1.1.3-1.4l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.3.5-.9.6-1.4.3l-4.4-2.7-4.5 2.7z" fill="#ff7452"/>
+        <path d="M3.484436 14.500867c-.5.3-1.1.2-1.3-.3s-.2-1.1.3-1.4l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.3.5-.9.6-1.4.3l-4.4-2.7-4.5 2.7z" fill="#ff8f73"/>
+      </symbol>
+    
+      <symbol id="high" class="high" viewBox="0 0 16 16">
+        <path d="M3.47876 7.9c-.5.3-1.1.1-1.4-.4s-.1-1 .4-1.3l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.2.4-.8.6-1.3.3l-4.5-2.7-4.5 2.7z" fill="#ff5630"/>
+        <path d="M3.47876 12.2c-.5.3-1.1.2-1.4-.3s-.1-1.1.4-1.4l5-3c.3-.2.7-.2 1 0l5 3c.5.3.6.9.3 1.4-.3.5-.9.6-1.4.3l-4.4-2.7-4.5 2.7z" fill="#ff7452"/>
+      </symbol>
+    
+      <symbol id="medium" class="medium" viewBox="0 0 16 16">
+        <g id="icon_x2F_16px_x2F_medium-priority-">
+          <g>
+            <path class="st0 medium" d="M3,4h10c0.6,0,1,0.4,1,1s-0.4,1-1,1H3C2.4,6,2,5.6,2,5S2.4,4,3,4z M3,10h10c0.6,0,1,0.4,1,1s-0.4,1-1,1H3
+              c-0.6,0-1-0.4-1-1S2.4,10,3,10z"/>
+          </g>
+        </g>
+      </symbol>
+    
+      <symbol id="low" class="low" viewBox="0 0 16 16">
+        <path d="M12.504883 8.14541c.5-.3 1.1-.1 1.4.4s.1 1-.4 1.3l-5 3c-.3.2-.7.2-1 0l-5-3c-.5-.3-.6-.9-.3-1.4.2-.4.8-.6 1.3-.3l4.5 2.7 4.5-2.7z" fill="#0065ff"/>
+        <path d="M12.504883 3.84541c.5-.3 1.1-.2 1.4.3s.1 1.1-.4 1.4l-5 3c-.3.2-.7.2-1 0l-5-3c-.5-.3-.6-.9-.3-1.4.3-.5.9-.6 1.4-.3l4.4 2.7 4.5-2.7z" fill="#2684ff"/>
+      </symbol>
+      
+      <symbol id="lowest" class="lowest" viewBox="0 0 16 16">
+        <path d="M8.045319 12.806152l4.5-2.7c.5-.3 1.1-.1 1.3.4s.2 1.1-.3 1.3l-5 3c-.3.2-.7.2-1 0l-5-3c-.5-.3-.6-.9-.3-1.4.3-.5.9-.6 1.4-.3l4.4 2.7z" fill="#0065ff"/>
+        <path d="M12.545319 5.806152c.5-.3 1.1-.1 1.3.3s.2 1.1-.3 1.4l-5 3c-.3.2-.7.2-1 0l-5-3c-.5-.3-.6-.9-.3-1.4.3-.5.9-.6 1.4-.3l4.4 2.7 4.5-2.7z" fill="#2684ff"/>
+        <path d="M12.545319 1.506152c.5-.3 1.1-.2 1.3.3s.2 1.1-.3 1.4l-5 3c-.3.2-.7.2-1 0l-5-3c-.5-.3-.6-.9-.3-1.4.3-.5.9-.6 1.4-.3l4.4 2.7 4.5-2.7z" fill="#4c9aff"/>
+      </symbol> 
+    </svg>
+    {% include 'tracker/partials/scripts.html' %}
+</body>
+
+</html>

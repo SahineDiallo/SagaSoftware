@@ -1,0 +1,89 @@
+    {% load static %}
+    {% load crispy_forms_tags %}
+    <!--Invitation Modal -->
+    <div class="modal fade" id="invitationsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Invite new members</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>            
+                <div class="modal-body">
+                    {% crispy formset helper %}
+                    <button type="submit" id="invite_new_members" form="InviteForm" class="btn btn-primary float-right">Invite </button>
+                </div>      
+            </div>
+        </div>
+      </div>
+      <!-- End of the invitation modal-->
+
+      <!-- start of the create project modal-->
+      <div class="modal fade" id="createProject" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Creating New Project</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div> 
+              <div class="modal-body">                
+                  {% crispy createProjectForm %}                
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- end of the create project modal -->
+      <!-- start of the delete milestone modal-->
+      <div class="modal fade" id="del_milestone" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">                
+                  <h3>You are about to delete this milestone from the project</h3>             
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Cancel</button>
+                  <button type="button" class="btn btn-danger">Yes, Delete</button>
+              </div>
+            </div>
+        </div>
+      </div>
+       {% comment %} <div class="modal fade" id="createLabel" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Creating New Label</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+        </div> 
+          <div class="modal-body">          
+              {% crispy labelForm %}
+             
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- end of the status creation modal -->
+  <div class="modal fade" id="createStatus" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Creating New Status</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div> 
+          <div class="modal-body">          
+              {% crispy statusForm %}
+              
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- end of the status creation modal -->
+
+ {% endcomment %}
+  {% comment %} {% include 'tracker/project-details.html' %} {% endcomment %}

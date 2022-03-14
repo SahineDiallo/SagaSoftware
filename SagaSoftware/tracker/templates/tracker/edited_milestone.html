@@ -1,0 +1,10 @@
+<td>{{milestone.name_milestone}}</td>
+    <td>{{milestone.start_date|date:"M d, Y"}}</td>
+    <td>{{milestone.end_date|date:"M d, Y"}}</td>
+    <td><span class="tag tag-success">{{milestone.created_by}}</span></td>
+    <td>
+      <span class="d-flex align-items-center justify-content-around">
+        <span data-mil-id-ed="{{milestone.id}}"><i class="mdi mdi-pencil" ></i></span>
+        <span data-toggle="modal" data-target="#del_milestone"><i class="mdi mdi-trash-can"></i></span>
+      </span>
+  </td>
