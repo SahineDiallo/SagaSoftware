@@ -8799,6 +8799,7 @@ img {
 svg {
   overflow: hidden;
   vertical-align: middle;
+  display:none;
 }
 
 table {
@@ -20900,6 +20901,9 @@ dl li {
 .dataTables_wrapper {
   padding-left: 0;
   padding-right: 0;
+}
+.project-name a {
+    color: black;
 }
 
 .dataTables_wrapper label {

@@ -104,14 +104,16 @@ def inviteMembers(request):
 @login_required
 def createProject(request, site_slug):
     form = CreateProjectForm(request.POST or None, request=request)
+    site_slug = request.user.profile.site.slug
     form_data = {}
     if form.is_valid():
         form.save(commit=False)
         site = request.user.profile.site
         form.instance.project_site = site
-        #form.save()
+        print(form.instance.project_icon)
+        form.save()
         form_data = form.cleaned_data
-        template = render_to_string("tracker/new_project.html", {'project': form.instance, }, request=request)
+        template = render_to_string("tracker/new_project.html", {'project': form.instance, 'site_slug': site_slug }, request=request)
         form_data["result"] = True
         form_data['template'] = template
         return JsonResponse(form_data)
@@ -203,7 +205,6 @@ def create_milestone(request, project_key, **kwargs):
 
 @login_required
 def edit_milestone(request, mil_id):
-    print("called")
     milestone = get_object_or_404(Milestone, id=mil_id)
     form = MilestoneForm(request.POST or None, instance=milestone)
     mil_id = milestone.id
@@ -223,3 +224,29 @@ def edit_milestone(request, mil_id):
     print("response given")
     return JsonResponse({'template': template, 'success': True, 'mil_id': mil_id})
 
+
+def project_home(request, site_slug, project_key):
+    project = get_object_or_404(Project, key=project_key)
+    
+    context = {}
+    return render(request, 'tracker/home.html', context)
+
+
+def project_board(request, site_slug, project_key):
+    project = get_object_or_404(Project, key=project_key)
+    
+    context = {}
+    return render(request, 'tracker/board.html', context)
+
+
+def project_backlog(request, site_slug, project_key):
+    project = get_object_or_404(Project, key=project_key)
+    
+    context = {}
+    return render(request, 'tracker/backlog.html', context)
+
+def project_tickets(request, site_slug, project_key):
+    project = get_object_or_404(Project, key=project_key)
+    
+    context = {}
+    return render(request, 'tracker/tickets.html', context)

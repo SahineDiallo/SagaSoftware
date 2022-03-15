@@ -188,6 +188,7 @@ $(document).ready(function () {
     $('#milestoneForm #id_end_date').datepicker({});
     $('#milestoneForm #id_start_date').datepicker({});
     $(".close-icon-selection").on("click", (e) => {
+        if (url_end !== 'dashboard') {
         var key = $("#vert-tabs-right-tabContent #createProjectForm input[name='key']").val();
         var url = `/trackers/${site_slug}/projects/edit/${key}/`
         var _form = document.querySelector("#vert-tabs-right-tabContent #createProjectForm")
@@ -210,6 +211,7 @@ $(document).ready(function () {
                 }
 
             })
+        }
     })
 
     $("#vert-tabs-right-tabContent input[type='text']").each((index, element) => {
@@ -248,7 +250,7 @@ $(document).ready(function () {
                     var project_key = data.key.toUpperCase();
                     $("#createProject").modal("hide"); // hiding the modal
                     setTimeout(() => {
-                        _form[0].reset();
+                        $(_form)[0].reset();
                         alertUser(project_key, "has been created successufully", "project")
                     }, 1000)
                     InsertNewProject(data);
@@ -284,7 +286,7 @@ $(document).ready(function () {
             $("#activeProjectLi i").removeClass(oldActiveProjectClass).addClass(newClass);
 
         } else {
-            $("#vert-tabs-right-tabContent #id_project_icon").attr("value", newClass) // for the hidden innput in the form
+            $("#createProjectForm #id_project_icon").attr("value", newClass) // for the hidden innput in the form
         }
 
     };

@@ -1,16 +1,20 @@
 <div class="project-instance d-flex align-items-center p-2">
-    <a href="{% url 'project_details' site_slug=site_slug project_key=project.key %}">
+    <a href="{% url 'backlog' site_slug=site_slug project_key=project.key %}">
         <div class="project-icon dashboard-icon-{{project.key}} mr-3" style="background: {{project.project_color}}">
             <span><i class="mdi mdi-24px {{project.project_icon}} "></i></span>
         </div>
     </a>
     <div class="project-details">
-        <p class="project-name"><a href="">{{project.name}}</a></p>
+        <p class="project-name">
+            <a href="{% url 'backlog' site_slug=site_slug project_key=project.key %}">
+                {{project.name}}
+            </a>
+        </p>
         <div>
             <div class="hidden-actions">
                 <div class="align-items-center d-flex mt-1 project-actions">                
-                    <a href="#" class="event-title">Add ticket</a>
-                    <a href="#" class="event-title">See Tickets</a>
+                    <a href="" class="event-title">Add ticket</a>
+                    <a href="{% url 'tickets' site_slug=site_slug project_key=project.key %}" class="event-title">See Tickets</a>
                     <a href="#" class="event-title">Board</a>
                 </div>
             </div>

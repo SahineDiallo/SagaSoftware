@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var inviteBtn = document.querySelector("#invite_new_members")
-    form = document.querySelector("#InviteForm")
+    form = document.getElementById("InviteForm")
     if (inviteBtn !== null) {
         inviteBtn.addEventListener("click", (e) => {
             e.preventDefault();

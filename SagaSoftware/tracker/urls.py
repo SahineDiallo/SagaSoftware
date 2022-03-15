@@ -16,4 +16,10 @@ urlpatterns = [
          tracker_views.ProjectDetailView.as_view(), name="project_details"),
     path("<slug:site_slug>/projects/edit/<slug:project_key>/",
          tracker_views.edit_project_name_and_key, name="edit_project_details"),
+    path("<slug:site_slug>/projects/backlog/<slug:project_key>/",
+         tracker_views.project_backlog, name="backlog"),
+    path("<slug:site_slug>/projects/board/<slug:project_key>/",
+         tracker_views.project_board, name="board"),
+    path("<slug:site_slug>/projects/home/<slug:project_key>/",
+         tracker_views.project_home, name="home"),
 ]
