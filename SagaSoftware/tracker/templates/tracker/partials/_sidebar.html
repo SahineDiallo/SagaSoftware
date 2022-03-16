@@ -14,8 +14,13 @@
       </a>
       <div class="collapse" id="projects">
         <ul class="nav flex-column sub-menu">
-          {% for project in request.user.projects.all %}
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">{{project.name}}</a></li>
+          {% for project in request.user.get_projects %}
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'home' site_slug=site_slug project_key=project.key %}">
+              <i class="mdi mr-2 {{project.project_icon}}"></i>
+              {{project.key}}
+            </a>
+          </li>
           {% empty %}
           <span>You have no projects</span>
           {% endfor %}
@@ -56,7 +61,7 @@
 
 
     <li class="nav-item {% if 'board' in request.get_full_path %}active{% endif %}">
-      <a class="nav-link" href="{% url 'backlog' site_slug=site_slug project_key=project_key %}">
+      <a class="nav-link" href="{% url 'board' site_slug=site_slug project_key=project_key %}">
         <i class="mdi mdi-view-week menu-icon project-child"></i>
         <span class="menu-title">Board</span>
       </a>

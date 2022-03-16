@@ -1,11 +1,10 @@
 $(document).ready(function() {
-    var _today = new Date();
-    var lastDate = new Date(_today.getFullYear(), _today.getMonth() + 1, 0);
     $("#id_key").attr('oninput', "let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);")
     var site_slug = (window.location.pathname).split("/")[2]
     var url_end = (window.location.pathname).split("/").at(-2)
-        // /////////////  EventListeners  //////////////
-        //.sidebar .nav .nav-item .nav-link
+    $("#addMembers").chosen();
+    // /////////////  EventListeners  //////////////
+    //.sidebar .nav .nav-item .nav-link
     if (!($("#sidebar").attr('style')).includes("fff")) {
         $(".sidebar .nav .nav-item .nav-link").css({
             'color': '#000 !important'
@@ -15,7 +14,6 @@ $(document).ready(function() {
         })
     }
     $('#vert-tabs-right-tabContent input[type="radio"]').on('click', function() {
-        console.log("the check project type has been changed");
         editRadionBtn();
     });
     document.querySelector("#createProject .modal-content .modal-body").addEventListener("keyup", (e) => {

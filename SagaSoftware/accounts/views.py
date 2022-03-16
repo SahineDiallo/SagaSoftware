@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from tracker.models import Site
 from .forms import UserRegistrationForm, LoginForm
@@ -66,10 +66,10 @@ def register(request):
         user = authenticate(email=email, password=password)
         if invitation_slug != None:  # check invitationn and redirect dashboard
             try:
-                invitation = Invitation.objects.get(slug=invitation_slug)
+                #we need the remove the last character of the invitation slug which is a slash
+                invitation = Invitation.objects.get(slug=invitation_slug[:-1])
                 invitation.accepted = True
                 role = invitation.role
-                print("this is the role from the invitation", role)
                 if role == '1':
                     instance.is_site_administrator = True
                 elif role == '2':
@@ -79,16 +79,17 @@ def register(request):
 
                 instance.save()
                 invitation.save()
-                site = invitation.inviter.site
+                site = invitation.inviter.profile.site
                 instance.profile.site = site
-                instance.save()
+                instance.profile.save()
                 login(request, user)
+                print(request.user)
                 # I neeed to loop ti see the site in which the user belongs
                 return redirect(
                     reverse("dashbaord", kwargs={"site_slug": site.slug})
                 )
-            except:  # return an error to the user
-                pass
+            except Invitation.DoesNotExist:  # return an error to the user
+                pass #we need to raise 403 with a message
 
         else:  # means we need to send an email confirmation
             code = "".join(random.choice(
@@ -131,3 +132,6 @@ def email_confirmation(request):
     return render(request, 'accounts\email_confirmation.html', context)
 
 
+def Logout(request):
+    logout(request)
+    return render(request, 'accounts/logout.html')

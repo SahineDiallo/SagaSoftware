@@ -39,7 +39,7 @@ class CreateProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ("project_type", "name", "key",
-                  "project_icon", "project_color", "Allow_Milestone", "project_theme",)
+                  "project_icon", "project_color", "project_theme",)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request", None)
@@ -110,7 +110,6 @@ class CreateProjectForm(forms.ModelForm):
                     ),
                     css_class="col-md-11 d-flex align-items-center"
                 ),
-                Field("Allow_Milestone"),
                 HTML(
                     """
                         <div class="d-flex align-align-items-end mb-3">
@@ -272,7 +271,6 @@ class CreateProjectForm(forms.ModelForm):
                     css_class="align-items-center mb-3"
                 ),
 
-                Field("Allow_Milestone"),
                 Div(
                     FormActions(
                         Submit("new project", "Create",

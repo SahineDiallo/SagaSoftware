@@ -80,7 +80,13 @@ def inviteMembers(request):
                 form.save()
                 url = f'{domain}/accounts/register/?invitation_refid={form.instance.slug}/'
                 context_data['url'] = url
-                context_data['role'] = form.instance.role
+                if form.instance.role == '1':
+                    role = 'Admin'
+                elif form.instance.role == '2': 
+                    role = 'Project Manager'
+                else: 
+                    role = 'Developer'
+                context_data['role'] = role
                 context_data['site'] = form.instance.inviter.profile.site.site_name
                 context_data['inviter'] = form.instance.inviter.username
                 context_data['project'] = "New Project"

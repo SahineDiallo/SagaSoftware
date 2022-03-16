@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Profile, ConfirmationCode
+from .models import User, Profile, ConfirmationCode, Invitation
 
 
 class UserCostumAdmin(UserAdmin):
@@ -25,5 +25,6 @@ class UserCostumAdmin(UserAdmin):
 
 admin.site.register(User, UserCostumAdmin)
 admin.site.register(Profile)
+admin.site.register(Invitation)
 admin.site.register(ConfirmationCode)
 
