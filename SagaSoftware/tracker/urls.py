@@ -24,4 +24,7 @@ urlpatterns = [
          tracker_views.project_home, name="home"),
     path("<slug:site_slug>/projects/tickets/<slug:project_key>/",
          tracker_views.project_tickets, name="tickets"),
+
+     path("<slug:site_slug>/projects/add-members/<slug:project_key>/",
+         tracker_views.add_members_to_project, name="add_members"),
 ]

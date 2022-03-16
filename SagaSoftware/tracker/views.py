@@ -17,6 +17,9 @@ from django.core.mail import send_mail, EmailMessage
 from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
 from django.template.loader import render_to_string
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 @login_required
@@ -121,7 +124,6 @@ def createProject(request, site_slug):
         form.save(commit=False)
         site = request.user.profile.site
         form.instance.project_site = site
-        print(form.instance.project_icon)
         form.save()
         form_data = form.cleaned_data
         template = render_to_string("tracker/new_project.html", {'project': form.instance, 'site_slug': site_slug }, request=request)
@@ -147,17 +149,29 @@ class ProjectDetailView(LoginRequiredMixin, View):
         milestone_form = MilestoneForm(request.POST or None)
         activeProjectBg = project.project_theme.split(' ')[0]
         navbarBg = project.project_theme.split(' ')[1]
-        members = project.members.all()
+        emails = project.members.all().values("email") #get the emials of the project members first
+        all_emails = [i['email'] for i in emails]
+        addable_members = User.objects.all().exclude(email__in = all_emails) #fllter the rest of the users 
+        print(addable_members)
         milestones = project.milestones.all()
         context = {
             'site_slug': site_slug, 'project': project,
             'form': form, 'project_icon': project.project_icon,
             'project_color': project.project_color,
             'activeProjectBg': activeProjectBg,
-            'activeNav': navbarBg, 'members': members,
+            'activeNav': navbarBg, 'members': addable_members,
             'mile_form': milestone_form, 'milestones': milestones}
         return render(request, 'tracker/project_details.html', context)
 
+def add_members_to_project(request, site_slug, project_key):
+    project = get_object_or_404(Project, key=project_key)
+    if request.method == 'POST':
+        data = request.POST.getlist('added_members')
+        if data == []:
+            return JsonResponse({'success':False})
+        added_members = [User.objects.get(username=username) for username in data]
+        project.members.add(*added_members) #add the members into the project
+    return JsonResponse({'success': True})
 
 @login_required
 @allowedToEnterProject

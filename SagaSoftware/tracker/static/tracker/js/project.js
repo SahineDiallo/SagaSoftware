@@ -2,15 +2,18 @@ $(document).ready(function() {
     $("#id_key").attr('oninput', "let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);")
     var site_slug = (window.location.pathname).split("/")[2]
     var url_end = (window.location.pathname).split("/").at(-2)
-    $("#addMembers").chosen();
+    $("#addMembers").chosen({ no_results_text: "Oops, no member were found!" });
     // /////////////  EventListeners  //////////////
     //.sidebar .nav .nav-item .nav-link
     if (!($("#sidebar").attr('style')).includes("fff")) {
         $(".sidebar .nav .nav-item .nav-link").css({
-            'color': '#000 !important'
+            'color': '#fff !important'
         })
+
+    } else {
+
         $(".navbar-nav .nav-link.count-indicator").css({
-            'color': '#3c3636e0'
+            'color': '#3c3636e0 !important'
         })
     }
     $('#vert-tabs-right-tabContent input[type="radio"]').on('click', function() {
@@ -79,6 +82,24 @@ $(document).ready(function() {
     $("#edit_mil").on("click", e => {
         $(".edit_mil_section").fadeIn();
         $(e.target).attr("disabled", true)
+    })
+    $("#add_new_members").on("click", (e) => {
+        e.preventDefault();
+        var _form = document.querySelector("#add_proj_members")
+        var url = `/trackers/${site_slug}/projects/add-members/${url_end}/`
+        var form_data = new FormData(_form)
+        fetch(url, { method: 'POST', body: form_data })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    $(_form)[0].reset();
+                    alertUser('New', 'added to the project successfully!', 'members');
+                }
+            })
+            .catch(error => {
+                alert("Something went wrong.Please try later!");
+                console.log("error");
+            })
     })
     var closeMilestone = (e) => {
 
