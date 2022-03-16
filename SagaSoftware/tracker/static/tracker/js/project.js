@@ -1,11 +1,11 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var _today = new Date();
     var lastDate = new Date(_today.getFullYear(), _today.getMonth() + 1, 0);
     $("#id_key").attr('oninput', "let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);")
     var site_slug = (window.location.pathname).split("/")[2]
     var url_end = (window.location.pathname).split("/").at(-2)
-    // /////////////  EventListeners  //////////////
-    //.sidebar .nav .nav-item .nav-link
+        // /////////////  EventListeners  //////////////
+        //.sidebar .nav .nav-item .nav-link
     if (!($("#sidebar").attr('style')).includes("fff")) {
         $(".sidebar .nav .nav-item .nav-link").css({
             'color': '#000 !important'
@@ -14,11 +14,11 @@ $(document).ready(function () {
             'color': '#3c3636e0'
         })
     }
-    $('#vert-tabs-right-tabContent input[type="radio"]').on('click', function () {
+    $('#vert-tabs-right-tabContent input[type="radio"]').on('click', function() {
         console.log("the check project type has been changed");
         editRadionBtn();
     });
-    document.querySelector("#createProject .modal-content .modal-body").addEventListener("keyup", (e) =>{
+    document.querySelector("#createProject .modal-content .modal-body").addEventListener("keyup", (e) => {
         if (e.target.tagName === "INPUT") return checkAndRemoveInvalidClass(e)
     })
     document.querySelector("#createProject .modal-content .modal-body").addEventListener("click", (e) => {
@@ -87,7 +87,9 @@ $(document).ready(function () {
         $(e.target).parent().parent().fadeOut();
         $("#add_mil").prop("disabled", false)
         $("#edit_mil").prop("disabled", false)
+        $('#milestoneForm')[0].reset();
     };
+
     function createNewMilestone(e) {
         e.preventDefault()
         _form = document.querySelector("#milestoneForm")
@@ -117,6 +119,7 @@ $(document).ready(function () {
                 alert("Something went wrong please try again later", error)
             })
     }
+
     function getEditMilestoneForm(e) {
 
         $(".edit_mil_section").html(
@@ -145,6 +148,7 @@ $(document).ready(function () {
                 alert("Something when wrong PLease try later!")
             })
     }
+
     function editMilestone(e) {
         e.preventDefault();
         $(e.target).attr("disabled", true)
@@ -171,6 +175,7 @@ $(document).ready(function () {
                 }
             })
     }
+
     function deleteMilestone(e) {
 
         var mil_id = $(e.target).parent().attr('data-mil-id-de')
@@ -189,28 +194,27 @@ $(document).ready(function () {
     $('#milestoneForm #id_start_date').datepicker({});
     $(".close-icon-selection").on("click", (e) => {
         if (url_end !== 'dashboard') {
-        var key = $("#vert-tabs-right-tabContent #createProjectForm input[name='key']").val();
-        var url = `/trackers/${site_slug}/projects/edit/${key}/`
-        var _form = document.querySelector("#vert-tabs-right-tabContent #createProjectForm")
-        console.log(_form)
-        var form_data = new FormData(_form)
-        fetch(url, { method: 'POST', body: form_data })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.response && data.not_valid) {
-                    $("#vert-tabs-right-tabContent #createProjectForm").replaceWith(data.formErrors)
-                } else {
-                    console.log(data.name)
-                    currVal = data.value
-                    setTimeout(() => {
+            var key = $("#vert-tabs-right-tabContent #createProjectForm input[name='key']").val();
+            var url = `/trackers/${site_slug}/projects/edit/${key}/`
+            var _form = document.querySelector("#vert-tabs-right-tabContent #createProjectForm")
+            var form_data = new FormData(_form)
+            fetch(url, { method: 'POST', body: form_data })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.response && data.not_valid) {
+                        $("#vert-tabs-right-tabContent #createProjectForm").replaceWith(data.formErrors)
+                    } else {
+                        console.log(data.name)
+                        currVal = data.value
+                        setTimeout(() => {
 
-                        // ALERT THE USER ABOUT THE THEME CHANGE
-                        alertUser("project", "has been updated successfully!", "The icon of the")
-                    }, 1000);
+                            // ALERT THE USER ABOUT THE THEME CHANGE
+                            alertUser("project", "has been updated successfully!", "The icon of the")
+                        }, 1000);
 
-                }
+                    }
 
-            })
+                })
         }
     })
 
@@ -232,16 +236,16 @@ $(document).ready(function () {
         data = new FormData(_form)
         console.log("this isthe data from the form", data)
         fetch(url, {
-            method: 'POST',
-            body: data,
-        })
+                method: 'POST',
+                body: data,
+            })
             .then(response => response.json())
             .then(data => {
                 if (!data.result) {
                     $(_form).replaceWith(data.formErrors)
                     $("#id_key").attr('oninput', "let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);")
                     $("#createProjectForm input[type='text']").each( //putting back the autocomplete since this is replace(dynamically created)
-                        function () {
+                        function() {
                             $(this).attr("autocomplete", "off");
                         }
                     );
@@ -297,7 +301,7 @@ $(document).ready(function () {
         iconObj.currentIcon.setAttribute("style", `color: ${newColor}`);
         for (let i = 0; i < allIcons.length; i++) {
             const element = allIcons[i];
-            element.parentElement.setAttribute("style", `color: ${newColor}`);
+            element.parentElement.setAttribut40080e("style", `color: ${newColor}`);
 
         }
         if ("dashboardIcon" in iconObj) {
@@ -309,6 +313,7 @@ $(document).ready(function () {
             projectColorInput.setAttribute("value", `${newColor}`) // for the hidden input 
         }
     }
+
     function changeProjectTheme(color, element) {
         var asidenav = document.getElementById("sidebar")
         if ($(element).parent().find(".mdi-check").length === 1) {
@@ -318,7 +323,7 @@ $(document).ready(function () {
         var sidebarLi = $("#sidebar ul li")
         var alphaColor = shade(color, 0.531)
         var sidebarAnchor = $("#sidebar ul li a")
-        // var key = document.querySelector("#vert-tabs-right-tabContent .project-key.badge").textContent;
+            // var key = document.querySelector("#vert-tabs-right-tabContent .project-key.badge").textContent;
         asidenav.setAttribute("style", `background:${color};`)
         hover_open.attr("style", `background:${color};`)
         sidebarLi.attr("style", "border-bottom: none;")
@@ -338,7 +343,7 @@ $(document).ready(function () {
             sidebarAnchor.attr("style", "color: #fff;");
             $(".menu-arrow").attr("style", "color: #fff;")
             $(element).attr("color", "#fff")
-            //projectThemeSelection();
+                //projectThemeSelection();
         }
 
     }
@@ -348,6 +353,7 @@ $(document).ready(function () {
         alertify.set('notifier', 'delay', 10);
         alertify.success(`${type} <span class="alert-key">${key} </span>${message}`);
     };
+
     function showInputEditIcon(el) {
 
         var _icon = el.closest(".align-items-center").lastElementChild.firstElementChild
@@ -406,7 +412,7 @@ $(document).ready(function () {
                         /// change the url when the key ofthe prject is changed
                         const domain = location.protocol + '//' + location.host;
                         history.pushState(null, 'project detail key', `${domain}/trackers/${site_slug}/projects/${data.value}/`);
-                        (data.name == "key") ? $('.active_project_key').text(`${data.value}`) : $('.active_project').text(data.value);
+                        (data.name == "key") ? $('.active_project_key').text(`${data.value}`): $('.active_project').text(data.value);
                     }
 
                 })
@@ -451,6 +457,7 @@ $(document).ready(function () {
         }
         return false;
     });
+
     function hex2(c) {
         c = Math.round(c);
         if (c < 0) c = 0;
@@ -465,6 +472,7 @@ $(document).ready(function () {
     function color(r, g, b) {
         return "#" + hex2(r) + hex2(g) + hex2(b);
     }
+
     function shade(col, light) {
 
         // TODO: Assert that col is good and that -1 < light < 1
@@ -509,6 +517,7 @@ $(document).ready(function () {
             })
 
     }
+
     function checkAndRemoveInvalidClass(e) {
         if (e.target.classList.contains("is-invalid")) {
             console.log("ok got the class")

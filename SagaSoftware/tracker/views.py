@@ -96,9 +96,14 @@ def inviteMembers(request):
                 # this is what allows you to send the email as html and not a plain text(this is super important)
                 email.content_subtype = 'html'
                 EmailThreading(email).start()
-        no_emails = True if all(i == emails_list[0] for i in emails_list) else False
+        no_emails = True if all(i == emails_list[0] and i == "" for i in emails_list) else False
         return JsonResponse({"success": True, 'no_emails': no_emails,})
-    return JsonResponse({"success": False})
+    form_data = {}
+    context = csrf(request)
+    formWithErrors = render_crispy_form(formset, context=context)
+    form_data["formErrors"] = formWithErrors
+    form_data["success"] = False
+    return JsonResponse(form_data)
 
 
 @login_required

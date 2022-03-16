@@ -103,16 +103,17 @@ class Profile(models.Model):
 
 
 class Invitation(models.Model):
+    Admin, Project_manager, Developer = '1', '2', '3'
     role_choices = (
-        ('Admin', 'Admin'),
-        ('Project Manager', 'project Manager'),
-        ('Developer', 'Developer'),
+        (Admin, 'Admin'),
+        (Project_manager, 'project Manager'),
+        (Developer, 'Developer'),
     )
     inviter = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="inviter")
     guest = models.EmailField(blank=True, verbose_name="Guest Email")
     date_invited = models.DateTimeField(default=timezone.now)
-    role = models.CharField(max_length=30, choices=role_choices, default='3')
+    role = models.CharField(max_length=30, choices=role_choices, default=Developer)
     accepted = models.BooleanField(default=False)
     slug = models.SlugField(max_length=200)
 

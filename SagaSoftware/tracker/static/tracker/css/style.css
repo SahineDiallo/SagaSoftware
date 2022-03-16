@@ -21934,3 +21934,12 @@ dl li {
   display:none;
 }
 /*# sourceMappingURL=maps/style.css.map */
+.empty-instance {
+  font-size: 17px;
+  text-align: center;
+  padding: 10px;
+  background: #ccc;
+  border-radius: 10px;
+  margin-top: 20px;
+  color: #403f3f;
+}

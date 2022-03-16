@@ -64,11 +64,20 @@ def register(request):
         instance.save()
 
         user = authenticate(email=email, password=password)
-        print("this is the user", user)
         if invitation_slug != None:  # check invitationn and redirect dashboard
             try:
                 invitation = Invitation.objects.get(slug=invitation_slug)
-                invitation.is_confirmed = True
+                invitation.accepted = True
+                role = invitation.role
+                print("this is the role from the invitation", role)
+                if role == '1':
+                    instance.is_site_administrator = True
+                elif role == '2':
+                    instance.is_project_manager = True
+                else:
+                    instance.is_developer = True
+
+                instance.save()
                 invitation.save()
                 site = invitation.inviter.site
                 instance.profile.site = site
@@ -84,9 +93,6 @@ def register(request):
         else:  # means we need to send an email confirmation
             code = "".join(random.choice(
                 "".join(string.digits)) for _ in range(6))
-            print("there is no inviation")
-            print("code", code)
-            print("this is the user", user.id)
             ConfirmationCode.objects.create(
                 user=user, code=code)
             request.session['user_to_verify_id'] = user.id

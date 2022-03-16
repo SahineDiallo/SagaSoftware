@@ -79,7 +79,12 @@
             </div>
             <div class="tab-pane fade" id="vert-tabs-right-members" role="tabpanel" aria-labelledby="vert-tabs-right-members-tab">
                 <div class="row">
+                  <div class="d-flex align-items-center justify-content-between flex-grow-1 mb-3">
                     <h3>Project Members</h3>
+                    <button type="button" class="btn btn-secondary btn-sm">
+                     <i class="mdi mdi-plus"></i> Add users to project
+                    </button>
+                  </div>
                     <div class="col-12">
                       <div class="card">
                         <div class="card-header">          
@@ -127,7 +132,7 @@
                                 </td>
                               </tr>
                               {% empty %}
-                              <h4> this project has no members currently. PLease invite members or add existing one</h4>
+                              <p class="empty-instance"> this project has no members currently. Please invite members or add existing ones to the project</p>
                               {% endfor %}
                             </tbody>
                           </table>
@@ -188,7 +193,7 @@
                               {% empty %}   
                                   <div>                            
                                     <span class="d-flex flex-column align-items-center justify-content-center p-4 empty">
-                                      <h4 class="text-center mt-1">This project has no on going milestones</h4>
+                                      <p class="text-center mt-1 empty-instance">This project has no on going milestones</p>
                                     </span>
                                   </div>                                 
                               {% endfor %}

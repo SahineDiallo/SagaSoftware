@@ -8,10 +8,16 @@ from django.shortcuts import get_object_or_404
 
 def get_universalForms(request, *args, **kwargs):
     url_end = (request.get_full_path()).split("/")[-2]
+    print(url_end)
     queryset = Invitation.objects.none()
     ProjectForm = CreateProjectForm(request.POST or None)
-    current_project = get_object_or_404(Project, key=url_end)
-    project_key = current_project.key
+    try: 
+        project = Project.objects.get(key=url_end)
+        project_key = project.key
+        print("this is the key for now")
+    except Project.DoesNotExist:
+        project_key = ""
+        print("there is no key in here")
     dashboard_page = False
     site_slug = request.user.profile.site.slug
     if url_end == 'dashboard':
