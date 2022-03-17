@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, ConfirmationCode
 from django.contrib.auth import authenticate, login
@@ -17,7 +18,7 @@ from crispy_forms.layout import (
     ButtonHolder,
 )
 
-
+User = get_user_model()
 class CostumUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
@@ -164,3 +165,25 @@ class inviteHelper(FormHelper):
             ),
         )
         # self.template = 'bootstrap4/table_inline_formset.html'
+
+class EditMemberRoleForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('role', )
+
+    # this form should only render the role of the user
+
+    def __init__(self, *args, **kwargs):
+        super(EditMemberRoleForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "editMemberRoleForm"
+        self.helper.form_class = "inline-form"
+        self.fields["role"].label = "Edit member role"    
+
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name', 'username')
+

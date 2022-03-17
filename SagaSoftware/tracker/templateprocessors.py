@@ -10,7 +10,6 @@ def get_universalForms(request, *args, **kwargs):
     url_end = (request.get_full_path()).split("/")[-2]
     queryset = Invitation.objects.none()
     ProjectForm = CreateProjectForm(request.POST or None)
-    print("this is the request user form template", request.user)
     try: 
         project = Project.objects.get(key=url_end)
         project_key = project.key
@@ -22,7 +21,7 @@ def get_universalForms(request, *args, **kwargs):
         navbarBg = ""
     dashboard_page = False
     site_slug = request.user.profile.site.slug if request.user.is_authenticated else  ""
-    if url_end == 'dashboard':
+    if url_end == 'dashboard' or 'accounts' in request.get_full_path():
         dashboard_page = True
     helper = inviteHelper()
     formset_factory = modelformset_factory(

@@ -1,3 +1,4 @@
+from random import choices
 from django.db import models
 
 from django.db import models
@@ -40,6 +41,12 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    Admin, Project_manager, Developer = '1', '2', '3'
+    role_choices = (
+        (Admin, 'Admin'),
+        (Project_manager, 'project Manager'),
+        (Developer, 'Developer'),
+    )
     email = models.EmailField(verbose_name="Email", unique=True)
     username = models.CharField(max_length=100, unique=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
@@ -49,9 +56,7 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    is_site_administrator = models.BooleanField(default=False)
-    is_developer = models.BooleanField(default=False)
-    is_project_manager = models.BooleanField(default=False)
+    role = models.CharField(max_length=100, choices=role_choices, default="3")
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)
     create_on = models.DateTimeField(
         verbose_name="Date Created", default=timezone.now)
@@ -78,16 +83,10 @@ class User(AbstractBaseUser):
         return True
 
     def get_projects(self):
-        if not self.is_site_administrator:
+        if not self.role == "1":
             return self.projects.all()
         return Project.objects.all()
 
-    def get_user_role(self):
-        if self.is_site_administrator:
-            return "Admin"
-        elif self.is_project_manager:
-            return "Project Manager"
-        return "Developer"
 
 
 class Profile(models.Model):

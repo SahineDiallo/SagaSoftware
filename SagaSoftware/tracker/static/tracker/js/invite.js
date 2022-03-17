@@ -1,6 +1,8 @@
 $(document).ready(function() {
+    var url_end = (window.location.pathname).split("/").at(-2)
+    var site_slug = (window.location.pathname).split("/")[2]
     var inviteBtn = document.querySelector("#invite_new_members")
-    form = document.getElementById("InviteForm")
+    var form = document.getElementById("InviteForm")
     if (inviteBtn !== null) {
         inviteBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -28,6 +30,25 @@ $(document).ready(function() {
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                })
+        })
+    }
+
+    var editProfileBtn = document.querySelector("#editProfile")
+    var _form = document.querySelector("#editUserProfile")
+    if (editProfileBtn !== null) {
+        editProfileBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            var url = `/accounts/${site_slug}/profile/${url_end}/`
+            var form_data = new FormData(_form)
+
+            fetch(url, { method: 'POST', body: form_data })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         })
     }

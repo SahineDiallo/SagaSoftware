@@ -1,11 +1,11 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from tracker.models import Site
-from .forms import UserRegistrationForm, LoginForm
+from .forms import UserRegistrationForm, LoginForm, UserProfileForm
 from .models import ConfirmationCode, Invitation
 from .utils import send_emailConfirmation_code, EmailThreading, get_first_and_last_name
 from django.template.loader import get_template
@@ -69,13 +69,7 @@ def register(request):
                 #we need the remove the last character of the invitation slug which is a slash
                 invitation = Invitation.objects.get(slug=invitation_slug[:-1])
                 invitation.accepted = True
-                role = invitation.role
-                if role == '1':
-                    instance.is_site_administrator = True
-                elif role == '2':
-                    instance.is_project_manager = True
-                else:
-                    instance.is_developer = True
+                instance.role = invitation.role
 
                 instance.save()
                 invitation.save()
@@ -135,3 +129,12 @@ def email_confirmation(request):
 def Logout(request):
     logout(request)
     return render(request, 'accounts/logout.html')
+
+
+def Profile(request,site_slug, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    form = UserProfileForm(request.POST or None, instance=user)
+    if form.is_valid():
+        print("the form is valid") 
+    context = {'form': form}
+    return render(request, 'accounts/profile.html', context)

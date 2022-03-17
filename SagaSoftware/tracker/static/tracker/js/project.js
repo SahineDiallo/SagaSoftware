@@ -245,7 +245,11 @@ $(document).ready(function() {
         $("#vert-tabs-right-tabContent #createProjectForm #id_key").attr('oninput', "let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);")
     });
 
-    // /////////////// functions  /////////////////
+    $("#proj_mem_list").on("click", (e) => {
+            if (!(e.target.classList).contains('mdi')) return;
+            if ((e.target.classList).contains('mdi-pencil')) return getUserRoleForm(e)
+        })
+        // /////////////// functions  /////////////////
 
     function createProjectFunc(e) {
         e.preventDefault();
@@ -544,4 +548,27 @@ $(document).ready(function() {
         }
     }
 
+    function editUserRole(e) {
+        console.log('edit user role called');
+
+    }
+    $("#editRole").on("click", (e) => {
+        console.log("clicked")
+        $("#editMemberoleForm").submit();
+    })
+
+    function getUserRoleForm(e) {
+        var user_id = e.target.parentElement.parentElement.getAttribute('data-reg')
+        var url = `/trackers/${site_slug}/projects/user-role/${url_end}/${user_id}/`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                $(".edit_members_role").last().html(data.template);
+            })
+            .catch(error => {
+                alert("something went wrong. Please try later!")
+                console.log("error", error)
+            })
+    }
 })

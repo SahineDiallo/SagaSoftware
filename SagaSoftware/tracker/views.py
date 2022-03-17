@@ -1,3 +1,4 @@
+from json import JSONEncoder
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.generic import View
@@ -6,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Site, Project, Milestone
 from django.conf import settings
 from accounts.models import Invitation
-from accounts.forms import InviteForm, inviteHelper
+from accounts.forms import InviteForm, EditMemberRoleForm
 from django.urls import reverse
 from .forms import CreateSiteForm, CreateProjectForm, MilestoneForm
 from django.forms import modelformset_factory
@@ -152,13 +153,13 @@ class ProjectDetailView(LoginRequiredMixin, View):
         emails = project.members.all().values("email") #get the emials of the project members first
         all_emails = [i['email'] for i in emails]
         addable_members = User.objects.all().exclude(email__in = all_emails) #fllter the rest of the users 
-        print(addable_members)
         milestones = project.milestones.all()
+        project_members = project.members.all()
         context = {
             'site_slug': site_slug, 'project': project,
             'form': form, 'project_icon': project.project_icon,
             'project_color': project.project_color,
-            'activeProjectBg': activeProjectBg,
+            'activeProjectBg': activeProjectBg, 'proj_mem': project_members,
             'activeNav': navbarBg, 'members': addable_members,
             'mile_form': milestone_form, 'milestones': milestones}
         return render(request, 'tracker/project_details.html', context)
@@ -172,6 +173,19 @@ def add_members_to_project(request, site_slug, project_key):
         added_members = [User.objects.get(username=username) for username in data]
         project.members.add(*added_members) #add the members into the project
     return JsonResponse({'success': True})
+
+
+def editUserRole(request, site_slug, project_key, user_id):
+    project = get_object_or_404(Project, key=project_key)
+    user = User.objects.get(pk=user_id)
+    print(user)
+    form = EditMemberRoleForm(request.POST or None, instance=user)
+    if form.is_valid():
+        pass
+
+    template = render_to_string(
+            "tracker/getUserRoleForm.html", {'user': user, 'form':form}, request=request)
+    return JsonResponse({'template': template})
 
 @login_required
 @allowedToEnterProject
@@ -275,3 +289,4 @@ def project_tickets(request, site_slug, project_key):
     
     context = {}
     return render(request, 'tracker/tickets.html', context)
+
