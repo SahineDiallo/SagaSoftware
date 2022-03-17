@@ -12,6 +12,8 @@ from .utils import send_emailConfirmation_code, EmailThreading, get_first_and_la
 from django.template.loader import get_template
 import string
 import random
+from django.template.context_processors import csrf
+from crispy_forms.utils import render_crispy_form
 
 User = get_user_model()
 
@@ -135,8 +137,14 @@ def Logout(request):
 def Profile(request,site_slug, user_id):
     user = get_object_or_404(User, pk=user_id)
     form = UserProfileForm(request.POST or None, instance=user)
-    if form.is_valid():
-        print("the form is valid")
-        return JsonResponse({'success': True}) 
+    if request.method == "POST":
+        if form.is_valid():
+            print("the form is valid")
+            return JsonResponse({'success': True}) 
+        else:
+            contexts = csrf(request)
+            formWithErrors = render_crispy_form(form, context=contexts)
+            return JsonResponse({'success': False, 'formErrors': formWithErrors, })
+    
     context = {'form': form}
     return render(request, 'accounts/profile.html', context)

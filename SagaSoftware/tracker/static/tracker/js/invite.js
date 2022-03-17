@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    function checkAndRemoveInvalidClass(e) {
+        if (e.target.classList.contains("is-invalid")) {
+            console.log("ok got the class")
+            $(e.target).removeClass("is-invalid")
+        }
+    }
     var url_end = (window.location.pathname).split("/").at(-2)
     var site_slug = (window.location.pathname).split("/")[2]
     var inviteBtn = document.querySelector("#invite_new_members")
@@ -34,18 +40,28 @@ $(document).ready(function() {
         })
     }
 
+    $(".profile-form").on('keyup', (e) => {
+        if (e.target.tagName === 'INPUT') {
+            checkAndRemoveInvalidClass(e)
+        }
+
+    })
     var editProfileBtn = document.querySelector("#editProfile")
-    var _form = document.querySelector("#editUserProfile")
     if (editProfileBtn !== null) {
         editProfileBtn.addEventListener("click", (e) => {
             e.preventDefault();
+            var _form = document.querySelector("#editUserProfile")
             var url = `/accounts/${site_slug}/profile/${url_end}/`
             var form_data = new FormData(_form)
 
             fetch(url, { method: 'POST', body: form_data })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+                    if (data.success) {
+                        alertUser('Your', 'has updated successfully!', 'profile')
+                    } else {
+                        $("#editUserProfile").replaceWith(data.formErrors)
+                    }
                 })
                 .catch(error => {
                     console.log(error)
