@@ -1,4 +1,5 @@
 
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.urls import reverse
@@ -135,6 +136,7 @@ def Profile(request,site_slug, user_id):
     user = get_object_or_404(User, pk=user_id)
     form = UserProfileForm(request.POST or None, instance=user)
     if form.is_valid():
-        print("the form is valid") 
+        print("the form is valid")
+        return JsonResponse({'success': True}) 
     context = {'form': form}
     return render(request, 'accounts/profile.html', context)

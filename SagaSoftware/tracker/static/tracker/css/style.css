@@ -21961,6 +21961,15 @@ dl li {
     background: transparent;
 }
 
+#editUserProfile label.col-form-label {
+    width: 150px;
+    font-weight: bold;
+}
+#editUserProfile input {
+    margin-top: 7px;
+    width: 300px;
+}
+
 
 /* style for off-canvas menu*/
 

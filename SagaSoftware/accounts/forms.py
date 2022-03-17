@@ -177,7 +177,7 @@ class EditMemberRoleForm(forms.ModelForm):
         super(EditMemberRoleForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "editMemberRoleForm"
-        self.helper.form_class = "inline-form"
+        self.helper.form_class = "form-inline"
         self.fields["role"].label = "Edit member role"    
 
 
@@ -186,4 +186,11 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'first_name', 'last_name', 'username')
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "editUserProfile"
+        self.helper.form_class = "form-horizontal"
+        
 
