@@ -94,6 +94,7 @@ $(document).ready(function() {
                 if (data.success) {
                     $(_form)[0].reset();
                     $("#proj_mem_list").append(data.template)
+                    $(".mem_close_icon").click();
                     alertUser('New', 'added to the project successfully!', 'members');
                 }
             })
@@ -112,10 +113,10 @@ $(document).ready(function() {
 
     function createNewMilestone(e) {
         e.preventDefault()
-        _form = document.querySelector("#milestoneForm")
-        form_data = new FormData(_form);
-        var project_key = (window.location.pathname).split("/").at(-3)
-        url = `/trackers/${project_key}/create-milestone/`
+        var _form = document.querySelector("#milestoneForm")
+        var form_data = new FormData(_form);
+        var project_key = (window.location.pathname).split("/").at(-2)
+        var url = `/trackers/${project_key}/create-milestone/`
         fetch(url, { method: "POST", body: form_data })
             .then(response => response.json())
             .then(data => {
@@ -126,7 +127,7 @@ $(document).ready(function() {
                     $(".milestones_body").prepend(data.template);
 
                     $("#vert-tabs-right-milestone #milestoneForm")[0].reset();
-                    $(".mil_close_icon").click();
+                    $(".add_mil_section .mdi-close-box").click();
                     alertUser("Milestone", "created with sucess", "New")
                 } else {
                     $("#vert-tabs-right-tabContent #milestoneForm").replaceWith(data.formErrors)
@@ -174,8 +175,8 @@ $(document).ready(function() {
         $(e.target).attr("disabled", true)
         var mil_id = $(".mil_close_icon").attr("data-close-mil")
         var url_mil = `/trackers/edit-milestone/${mil_id}/`
-        _form = document.querySelector(".edit_mil_section #milestoneForm")
-        form_data = new FormData(_form)
+        var _form = document.querySelector(".edit_mil_section #milestoneForm")
+        var form_data = new FormData(_form)
         fetch(url_mil, { method: 'POST', body: form_data, })
             .then(response => response.json())
             .then(data => {
@@ -197,10 +198,9 @@ $(document).ready(function() {
     }
 
     function deleteMilestone(e) {
-
+        $("#del_milestone").modal();
         var mil_id = $(e.target).parent().attr('data-mil-id-de')
-        console.log(mil_id)
-        $("#del_milestone").attr('data-mil-id-de', mil_id)
+        $("#del_milestone .modal-body").attr('data-mil-id-de', mil_id)
     }
     $("#vert-tabs-right-milestone").on("click", (e) => {
         if ($(e.target).attr("id") === "submit-id-save") return createNewMilestone(e);
@@ -273,7 +273,6 @@ $(document).ready(function() {
                 if (data.success) {
                     $("#RemoveMemberModal").modal('toggle');
                     var spn = document.querySelector(`span[data-reg="${user_id}"`);
-                    console.log(spn)
                     spn.parentElement.parentElement.remove();
                     alertUser('removed', 'from project successfully!', 'member')
                 }
