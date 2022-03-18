@@ -1,4 +1,3 @@
-
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
@@ -28,10 +27,9 @@ def Login(request):
         password = form.cleaned_data.get("password")
         user = authenticate(email=email, password=password)
         # check if the user has been sent a code then he is an admin
-        user_email_code = user.confirmation_code
-        if user_email_code:
+        if user.confirmation_code.code:
             # this means that this user is an admin
-            if user_email_code.is_confirmed:
+            if user.confirmation_code.is_confirmed:
                 login(request, user)  # login the user before redirecting
                 site_slug = user.profile.site.slug if user.profile.site else ""
                 if site_slug != "":

@@ -14,6 +14,7 @@ def create_profile(sender, instance, created, **kwargs):
             user=instance, profile_background=random.choice(
                 list(colorPickerList))
         )
+        ConfirmationCode.objects.create(user=instance)
 
 
 @receiver(post_save, sender=Invitation)

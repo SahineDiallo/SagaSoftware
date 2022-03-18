@@ -37,6 +37,16 @@ class CostumUserCreationForm(UserCreationForm):
         return username
 
 
+
+    def clean_full_name(self):
+        f_name = self.cleaned_data.get('full_name')
+        if len(f_name.split(' ')) < 2:
+            raise forms.ValidationError(
+                "Please make sure to provide your first and last name seperated by espace!"
+            )
+        return f_name
+
+
 class UserRegistrationForm(CostumUserCreationForm):
     username = forms.CharField(
         widget=forms.TextInput(
