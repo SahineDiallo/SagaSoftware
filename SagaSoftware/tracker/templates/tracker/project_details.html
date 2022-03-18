@@ -104,7 +104,7 @@
                         <div class="card m-4 p-3 edit_members_role" style="background: #f3f3f3;">
                           <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
                           <div>
-                            </div>
+                            <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary btn-sm mr-2">modal</button>                            </div>
                         </div>
                         <div class="card-header">          
                           <div class="card-tools d-flex align-items-center">
@@ -145,7 +145,7 @@
                                 <td>{{member.last_login|date:"M d, Y"}}</td>
                                 <td>
                                   <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
-                                    <span><i class="mdi mdi-pencil" ></i></span>
+                                    <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
                                     <span><i class="mdi mdi-eye" ></i></span>
                                     <span><i class="mdi mdi-trash-can"></i></span>
                                   </span>

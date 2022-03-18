@@ -4,10 +4,10 @@
         <span class="project_name"><strong>User</strong>: {{user.username}}</span>
     </div>
     <div class="col-md-6">
-        <form class="" id="" method="POST">
+        <form class="" id="editUserProfile" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" id="editRole" class="btn btn-primary btn-sm ml-2">Edit Role</button>
+            <button type="submit"id="editRole"  class="btn btn-primary btn-sm ">Edit Role</button>
         </form>
     </div>
 </div>

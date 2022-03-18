@@ -344,7 +344,7 @@ $(document).ready(function() {
         }
         var hover_open = $(".sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link .menu-title")
         var sidebarLi = $("#sidebar ul li")
-        var alphaColor = shade(color, 0.531)
+        var alphaColor = shade(color, -0.31)
         var sidebarAnchor = $("#sidebar ul li a")
             // var key = document.querySelector("#vert-tabs-right-tabContent .project-key.badge").textContent;
         asidenav.setAttribute("style", `background:${color};`)
@@ -475,7 +475,7 @@ $(document).ready(function() {
         } else if ($el.classList.contains("mdi-close-box")) {
             $(".edit-project-icon-container-parent").fadeOut();
         } else if ($el.classList.contains("theme-choice")) {
-            _color = $el.getAttribute("style").slice(-8, -1);
+            var _color = $el.getAttribute("style").slice(-8, -1);
             changeProjectTheme(_color, $el);
         }
         return false;
@@ -548,27 +548,66 @@ $(document).ready(function() {
         }
     }
 
+
     function editUserRole(e) {
-        console.log('edit user role called');
+        e.preventDefault();
+        var user_id = $("#editRoleModal .modal-body").attr("data-reg")
+        var url = `/trackers/${site_slug}/projects/user-role/${url_end}/${user_id}/`
+        var _form = document.querySelector("#editUserProfile");
+        var form_data = new FormData(_form)
+        fetch(url, { method: 'POST', body: form_data })
+            .then(res => res.json())
+            .then(data => {
+                console.log("data", data)
+                    // if success : close the modal, alert the user and update the datatable
+                if (data.success) {
+                    $('#editRoleModal').modal('toggle');
+                    $("#editRoleModal .modal-body").first().html(
+                        `
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" style="width: 3.5rem; height: 3.5rem;" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        `
+                    );
+                    alertUser('Your', 'has been updated successfully', 'Profile')
+                }
+            })
+            .catch(error => {
+                alert("OOOPS, Something went wrong. Please try later!")
+            })
 
     }
-    $("#editRole").on("click", (e) => {
-        console.log("clicked")
-        $("#editMemberoleForm").submit();
+    $("#editRoleModal .close").on("click", (e) => {
+        $("#editRoleModal .modal-body").first().html(
+            `
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" style="width: 3.5rem; height: 3.5rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            `
+        );
     })
 
+
     function getUserRoleForm(e) {
+        $("#editRoleModal").modal();
         var user_id = e.target.parentElement.parentElement.getAttribute('data-reg')
+        $("#editRoleModal .modal-body").attr("data-reg", user_id)
         var url = `/trackers/${site_slug}/projects/user-role/${url_end}/${user_id}/`
         fetch(url)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                $(".edit_members_role").last().html(data.template);
+                $("#editRoleModal .modal-body").first().html(data.template);
+                $("#editRole").on("click", (e) => { editUserRole(e) })
             })
             .catch(error => {
                 alert("something went wrong. Please try later!")
                 console.log("error", error)
             })
+
+
     }
 })

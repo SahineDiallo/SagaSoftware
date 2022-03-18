@@ -178,10 +178,10 @@ def add_members_to_project(request, site_slug, project_key):
 def editUserRole(request, site_slug, project_key, user_id):
     project = get_object_or_404(Project, key=project_key)
     user = User.objects.get(pk=user_id)
-    print(user)
     form = EditMemberRoleForm(request.POST or None, instance=user)
     if form.is_valid():
-        pass
+        form.save()
+        return JsonResponse({"success": True})
 
     template = render_to_string(
             "tracker/getUserRoleForm.html", {'user': user, 'form':form}, request=request)

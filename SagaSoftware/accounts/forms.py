@@ -187,7 +187,7 @@ class EditMemberRoleForm(forms.ModelForm):
         super(EditMemberRoleForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = "editMemberRoleForm"
-        self.helper.form_class = "form-inline"
+        self.helper.form_class = "form-horizontal"
         self.fields["role"].label = "Edit member role"    
 
 
