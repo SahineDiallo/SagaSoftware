@@ -29,4 +29,7 @@ urlpatterns = [
 
      path("<slug:site_slug>/projects/add-members/<slug:project_key>/",
           tracker_views.add_members_to_project, name="add_members"),
+     
+     path("<slug:site_slug>/projects/remove-member/<slug:project_key>/<int:user_id>/",
+          tracker_views.removeMember, name="remove_member"),
 ]

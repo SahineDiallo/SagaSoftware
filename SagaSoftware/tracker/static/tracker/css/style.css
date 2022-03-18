@@ -22566,7 +22566,8 @@ dl li {
 }
 
 .add_mil_section,
-.edit_mil_section {
+.edit_mil_section,
+.add_members_section {
     display: none;
 }
 
@@ -22589,4 +22590,9 @@ dl li {
 
 div#addMembers_chosen {
     width: 400px !important;
+}
+
+ul.chosen-choices {
+    padding: 4px !important;
+    border-radius: 2px;
 }

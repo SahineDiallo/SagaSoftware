@@ -81,31 +81,27 @@
                 <div class="row">
                   <div class="d-flex align-items-center justify-content-between flex-grow-1 mb-3">
                     <h3>Project Members</h3>
-                    <button type="button" class="btn btn-secondary btn-sm">
+                    <button type="button" class="btn btn-secondary btn-sm add_new_users">
                      <i class="mdi mdi-plus"></i> Add users to project
                     </button>
                   </div>
                     <div class="col-12">
+                      <div class="card p-3 add_members_section" style="background: #f3f3f3;">
+                        <span class="mem_close_icon"><i class="mdi mdi-close-box"></i></span>
+                          <form class="form-inline" id="add_proj_members" method="post">
+                              {% csrf_token %}
+                              <div class="form-group">
+                                <select class="form-control" name="added_members" id="addMembers" multiple="multiple">
+                                  {% for member in members %}
+                                    <option>{{member.username}}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                              <button type="submit" id="add_new_members" class="btn btn-info btn-sm ml-3">Add Now</button>
+                          </form>
+                      </div>
+
                       <div class="card">
-                        <div class="card m-4 p-3 add_members_section" style="background: #f3f3f3;">
-                          <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
-                            <form class="form-inline" id="add_proj_members" method="post">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                  <select class="form-control" name="added_members" id="addMembers" multiple="multiple">
-                                    {% for member in members %}
-                                      <option>{{member.username}}</option>
-                                    {% endfor %}
-                                  </select>
-                                </div>
-                                <button type="submit" id="add_new_members" class="btn btn-info btn-sm ml-3">Add Now</button>
-                            </form>
-                        </div>
-                        <div class="card m-4 p-3 edit_members_role" style="background: #f3f3f3;">
-                          <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
-                          <div>
-                            <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary btn-sm mr-2">modal</button>                            </div>
-                        </div>
                         <div class="card-header">          
                           <div class="card-tools d-flex align-items-center">
                             <div class="input-group input-group-sm" style="width: 450px;">
@@ -140,7 +136,7 @@
                                 <td>{{member.last_name}}</td>
                                 <td>{{member.first_name}}</td>
                                 <td>{{member.email}}</td>
-                                <td>{{member.get_user_role}}</td>
+                                <td>{{member.role}}</td>
                                 <td>{{member.create_on|date:"M d, Y"}}</td>
                                 <td>{{member.last_login|date:"M d, Y"}}</td>
                                 <td>

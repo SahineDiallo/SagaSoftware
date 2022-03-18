@@ -172,7 +172,10 @@ def add_members_to_project(request, site_slug, project_key):
             return JsonResponse({'success':False})
         added_members = [User.objects.get(username=username) for username in data]
         project.members.add(*added_members) #add the members into the project
-    return JsonResponse({'success': True})
+    
+        template = render_to_string(
+            "tracker/added_members.html", {'added_members': added_members,}, request=request)
+    return JsonResponse({'success': True, 'template': template})
 
 
 def editUserRole(request, site_slug, project_key, user_id):
@@ -186,6 +189,13 @@ def editUserRole(request, site_slug, project_key, user_id):
     template = render_to_string(
             "tracker/getUserRoleForm.html", {'user': user, 'form':form}, request=request)
     return JsonResponse({'template': template})
+
+
+def removeMember(request, site_slug, project_key, user_id):
+    user = User.objects.get(pk=user_id)
+    project = get_object_or_404(Project, key=project_key)
+    project.members.remove(user)
+    return JsonResponse({"success": True})
 
 @login_required
 @allowedToEnterProject

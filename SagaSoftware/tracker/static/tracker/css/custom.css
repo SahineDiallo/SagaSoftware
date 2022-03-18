@@ -1,4 +1,5 @@
 /* this class is for login errors show */
+
 .errornote {
     font-size: 14px;
     font-weight: 400;
@@ -11,13 +12,16 @@
     background-position: 5px 12px;
     overflow-wrap: break-word;
 }
+
 .errorlist {
     font-size: 13px;
     color: #e35f5f !important;
 }
-.navbar-menu-wrapper > div {
+
+.navbar-menu-wrapper>div {
     color: black;
 }
+
 .navbar-menu-wrapper p {
     font-size: .75rem;
     color: #8b8b8b;
@@ -25,18 +29,22 @@
     letter-spacing: .5px;
 }
 
+
 /* this is for the carousel of the project dashbaord */
+
 #events {
     height: 100px;
 }
 
-.event-schedule .badge{
+.event-schedule .badge {
     font-size: 11px;
     padding: 0.2rem 0.4rem;
 }
+
 .owl-item {
     min-width: 345px;
 }
+
 .event-list .event-item {
     padding: 0.5rem .9rem;
     margin: 0 0.9375rem 1.875rem 0.9375rem;
@@ -48,8 +56,8 @@
     -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
     -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
     transition: all .3s ease;
-    
 }
+
 .event-item.d-flex.flex-column:hover {
     background: #dde4f5;
 }
@@ -58,11 +66,13 @@
     color: black;
     opacity: 1
 }
+
 .project-actions a {
     transition: all .5s ease;
     font-size: 15px;
 }
-.event-item.d-flex.flex-column:hover .project-actions a:hover  {
+
+.event-item.d-flex.flex-column:hover .project-actions a:hover {
     color: #1b397e;
 }
 
@@ -112,14 +122,14 @@
     color: gray;
     font-size: 14px
 }
-.event-title{
+
+.event-title {
     display: block;
     font-weight: 400;
     padding: 0 0.6rem;
     border-right: 1px solid #ccc;
     color: gray;
     font-size: 14px;
-
 }
 
 .event-list .event-item .event-title:hover {
@@ -157,18 +167,19 @@
     border-radius: 50%;
 }
 
-.event-list .event-item .event-participants li + li {
+.event-list .event-item .event-participants li+li {
     margin-left: -10px;
 }
-
 
 .event-list .event-item .event-participants {
     flex-direction: row !important;
 }
+
 .event-list .event-item .event-participants {
     padding: 0;
     margin: 0;
 }
+
 .event-user {
     line-height: 0.9 !important;
 }
@@ -189,84 +200,86 @@
     background-color: #d1f6f2;
 }
 
-.event-list .event-item .event-schedule, .event-list .event-item .event-participants{
+.event-list .event-item .event-schedule,
+.event-list .event-item .event-participants {
     display: flex !important;
 }
 
-
 .owl-prev {
-  width: 100px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  margin-left: 0;
-  display: block !important;
-  background-image: linear-gradient(to right, #efefefa8, transparent) !important;
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    margin-left: 0;
+    display: block !important;
+    background-image: linear-gradient(to right, #efefefa8, transparent) !important;
 }
 
 .owl-prev .owl-nav-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.owl-prev .owl-nav-wrapper svg, .owl-prev .owl-nav-wrapper i {
-  color: #ffffff;
-  width: 20px;
-  height: 20px;
+.owl-prev .owl-nav-wrapper svg,
+.owl-prev .owl-nav-wrapper i {
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
 }
 
 .owl-next {
-  width: 100px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: block !important;
-  background-image: linear-gradient(to right, transparent, #efefefa8) !important;
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block !important;
+    background-image: linear-gradient(to right, transparent, #efefefa8) !important;
 }
 
 .owl-next .owl-nav-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
 }
 
-.owl-next .owl-nav-wrapper svg, .owl-next .owl-nav-wrapper i {
-  color: #ffffff;
-  width: 20px;
-  height: 20px;
+.owl-next .owl-nav-wrapper svg,
+.owl-next .owl-nav-wrapper i {
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
 }
 
 .owl-dots {
-  text-align: center;
-  margin-top: .5rem;
+    text-align: center;
+    margin-top: .5rem;
 }
 
 .owl-dots .owl-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
-  background: #cbcbcb !important;
-  margin-right: 5px;
-  display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background: #cbcbcb !important;
+    margin-right: 5px;
+    display: inline-block;
 }
 
 .owl-dots .owl-dot.active {
-  background: #757575 !important;
+    background: #757575 !important;
 }
 
-.text-primary, .task-list-wrapper .completed .remove {
+.text-primary,
+.task-list-wrapper .completed .remove {
     color: #4e73e5 !important;
 }
-
 
 
 /* end of project carousel */
@@ -276,22 +289,27 @@
     align-items: center;
     align-content: space-between;
 }
-._header + div{
+
+._header+div {
     min-height: 200px;
     box-shadow: 0 0 10px 0 #d1cfcf;
 }
+
 ._header button {
     margin-left: auto;
     border-radius: 50%;
     border: 1px solid #d5d6d7
 }
-.versions{
+
+.versions {
     min-height: 100px !important;
 }
+
 .filter {
     background: #ccc;
 }
-.filter .tickets-assigned-filter label{
+
+.filter .tickets-assigned-filter label {
     margin: 0 6px;
     border-radius: 30px !important;
     border: none;
@@ -301,12 +319,15 @@
     font-size: 13px;
     padding: 5px 10px;
 }
+
 .filter .tickets-assigned-filter label:hover {
     background: #dde4f5;
 }
-.filter .tickets-assigned-filter label input:focus{
-    outline:none;
+
+.filter .tickets-assigned-filter label input:focus {
+    outline: none;
 }
+
 #sort-by-filter {
     width: 200px;
     height: 1.9rem !important;
@@ -326,7 +347,7 @@
     display: none;
 }
 
-.show-only > span {
+.show-only>span {
     display: block;
     padding: 10px;
     cursor: pointer;
@@ -335,27 +356,30 @@
     font-weight: 500;
     letter-spacing: .02rem;
     color: #6d6b81;
-
 }
 
-.show-only > span:hover {
+.show-only>span:hover {
     background: #f3f3f3;
 }
 
-th.ticket_status, th.ticket_priority {
+th.ticket_status,
+th.ticket_priority {
     width: 120px !important;
     text-align: center;
-
 }
+
 th.ticket_key {
     width: 77px;
 }
+
 th.ticket_summary {
     width: calc(100% - 347px) !important;
 }
-.filter + div thead{
+
+.filter+div thead {
     background: #f3f3f3;
 }
+
 .project-instance {
     border-bottom: 1px solid #ccc;
     height: 50px;
@@ -366,9 +390,11 @@ th.ticket_summary {
     height: 2.25rem;
     border-radius: 50%;
 }
+
 .trending .card-header {
     border-bottom: 2px solid #d1d1d1 !important;
 }
+
 .trending {
     font-size: 13px;
     letter-spacing: .02rem;
@@ -376,12 +402,15 @@ th.ticket_summary {
     padding-bottom: 10px;
     border-bottom: 1px solid #d1d1d1;
 }
+
 .trendings .card-body {
     background: #fff8a226 !important;
 }
+
 .event-title:first-child {
     padding-left: 0;
 }
+
 .hidden-actions {
     display: none;
     font-size: 15px;
@@ -391,9 +420,11 @@ th.ticket_summary {
 .project-instance.d-flex.align-items-center.p-2 {
     transition: all .4s ease;
 }
+
 .empty {
     display: block;
 }
+
 .over_header {
     position: fixed;
     top: 60px;
@@ -401,8 +432,8 @@ th.ticket_summary {
     left: 258px;
     background: #fff;
     z-index: 99;
-    
 }
+
 .proj_set_body {
     height: calc(100vh - 120px);
     border-top: 1px solid #ededed;
@@ -410,6 +441,7 @@ th.ticket_summary {
     margin-top: 1px;
     padding: 0;
 }
+
 .content-wrapper {
     background: #f3f3f3;
     padding: 2.1rem 0 2.1rem 30px !important;
@@ -417,6 +449,7 @@ th.ticket_summary {
     -webkit-flex-grow: 1;
     flex-grow: 1;
 }
+
 .set_head {
     padding: 15px;
     display: flex;
@@ -426,6 +459,7 @@ th.ticket_summary {
     letter-spacing: .03rem;
     color: #000000ad;
 }
+
 .nav-tabs .nav-link {
     background: #f3f3f3b5;
     color: #000000;
@@ -439,34 +473,45 @@ th.ticket_summary {
     vertical-align: middle;
     letter-spacing: .02rem;
 }
-.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
     color: #000;
     background-color: #ffffff;
     border-color: #ebedf2 #ebedf2 #ffffff;
     border-right: none !important;
 }
+
 .proj_settings_nav a.active {
     border-right: none;
 }
-._comment, ._overview {
+
+._comment,
+._overview {
     background: transparent !important;
     border: none !important;
 }
-._comment .card-header, ._overview .card-header {
+
+._comment .card-header,
+._overview .card-header {
     border: 1px solid #e7eaed;
 }
+
 .dash-set-proj-icon {
     font-size: 18px;
     opacity: .4;
     transition: ease-in-out .3s all;
 }
+
 .project-instance.d-flex.align-items-center.p-2:hover {
     background: #dde4f5;
 }
+
 .project-instance.d-flex.align-items-center.p-2:hover .dash-set-proj-icon {
     font-size: 20px;
     opacity: 1;
 }
+
 .project-instance-key {
     font-size: 13px;
     padding: 2px 7px;
@@ -477,39 +522,47 @@ th.ticket_summary {
     letter-spacing: .03rem;
     color: #6d6b81;
 }
+
 .project-instance.d-flex.align-items-center.p-2:hover .project-instance-key {
-    display:none;
+    display: none;
 }
+
 .project-instance.d-flex.align-items-center.p-2:hover .hidden-actions {
-    display:block;
+    display: block;
 }
+
 .backlogContainer {
-    display:flex;
+    display: flex;
     align-items: center;
     height: 100%;
 }
+
 .bucketsInstances {
     width: 250px;
     max-width: 250px;
     height: 100%;
     background: green;
 }
+
 .TicketsInstances {
     flex-grow: 1;
     background: transparent;
     height: 100%;
     margin-right: 10px
 }
+
 .bucket {
     display: flex;
     flex-direction: column;
 }
+
 .bucketTitle span {
     padding: 3px 10px;
     background: #2f3d83;
     border-top-left-radius: 4px;
     color: white;
 }
+
 .bucketTicketsContainer {
     border-left: 4px solid #2f3d83;
     border-bottom-left-radius: 3px;
@@ -518,7 +571,7 @@ th.ticket_summary {
     background: #2f3d830f;
 }
 
-.category-name{
+.category-name {
     color: green;
     padding: 3px;
     border: 2px solid;
@@ -526,9 +579,11 @@ th.ticket_summary {
     font-size: 13px;
     letter-spacing: .02rem;
 }
+
 .accordion .card {
     background: transparent;
 }
+
 .ticketsContainer li {
     display: flex;
     justify-content: space-between;
@@ -536,47 +591,53 @@ th.ticket_summary {
     cursor: grab;
     background: #fff;
     color: #130866 !important;
-    margin-bottom:1px;
+    margin-bottom: 1px;
     color: #6d6b81;
     letter-spacing: .02rem;
     font-size: 0.8rem;
     height: 34px;
-
 }
-.ticketsContainer li .issue_summary{
+
+.ticketsContainer li .issue_summary {
     display: flex;
     min-width: 0;
     align-items: center;
     flex-grow: 1;
 }
-.ticketsContainer li .issue_summary i{
+
+.ticketsContainer li .issue_summary i {
     font-size: 18px;
 }
+
 .ticketsContainer li .issue_summary .issue_key {
     color: #684d7c;
     font-weight: 500;
     width: 60px;
 }
 
-.issue_info span{
+.issue_info span {
     flex: 0 0 auto;
 }
+
 i.mdi-bug-outline {
     color: #db3e3e;
 }
+
 i.mdi-check {
     color: #3434a9;
 }
+
 i.mdi-receipt {
     color: #369325;
 }
 
-.ticketsContainer li .issue_info{
+.ticketsContainer li .issue_info {
     display: flex;
     align-items: center;
     flex: 0 0 auto;
     min-width: 0;
 }
+
 .ticketsContainer li .issue_info .issue_estimated {
     width: 30px;
     height: 28px;
@@ -586,23 +647,27 @@ i.mdi-receipt {
     text-align: center;
     font-weight: 500;
 }
+
 .ticketsContainer li .issue_info .issue_assignee {
     width: 50px;
     text-align: center;
     height: 34px;
     line-height: 34px;
 }
+
 .ticketsContainer li .issue_info .issue_assignee img {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
 }
+
 .ticketsContainer li .issue_info .issue_due_date {
     width: 70px;
     line-height: 34px;
     height: 34px;
     text-align: center;
 }
+
 .ticketsContainer li .issue_info .issue_status,
 .ticketsContainer li .issue_info .issue_priority {
     height: 34px;
@@ -616,6 +681,7 @@ i.mdi-receipt {
     font-weight: 500;
     letter-spacing: .02rem;
 }
+
 .icon-container {
     width: 400px;
     height: 150px;
@@ -624,12 +690,13 @@ i.mdi-receipt {
     top: 45px;
     box-shadow: 0 3px 13px 0 #5e5e5e;
     border-radius: 5px;
-
 }
+
 .icon-container-parent,
-.theme-container-parent{
+.theme-container-parent {
     display: none;
 }
+
 .theme-container {
     position: absolute;
     top: 0;
@@ -639,17 +706,18 @@ i.mdi-receipt {
     box-shadow: 1px 1px 5px 1px grey;
     width: 620px;
 }
+
 .icon-container .row span {
     height: 40px;
     line-height: 40px;
     vertical-align: middle;
     width: 45px;
     cursor: pointer;
-    transition :background .3s ease;
+    transition: background .3s ease;
     text-align: center;
     color: #0075ff;
-  
 }
+
 .select-theme {
     font-weight: 600;
     color: white;
@@ -658,15 +726,18 @@ i.mdi-receipt {
     letter-spacing: .05rem;
     text-align: center;
 }
-.icon-container .row span i{
+
+.icon-container .row span i {
     text-align: center;
     padding: 13px;
     border-radius: 5px;
 }
-.icon-container .row span i:hover{
+
+.icon-container .row span i:hover {
     background: grey;
     color: white;
 }
+
 .close-icon-selection {
     position: absolute;
     top: -10px;
@@ -675,12 +746,14 @@ i.mdi-receipt {
     right: -10px;
     cursor: pointer;
 }
+
 .row .color-choice {
     width: 20px !important;
     height: 20px !important;
     border-radius: 50% !important;
     margin: 5px;
 }
+
 .theme-choice {
     width: 107px;
     height: 80px;
@@ -696,11 +769,13 @@ i.mdi-receipt {
     cursor: pointer;
     color: #0075ff;
 }
+
 .project-name {
     font-size: 15px;
     margin-bottom: 3px;
     letter-spacing: .01rem;
 }
+
 .existing-types {
     background: #cccccc2e;
     min-height: 60px;
@@ -712,23 +787,27 @@ i.mdi-receipt {
     display: flex;
     align-items: center;
 }
+
 .existing-types button {
     padding: 7px;
     border: 2px solid;
     font-size: 15px;
     letter-spacing: .02rem;
 }
+
 .issue-types .badge {
     font-size: 15px !important;
     letter-spacing: .02rem;
     margin: 0 5px !important;
     min-width: 30px;
 }
+
 .table-actions {
     width: 50px !important;
-    text-align:center;
+    text-align: center;
 }
-.project-edit{
+
+.project-edit {
     position: fixed;
     right: 0;
     top: 60px;
@@ -739,6 +818,7 @@ i.mdi-receipt {
     box-shadow: 0px 3px 23px #000000d9;
     display: none;
 }
+
 .project-edit .flex-grow-1 {
     padding: 0 10px;
     background: white;
@@ -750,6 +830,7 @@ i.mdi-receipt {
     border-top: 1px solid #ccc !important;
     border-left: 2px solid #ccc !important;
 }
+
 .project-instance .project-icon {
     color: white;
     border-radius: 5px;
@@ -760,17 +841,19 @@ i.mdi-receipt {
     line-height: 37px;
     height: 41px;
 }
+
 .project-edit .modal-body {
     height: calc(90vh - 69px);
     padding-top: 0;
 }
+
 .myLine {
     border-bottom: 2px solid #f3f3f3;
     flex-grow: 1;
     margin-bottom: 6px;
     margin-left: 5px;
-
 }
+
 .asteriskField {
     color: rgb(209, 41, 41)
 }
@@ -778,10 +861,11 @@ i.mdi-receipt {
 .issue-types-parent ul {
     list-style: none;
 }
+
 .issue-type-info {
     display: flex;
-
 }
+
 .issue-type-parent ul li {
     border-left: 4px solid #6493ff;
     font-size: 14px !important;
@@ -789,11 +873,12 @@ i.mdi-receipt {
     letter-spacing: .02rem;
     height: 30px;
     margin-bottom: 2px;
-
 }
+
 .issue-type-info {
     flex-grow: 1;
 }
+
 .issue-type-info span {
     background: #f3f3f3;
     height: 30px;
@@ -803,19 +888,24 @@ i.mdi-receipt {
     border-top: 1px solid #edeaea;
     border-bottom: 1px solid #edeaea;
 }
+
 .issue-type-info .issue-icon {
     width: 40px;
 }
+
 .issue-type-info .issue-name {
     width: 100px
 }
+
 .issue-type-info .issue-background {
     width: 100px;
     color: white;
 }
+
 .issue-type-info .issue-number {
     width: 50px;
 }
+
 .issue-type-info .complete-area {
     background: #bfbfbf42;
     flex-grow: 1;
@@ -826,17 +916,21 @@ i.mdi-receipt {
     display: flex;
     height: 30px;
 }
+
 .issue-type-actions span {
     width: 50px;
     background: #f3f3f3;
     text-align: center;
     margin-left: 2px;
     border-top: 1px solid #edeaea;
-    border-bottom: 1px solid #edeaea;;
+    border-bottom: 1px solid #edeaea;
+    ;
 }
+
 li.d-flex.header {
     border: none;
 }
+
 li.d-flex.header span {
     background: none;
     border: none;
@@ -854,86 +948,103 @@ li.d-flex.header span {
     background: #9b9b9b !important;
     border: none !important;
 }
-.add-btn-navbar i{
+
+.add-btn-navbar i {
     color: white !important;
     font-size: 18px;
 }
+
+
 /* alertify section */
 
 .alertify-notifier.ajs-top {
     top: 30px !important;
 }
+
 .alertify-notifier.ajs-right .ajs-message.ajs-visible {
     right: 280px !important;
 }
+
 .alertify-notifier .ajs-message.ajs-success {
     color: #fff !important;
     text-shadow: none !important;
     border-radius: 5px;
 }
+
 .alertify-notifier.ajs-right {
     right: 210px !important;
 }
+
 .alertify-notifier .ajs-message {
-    width: 465px !important; 
+    width: 465px !important;
 }
+
 .alert-key {
     font-weight: 500;
     text-transform: uppercase;
 }
+
+
 /* end of alertify section */
 
 .ssc-circle {
     width: 30px !important;
     height: 30px !important;
 }
+
 .event-title.settings i {
     padding: 0 .6rem;
     cursor: pointer;
-
 }
+
 .event-title.settings i:hover {
     text-decoration: underline;
     color: #4e73e5;
 }
+
 .edit-project-icon-container-parent {
     display: none;
 }
-.edit-project-icon-container-parent .icon-container{
+
+.edit-project-icon-container-parent .icon-container {
     left: -450px;
     top: -200px;
 }
-.input-edit-icon{
+
+.input-edit-icon {
     color: #80bdff;
     border: none;
     background: none;
     outline: none;
     display: none;
-
 }
-.new-status .badge{
+
+.new-status .badge {
     min-width: 150px;
 }
-.project-key.badge{
+
+.project-key.badge {
     font-weight: 500;
     font-size: 12px;
     letter-spacing: .03rem !important;
     background: #f3f3f361;
-
 }
+
 .project-edit #div_id_name {
     flex-grow: 1;
 }
 
+
 /* loading icon css */
+
 .spinner {
     margin: 5px auto 0;
     width: 70px;
     text-align: center;
-    display:none;
-  }
-  
-  .spinner > div {
+    display: none;
+}
+
+.spinner>div {
     width: 15px;
     height: 15px;
     background-color: #333;
@@ -941,50 +1052,65 @@ li.d-flex.header span {
     display: inline-block;
     -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
     animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  }
-  
-  .spinner .bounce1 {
+}
+
+.spinner .bounce1 {
     -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
     background-color: #007bff;
-  }
-  
-  .spinner .bounce2 {
+}
+
+.spinner .bounce2 {
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
     background: #006633;
-  }
-  .spinner .bounce3 {
-    background: #d13737;
-  }
-  @-webkit-keyframes sk-bouncedelay {
-    0%, 80%, 100% { -webkit-transform: scale(0) }
-    40% { -webkit-transform: scale(1.0) }
-  }
-  
-  @keyframes sk-bouncedelay {
-    0%, 80%, 100% { 
-      -webkit-transform: scale(0);
-      transform: scale(0);
-    } 40% { 
-      -webkit-transform: scale(1.0);
-      transform: scale(1.0);
-    }
-  }
+}
 
-td span .mdi-pencil,  td span .mdi-trash-can{
+.spinner .bounce3 {
+    background: #d13737;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+}
+
+td span .mdi-pencil,
+td span .mdi-trash-can {
     cursor: pointer !important;
     cursor: pointer !important;
     border: 1px solid;
     padding: 3px;
     border-radius: 2px;
 }
-  /* end loading icon css */
-.mil_close_icon{
+
+
+/* end loading icon css */
+
+.mil_close_icon,
+.mem_close_icon {
     position: absolute;
     right: -6px;
     top: -14px;
     font-size: 21px;
     cursor: pointer;
 }
-

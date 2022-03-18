@@ -1,0 +1,17 @@
+{% for member in added_members %}
+    <tr>
+        <td>{{member.last_name}}</td>
+        <td>{{member.first_name}}</td>
+        <td>{{member.email}}</td>
+        <td>{{member.role}}</td>
+        <td>{{member.create_on|date:"M d, Y"}}</td>
+        <td>{{member.last_login|date:"M d, Y"}}</td>
+        <td>
+            <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
+                <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
+                <span><i class="mdi mdi-eye" ></i></span>
+                <span><i class="mdi mdi-trash-can"></i></span>
+            </span>
+        </td>
+    </tr>
+{% endfor %}

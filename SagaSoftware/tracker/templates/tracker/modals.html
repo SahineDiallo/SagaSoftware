@@ -19,7 +19,7 @@
       </div>
       <!-- End of the invitation modal-->
 
-      <!--Invitation Modal -->
+      <!--Edit user role Modal -->
     <div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -71,6 +71,28 @@
                   <button type="button" class="btn btn-primary">Cancel</button>
                   <button type="button" class="btn btn-danger">Yes, Delete</button>
               </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="RemoveMemberModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Removing Member</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>            
+                <div class="modal-body">
+                    <div class="">
+                        <span class="project-name">You are about to remove this user in the project</span>
+                        <div class="d-flex justify-content-center align-items-center mt-4">
+                            <button type="button" id="cancel_rem" class="btn btn-secondary mr-2">Cancel</button>
+                            <button type="button" id="remove_mem" class="btn btn-danger">Yes, Remove</button>
+                        </div>
+                    </div><!-- need to complete that with the rendered form-->
+                </div>      
             </div>
         </div>
       </div>

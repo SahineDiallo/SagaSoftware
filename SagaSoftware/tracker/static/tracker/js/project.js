@@ -93,6 +93,7 @@ $(document).ready(function() {
             .then(data => {
                 if (data.success) {
                     $(_form)[0].reset();
+                    $("#proj_mem_list").append(data.template)
                     alertUser('New', 'added to the project successfully!', 'members');
                 }
             })
@@ -248,8 +249,37 @@ $(document).ready(function() {
     $("#proj_mem_list").on("click", (e) => {
             if (!(e.target.classList).contains('mdi')) return;
             if ((e.target.classList).contains('mdi-pencil')) return getUserRoleForm(e)
+            if (e.target.classList.contains("mdi-trash-can")) return RemoveMember(e);
         })
         // /////////////// functions  /////////////////
+
+    function RemoveMember(e) {
+        $("#RemoveMemberModal").modal();
+        var user_id = $(e.target.parentElement.parentElement).attr("data-reg")
+        $("#RemoveMemberModal .modal-body").attr("data-reg", user_id)
+
+        $("#cancel_rem").on("click", (e) => {
+            $("#RemoveMemberModal").modal('toggle');
+        })
+    }
+
+    $("#remove_mem").on("click", (e) => {
+        var user_id = document.querySelector("#RemoveMemberModal .modal-body").getAttribute('data-reg')
+        console.log(user_id)
+        var url = `/trackers/${site_slug}/projects/remove-member/${url_end}/${user_id}/`
+        fetch(url)
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.success) {
+                    $("#RemoveMemberModal").modal('toggle');
+                    var spn = document.querySelector(`span[data-reg="${user_id}"`);
+                    console.log(spn)
+                    spn.parentElement.parentElement.remove();
+                    alertUser('removed', 'from project successfully!', 'member')
+                }
+            })
+            .catch(error => { alert('Something went wrong. Please try later') })
+    })
 
     function createProjectFunc(e) {
         e.preventDefault();
@@ -591,6 +621,12 @@ $(document).ready(function() {
         );
     })
 
+    $(".add_new_users").on("click", (e) => {
+        $(".add_members_section").fadeIn();
+    })
+    $(".mem_close_icon").on("click", (e) => {
+        $(".add_members_section").fadeOut();
+    })
 
     function getUserRoleForm(e) {
         $("#editRoleModal").modal();
