@@ -170,7 +170,7 @@ class CreateProjectForm(forms.ModelForm):
                             <div class="card-header" style="background:#006633;" >
                                 <span class="select-theme">Select a theme</span>
                                 <button type="button" class="close close-change-theme-btn" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true" style="color:white">&times;</span>
                                 </button>
                             </div>
 
@@ -181,10 +181,10 @@ class CreateProjectForm(forms.ModelForm):
                                 <span class="theme-choice" style="background: #000080;"></span>
                                 <span class="theme-choice" style="background: #006633;"></span>
                                 <span class="theme-choice" style="background: #008080;"></span>
-                                <span class="theme-choice" style="background: #0F0F0F;"></span>
+                                <span class="theme-choice" style="background: #7a6464;"></span>
                                 <span class="theme-choice" style="background: #e0844a;"></span>
                                 <span class="theme-choice" style="background: #2F2F4F;"></span>
-                                <span class="theme-choice" style="background: #330000;"></span>
+                                <span class="theme-choice" style="background: #b31515;"></span>
                                 <span class="theme-choice" style="background: #380474;"></span>
                                 <span class="theme-choice" style="background: #35586C;"></span>
                                 <span class="theme-choice" style="background: #458B00;"></span>
@@ -192,7 +192,7 @@ class CreateProjectForm(forms.ModelForm):
                                 <span class="theme-choice" style="background: #734A12;"></span>
                             </div>
                             <div class="select-theme mt-3">
-                                <button type="button" class="btn btn-secondary">Cancel</button>
+                                <button type="button" class=" close-change-theme-btn btn btn-secondary">Cancel</button>
                                 <button type="submit" class="btn btn-primary select-this-theme">Select this theme</button>
                             </div>
                         </div>
@@ -246,10 +246,10 @@ class CreateProjectForm(forms.ModelForm):
                                     <span class="color-choice" style="background: #000080;"></span>
                                     <span class="color-choice" style="background: #006633;"></span>
                                     <span class="color-choice" style="background: #008080;"></span>
-                                    <span class="color-choice" style="background: #0F0F0F;"></span>
+                                    <span class="color-choice" style="background: #7a6464;"></span>
                                     <span class="color-choice" style="background: #e0844a;"></span>
                                     <span class="color-choice" style="background: #2F2F4F;"></span>
-                                    <span class="color-choice" style="background: #330000;"></span>
+                                    <span class="color-choice" style="background: #b31515;"></span>
                                     <span class="color-choice" style="background: #380474;"></span>
                                     <span class="color-choice" style="background: #35586C;"></span>
                                     <span class="color-choice" style="background: #458B00;"></span>

@@ -201,8 +201,8 @@ def removeMember(request, site_slug, project_key, user_id):
     return JsonResponse({"success": True})
 
 @login_required
-@allowedToEnterProject
-@allowedToEditProject
+# @allowedToEnterProject
+# @allowedToEditProject
 def edit_project_name_and_key(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     result = {}

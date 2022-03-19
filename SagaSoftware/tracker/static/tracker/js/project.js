@@ -2,19 +2,37 @@ $(document).ready(function() {
     $("#id_key").attr('oninput', "let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);")
     var site_slug = (window.location.pathname).split("/")[2]
     var url_end = (window.location.pathname).split("/").at(-2)
-        // /////////////  EventListeners  //////////////
-        //.sidebar .nav .nav-item .nav-link
-    if (!($("#sidebar").attr('style')).includes("fff")) {
-        $(".sidebar .nav .nav-item .nav-link").css({
-            'color': '#fff !important'
-        })
 
+    // /////////////  EventListeners  //////////////
+    //.sidebar .nav .nav-item .nav-link
+    var sidebar = document.querySelector("#sidebar")
+    var navbar_ = document.querySelector("nav.navbar.col-lg-12")
+    var style = $("#sidebar").attr('style')
+    if (style.includes("fff")) {
+        if (sidebar.classList.contains("clr-wt")) {
+            $(sidebar).removeClass('clr-wt')
+        }
+        if (navbar_.classList.contains("clr-wt")) {
+            $(navbar_).removeClass('clr-wt')
+        }
+        $(sidebar).addClass("clr-bk")
+        $(navbar_).addClass('clr-bk')
     } else {
-
-        $(".navbar-nav .nav-link.count-indicator").css({
-            'color': '#3c3636e0 !important'
-        })
+        if (sidebar.classList.contains("clr-bk")) {
+            $(sidebar).removeClass('clr-bk')
+        }
+        if (navbar_.classList.contains("clr-bk")) {
+            $(navbar_).removeClass('clr-bk')
+        }
+        $(sidebar).addClass("clr-wt")
+        $(navbar_).addClass('clr-wt')
     }
+
+
+    // } else {
+    //     
+    // }
+
     $('#vert-tabs-right-tabContent input[type="radio"]').on('click', function() {
         editRadionBtn();
     });
@@ -56,8 +74,7 @@ $(document).ready(function() {
                 if (!data.response && data.not_valid) {
                     $("#vert-tabs-right-tabContent #createProjectForm").replaceWith(data.formErrors)
                 } else {
-                    console.log(data.name)
-                    currVal = data.value
+                    var currVal = data.value
                     setTimeout(() => {
                         // CLOSE THE THEME CONTAINER
                         $(".close-change-theme-btn").click();
@@ -404,22 +421,31 @@ $(document).ready(function() {
         hover_open.attr("style", `background:${color};`)
         sidebarLi.attr("style", "border-bottom: none;")
         $("#sidebar ul li.borderBottom").attr("style", `border-bottom: 1px solid #f3f3f373;`)
-        $(".navbar-brand-wrapper").attr("style", `background:${alphaColor};`)
-        $(".navbar-menu-wrapper").attr("style", `background:${alphaColor};`)
-        $("#id_project_theme").val(`${color} ${alphaColor}`)
+        console.log(color)
         if (color === "#ffffff") {
-            $("<i class='mdi mdi-24px mdi-check' style='color: #000'></i>").appendTo($(element))
-            $(element).attr("color", "#000")
-            sidebarAnchor.attr("style", "color: #000;");
-            $(".menu-arrow").attr("style", "color: #000;");
-            $(".theme-choice.selected").attr("style", `background:${color}; `).addClass("border");
+            $(".navbar-brand-wrapper").attr("style", `background:#ffffff;`)
+            $(".navbar-menu-wrapper").attr("style", `background:#ffffff;`)
+            $("#id_project_theme").val(`${color} #ffffff`)
+            if (sidebar.classList.contains("clr-wt")) {
+                $(sidebar).removeClass('clr-wt')
+            }
+            if (navbar_.classList.contains("clr-wt")) {
+                $(navbar_).removeClass('clr-wt')
+            }
+            $(sidebar).addClass("clr-bk")
+            $(navbar_).addClass('clr-bk')
         } else {
-            $("<i class='mdi mdi-24px mdi-check' style='color: #fff'></i>").appendTo($(element))
-            $(".theme-choice.selected").attr("style", `background:${color};`)
-            sidebarAnchor.attr("style", "color: #fff;");
-            $(".menu-arrow").attr("style", "color: #fff;")
-            $(element).attr("color", "#fff")
-                //projectThemeSelection();
+            $(".navbar-brand-wrapper").attr("style", `background:${alphaColor};`)
+            $(".navbar-menu-wrapper").attr("style", `background:${alphaColor};`)
+            $("#id_project_theme").val(`${color} ${alphaColor}`);
+            if (sidebar.classList.contains("clr-bk")) {
+                $(sidebar).removeClass('clr-bk')
+            }
+            if (navbar_.classList.contains("clr-bk")) {
+                $(navbar_).removeClass('clr-bk')
+            }
+            $(sidebar).addClass("clr-wt")
+            $(navbar_).addClass('clr-wt')
         }
 
     }
@@ -604,6 +630,7 @@ $(document).ready(function() {
 
     function editUserRole(e) {
         e.preventDefault();
+        $("#editProfile").attr('disabled', "true")
         var user_id = $("#editRoleModal .modal-body").attr("data-reg")
         var url = `/trackers/${site_slug}/projects/user-role/${url_end}/${user_id}/`
         var _form = document.querySelector("#editUserProfile");
@@ -622,7 +649,8 @@ $(document).ready(function() {
                             </div>
                         `
                     );
-                    alertUser('Your', 'has been updated successfully', 'Profile')
+                    $("#editProfile").prop("disabled", false);
+                    alertUser('Profile', 'has been updated successfully', 'Your')
                 }
             })
             .catch(error => {

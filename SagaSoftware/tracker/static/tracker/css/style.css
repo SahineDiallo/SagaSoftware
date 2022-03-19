@@ -21825,10 +21825,6 @@ dl li {
     margin-left: 1.125rem;
 }
 
-.active-project {
-    font-style: italic;
-}
-
 .rtl .sidebar .nav .nav-item .nav-link i.menu-icon {
     margin-left: 2rem;
     margin-right: 0;
@@ -22595,4 +22591,25 @@ div#addMembers_chosen {
 ul.chosen-choices {
     padding: 4px !important;
     border-radius: 2px;
+}
+
+#sidebar.clr-bk .nav .nav-item .nav-link {
+    color: black !important;
+}
+
+nav.navbar.clr-bk.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row span.nav-profile-name,
+nav.navbar.clr-bk.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row .navbar-nav .nav-link.count-indicator,
+nav.navbar.clr-bk.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row span.mdi.mdi-sort-variant {
+    color: black !important;
+}
+
+#sidebar.clr-wt .nav .nav-item .nav-link,
+.sidebar.clr-wt .nav .nav-item .nav-link i.menu-arrow {
+    color: #fff !important;
+}
+
+nav.navbar.clr-wt.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row span.nav-profile-name,
+nav.navbar.clr-wt.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row .navbar-nav .nav-link.count-indicator,
+nav.navbar.clr-wt.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row span.mdi.mdi-sort-variant {
+    color: #fff !important;
 }

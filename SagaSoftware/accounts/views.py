@@ -137,7 +137,7 @@ def Profile(request,site_slug, user_id):
     form = UserProfileForm(request.POST or None, instance=user)
     if request.method == "POST":
         if form.is_valid():
-            print("the form is valid")
+            form.save()
             return JsonResponse({'success': True}) 
         else:
             contexts = csrf(request)
