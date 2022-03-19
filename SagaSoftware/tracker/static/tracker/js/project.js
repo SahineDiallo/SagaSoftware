@@ -2,9 +2,8 @@ $(document).ready(function() {
     $("#id_key").attr('oninput', "let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);")
     var site_slug = (window.location.pathname).split("/")[2]
     var url_end = (window.location.pathname).split("/").at(-2)
-    $("#addMembers").chosen({ no_results_text: "Oops, no member were found!" });
-    // /////////////  EventListeners  //////////////
-    //.sidebar .nav .nav-item .nav-link
+        // /////////////  EventListeners  //////////////
+        //.sidebar .nav .nav-item .nav-link
     if (!($("#sidebar").attr('style')).includes("fff")) {
         $(".sidebar .nav .nav-item .nav-link").css({
             'color': '#fff !important'
@@ -83,7 +82,13 @@ $(document).ready(function() {
         $(".edit_mil_section").fadeIn();
         $(e.target).attr("disabled", true)
     })
-    $("#add_new_members").on("click", (e) => {
+    $(".add_members_section").on("click", (e) => {
+        console.log($(e.target).attr("id"))
+        if ($(e.target).attr("id") === "add_new_members") return addNewMembersFunc(e);
+    });
+
+    function addNewMembersFunc(e) {
+        console.log("ok")
         e.preventDefault();
         var _form = document.querySelector("#add_proj_members")
         var url = `/trackers/${site_slug}/projects/add-members/${url_end}/`
@@ -102,7 +107,7 @@ $(document).ready(function() {
                 alert("Something went wrong.Please try later!");
                 console.log("error");
             })
-    })
+    }
     var closeMilestone = (e) => {
 
         $(e.target).parent().parent().fadeOut();
@@ -128,7 +133,7 @@ $(document).ready(function() {
 
                     $("#vert-tabs-right-milestone #milestoneForm")[0].reset();
                     $(".add_mil_section .mdi-close-box").click();
-                    alertUser("Milestone", "created with sucess", "New")
+                    alertUser("Milestone", "created with success", "New")
                 } else {
                     $("#vert-tabs-right-tabContent #milestoneForm").replaceWith(data.formErrors)
                     $('#milestoneForm #id_end_date').datepicker();
@@ -201,6 +206,26 @@ $(document).ready(function() {
         $("#del_milestone").modal();
         var mil_id = $(e.target).parent().attr('data-mil-id-de')
         $("#del_milestone .modal-body").attr('data-mil-id-de', mil_id)
+
+    }
+    $("#del_mil").on("click", (e) => {
+        delMilFunc(e)
+    })
+
+    function delMilFunc(e) {
+        var mil_id = $("#del_milestone .modal-body").attr('data-mil-id-de')
+        var url = `/trackers/delete-milestone/${mil_id}/`
+        fetch(url)
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.success) {
+                    var spn = document.querySelector(`span[data-mil-id-de="${mil_id}"`);
+                    spn.parentElement.parentElement.parentElement.remove();
+                    $("#del_milestone").modal('toggle');
+                    alertUser('deleted', 'from project successfully!', 'Milestone')
+                }
+            })
+            .catch(error => { alert("Something went wrong.Please try later...") })
     }
     $("#vert-tabs-right-milestone").on("click", (e) => {
         if ($(e.target).attr("id") === "submit-id-save") return createNewMilestone(e);
@@ -335,7 +360,6 @@ $(document).ready(function() {
         // checking if we are in the edit project page
         if ("dashboardIcon" in iconObj) {
             $("#vert-tabs-right-tabContent #id_project_icon").attr("value", newClass)
-            console.log($(iconObj.dashboardIcon).children(":first-child"))
             $(iconObj.dashboardIcon).children(":first-child").removeClass(oldClass).addClass(newClass);
             $(iconObj.previewIcon).children(":first-child").removeClass(oldClass).addClass(newClass);
             var oldActiveProjectClass = document.querySelector("#activeProjectLi i").classList[2]
@@ -353,7 +377,7 @@ $(document).ready(function() {
         iconObj.currentIcon.setAttribute("style", `color: ${newColor}`);
         for (let i = 0; i < allIcons.length; i++) {
             const element = allIcons[i];
-            element.parentElement.setAttribut40080e("style", `color: ${newColor}`);
+            element.parentElement.setAttribute("style", `color: ${newColor}`);
 
         }
         if ("dashboardIcon" in iconObj) {
@@ -491,14 +515,14 @@ $(document).ready(function() {
 
             // take care of the do not repeat yourself  after
 
-            iconObj = { element: $el, currentIcon: currentIcon, dashboardIcon: dashboardIcon, previewIcon: previewIcon }
+            var iconObj = { element: $el, currentIcon: currentIcon, dashboardIcon: dashboardIcon, previewIcon: previewIcon }
             updateIcon(iconObj)
         } else if ($el.classList.contains("color-choice")) {
             var currentIcon = document.getElementById("project-edit-current-icon");
             var projectKey = $("#vert-tabs-right-tabContent #id_key").val()
             var dashboardIcon = $(`.active_project_icon`);
             var previewIcon = $(".project-icon.preview-icon");
-            iconObj = { element: $el, currentIcon: currentIcon, dashboardIcon: dashboardIcon, previewIcon: previewIcon }
+            var iconObj = { element: $el, currentIcon: currentIcon, dashboardIcon: dashboardIcon, previewIcon: previewIcon }
 
             updateColorIcon(iconObj);
         } else if ($el.classList.contains("mdi-close-box")) {
@@ -594,10 +618,8 @@ $(document).ready(function() {
                     $("#editRoleModal .modal-body").first().html(
                         `
                         <div class="d-flex justify-content-center">
-                            <div class="spinner-border" style="width: 3.5rem; height: 3.5rem;" role="status">
-                                <span class="sr-only">Loading...</span>
+                              <div class="lds-hourglass "></div>
                             </div>
-                        </div>
                         `
                     );
                     alertUser('Your', 'has been updated successfully', 'Profile')
@@ -612,9 +634,7 @@ $(document).ready(function() {
         $("#editRoleModal .modal-body").first().html(
             `
             <div class="d-flex justify-content-center">
-                <div class="spinner-border" style="width: 3.5rem; height: 3.5rem;" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                <div class="lds-hourglass "></div>
             </div>
             `
         );
@@ -622,9 +642,26 @@ $(document).ready(function() {
 
     $(".add_new_users").on("click", (e) => {
         $(".add_members_section").fadeIn();
+        var url = `/trackers/${site_slug}/projects/add-members/${url_end}/`
+        fetch(url)
+            .then(resp => resp.json())
+            .then(data => {
+                $(".add_mem_sec").html(data.template);
+                $("#addMembers").chosen({ no_results_text: "Oops, no member were found!" });
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Something Went wrong. Please try later")
+            })
+
     })
     $(".mem_close_icon").on("click", (e) => {
         $(".add_members_section").fadeOut();
+        $(".add_mem_sec").html(`
+            <div class="d-flex justify-content-center">
+                <div class="lds-hourglass "></div>
+            </div>
+        `);
     })
 
     function getUserRoleForm(e) {

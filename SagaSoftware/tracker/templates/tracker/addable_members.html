@@ -1,0 +1,11 @@
+<form class="form-inline" id="add_proj_members" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <select class="form-control" name="added_members" id="addMembers" multiple="multiple">
+        {% for member in addable_members %}
+          <option>{{member.username}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" id="add_new_members" class="btn btn-info btn-sm ml-3">Add Now</button>
+</form>

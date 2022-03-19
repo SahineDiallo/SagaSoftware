@@ -42,7 +42,7 @@ class CostumUserCreationForm(UserCreationForm):
         f_name = self.cleaned_data.get('full_name')
         if len(f_name.split(' ')) < 2:
             raise forms.ValidationError(
-                "Please make sure to provide your first and last name seperated by espace!"
+                "Please make sure to provide at your first and last name seperated by espace! You can include your middle if wanted!!"
             )
         return f_name
 
@@ -202,5 +202,7 @@ class UserProfileForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_id = "editUserProfile"
         self.helper.form_class = "form-horizontal"
+
+    
         
 

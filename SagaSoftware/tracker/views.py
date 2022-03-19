@@ -150,9 +150,6 @@ class ProjectDetailView(LoginRequiredMixin, View):
         milestone_form = MilestoneForm(request.POST or None)
         activeProjectBg = project.project_theme.split(' ')[0]
         navbarBg = project.project_theme.split(' ')[1]
-        emails = project.members.all().values("email") #get the emials of the project members first
-        all_emails = [i['email'] for i in emails]
-        addable_members = User.objects.all().exclude(email__in = all_emails) #fllter the rest of the users 
         milestones = project.milestones.all()
         project_members = project.members.all()
         context = {
@@ -160,12 +157,15 @@ class ProjectDetailView(LoginRequiredMixin, View):
             'form': form, 'project_icon': project.project_icon,
             'project_color': project.project_color,
             'activeProjectBg': activeProjectBg, 'proj_mem': project_members,
-            'activeNav': navbarBg, 'members': addable_members,
+            'activeNav': navbarBg,
             'mile_form': milestone_form, 'milestones': milestones}
         return render(request, 'tracker/project_details.html', context)
 
 def add_members_to_project(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
+    emails = project.members.all().values("email") #get the emials of the project members first
+    all_emails = [i['email'] for i in emails]
+    addable_members = User.objects.all().exclude(email__in = all_emails) #fllter the rest of the users 
     if request.method == 'POST':
         data = request.POST.getlist('added_members')
         if data == []:
@@ -175,7 +175,10 @@ def add_members_to_project(request, site_slug, project_key):
     
         template = render_to_string(
             "tracker/added_members.html", {'added_members': added_members,}, request=request)
-    return JsonResponse({'success': True, 'template': template})
+        return JsonResponse({'success': True, 'template': template})
+    template = render_to_string(
+            "tracker/addable_members.html", {'addable_members': addable_members,}, request=request)
+    return JsonResponse({"template": template})
 
 
 def editUserRole(request, site_slug, project_key, user_id):
@@ -273,7 +276,11 @@ def edit_milestone(request, mil_id):
     print("response given")
     return JsonResponse({'template': template, 'success': True, 'mil_id': mil_id})
 
-
+def delete_milestone(request, mil_id):
+    milestone = get_object_or_404(Milestone, id=mil_id)
+    milestone.delete()
+    return JsonResponse({'success': True,})
+    
 def project_home(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     

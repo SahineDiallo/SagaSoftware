@@ -32,4 +32,6 @@ urlpatterns = [
      
      path("<slug:site_slug>/projects/remove-member/<slug:project_key>/<int:user_id>/",
           tracker_views.removeMember, name="remove_member"),
+     path("delete-milestone/<int:mil_id>/",
+          tracker_views.delete_milestone, name="delete_milestone"),
 ]

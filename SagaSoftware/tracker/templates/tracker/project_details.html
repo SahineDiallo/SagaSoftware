@@ -87,18 +87,12 @@
                   </div>
                     <div class="col-12">
                       <div class="card p-3 add_members_section" style="background: #f3f3f3;">
-                        <span class="mem_close_icon"><i class="mdi mdi-close-box"></i></span>
-                          <form class="form-inline" id="add_proj_members" method="post">
-                              {% csrf_token %}
-                              <div class="form-group">
-                                <select class="form-control" name="added_members" id="addMembers" multiple="multiple">
-                                  {% for member in members %}
-                                    <option>{{member.username}}</option>
-                                  {% endfor %}
-                                </select>
-                              </div>
-                              <button type="submit" id="add_new_members" class="btn btn-info btn-sm ml-3">Add Now</button>
-                          </form>
+                          <span class="mem_close_icon"><i class="mdi mdi-close-box"></i></span>
+                          <div class="add_mem_sec">
+                            <div class="d-flex justify-content-center">
+                              <div class="lds-hourglass "></div>
+                            </div>
+                          </div>
                       </div>
 
                       <div class="card">
@@ -202,7 +196,7 @@
                                 <td>
                                   <span class="d-flex align-items-center justify-content-around">
                                     <span data-mil-id-ed="{{milestone.id}}"><i class="mdi mdi-pencil" ></i></span>
-                                    <span data-mil-id-de="{{milestone.id}}" data-toggle="modal" data-target="#del_milestone"><i class="mdi mdi-trash-can"></i></span>
+                                    <span data-mil-id-de="{{milestone.id}}"><i class="mdi mdi-trash-can"></i></span>
                                   </span>                                
                                 </td>
                               </tr>
