@@ -3,6 +3,10 @@ $(document).ready(function() {
     var site_slug = (window.location.pathname).split("/")[2]
     var url_end = (window.location.pathname).split("/").at(-2)
 
+    $("#vert-tabs-right-tabContent #createProjectForm #id_key").parent().css({
+        'width': '400px;'
+    })
+
     // /////////////  EventListeners  //////////////
     //.sidebar .nav .nav-item .nav-link
     var sidebar = document.querySelector("#sidebar")
@@ -28,14 +32,6 @@ $(document).ready(function() {
         $(navbar_).addClass('clr-wt')
     }
 
-
-    // } else {
-    //     
-    // }
-
-    $('#vert-tabs-right-tabContent input[type="radio"]').on('click', function() {
-        editRadionBtn();
-    });
     document.querySelector("#createProject .modal-content .modal-body").addEventListener("keyup", (e) => {
         if (e.target.tagName === "INPUT") return checkAndRemoveInvalidClass(e)
     })
@@ -153,8 +149,10 @@ $(document).ready(function() {
                     alertUser("Milestone", "created with success", "New")
                 } else {
                     $("#vert-tabs-right-tabContent #milestoneForm").replaceWith(data.formErrors)
-                    $('#milestoneForm #id_end_date').datepicker();
-                    $('#milestoneForm #id_start_date').datepicker();
+                    var end_date = $('#milestoneForm #id_end_date')
+                    var start_date = $('#milestoneForm #id_start_date')
+                    flatpickr(start_date, {});
+                    flatpickr(end_date, {});
                 }
             })
             .catch(error => {
@@ -182,8 +180,10 @@ $(document).ready(function() {
             .then(data => {
                 if (data.success) {
                     $("#vert-tabs-right-milestone .edit_mil_section").html(data.template)
-                    $('#milestoneForm #id_end_date').datepicker({});
-                    $('#milestoneForm #id_start_date').datepicker({});
+                    var end_date = $('#milestoneForm #id_end_date')
+                    var start_date = $('#milestoneForm #id_start_date')
+                    flatpickr(start_date, {});
+                    flatpickr(end_date, {});
                 }
             })
             .catch(error => {
@@ -252,8 +252,10 @@ $(document).ready(function() {
         if ($(e.target).attr("id") === "submit-id-edit") return editMilestone(e);
 
     })
-    $('#milestoneForm #id_end_date').datepicker({});
-    $('#milestoneForm #id_start_date').datepicker({});
+    var end_date = $('#milestoneForm #id_end_date')
+    var start_date = $('#milestoneForm #id_start_date')
+    flatpickr(start_date, {});
+    flatpickr(end_date, {});
     $(".close-icon-selection").on("click", (e) => {
         if (url_end !== 'dashboard') {
             var key = $("#vert-tabs-right-tabContent #createProjectForm input[name='key']").val();
@@ -526,6 +528,10 @@ $(document).ready(function() {
     $("#vert-tabs-right-tabContent").on("click", (e) => {
         e.stopImmediatePropagation();
         var $el = e.target
+        if ($(e.target).attr("type") === "radio") {
+            console.log('radio')
+            editRadionBtn();
+        }
         if ($el.classList.contains("change-theme-btn")) {
             $(".theme-container-parent").show();
             $(".close-change-theme-btn").on("click", () => { $(".theme-container-parent").hide(); })
@@ -595,7 +601,7 @@ $(document).ready(function() {
 
         return color(r, g, b);
     }
-    var editRadionBtn = () => {
+    var changeProjectType = () => {
         var key = $("#vert-tabs-right-tabContent #createProjectForm input[name='key']").val();
         var url = `/trackers/${site_slug}/projects/edit/${key}/`
         var _form = document.querySelector("#vert-tabs-right-tabContent #createProjectForm")
@@ -619,10 +625,12 @@ $(document).ready(function() {
             })
 
     }
+    $("#vert-tabs-right-tabContent #id_project_type").on("change", (e) => {
+        changeProjectType();
+    })
 
     function checkAndRemoveInvalidClass(e) {
         if (e.target.classList.contains("is-invalid")) {
-            console.log("ok got the class")
             $(e.target).removeClass("is-invalid")
         }
     }

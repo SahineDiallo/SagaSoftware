@@ -8675,7 +8675,7 @@
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
-    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Libre Franklin, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -8707,7 +8707,7 @@ section {
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Libre Franklin, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -11045,8 +11045,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #4d83ff;
-    border-color: #4d83ff;
+    background-color: #0069d9;
+    border-color: #0062cc;
 }
 
 .btn-primary:hover {
@@ -14579,7 +14579,7 @@ a.close.disabled {
     z-index: 1070;
     display: block;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Libre Franklin, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -14704,7 +14704,7 @@ a.close.disabled {
     z-index: 1060;
     display: block;
     max-width: 276px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Libre Franklin, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -18766,41 +18766,41 @@ input:focus {
 }
 
 @font-face {
-    font-family: 'Roboto';
-    src: url("../fonts/Roboto/Roboto-Light.eot");
-    src: url("../fonts/Roboto/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto/Roboto-Light.woff2") format("woff2"), url("../fonts/Roboto/Roboto-Light.woff") format("woff"), url("../fonts/Roboto/Roboto-Light.ttf") format("truetype");
+    font-family: 'Libre Franklin';
+    src: url("../fonts/Libre Franklin/Libre Franklin-Light.eot");
+    src: url("../fonts/Libre Franklin/Libre Franklin-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Light.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Light.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Light.ttf") format("truetype");
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Roboto';
-    src: url("../fonts/Roboto/Roboto-Bold.eot");
-    src: url("../fonts/Roboto/Roboto-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto/Roboto-Bold.woff2") format("woff2"), url("../fonts/Roboto/Roboto-Bold.woff") format("woff"), url("../fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+    font-family: 'Libre Franklin';
+    src: url("../fonts/Libre Franklin/Libre Franklin-Bold.eot");
+    src: url("../fonts/Libre Franklin/Libre Franklin-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Bold.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Bold.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Roboto';
-    src: url("../fonts/Roboto/Roboto-Medium.eot");
-    src: url("../fonts/Roboto/Roboto-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto/Roboto-Medium.woff2") format("woff2"), url("../fonts/Roboto/Roboto-Medium.woff") format("woff"), url("../fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+    font-family: 'Libre Franklin';
+    src: url("../fonts/Libre Franklin/Libre Franklin-Medium.eot");
+    src: url("../fonts/Libre Franklin/Libre Franklin-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Medium.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Medium.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Medium.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Roboto';
-    src: url("../fonts/Roboto/Roboto-Regular.eot");
-    src: url("../fonts/Roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto/Roboto-Regular.woff2") format("woff2"), url("../fonts/Roboto/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+    font-family: 'Libre Franklin';
+    src: url("../fonts/Libre Franklin/Libre Franklin-Regular.eot");
+    src: url("../fonts/Libre Franklin/Libre Franklin-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Regular.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Regular.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Roboto';
-    src: url("../fonts/Roboto/Roboto-Black.eot");
-    src: url("../fonts/Roboto/Roboto-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto/Roboto-Black.woff2") format("woff2"), url("../fonts/Roboto/Roboto-Black.woff") format("woff"), url("../fonts/Roboto/Roboto-Black.ttf") format("truetype");
+    font-family: 'Libre Franklin';
+    src: url("../fonts/Libre Franklin/Libre Franklin-Black.eot");
+    src: url("../fonts/Libre Franklin/Libre Franklin-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Black.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Black.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Black.ttf") format("truetype");
     font-weight: 900;
     font-style: normal;
 }
@@ -18882,7 +18882,7 @@ input:focus {
 
 body {
     font-size: 1rem;
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     font-weight: initial;
     line-height: normal;
     -webkit-font-smoothing: antialiased;
@@ -19154,7 +19154,7 @@ pre {
 code {
     padding: 5px;
     color: #ff4747;
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     font-weight: 300;
     font-size: 0.875rem;
     border-radius: 4px;
@@ -19171,7 +19171,7 @@ code {
     -webkit-transition: all 0.25s ease;
     -ms-transition: all 0.25s ease;
     font-size: calc(0.875rem - 0.05rem);
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     font-weight: 400;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
@@ -19583,6 +19583,7 @@ code {
     border-radius: 0;
     border: 1px solid #f3f3f3;
     padding: 1rem 1.5rem .2rem 1.5rem;
+    font-weight: 500;
 }
 
 @media (max-width: 767px) {
@@ -19621,6 +19622,8 @@ code {
 
 .btn i {
     font-size: 1.25rem;
+    vertical-align: middle;
+    letter-spacing: 0.02rem;
 }
 
 .btn.btn-rounded {
@@ -21504,9 +21507,13 @@ dl li {
 
 .dataTables_wrapper .dataTable thead th {
     border-bottom-width: 0;
+    /* border: none; */
     border: 1px solid rgba(151, 151, 151, 0.18);
-    padding: 1.7rem 0.9375rem;
+    padding: 0.9375rem;
     white-space: nowrap;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: .875rem;
 }
 
 .dataTables_wrapper .dataTable thead .sorting:before,
@@ -21545,19 +21552,24 @@ dl li {
 }
 
 .dataTables_wrapper .dataTable tbody tr td {
-    border: 1px solid rgba(151, 151, 151, 0.18);
+    border: none;
     color: #08113b;
     white-space: nowrap;
-    font-weight: 300;
-    padding: 1.1rem 0.9375rem;
+    font-weight: 400;
+    padding: 0.9375rem;
+    border: 1px solid rgba(151, 151, 151, 0.18);
 }
 
 .dataTables_wrapper .dataTable tbody tr:nth-child(odd) {
-    background: rgba(238, 238, 238, 0.57);
+    background: rgb(253 253 253 / 57%);
 }
 
 .dataTables_wrapper .dataTables_paginate {
     margin-top: 20px;
+}
+
+.dataTables_scroll {
+    overflow: auto;
 }
 
 .dataTables_wrapper .dataTables_info {
@@ -21750,7 +21762,7 @@ dl li {
     min-height: calc(100vh - 60px);
     background: #ffffff;
     position: fixed;
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     font-weight: 400;
     padding: 0;
     width: 257px;
@@ -21771,7 +21783,7 @@ dl li {
 }
 
 .sidebar-icon-only .main-panel {
-    margin-left: 90px !important;
+    margin-left: 70px !important;
 }
 
 .sidebar .nav {
@@ -22612,4 +22624,10 @@ nav.navbar.clr-wt.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row span.nav-profil
 nav.navbar.clr-wt.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row .navbar-nav .nav-link.count-indicator,
 nav.navbar.clr-wt.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row span.mdi.mdi-sort-variant {
     color: #fff !important;
+}
+
+#vert-tabs-right-tabContent #createProjectForm #id_name,
+#vert-tabs-right-tabContent #createProjectForm #id_key,
+#vert-tabs-right-tabContent #createProjectForm #div_id_key {
+    width: 400px;
 }

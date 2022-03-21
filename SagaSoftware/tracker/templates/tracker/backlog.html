@@ -1,5 +1,139 @@
 {% extends 'tracker/partials/base.html' %}
 {% block content %}
-<h1>this is your empty backlog</h1>
-
+<div class="over_header card-header py-1 px-2" style="padding: 0;">
+    <div class="d-flex">
+        <div class="d-flex align-items-center">
+            <div class="default-profile-picture2">
+                <span class="active_project_icon" style="color:{{project.project_color}}"><i class="mdi {{project.project_icon}} mdi-36px"></i></span>
+            </div>
+            <div class="d-flex ml-2 mt-1 flex-column">
+                <p class="lead2 m-0" style="font-size: 17px;">
+                    <span class="active_project" style="font-weight: 500;">{{project.name}}</span>
+                    <span class="active_project_key" style="font-style:italic;"> ({{project.key}})</span>
+                </p>
+                <span class="m-0 text-muted proj_type" style="font-size: 13px;">{{project.project_type}}</span>
+            </div> 
+        </div>
+        <div class="ml-auto d-flex align-items-center">
+            <span class="mr-2">members</span>
+            <span class="badge badge-danger mr-3">20</span>
+            {% if not request.user.is_developer %}
+              <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary btn-sm mr-2">Invite New members</button>
+            {% endif %}
+          </div>
+    </div>
+</div>
+<div class="bkl-parent">
+    <div class="d-flex justify-content-between align-items-center bkl-hd p-3">
+        <h3>All Open</h3>
+        <div>
+            <button type="button" class="btn btn-sm btn-primary">
+                <i class="mdi mdi-plus"></i>
+                Ticket
+            </button>
+            <button type="button" class="btn btn-sm btn-secondary">
+                <i class="mdi mdi-filter"></i>
+                Filters
+            </button>
+            <button type="button" class="btn btn-sm btn-secondary">
+                <i class="mdi mdi-content-save"></i>
+                Save as
+            </button>
+        </div>
+    </div>
+    <div class="mt-3" id="MainEquipDiv">
+        <table class="table" id="tkts-bkl" >
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Type</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Assignee</th>
+                    <th>Reported by</th>
+                    <th>est</th>
+                    <th>Start DAte</th>
+                    <th>end date</th>
+                    <th>progress</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">PMS-2</td>
+                    <td>TASK</td>
+                    <td>this is the first test for subject add something  only</td>
+                    <td>open</td>
+                    <td>Medium</td>
+                    <td><span>NM</span>Nourish Members </td>
+                    <td><span>ST</span>STephane Toumbia </td>
+                    <td>2</td>
+                    <td>Sept 29, 2022</td>
+                    <td>Sept 29, 2022</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">PMS-2</td>
+                    <td>TASK</td>
+                    <td>this is the first test for subject only</td>
+                    <td>open</td>
+                    <td>Medium</td>
+                    <td><span>NM</span>Nourish Members </td>
+                    <td><span>ST</span>STephane Toumbia </td>
+                    <td>2</td>
+                    <td>Sept 29, 2022</td>
+                    <td>Sept 29, 2022</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">PMS-2</td>
+                    <td>TASK</td>
+                    <td>this is the first test for subject only</td>
+                    <td>open</td>
+                    <td>Medium</td>
+                    <td><span>NM</span>Nourish Members </td>
+                    <td><span>ST</span>STephane Toumbia </td>
+                    <td>2</td>
+                    <td>Sept 29, 2022</td>
+                    <td>Sept 29, 2022</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">PMS-2</td>
+                    <td>TASK</td>
+                    <td>this is the first test for subject only</td>
+                    <td>open</td>
+                    <td>Medium</td>
+                    <td><span>NM</span>Nourish Members </td>
+                    <td><span>ST</span>STephane Toumbia </td>
+                    <td>2</td>
+                    <td>Sept 29, 2022</td>
+                    <td>Sept 29, 2022</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock content %}

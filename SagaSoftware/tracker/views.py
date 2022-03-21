@@ -298,7 +298,7 @@ def project_board(request, site_slug, project_key):
 def project_backlog(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     
-    context = {}
+    context = {'project': project}
     return render(request, 'tracker/backlog.html', context)
 
 def project_tickets(request, site_slug, project_key):

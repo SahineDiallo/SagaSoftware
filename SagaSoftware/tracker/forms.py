@@ -62,28 +62,20 @@ class CreateProjectForm(forms.ModelForm):
                         </div>
                     """
                 ),
-                Div(
-                    HTML("""
-
-                        <div class="col-md-6">
-                            <input type="radio" name="project_type" id="project_management"  checked value="Project Management"> <label for="project_management">Project Management</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="radio" name="project_type" id="bug_tracker" value="Bug Tracker"> <label for="bug_tracker">Bug Tracker</label>
-                        </div>
-                        """
-                         ),
-                    css_class="row justify-content-between align-items-center mb-2 col-8", css_id="id_project_type", style="font-size: 15px;"
-                ),
+                
+                Field("project_type", css_class="col-md-3"),
+                
                 Field("project_color"),
                 Field("project_icon"),
                 Field("project_theme"),
                 Div(
+                
                     Field("name"),
+                    
                     HTML(
                         """
                             <div class="col-md-4 mt-1 d-flex align-items-center">
-                                <button class="ml-2 input-edit-icon"><i class="mdi mdi-36px mdi-check-circle-outline"></i></button>
+                                <button class="input-edit-icon"><i class="mdi mdi-36px mdi-check-circle-outline"></i></button>
                                 <div class="spinner">
                                     <div class="bounce1"></div>
                                     <div class="bounce2"></div>
@@ -92,14 +84,14 @@ class CreateProjectForm(forms.ModelForm):
                             </div>
                          """
                     ),
-                    css_class="col-md-11 d-flex align-items-center"
+                    css_class="d-flex align-items-center"
                 ),
                 Div(
                     Field("key"),
                     HTML(
                         """
-                            <div class="col-md-4 mb-4 d-flex align-items-center">
-                                <button class="ml-2 input-edit-icon"><i class="mdi mdi-36px mdi-check-circle-outline"></i></button>
+                            <div class="col-md-5 mb-4 d-flex align-items-center justify-content-start">
+                                <button class="mb-1 input-edit-icon"><i class="mdi mdi-36px mdi-check-circle-outline"></i></button>
                                 <div class="spinner">
                                     <div class="bounce1"></div>
                                     <div class="bounce2"></div>
@@ -108,7 +100,7 @@ class CreateProjectForm(forms.ModelForm):
                             </div>
                          """
                     ),
-                    css_class="col-md-11 d-flex align-items-center"
+                    css_class="pl-0 col-md-11 d-flex align-items-center"
                 ),
                 HTML(
                     """
