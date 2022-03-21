@@ -13914,7 +13914,7 @@ a.badge-dark.focus {
     display: flex;
     height: 1rem;
     overflow: hidden;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     background-color: #e9ecef;
     border-radius: 0.25rem;
 }
@@ -20388,7 +20388,7 @@ code {
 
 .progress {
     border-radius: 3px;
-    height: 8px;
+    height: 15px;
 }
 
 .progress .progress-bar {
@@ -21507,8 +21507,8 @@ dl li {
 
 .dataTables_wrapper .dataTable thead th {
     border-bottom-width: 0;
-    /* border: none; */
-    border: 1px solid rgba(151, 151, 151, 0.18);
+    border: none;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.18);
     padding: 0.9375rem;
     white-space: nowrap;
     text-transform: uppercase;
@@ -21553,11 +21553,12 @@ dl li {
 
 .dataTables_wrapper .dataTable tbody tr td {
     border: none;
-    color: #08113b;
+    color: #39345ef5;
     white-space: nowrap;
-    font-weight: 400;
-    padding: 0.9375rem;
-    border: 1px solid rgba(151, 151, 151, 0.18);
+    font-weight: 500;
+    padding: 0.5065rem;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.18);
+    font-size: 12px;
 }
 
 .dataTables_wrapper .dataTable tbody tr:nth-child(odd) {

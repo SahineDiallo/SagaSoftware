@@ -1168,6 +1168,25 @@ td span .mdi-trash-can {
     overflow-x: auto;
 }
 
+.estm,
+._mil,
+.tdtk,
+._typ,
+.str_date,
+.end_date,
+.cr_date,
+.upt_date {
+    text-align: center !important;
+}
+
+#tkts-bkl {
+    border-collapse: separate !important;
+}
+
+#tkts-bkl_wrapper div:nth-child(even) .col-sm-12 {
+    margin-bottom: 60px;
+}
+
 table.dataTable th:nth-child(1) {
     width: 20px;
     max-width: 20px;
@@ -1175,9 +1194,119 @@ table.dataTable th:nth-child(1) {
     white-space: pre-line;
 }
 
+
+/* .dataTables_wrapper .dataTable tbody tr:nth-child(odd) td:nth-child(1) {
+    border-left: 1px solid #ebebeb;
+} */
+
 table.dataTable td:nth-child(1) {
     width: 20px;
     max-width: 20px;
     word-break: break-all;
     white-space: pre-line;
+}
+
+.tkts-asg,
+.tkts-rpt {
+    background: blueviolet;
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    height: 26px;
+    width: 26px;
+    margin-right: 3px;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    line-height: 19px;
+}
+
+._tsk,
+._feat,
+._other,
+._bug,
+._imm,
+._high,
+._low,
+._norm {
+    font-weight: 600 !important;
+    text-align: center;
+}
+
+._tsk {
+    color: #131abb !important;
+}
+
+._feat {
+    color: #05b1eb !important;
+}
+
+._bug {
+    color: #e30526 !important;
+}
+
+._other {
+    color: #ba6bfa !important;
+}
+
+._imm {
+    color: #e60c05 !important;
+    background: #f9aaa7d1;
+    border-left: 8px solid #f3928f !important;
+    border-right: 8px solid #f3928f !important;
+}
+
+._high {
+    color: #f9605b !important;
+    background: #f7e2e291;
+    border-left: 8px solid #f5d8d8 !important;
+    border-right: 8px solid #f5d8d8 !important
+}
+
+._norm {
+    color: #000 !important;
+    background: #f7742878;
+    border-left: 8px solid #f5ae84!important;
+    border-right: 8px solid #f5ae84 !important;
+}
+
+._low {
+    color: #82807f !important;
+    border-right: 1px solid #ebebeb;
+    background: #82807f3d;
+    border-left: 8px solid #d1d1c2 !important;
+    border-right: 8px solid #d1d1ce !important
+}
+
+._on_hold {
+    color: #977303 !important;
+    background: #f7f5c6d1;
+    font-weight: 600 !important;
+    border-left: 8px solid #edebb4 !important;
+    border-right: 8px solid #edebb4 !important;
+}
+
+._done {
+    color: #7608dd !important;
+    background: #b981ed52;
+    font-weight: 600 !important;
+    border-left: 8px solid #e2c9f9 !important;
+    border-right: 8px solid #e2c9f9 !important;
+}
+
+._todo {
+    color: #023a0e !important;
+    background: #aef5b478;
+    font-weight: 600 !important;
+    border-left: 8px solid #cdf3d5 !important;
+    border-right: 8px solid #cdf3d5 !important;
+}
+
+._in_prog {
+    color: #0d168b !important;
+    font-weight: 600 !important;
+    background: #230fc747;
+    border-left: 8px solid #aca2f7 !important;
+    border-right: 8px solid #aca2f7 !important;
 }

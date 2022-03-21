@@ -41,6 +41,25 @@
             </button>
         </div>
     </div>
+    <div class="filters">
+          <label for=""></label>
+          <select multiple="multiple" name="" id="toggle_columns">
+            <option value="0">Key</option>
+            <option value="1">Type</option>
+            <option value="2">Subject</option>
+            <option value="3">Status</option>
+            <option value="4">Priority</option>
+            <option value="5">Assignee</option>
+            <option value="6">Reporter</option>
+            <option value="7">Milestone</option>
+            <option value="8">Estimated Hours</option>
+            <option value="9">End Date</option>
+            <option value="10">Start Date</option>
+            <option value="11">Progress</option>
+            <option value="12">Last Update</option>
+            <option value="13">Create on</option>
+          </select>
+    </div>
     <div class="mt-3" id="MainEquipDiv">
         <table class="table" id="tkts-bkl" >
             <thead>
@@ -50,87 +69,101 @@
                     <th>Subject</th>
                     <th>Status</th>
                     <th>Priority</th>
-                    <th>Assignee</th>
-                    <th>Reported by</th>
+                    <th class="px-5">Assignee</th>
+                    <th class="px-5">Reported by</th>
+                    <th>Milestone
                     <th>est</th>
                     <th>Start DAte</th>
                     <th>end date</th>
                     <th>progress</th>
-                    
+                    <th>Last update</th>
+                    <th>create on</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td scope="row">PMS-2</td>
-                    <td>TASK</td>
-                    <td>this is the first test for subject add something  only</td>
-                    <td>open</td>
-                    <td>Medium</td>
-                    <td><span>NM</span>Nourish Members </td>
-                    <td><span>ST</span>STephane Toumbia </td>
-                    <td>2</td>
-                    <td>Sept 29, 2022</td>
-                    <td>Sept 29, 2022</td>
+                    <td class="_feat">REQUEST</td>
+                    <td >this is the first test for subject add something  only</td>
+                    <td class="_todo">Todo</td>
+                    <td class="_high">High</td>
+                    <td class="tdtk"><span class="tkts-asg">NM</span>Nourish Members </td>
+                    <td class="tdtk"><span class="tkts-rpt">ST</span>STephane Toumbia </td>
+                    <td class="_mil">Sprint 1</td>
+                    <td class="estm"><span>2</span></td>
+                    <td class="str_date">Sept 29, 2022</td>
+                    <td class="end_date"> Sept 29, 2022</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
                         </div>
                     </td>
+                    <td class="upt_date">Sept 29, 2022</td>
+                    <td class="cr_date">Sept 29, 2022</td>
                 </tr>
                 <tr>
                     <td scope="row">PMS-2</td>
-                    <td>TASK</td>
+                    <td class="_bug">BUG</td>
                     <td>this is the first test for subject only</td>
-                    <td>open</td>
-                    <td>Medium</td>
-                    <td><span>NM</span>Nourish Members </td>
-                    <td><span>ST</span>STephane Toumbia </td>
-                    <td>2</td>
-                    <td>Sept 29, 2022</td>
-                    <td>Sept 29, 2022</td>
+                    <td class="_done">Done</td>
+                    <td class="_imm">Immediate</td>
+                    <td class="tdtk"><span class="tkts-asg">NM</span>Nourish Members </td>
+                    <td class="tdtk"><span class="tkts-rpt">ST</span>STephane Toumbia </td>
+                    <td class="_mil">Sprint 1</td>
+                    <td class="estm"><span>2</span></td>
+                    <td class="str_date">Sept 29, 2022</td>
+                    <td class="end_date">Sept 29, 2022</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
                         </div>
                     </td>
+                    <td class="upt_date">Sept 29, 2022</td>
+                    <td class="cr_date">Sept 29, 2022</td>
                 </tr>
                 <tr>
                     <td scope="row">PMS-2</td>
-                    <td>TASK</td>
+                    <td class="_tsk">TASK</td>
                     <td>this is the first test for subject only</td>
-                    <td>open</td>
-                    <td>Medium</td>
-                    <td><span>NM</span>Nourish Members </td>
-                    <td><span>ST</span>STephane Toumbia </td>
-                    <td>2</td>
-                    <td>Sept 29, 2022</td>
-                    <td>Sept 29, 2022</td>
+                    <td class="_in_prog">In Progress</td>
+                    <td class="_norm">Normal</td>
+                    <td class="tdtk"><span class="tkts-asg">NM</span>Nourish Members </td>
+                    <td class="tdtk"><span class="tkts-rpt">ST</span>STephane Toumbia </td>
+                    <td class="_mil">Sprint 1</td>
+                    <td class="estm"><span>2</span></td>
+                    <td class="str_date">Sept 29, 2022</td>
+                    <td class="end_date">Sept 29, 2022</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
                         </div>
                     </td>
+                    <td class="upt_date">Sept 29, 2022</td>
+                    <td class="cr_date">Sept 29, 2022</td>
                 </tr>
                 <tr>
                     <td scope="row">PMS-2</td>
-                    <td>TASK</td>
-                    <td>this is the first test for subject only</td>
-                    <td>open</td>
-                    <td>Medium</td>
-                    <td><span>NM</span>Nourish Members </td>
-                    <td><span>ST</span>STephane Toumbia </td>
-                    <td>2</td>
-                    <td>Sept 29, 2022</td>
-                    <td>Sept 29, 2022</td>
+                    <td class="_other">OTHER</td>
+                    <td class="subj">this is the first test for subject only</td>
+                    <td class="_on_hold">On Hold</td>
+                    <td class="_low">Low</td>
+                    <td class="tdtk"><span class="tkts-asg">NM</span>Nourish Members </td>
+                    <td class="tdtk"><span class="tkts-rpt">ST</span>STephane Toumbia </td>
+                    <td class="_mil">Sprint 1</td>
+                    <td class="estm"><span>2</span></td>
+                    <td class="str_date">Sept 29, 2022</td>
+                    <td class="end_date">Sept 29, 2022</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Description</div>
                         </div>
                     </td>
+                    <td class="upt_date">Sept 29, 2022</td>
+                    <td class="cr_date">Sept 29, 2022</td>
                 </tr>
             </tbody>
         </table>
