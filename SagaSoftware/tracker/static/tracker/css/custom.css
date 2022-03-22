@@ -1149,10 +1149,15 @@ td span .mdi-trash-can {
     }
 }
 
+.l-70 {
+    left: 70px !important;
+}
+
 .bkl-parent {
     background: white;
     padding: 20px;
     margin-right: 25px;
+    margin-top: 16px;
 }
 
 .bkl-hd {
@@ -1331,4 +1336,17 @@ table.dataTable td:nth-child(1) {
 ::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background: #c1c1c1;
+}
+
+.cr-edt-tkt {
+    position: absolute;
+    top: 0;
+    height: calc(100vh - 60px);
+    width: 600px;
+    right: 0;
+    background: #fff;
+    z-index: 99;
+    border: 1px solid #e7eaed;
+    box-shadow: -5px 0px 6px -4px #616161;
+    border-top-left-radius: 3px;
 }

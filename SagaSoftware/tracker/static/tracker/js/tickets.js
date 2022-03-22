@@ -15,7 +15,18 @@ $(document).ready(function() {
         ],
         colReorder: {
             realtime: false
-        }
+        },
+        // "columns": [{
+        //         "className": 'details-control',
+        //         "orderable": true,
+        //         "data": null,
+        //         "defaultContent": ''
+        //     },
+        //     { "data": "name" },
+        //     { "data": "designation" },
+        //     { "data": "city" },
+        //     { "data": "salary" }
+        // ]
 
 
 
@@ -57,4 +68,48 @@ $(document).ready(function() {
             table.column(i).visible(1);
         }
     }
+    // $('#tkts-bkl tbody').on('click',
+    //     'td.details-control',
+    //     function() {
+
+    //         var tr = $(this).closest('tr');
+    //         var row = table.row(tr);
+
+    //         if (row.child.isShown()) {
+
+    //             // Closing the already opened row           
+    //             row.child.hide();
+
+    //             // Removing class to hide
+    //             tr.removeClass('shown');
+    //         } else {
+
+    //             // Show the child row for detail
+    //             // information
+    //             row.child(getChildRow()).show();
+
+    //             // To show details,add the below class
+    //             tr.addClass('shown');
+    //         }
+    //     });
+    /* Function for child row details*/
+    // function getChildRow(data) {
+
+    //     // `data` is the data object for the row
+    //     return '<table cellpadding="5" cellspacing="0"' +
+    //         ' style="padding-left:50px;">' +
+    //         '<tr>' +
+    //         '<td>Full name:</td>' +
+    //         '<td>' + "name" + '</td>' +
+    //         '</tr>' +
+    //         '<tr>' +
+    //         '<td>Address in detail:</td>' +
+    //         '<td>' + "something as a data" + '</td>' +
+    //         '</tr>' +
+    //         '<tr>' +
+    //         '<td>Extra details like ID:</td>' +
+    //         '<td>' + "employee" + '</td>' +
+    //         '</tr>' +
+    //         '</table>';
+    // }
 });
