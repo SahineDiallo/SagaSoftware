@@ -1166,6 +1166,7 @@ td span .mdi-trash-can {
 
 #tkts-bkl_wrapper div:nth-child(even) {
     overflow-x: auto;
+    background: #fbfbfb;
 }
 
 .estm,
@@ -1251,62 +1252,83 @@ table.dataTable td:nth-child(1) {
 }
 
 ._imm {
-    color: #e60c05 !important;
-    background: #f9aaa7d1;
-    border-left: 8px solid #f3928f !important;
-    border-right: 8px solid #f3928f !important;
+    color: #ffffff !important;
+    background: #e60c05;
+    display: inherit;
+    padding: 6px 15px;
+    width: 120px;
+    border-radius: 30px;
 }
 
 ._high {
-    color: #f9605b !important;
-    background: #f7e2e291;
-    border-left: 8px solid #f5d8d8 !important;
-    border-right: 8px solid #f5d8d8 !important
+    color: #ffffff !important;
+    background: #f9605b;
+    padding: 6px 22px;
+    border-radius: 30px;
+    width: 120px;
+    display: inherit;
 }
 
 ._norm {
-    color: #000 !important;
-    background: #f7742878;
-    border-left: 8px solid #f5ae84!important;
-    border-right: 8px solid #f5ae84 !important;
+    color: #fff !important;
+    background: #ff7423;
+    display: inherit;
+    padding: 7px 15px;
+    width: 120px;
+    border-radius: 30px;
 }
 
 ._low {
-    color: #82807f !important;
-    border-right: 1px solid #ebebeb;
-    background: #82807f3d;
-    border-left: 8px solid #d1d1c2 !important;
-    border-right: 8px solid #d1d1ce !important
+    color: #fff !important;
+    background: #82807f;
+    width: 120px;
+    display: inherit;
+    padding: 6px 17px;
+    border-radius: 30px;
 }
 
 ._on_hold {
-    color: #977303 !important;
-    background: #f7f5c6d1;
+    color: #fff !important;
+    background: #f39219;
     font-weight: 600 !important;
-    border-left: 8px solid #edebb4 !important;
-    border-right: 8px solid #edebb4 !important;
+    border-left: 8px solid #fba943 !important;
+    border-right: 8px solid #fba943 !important
 }
 
 ._done {
-    color: #7608dd !important;
-    background: #b981ed52;
+    color: #fff !important;
+    background: #7608dd;
     font-weight: 600 !important;
-    border-left: 8px solid #e2c9f9 !important;
-    border-right: 8px solid #e2c9f9 !important;
+    border-left: 8px solid #9b2fff !important;
+    border-right: 8px solid #9b2fff !important;
 }
 
 ._todo {
-    color: #023a0e !important;
-    background: #aef5b478;
+    background: #039b24;
     font-weight: 600 !important;
-    border-left: 8px solid #cdf3d5 !important;
-    border-right: 8px solid #cdf3d5 !important;
+    border-left: 8px solid #37bd52 !important;
+    border-right: 8px solid #37bd52 !important;
+    color: #fff !important;
 }
 
 ._in_prog {
-    color: #0d168b !important;
+    color: #fff !important;
     font-weight: 600 !important;
-    background: #230fc747;
-    border-left: 8px solid #aca2f7 !important;
-    border-right: 8px solid #aca2f7 !important;
+    background: #0513d1;
+    border-left: 8px solid #4836d1 !important;
+    border-right: 8px solid #4836d1 !important;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 4px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.25);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #c1c1c1;
 }

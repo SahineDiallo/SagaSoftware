@@ -24,42 +24,44 @@
     </div>
 </div>
 <div class="bkl-parent">
-    <div class="d-flex justify-content-between align-items-center bkl-hd p-3">
-        <h3>All Open</h3>
-        <div>
-            <button type="button" class="btn btn-sm btn-primary">
-                <i class="mdi mdi-plus"></i>
-                Ticket
-            </button>
-            <button type="button" class="btn btn-sm btn-secondary">
-                <i class="mdi mdi-filter"></i>
-                Filters
-            </button>
-            <button type="button" class="btn btn-sm btn-secondary">
-                <i class="mdi mdi-content-save"></i>
-                Save as
-            </button>
+    <div class="bkl-hd">
+        <div class="d-flex justify-content-between align-items-center p-3">
+            <h3>All Open</h3>
+            <div>
+                <button type="button" class="btn btn-sm btn-primary">
+                    <i class="mdi mdi-plus"></i>
+                    Ticket
+                </button>
+                <button type="button" class="btn btn-sm btn-secondary">
+                    <i class="mdi mdi-filter"></i>
+                    Filters
+                </button>
+                <button type="button" class="btn btn-sm btn-secondary">
+                    <i class="mdi mdi-content-save"></i>
+                    Save as
+                </button>
+            </div>
+
         </div>
-    </div>
-    <div class="filters">
-          <label for=""></label>
-          <select multiple="multiple" name="" id="toggle_columns">
-            <option value="0">Key</option>
-            <option value="1">Type</option>
-            <option value="2">Subject</option>
-            <option value="3">Status</option>
-            <option value="4">Priority</option>
-            <option value="5">Assignee</option>
-            <option value="6">Reporter</option>
-            <option value="7">Milestone</option>
-            <option value="8">Estimated Hours</option>
-            <option value="9">End Date</option>
-            <option value="10">Start Date</option>
-            <option value="11">Progress</option>
-            <option value="12">Last Update</option>
-            <option value="13">Create on</option>
-          </select>
-    </div>
+        <div class="filters p-3">
+            <select multiple="multiple" name="toggle_columns" id="toggle_columns">
+              <option value="0">Key</option>
+              <option value="1">Type</option>
+              <option value="2">Subject</option>
+              <option value="3">Status</option>
+              <option value="4">Priority</option>
+              <option value="5">Assignee</option>
+              <option value="6">Reporter</option>
+              <option value="7">Milestone</option>
+              <option value="8">Estimated Hours</option>
+              <option value="9">End Date</option>
+              <option value="10">Start Date</option>
+              <option value="11">Progress</option>
+              <option value="12">Last Update</option>
+              <option value="13">Create on</option>
+            </select>
+      </div>
+    </div>  
     <div class="mt-3" id="MainEquipDiv">
         <table class="table" id="tkts-bkl" >
             <thead>
@@ -86,7 +88,7 @@
                     <td class="_feat">REQUEST</td>
                     <td >this is the first test for subject add something  only</td>
                     <td class="_todo">Todo</td>
-                    <td class="_high">High</td>
+                    <td><span class="_high">High</span></td>
                     <td class="tdtk"><span class="tkts-asg">NM</span>Nourish Members </td>
                     <td class="tdtk"><span class="tkts-rpt">ST</span>STephane Toumbia </td>
                     <td class="_mil">Sprint 1</td>
@@ -107,7 +109,7 @@
                     <td class="_bug">BUG</td>
                     <td>this is the first test for subject only</td>
                     <td class="_done">Done</td>
-                    <td class="_imm">Immediate</td>
+                    <td><span class="_imm">Immediate</span></td>
                     <td class="tdtk"><span class="tkts-asg">NM</span>Nourish Members </td>
                     <td class="tdtk"><span class="tkts-rpt">ST</span>STephane Toumbia </td>
                     <td class="_mil">Sprint 1</td>
@@ -128,7 +130,7 @@
                     <td class="_tsk">TASK</td>
                     <td>this is the first test for subject only</td>
                     <td class="_in_prog">In Progress</td>
-                    <td class="_norm">Normal</td>
+                    <td><span class="_norm">Normal</span></td>
                     <td class="tdtk"><span class="tkts-asg">NM</span>Nourish Members </td>
                     <td class="tdtk"><span class="tkts-rpt">ST</span>STephane Toumbia </td>
                     <td class="_mil">Sprint 1</td>
@@ -149,7 +151,7 @@
                     <td class="_other">OTHER</td>
                     <td class="subj">this is the first test for subject only</td>
                     <td class="_on_hold">On Hold</td>
-                    <td class="_low">Low</td>
+                    <td><span class="_low">Low</span></td>
                     <td class="tdtk"><span class="tkts-asg">NM</span>Nourish Members </td>
                     <td class="tdtk"><span class="tkts-rpt">ST</span>STephane Toumbia </td>
                     <td class="_mil">Sprint 1</td>

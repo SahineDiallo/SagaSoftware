@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    $("#tkts-bkl_wrapper")
-    var table = $("#tkts-bkl").DataTable({
+    table = $("#tkts-bkl").DataTable({
         'columnDefs': [{
                 "targets": 0, // your case first column
                 "className": "text-center",
@@ -14,6 +13,11 @@ $(document).ready(function() {
                 "className": "text-center",
             }
         ],
+        colReorder: {
+            realtime: false
+        }
+
+
 
     })
 
@@ -34,18 +38,23 @@ $(document).ready(function() {
             hideAllColumns();
         },
     })
+    table.on("column-reorder", (e, settings, details) => {
+        var orders = table.order();
+        console.log(details);
+        console.log(orders)
+    })
 
     //////////// functions ///////////
 
     function hideAllColumns() {
-        for (var i = 0; i <= 14; i++) {
-            columns = table.column(i).visible(0);
+        for (var i = 0; i <= 13; i++) {
+            table.column(i).visible(0);
         }
     }
 
     function showAllColumns() {
-        for (var i = 0; i <= 14; i++) {
-            columns = table.column(i).visible(1);
+        for (var i = 0; i <= 13; i++) {
+            table.column(i).visible(1);
         }
     }
 });
