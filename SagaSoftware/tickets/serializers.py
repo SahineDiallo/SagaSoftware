@@ -15,11 +15,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ReadTicketSerializer(serializers.ModelSerializer):
     # this serializer will be used for reading data only
+    assignee = UserSerializer()
+    accountable = UserSerializer()
+    created_by = UserSerializer()
     class Meta:
         model = Ticket
         fields = (
             "id",
-            "type", "subject", "description",
+            "key", "subject", "_type", "description",
             "status", "priority", "assignee", "accountable", "created_by", 
             "est_hours", "act_hours", "milestone", "start_date", "end_date",
             "created_date", "updated_date",
@@ -28,11 +31,14 @@ class ReadTicketSerializer(serializers.ModelSerializer):
 
 
 class WriteTicketSerializer(serializers.ModelSerializer):
+    accountable = serializers.SlugRelatedField(slug_field="username", queryset=User.objects.all())
+    assignee = serializers.SlugRelatedField(slug_field="username", queryset=User.objects.all())
+    created_by = serializers.SlugRelatedField(slug_field="username", queryset=User.objects.all())
+
     class Meta:
         model = Ticket
-        model = Ticket
         fields = (
-            "type", "subject", "description",
+            "key", "subject", "_type", "description",
             "status", "priority", "assignee", "accountable", "created_by", 
             "est_hours", "act_hours", "milestone", "start_date", "end_date",
             "created_date", "updated_date",

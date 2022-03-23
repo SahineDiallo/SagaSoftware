@@ -1,5 +1,22 @@
 $(document).ready(function() {
     table = $("#tkts-bkl").DataTable({
+        stripeClasses: ['strip1', 'strip2'],
+        ajax: {
+            url: '/api/tickets/',
+            dataSrc: 'results'
+        },
+        "serverSide": true,
+
+        lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+        ],
+        initComplete: function(settings, json) {
+            table.buttons().container().appendTo('#UserHead');
+        },
+        select: true,
+        "bJQueryUI": true,
+        order: [0, 'des'],
         'columnDefs': [{
                 "targets": 0, // your case first column
                 "className": "text-center",
@@ -13,20 +30,27 @@ $(document).ready(function() {
                 "className": "text-center",
             }
         ],
+
         colReorder: {
             realtime: false
         },
-        // "columns": [{
-        //         "className": 'details-control',
-        //         "orderable": true,
-        //         "data": null,
-        //         "defaultContent": ''
-        //     },
-        //     { "data": "name" },
-        //     { "data": "designation" },
-        //     { "data": "city" },
-        //     { "data": "salary" }
-        // ]
+        "columns": [
+            { "data": "key" },
+            { "data": "subject" },
+            { "data": "_type" },
+            { "data": "status" },
+            { "data": "priority" },
+            { "data": "assignee.username" },
+            { "data": "accountable.username" },
+            { "data": "milestone" },
+            { "data": "est_hours" },
+            { "data": "start_date" },
+            { "data": "end_date" },
+            { "data": "created_by.username" },
+            { "data": "act_hours" },
+            { "data": "updated_date" },
+            { "data": "created_date" }
+        ]
 
 
 
@@ -54,6 +78,7 @@ $(document).ready(function() {
         console.log(details);
         console.log(orders)
     })
+
 
     //////////// functions ///////////
 
