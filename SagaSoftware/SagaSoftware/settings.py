@@ -45,7 +45,11 @@ INSTALLED_APPS = [
     #Installed apps
     'accounts',
     'tracker',
+    'tickets',
+
+    #third party libraries I guess
     'crispy_forms',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = (

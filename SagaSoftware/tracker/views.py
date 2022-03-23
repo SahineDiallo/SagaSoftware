@@ -84,6 +84,7 @@ def inviteMembers(request):
                 form.save()
                 url = f'{domain}/accounts/register/?invitation_refid={form.instance.slug}/'
                 context_data['url'] = url
+                #should use a function to get the role of the user
                 if form.instance.role == '1':
                     role = 'Admin'
                 elif form.instance.role == '2': 
@@ -171,6 +172,7 @@ def add_members_to_project(request, site_slug, project_key):
         if data == []:
             return JsonResponse({'success':False})
         added_members = [User.objects.get(username=username) for username in data]
+        #we should if the user is not in the project before which should not happen by the way
         project.members.add(*added_members) #add the members into the project
     
         template = render_to_string(
@@ -213,7 +215,6 @@ def edit_project_name_and_key(request, site_slug, project_key):
             if form.has_changed():
                 result["result"] = True
                 field_name = form.changed_data[0]
-                print(field_name)
                 field_obj = Project._meta.get_field(field_name)
                 field_value = field_obj.value_from_object(project)
                 result["name"] = field_name
