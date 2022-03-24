@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var url_end = (window.location.pathname).split("/").at(-2)
+    let _type = ""
     table = $("#tkts-bkl").DataTable({
         // stripeClasses: ['strip1', 'strip2'],
         "serverSide": true,
@@ -38,17 +39,118 @@ $(document).ready(function() {
         "columns": [
             { "data": "key" },
             { "data": "subject" },
-            { "data": "_type" },
-            { "data": "status" },
-            { "data": "priority" },
-            { "data": "assignee.username" },
-            { "data": "accountable.username" },
+            {
+
+                className: `${_type}`,
+                "data": "_type",
+                render: function(data, type) {
+                    if (type === 'display') {
+                        switch (data) {
+                            case 'BUG':
+                                _type = '_bug';
+                                break;
+                            case 'REQUEST':
+                                _type = '_feat';
+                                break;
+                            case 'TASK':
+                                _type = '_tsk';
+                                break;
+                            case 'OTHER':
+                                _type = '_other';
+                                break;
+
+                        }
+                        //I will need to place the data outside of the sapn
+                        return `<span class="${_type}">${data}</span> `;
+                    }
+
+                    return data;
+                }
+            },
+            {
+                "data": "status",
+                render: function(data, type) {
+                    if (type === 'display') {
+                        console.log('display')
+                        let status = '';
+
+                        switch (data) {
+                            case 'Open':
+                                status = '_open';
+                                break;
+                            case 'Todo':
+                                status = '_todo';
+                                break;
+                            case 'In Progress':
+                                status = '_in_prog';
+                                break;
+                            case 'Resolved':
+                                status = '_on_hold';
+                                break;
+                            case 'Closed':
+                                status = '_done';
+                                break;
+                        }
+                        // I will need to place the data outside of the sapn
+                        return `<span class="${status}">${data}</span> `;
+                    }
+
+                    return data;
+                }
+
+            },
+            {
+                "data": "priority",
+
+                render: function(data, type) {
+                    if (type === 'display') {
+                        console.log('display')
+                        let priority = '';
+
+                        switch (data) {
+                            case 'Normal':
+                                priority = '_norm';
+                                break;
+                            case 'High':
+                                priority = '_high';
+                                break;
+                            case 'Low':
+                                priority = '_low';
+                                break;
+                            case 'Immediate':
+                                priority = '_imm';
+                                break;
+
+                        }
+                        // I will need to place the data outside of the sapn
+                        return `<span class="${priority}">${data}</span> `;
+                    }
+
+                    return data;
+                }
+
+
+            },
+            {
+                className: "tdtk",
+                "data": "assignee.username",
+            },
+            {
+                className: "tdtk",
+                "data": "accountable.username"
+            },
             { "data": "milestone" },
-            { "data": "est_hours" },
+            {
+                className: "estm",
+                "data": "est_hours"
+            },
             { "data": "start_date" },
             { "data": "end_date" },
             { "data": "created_by.username" },
-            { "data": "act_hours" },
+            {
+                className: "estm",
+                "data": "act_hours"
+            },
             { "data": "updated_date" },
             { "data": "created_date" }
         ]

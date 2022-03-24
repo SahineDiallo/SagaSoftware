@@ -5,7 +5,11 @@ from .models import Ticket
 @receiver(post_save, sender=Ticket)
 def set_project_key(sender, instance, **kwargs):
     project = instance.project
-    instance.key = f"{project.key}-{project.key_project_int}"
-    project.key_tracker_int += 1
+    new_key = f"{project.key}-{project.key_tracker}"
+    print(f"{project.key}-{project.key_tracker}")
+    project.key_tracker += 1
     project.save()
-    instance.save()
+    print('this is the project', project.key_tracker)
+    # this will prevent from calling the .save and avoid the infinit loop
+    Ticket.objects.filter(id=instance.id).update(key=new_key)
+    print(instance.key)

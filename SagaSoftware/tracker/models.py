@@ -27,7 +27,6 @@ class projectManager(models.Manager):
 
 
 class Project(models.Model):
-    key_tracker_int = 0
     # make the project type radion button is easier and cleaner
     typeChoices = (
         ("Project Management", "Project Management"),
@@ -57,6 +56,7 @@ class Project(models.Model):
     slug = models.SlugField(max_length=30, blank=True)
     key = models.CharField(max_length=30, unique=True)
     project_description = models.TextField(blank=True, null=True)
+    key_tracker = models.IntegerField(default=0, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 

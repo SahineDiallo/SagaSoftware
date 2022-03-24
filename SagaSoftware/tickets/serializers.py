@@ -2,7 +2,7 @@ from dataclasses import fields
 from .models import Ticket
 from accounts.models import User 
 from rest_framework import serializers
-
+from django.conf import settings
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,6 +18,11 @@ class ReadTicketSerializer(serializers.ModelSerializer):
     assignee = UserSerializer()
     accountable = UserSerializer()
     created_by = UserSerializer()
+
+    created_date = serializers.DateTimeField(format=settings.DATETIME_FORMAT)
+    updated_date = serializers.DateTimeField(format=settings.DATETIME_FORMAT)
+    start_date = serializers.DateField(format=settings.DATETIME_FORMAT)
+    end_date = serializers.DateField(format=settings.DATETIME_FORMAT)
     class Meta:
         model = Ticket
         fields = (

@@ -49,7 +49,7 @@ class Ticket(models.Model):
     milestone    = models.ForeignKey(Milestone, on_delete=models.SET_NULL, related_name="milestone", blank=True, null=True)
     start_date   = models.DateField(blank=True, null=True)
     end_date     = models.DateField(blank=True, null=True)
-    files        = models.ManyToManyField(TicketFiles)
+    files        = models.ManyToManyField(TicketFiles, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

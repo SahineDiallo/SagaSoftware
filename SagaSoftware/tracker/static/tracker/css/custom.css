@@ -1296,32 +1296,60 @@ table.dataTable td:nth-child(1) {
     color: #fff !important;
     background: #f39219;
     font-weight: 600 !important;
-    border-left: 8px solid #fba943 !important;
-    border-right: 8px solid #fba943 !important
+    border-left: 8px solid #d77e10 !important;
+    border-right: 8px solid #d77e10 !important;
+    display: inherit;
+    width: 120px;
+    padding: 4px;
+    border-radius: 2px;
 }
 
 ._done {
     color: #fff !important;
     background: #7608dd;
     font-weight: 600 !important;
-    border-left: 8px solid #9b2fff !important;
-    border-right: 8px solid #9b2fff !important;
+    border-left: 8px solid #5a09a5 !important;
+    border-right: 8px solid #5a09a5 !important;
+    display: inherit;
+    padding: 4px;
+    border-radius: 2px;
+    width: 120px
 }
 
 ._todo {
     background: #039b24;
     font-weight: 600 !important;
-    border-left: 8px solid #37bd52 !important;
-    border-right: 8px solid #37bd52 !important;
+    border-left: 8px solid #07701c !important;
+    border-right: 8px solid #07701c !important;
     color: #fff !important;
+    padding: 4px;
+    display: inherit;
+    width: 120px;
+    border-radius: 2px;
+}
+
+._open {
+    background: #05b1eb;
+    font-weight: 600 !important;
+    border-left: 8px solid #0780a9 !important;
+    border-right: 8px solid #0780a9 !important;
+    color: #fff !important;
+    padding: 4px;
+    border-radius: 2px;
+    width: 120px;
+    display: inherit;
 }
 
 ._in_prog {
     color: #fff !important;
     font-weight: 600 !important;
-    background: #0513d1;
-    border-left: 8px solid #4836d1 !important;
-    border-right: 8px solid #4836d1 !important;
+    background: #055ebd;
+    border-left: 8px solid #1b02d9 !important;
+    border-right: 8px solid #1b02d9 !important;
+    padding: 4px;
+    width: 120px;
+    display: inherit;
+    border-radius: 2px;
 }
 
 ::-webkit-scrollbar {
