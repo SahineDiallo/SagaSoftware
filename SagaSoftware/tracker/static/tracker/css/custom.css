@@ -1325,7 +1325,7 @@ table.dataTable td:nth-child(1) {
 }
 
 ::-webkit-scrollbar {
-    width: 4px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {

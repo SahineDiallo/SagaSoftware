@@ -1,15 +1,16 @@
 $(document).ready(function() {
+    var url_end = (window.location.pathname).split("/").at(-2)
     table = $("#tkts-bkl").DataTable({
-        stripeClasses: ['strip1', 'strip2'],
+        // stripeClasses: ['strip1', 'strip2'],
+        "serverSide": true,
+        "processing": true,
         ajax: {
-            url: '/api/tickets/',
+            url: `/api/tickets/${url_end}`,
             dataSrc: 'results'
         },
-        "serverSide": true,
-
         lengthMenu: [
-            [10, 25, 50, -1],
-            [10, 25, 50, "All"]
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, "All"]
         ],
         initComplete: function(settings, json) {
             table.buttons().container().appendTo('#UserHead');

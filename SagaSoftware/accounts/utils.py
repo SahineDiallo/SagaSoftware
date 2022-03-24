@@ -9,6 +9,7 @@ from django.template.loader import get_template
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
+from tickets.models import Ticket
 
 colorPickerList = {
     "#2596be",
@@ -121,3 +122,37 @@ def allowedToEditProject(func_view):
         else:
             return func_view(request, site_slug, project_key, *args, **kwargs)
     return wrapper_func
+
+def get_choice(_tuple, order):
+    return _tuple[order][1]
+
+ORDER_COLUMN_CHOICES = (
+    ('0', 'key'),('1', 'subject'),
+    ('2', '_type'), ('3', 'status'),
+    ('4', 'priority'), ('5', 'assignee'),
+    ('6', 'accountable'), ('7', 'progress'), ('8', 'milestone'),
+    ('9', 'est'), ('10', 'start_date'),
+    ('11', 'end_date'), ('12', 'created_by'),
+    ('13', 'act_hours'), ('14', 'update_date'),
+    ('15', 'created_date'),
+)
+
+def get_tickets_by_kwargs(user, **kwargs):
+    draw = int(kwargs.get('draw', None)[0])
+    start = int(kwargs.get('start', None)[0])
+    length = int(kwargs.get('length', None)[0])
+    search_value = kwargs.get('search[value]', None)[0]
+    order = kwargs.get('order[0][dir]', None)[0]
+    order_column = int(kwargs.get('order[0][column]', None)[0])
+    order_column = get_choice(ORDER_COLUMN_CHOICES, order_column)
+    if order == 'des':
+        order_column = '-' + order_column
+
+    if search_value:
+        pass
+    else:
+        queryset = Ticket.objects
+    count = queryset.count()
+    result = {'queryset': queryset, 'count': count, 'draw': draw}
+    return result
+

@@ -8,7 +8,7 @@ from tickets.views import TicketModelViewSet
 
 router = routers.SimpleRouter()
 
-router.register(r'api/tickets', TicketModelViewSet, basename="tickets")
+router.register(r'api/tickets/(?P<project_key>[\w-]+)', TicketModelViewSet, basename="tickets")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

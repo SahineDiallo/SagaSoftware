@@ -27,7 +27,7 @@ class projectManager(models.Manager):
 
 
 class Project(models.Model):
-    #objects = projectManager()
+    key_tracker_int = 0
     # make the project type radion button is easier and cleaner
     typeChoices = (
         ("Project Management", "Project Management"),

@@ -1,12 +1,11 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
-from tracker.models import Project
+from .models import Ticket
 
-@receiver(pre_save, sender=Project)
-def set_project_key(sender, instance, created, **kwargs):
-    if created:
-        Klass = instance.__class__
-        print(Klass.key_tracker_int)
-        instance.key = f"{Klass.key}-{Klass.key_tracker_int}"
-        Klass.key_tracker_int += 1
-        instance.save()
+@receiver(post_save, sender=Ticket)
+def set_project_key(sender, instance, **kwargs):
+    project = instance.project
+    instance.key = f"{project.key}-{project.key_project_int}"
+    project.key_tracker_int += 1
+    project.save()
+    instance.save()

@@ -13,7 +13,6 @@ class TicketFiles(models.Model):
     def __str__(self):
         return self.id
 class Ticket(models.Model):
-    key_tracker_int = 0
     # we might create a model to handle the status to give the user the option to create his own
     class TicketStatus(models.TextChoices):
         OPEN = "OP", _("Open")
