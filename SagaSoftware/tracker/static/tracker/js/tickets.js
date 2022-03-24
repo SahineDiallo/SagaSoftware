@@ -6,15 +6,15 @@ $(document).ready(function() {
         "processing": true,
         ajax: {
             url: `/api/tickets/${url_end}`,
-            dataSrc: 'results'
+            type: 'GET'
         },
         lengthMenu: [
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, "All"]
         ],
-        initComplete: function(settings, json) {
-            table.buttons().container().appendTo('#UserHead');
-        },
+        // initComplete: function(settings, json) {
+        //     table.buttons().container().appendTo('#UserHead');
+        // },
         select: true,
         "bJQueryUI": true,
         order: [0, 'des'],

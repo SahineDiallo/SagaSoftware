@@ -21,7 +21,6 @@ class ReadTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = (
-            "id",
             "key", "subject", "_type", "description",
             "status", "priority", "assignee", "accountable", "created_by", 
             "est_hours", "act_hours", "milestone", "start_date", "end_date",

@@ -15,30 +15,30 @@ class TicketFiles(models.Model):
 class Ticket(models.Model):
     # we might create a model to handle the status to give the user the option to create his own
     class TicketStatus(models.TextChoices):
-        OPEN = "OP", _("Open")
-        TODO = "TD", _("Todo")
-        IN_PROGRESS = "IP", _("In Progress")
-        RESOLVED = "RES", _("Resolved")
-        CLOSED =  "CLS", _("Close")
+        OPEN = "Open", _("Open")
+        TODO = "Todo", _("Todo")
+        IN_PROGRESS = "In Progress", _("In Progress")
+        RESOLVED = "Resolved", _("Resolved")
+        CLOSED =  "Closed", _("Close")
 
     class TicketPriority(models.TextChoices):
-        NORMAL = "NORM", _("Normal")
-        HIGH = "HG", _("High")
-        LOW = "LW", _("Low")
-        IMMEDIATE = "IMM", _("Immediate")
+        NORMAL = "Normal", _("Normal")
+        HIGH = "High", _("High")
+        LOW = "Low", _("Low")
+        IMMEDIATE = "Immediate", _("Immediate")
 
 
     class TicketType(models.TextChoices):
-        BUG = 'Bug', _("bug")
-        TASK = 'Task', _("task")
-        REQUEST = 'req', _('request')
-        OTHER = 'oth', _("other")
+        BUG = 'BUG', _("bug")
+        TASK = 'TASK', _("task")
+        REQUEST = 'REQUEST', _('request')
+        OTHER = 'OTHER', _("other")
 
     key          = models.CharField(max_length=100, default="PMS-1000")
     project      = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tickets')
     subject      = models.CharField(max_length=255)
-    _type        = models.CharField(max_length=10, choices=TicketType.choices, default=TicketType.TASK)
-    status       = models.CharField(max_length=10, choices=TicketStatus.choices, default=TicketStatus.TODO)
+    _type        = models.CharField(max_length=50, choices=TicketType.choices, default=TicketType.TASK)
+    status       = models.CharField(max_length=50, choices=TicketStatus.choices, default=TicketStatus.TODO)
     priority     = models.CharField(max_length=20, choices=TicketPriority.choices, default=TicketPriority.NORMAL)
     created_by   = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="created_tickets", blank=True, null=True)
     assignee     = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="tickets", blank=True, null=True)

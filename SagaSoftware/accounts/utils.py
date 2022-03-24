@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from tickets.models import Ticket
+from django.db.models import Q
 
 colorPickerList = {
     "#2596be",
@@ -137,7 +138,8 @@ ORDER_COLUMN_CHOICES = (
     ('15', 'created_date'),
 )
 
-def get_tickets_by_kwargs(user, **kwargs):
+def get_tickets_by_kwargs(user, project, **kwargs):
+    queryset = Ticket.objects.filter(project=project)
     draw = int(kwargs.get('draw', None)[0])
     start = int(kwargs.get('start', None)[0])
     length = int(kwargs.get('length', None)[0])
@@ -148,11 +150,36 @@ def get_tickets_by_kwargs(user, **kwargs):
     if order == 'des':
         order_column = '-' + order_column
 
+    if user.role != '1' and user.role != '2':
+        print('this is a developer')
+        queryset = queryset.filter(Q(assignee=user) | Q(accountable=user))
+
     if search_value:
-        pass
-    else:
-        queryset = Ticket.objects
+        print('from utils', queryset)
+        queryset = queryset.filter(
+            Q(key__icontains=search_value)| 
+            Q(subject__icontains=search_value)| 
+            Q(_type__icontains=search_value)| 
+            Q(status__icontains=search_value)| 
+            Q(priority__icontains=search_value)|
+            Q(assignee__last_name__icontains=search_value)|
+            Q(assignee__first_name__icontains=search_value)| 
+            Q(accountable__first_name__icontains=search_value)| 
+            Q(accountable__last_name__icontains=search_value)| 
+            Q(milestone__name_milestone__icontains=search_value)| 
+            Q(est_hours__icontains=search_value)| 
+            Q(start_date__icontains=search_value)| 
+            Q(end_date__icontains=search_value)| 
+            Q(created_by__first_name__icontains=search_value)| 
+            Q(created_by__last_name__icontains=search_value)|
+            Q(act_hours__icontains=search_value)| 
+            Q(updated_date__icontains=search_value)| 
+            Q(created_date__icontains=search_value)
+        )
+        print("this is the data after the search", queryset)
+        
     count = queryset.count()
-    result = {'queryset': queryset, 'count': count, 'draw': draw}
+    data = queryset.order_by(order_column)[start:start+length]
+    result = {'data': data, 'count': count, 'draw': draw}
     return result
 
