@@ -16,13 +16,14 @@ $(document).ready(function() {
         // initComplete: function(settings, json) {
         //     table.buttons().container().appendTo('#UserHead');
         // },
+        "autoWidth": false, // might need this
         select: true,
         "bJQueryUI": true,
         order: [0, 'des'],
         'columnDefs': [{
                 "targets": 0, // your case first column
                 "className": "text-center",
-                "width": "4%"
+                "width": "10%"
             },
             {
                 "targets": 3,
@@ -30,7 +31,8 @@ $(document).ready(function() {
             }, {
                 "targets": 4,
                 "className": "text-center",
-            }
+            },
+            { "targets": 1, "width": "200" }
         ],
 
         colReorder: {

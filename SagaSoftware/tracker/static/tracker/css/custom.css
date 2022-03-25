@@ -1189,6 +1189,18 @@ td span .mdi-trash-can {
     border-collapse: separate !important;
 }
 
+th.big-col {
+    width: 300px !important;
+}
+
+th.med-col {
+    width: 200px;
+}
+
+table#tkts-bkl {
+    table-layout: fixed;
+}
+
 #tkts-bkl_wrapper div:nth-child(even) .col-sm-12 {
     margin-bottom: 60px;
 }
