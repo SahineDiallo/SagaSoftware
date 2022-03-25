@@ -21513,7 +21513,11 @@ dl li {
     white-space: nowrap;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: .875rem;
+    font-size: .75rem;
+}
+
+.col-30 {
+    width: 30px;
 }
 
 .dataTables_wrapper .dataTable thead .sorting:before,

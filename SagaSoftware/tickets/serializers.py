@@ -7,10 +7,7 @@ from django.conf import settings
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = (
-            "username", "first_name", "last_name", #later we will add the background
-            "email",
-        )
+        fields = ("full_name", "email", 'background', )
 
 
 class ReadTicketSerializer(serializers.ModelSerializer):
@@ -19,10 +16,10 @@ class ReadTicketSerializer(serializers.ModelSerializer):
     accountable = UserSerializer()
     created_by = UserSerializer()
 
-    created_date = serializers.DateTimeField(format=settings.DATETIME_FORMAT)
-    updated_date = serializers.DateTimeField(format=settings.DATETIME_FORMAT)
-    start_date = serializers.DateField(format=settings.DATETIME_FORMAT)
-    end_date = serializers.DateField(format=settings.DATETIME_FORMAT)
+    # created_date = serializers.DateTimeField(format="%N-%d-%Y")
+    # updated_date = serializers.DateTimeField(format=settings.DATETIME_FORMAT)
+    # start_date = serializers.DateField(format=settings.DATETIME_FORMAT)
+    # end_date = serializers.DateField(format=settings.DATETIME_FORMAT)
     class Meta:
         model = Ticket
         fields = (

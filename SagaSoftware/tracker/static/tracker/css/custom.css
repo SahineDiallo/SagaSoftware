@@ -1176,7 +1176,6 @@ td span .mdi-trash-can {
 
 .estm,
 ._mil,
-.tdtk,
 ._typ,
 .str_date,
 .end_date,
@@ -1194,11 +1193,19 @@ th.big-col {
 }
 
 th.med-col {
-    width: 200px;
+    width: 100px;
+}
+
+.col-75 {
+    width: 75px;
+}
+
+.col-50 {
+    width: 44px;
 }
 
 table#tkts-bkl {
-    table-layout: fixed;
+    width: 2000px;
 }
 
 #tkts-bkl_wrapper div:nth-child(even) .col-sm-12 {
@@ -1272,84 +1279,104 @@ table.dataTable td:nth-child(1) {
     color: #ffffff !important;
     background: #e60c05;
     display: inherit;
-    padding: 6px 15px;
-    width: 120px;
-    border-radius: 30px;
+    padding: 4px 15px;
+    width: 100px;
+    border-right: 6px solid #c30c06;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 ._high {
     color: #ffffff !important;
     background: #f9605b;
-    padding: 6px 22px;
-    border-radius: 30px;
-    width: 120px;
+    padding: 4px 22px;
+    width: 100px;
     display: inherit;
+    border-right: 6px solid #f53731;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 ._norm {
     color: #fff !important;
     background: #ff7423;
     display: inherit;
-    padding: 7px 15px;
-    width: 120px;
-    border-radius: 30px;
+    padding: 4px 15px;
+    width: 100px;
+    border-right: 6px solid #ed5d08;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 ._low {
     color: #fff !important;
     background: #82807f;
-    width: 120px;
+    width: 100px;
     display: inherit;
-    padding: 6px 17px;
-    border-radius: 30px;
+    padding: 4px 17px;
+    border-right: 6px solid #545453;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 ._on_hold {
     color: #fff !important;
     background: #f39219;
     font-weight: 600 !important;
-    border-left: 8px solid #d77e10 !important;
-    border-right: 8px solid #d77e10 !important;
+    border-left: 6px solid #d77e10 !important;
+    /* border-right: 8px solid #d77e10 !important; */
     display: inherit;
-    width: 120px;
+    width: 110px;
     padding: 4px;
     border-radius: 2px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
 }
 
 ._done {
     color: #fff !important;
     background: #7608dd;
     font-weight: 600 !important;
-    border-left: 8px solid #5a09a5 !important;
-    border-right: 8px solid #5a09a5 !important;
+    border-left: 6px solid #5a09a5 !important;
+    /* border-right: 8px solid #5a09a5 !important; */
     display: inherit;
     padding: 4px;
     border-radius: 2px;
-    width: 120px
+    width: 110px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
 }
 
 ._todo {
     background: #039b24;
     font-weight: 600 !important;
-    border-left: 8px solid #07701c !important;
-    border-right: 8px solid #07701c !important;
+    border-left: 6px solid #07701c !important;
+    /* border-right: 8px solid #07701c !important; */
     color: #fff !important;
     padding: 4px;
     display: inherit;
-    width: 120px;
+    width: 110px;
     border-radius: 2px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
 }
 
 ._open {
     background: #05b1eb;
     font-weight: 600 !important;
-    border-left: 8px solid #0780a9 !important;
-    border-right: 8px solid #0780a9 !important;
+    border-left: 6px solid #0780a9 !important;
+    /* border-right: 8px solid #06a2d7 !important; */
     color: #fff !important;
     padding: 4px;
     border-radius: 2px;
-    width: 120px;
+    width: 110px;
     display: inherit;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
 }
 
 ._in_prog {
@@ -1357,11 +1384,14 @@ table.dataTable td:nth-child(1) {
     font-weight: 600 !important;
     background: #055ebd;
     border-left: 8px solid #1b02d9 !important;
-    border-right: 8px solid #1b02d9 !important;
+    /* border-right: 8px solid #1b02d9 !important; */
     padding: 4px;
-    width: 120px;
+    width: 110px;
     display: inherit;
     border-radius: 2px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
 }
 
 ::-webkit-scrollbar {

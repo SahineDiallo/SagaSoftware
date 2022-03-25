@@ -23,7 +23,7 @@ $(document).ready(function() {
         'columnDefs': [{
                 "targets": 0, // your case first column
                 "className": "text-center",
-                "width": "10%"
+                "width": '4%'
             },
             {
                 "targets": 3,
@@ -70,10 +70,10 @@ $(document).ready(function() {
                 }
             },
             {
+                className: 'pr-0',
                 "data": "status",
                 render: function(data, type) {
                     if (type === 'display') {
-                        console.log('display')
                         let status = '';
 
                         switch (data) {
@@ -102,11 +102,11 @@ $(document).ready(function() {
 
             },
             {
+                className: 'px-0',
                 "data": "priority",
 
                 render: function(data, type) {
                     if (type === 'display') {
-                        console.log('display')
                         let priority = '';
 
                         switch (data) {
@@ -134,23 +134,45 @@ $(document).ready(function() {
 
             },
             {
-                className: "tdtk",
-                "data": "assignee.username",
+
+                "data": "assignee",
+                render: function(data, type) {
+                    var profile = get_first_letters(data.full_name)
+                    if (type === 'display') {
+                        return `<span class="tkts-asg" style="background:${data.background}">${profile}</span> ${data.full_name}`
+                    }
+                    return data;
+                }
             },
             {
-                className: "tdtk",
-                "data": "accountable.username"
+
+                "data": "accountable",
+                render: function(data, type) {
+                    var profile = get_first_letters(data.full_name)
+                    if (type === 'display') {
+                        return `<span class="tkts-asg" style="background:${data.background}">${profile}</span> ${data.full_name}`
+                    }
+                    return data;
+                }
             },
             { "data": "milestone" },
             {
-                className: "estm",
                 "data": "est_hours"
             },
             { "data": "start_date" },
             { "data": "end_date" },
-            { "data": "created_by.username" },
             {
-                className: "estm",
+                "data": "created_by",
+                render: function(data, type) {
+                    var profile = get_first_letters(data.full_name)
+                    if (type === 'display') {
+                        return `<span class="tkts-asg" style="background:${data.background}">${profile}</span> ${data.full_name}`
+                    }
+                    return data;
+                }
+            },
+            {
+
                 "data": "act_hours"
             },
             { "data": "updated_date" },
@@ -242,4 +264,9 @@ $(document).ready(function() {
     //         '</tr>' +
     //         '</table>';
     // }
+
+    function get_first_letters(string) {
+        l = string.split(" ")
+        return l[0][0].toUpperCase() + l.at(-1)[0].toUpperCase();
+    }
 });

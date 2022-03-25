@@ -57,6 +57,7 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     role = models.CharField(max_length=100, choices=role_choices, default="3")
+    background = models.CharField(max_length=30, default="#ffffff")
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)
     create_on = models.DateTimeField(
         verbose_name="Date Created", default=timezone.now)
