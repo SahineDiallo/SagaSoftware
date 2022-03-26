@@ -146,16 +146,31 @@ def get_tickets_by_kwargs(user, project, **kwargs):
     search_value = kwargs.get('search[value]', None)[0]
     order = kwargs.get('order[0][dir]', None)[0]
     order_column = int(kwargs.get('order[0][column]', None)[0])
+    assignee = kwargs.get('assignee', None)
+    status = kwargs.get('status', None)
+    accountable = kwargs.get('accountable', None)
+    if assignee != None:
+        assignee = assignee[0]
+        queryset = queryset.filter(assignee__full_name=assignee)
+    if accountable != None:
+        accountable = accountable[0]
+        queryset = queryset.filter(accountable__full_name=accountable)
+
+    if status != None:
+        status = status[0]
+        if status == 'not_closed':
+            queryset = queryset.exclude(status='Closed')
+        else:
+            queryset = queryset.filter(status=status)
+
     order_column = get_choice(ORDER_COLUMN_CHOICES, order_column)
-    if order == 'des':
+    if order == 'des' or order == "desc":
         order_column = '-' + order_column
 
     if user.role != '1' and user.role != '2':
-        print('this is a developer')
         queryset = queryset.filter(Q(assignee=user) | Q(accountable=user))
 
     if search_value:
-        print('from utils', queryset)
         queryset = queryset.filter(
             Q(key__icontains=search_value)| 
             Q(subject__icontains=search_value)| 
@@ -176,10 +191,11 @@ def get_tickets_by_kwargs(user, project, **kwargs):
             Q(updated_date__icontains=search_value)| 
             Q(created_date__icontains=search_value)
         )
-        print("this is the data after the search", queryset)
-        
     count = queryset.count()
-    data = queryset.order_by(order_column)[start:start+length]
+    if status != 'Closed':
+        data = queryset.exclude(status='Closed').order_by(order_column)[start:start+length]
+    else:
+        data = queryset.order_by(order_column)[start:start+length]
     result = {'data': data, 'count': count, 'draw': draw}
     return result
 

@@ -15,17 +15,12 @@ class ReadTicketSerializer(serializers.ModelSerializer):
     assignee = UserSerializer()
     accountable = UserSerializer()
     created_by = UserSerializer()
-
-    # created_date = serializers.DateTimeField(format="%N-%d-%Y")
-    # updated_date = serializers.DateTimeField(format=settings.DATETIME_FORMAT)
-    # start_date = serializers.DateField(format=settings.DATETIME_FORMAT)
-    # end_date = serializers.DateField(format=settings.DATETIME_FORMAT)
     class Meta:
         model = Ticket
         fields = (
             "key", "subject", "_type", "description",
             "status", "priority", "assignee", "accountable", "created_by", 
-            "est_hours", "act_hours", "milestone", "start_date", "end_date",
+            "est_hours", "act_hours", "milestone",'progress', "start_date", "end_date",
             "created_date", "updated_date",
         )
         read_only_fields = fields
@@ -41,6 +36,6 @@ class WriteTicketSerializer(serializers.ModelSerializer):
         fields = (
             "key", "subject", "_type", "description",
             "status", "priority", "assignee", "accountable", "created_by", 
-            "est_hours", "act_hours", "milestone", "start_date", "end_date",
+            "est_hours", "act_hours", "milestone", "progress", "start_date", "end_date",
             "created_date", "updated_date",
         )

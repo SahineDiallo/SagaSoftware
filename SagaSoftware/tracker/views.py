@@ -1,4 +1,3 @@
-from json import JSONEncoder
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.generic import View
@@ -19,6 +18,8 @@ from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
+from tickets.models import Ticket
+from tickets.serializers import WriteTicketSerializer
 
 User = get_user_model()
 
@@ -298,8 +299,12 @@ def project_board(request, site_slug, project_key):
 
 def project_backlog(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
-    
-    context = {'project': project}
+    status_choices = [i[0] for i in Ticket.TicketStatus.choices]
+    users = project.members.all()
+    context = {
+        'project': project, 
+        'members':users, 'status_choices':status_choices
+    }
     return render(request, 'tracker/backlog.html', context)
 
 def project_tickets(request, site_slug, project_key):

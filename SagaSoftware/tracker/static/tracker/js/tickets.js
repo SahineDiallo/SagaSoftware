@@ -1,22 +1,43 @@
 $(document).ready(function() {
+    let assignee;
+    let accountable;
+    let status;
     var url_end = (window.location.pathname).split("/").at(-2)
     let _type = ""
+    $("#assignee_select").chosen({ no_results_text: "Oops, no member were found!" });
+    $("#accountable_select").chosen({ no_results_text: "Oops, no member were found!" });
+    $("#assignee_select").on("change", function(e) {
+        assignee = this.value
+        table.draw()
+    });
+    $("#accountable_select").on("change", function(e) {
+        accountable = this.value
+        table.draw()
+    })
+    $('input[type=radio][name=status_fil]').change(function() {
+        status = this.value;
+        table.draw();
+    });
     table = $("#tkts-bkl").DataTable({
-        // stripeClasses: ['strip1', 'strip2'],
         "serverSide": true,
         "processing": true,
+        fixedHeader: true,
         ajax: {
             url: `/api/tickets/${url_end}`,
-            type: 'GET'
+            type: 'GET',
+            "data": function(d) {
+                return $.extend({}, d, {
+                    "assignee": assignee,
+                    "accountable": accountable,
+                    "status": status
+                });
+            }
         },
         lengthMenu: [
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, "All"]
         ],
-        // initComplete: function(settings, json) {
-        //     table.buttons().container().appendTo('#UserHead');
-        // },
-        "autoWidth": false, // might need this
+        "autoWidth": false, // might need this to disable the auto width calc
         select: true,
         "bJQueryUI": true,
         order: [0, 'des'],
@@ -155,6 +176,19 @@ $(document).ready(function() {
                     return data;
                 }
             },
+            {
+                "data": "progress",
+                render: function(data, type) {
+                    if (type === 'display') {
+                        return `<div class="progress">
+                                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${data}%" aria-valuenow="${data}" aria-valuemin="0" aria-valuemax="100">
+                                        ${data}%
+                                    </div>
+                                </div>`
+                    }
+                    return data;
+                }
+            },
             { "data": "milestone" },
             {
                 "data": "est_hours"
@@ -199,24 +233,18 @@ $(document).ready(function() {
         onUncheckAll: function() {
             hideAllColumns();
         },
-    })
-    table.on("column-reorder", (e, settings, details) => {
-        var orders = table.order();
-        console.log(details);
-        console.log(orders)
-    })
-
+    });
 
     //////////// functions ///////////
 
     function hideAllColumns() {
-        for (var i = 0; i <= 13; i++) {
+        for (var i = 0; i <= 15; i++) {
             table.column(i).visible(0);
         }
     }
 
     function showAllColumns() {
-        for (var i = 0; i <= 13; i++) {
+        for (var i = 0; i <= 15; i++) {
             table.column(i).visible(1);
         }
     }
@@ -269,4 +297,5 @@ $(document).ready(function() {
         l = string.split(" ")
         return l[0][0].toUpperCase() + l.at(-1)[0].toUpperCase();
     }
+
 });

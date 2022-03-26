@@ -46,6 +46,7 @@ class Ticket(models.Model):
     description  = models.TextField(blank=True, null=True)
     est_hours    = models.IntegerField(blank=True, null=True)
     act_hours    = models.IntegerField(blank=True, null=True)
+    progress     = models.IntegerField(blank=True, null=True, default=0)
     milestone    = models.ForeignKey(Milestone, on_delete=models.SET_NULL, related_name="milestone", blank=True, null=True)
     start_date   = models.DateField(blank=True, null=True)
     end_date     = models.DateField(blank=True, null=True)

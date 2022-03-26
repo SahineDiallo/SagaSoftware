@@ -47,42 +47,82 @@
 
         </div>
         <div class="filters p-3">
-            <select multiple="multiple" name="toggle_columns" id="toggle_columns">
-              <option value="0">Key</option>
-              <option value="1">Type</option>
-              <option value="2">Subject</option>
-              <option value="3">Status</option>
-              <option value="4">Priority</option>
-              <option value="5">Assignee</option>
-              <option value="6">Reporter</option>
-              <option value="7">Milestone</option>
-              <option value="8">Estimated Hours</option>
-              <option value="9">End Date</option>
-              <option value="10">Start Date</option>
-              <option value="11">Progress</option>
-              <option value="12">Last Update</option>
-              <option value="13">Create on</option>
-            </select>
-      </div>
+            <div class="d-flex align-items-center">
+                <span class="mb-3 mr-3">Status: </span>
+                <div class="status_filter">
+                    <input type="radio"  name="status_fil" id="All" checked value="All">
+                    <label class="status_check_label" for="All">All</label> 
+                    {% for choice in status_choices %}
+                    <input type="radio"  name="status_fil" id="{{choice}}" value="{{choice}}">
+                    <label class="status_check_label" for="{{choice}}">{{choice}}</label>
+                    {% endfor %} 
+                    <input type="radio"  name="status_fil" id="not_closed" checked value="not_closed">
+                    <label class="status_check_label" for="not_closed">Not Closed</label>                
+                </div>
+            </div>
+            <div class="d-flex align-items-center ">
+                <select multiple="multiple" name="toggle_columns" id="toggle_columns">
+                    <option value="0">Key</option>
+                    <option value="1">Subject</option>
+                    <option value="2">Type</option>
+                    <option value="3">Status</option>
+                    <option value="4">Priority</option>
+                    <option value="5">Assignee</option>
+                    <option value="6">Accountable</option>
+                    <option value="7">Progress</option>
+                    <option value="8">Milestone</option>
+                    <option value="9">Estimated Hours</option>
+                    <option value="10">Start Date</option>
+                    <option value="11">End Date</option>
+                    <option value="12">Created By</option>
+                    <option value="13">Actual Hours</option>
+                    <option value="14">Update On</option>
+                    <option value="15">Create On</option>
+                </select>
+                <div class="col-md-3">
+                    <div class="form-group" >
+                        <select class="form-control" id="assignee_select">
+                            {% for member in members %}
+                                <option value="" selected></option>
+                                <option>{{member.full_name}}</option>
+                            {% endfor %}
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control" id="accountable_select">
+                            {% for member in members %}
+                                <option value="" selected></option>
+                                <option>{{member.full_name}}</option>
+                            {% endfor %}
+                            
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>  
     <div class="mt-3" id="MainEquipDiv">
         <table class="table" id="tkts-bkl" >
             <thead>
                 <tr>
                     <th>Key</th>
-                    <th>Subject</th>
+                    <th class="subj">Subject</th>
                     <th class="col-50 pl-1">Type</th>
                     <th class="col-75 px-3">Status</th>
                     <th class="col-75 px-3">Priority</th>
                     <th class="px-3 med-col">Assignee</th>
                     <th class="px-3 med-col">Accountable</th>
+                    <th class="med-col">Progress</th>
                     <th class="med-col">Milestone</th>
                     <th class="col-30">est</th>
                     <th class="med-col">Start Date</th>
                     <th class="med-col">end date</th>
                     <th class="med-col">created_by</th>
                     <th class="col-30">Act</th>
-                    <th class="med-col">Last update</th>
+                    <th class="med-col">updated on</th>
                     <th class="med-col">created on</th>
                 </tr>
             </thead>

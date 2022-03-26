@@ -21541,7 +21541,7 @@ dl li {
 .dataTables_wrapper .dataTable thead .sorting_asc_disabled:before,
 .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before {
     content: "\F05D";
-    right: 2.4em;
+    /* right: 2.4em; */
     bottom: 1.5rem;
 }
 
@@ -21551,7 +21551,7 @@ dl li {
 .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after,
 .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
     content: "\F045";
-    right: 2em;
+    /* right: 2em; */
     bottom: 1.1rem;
 }
 
@@ -21560,7 +21560,7 @@ dl li {
     color: #39345ef5;
     white-space: nowrap;
     font-weight: 500;
-    padding: 0.5065rem;
+    padding: 0.4065rem;
     border-bottom: 1px solid rgba(151, 151, 151, 0.18);
     font-size: 12px;
 }
