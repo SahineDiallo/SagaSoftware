@@ -149,12 +149,19 @@ def get_tickets_by_kwargs(user, project, **kwargs):
     assignee = kwargs.get('assignee', None)
     status = kwargs.get('status', None)
     accountable = kwargs.get('accountable', None)
+    _type = kwargs.get('type', None)
     if assignee != None:
         assignee = assignee[0]
         queryset = queryset.filter(assignee__full_name=assignee)
     if accountable != None:
         accountable = accountable[0]
         queryset = queryset.filter(accountable__full_name=accountable)
+    if _type != None:
+        _type = _type[0]
+        if _type == "All":
+            queryset = queryset
+        else:        
+            queryset = queryset.filter(_type__icontains=_type)
 
     if status != None:
         status = status[0]
@@ -191,11 +198,11 @@ def get_tickets_by_kwargs(user, project, **kwargs):
             Q(updated_date__icontains=search_value)| 
             Q(created_date__icontains=search_value)
         )
-    count = queryset.count()
     if status != 'Closed':
         data = queryset.exclude(status='Closed').order_by(order_column)[start:start+length]
     else:
         data = queryset.order_by(order_column)[start:start+length]
+    count = queryset.count()
     result = {'data': data, 'count': count, 'draw': draw}
     return result
 

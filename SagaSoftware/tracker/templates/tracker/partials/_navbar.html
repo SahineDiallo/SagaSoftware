@@ -25,84 +25,34 @@
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item dropdown mr-1">
         <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-          <button type="button" class="btn btn-light btn-icon add-btn-navbar mt-xl-0">
-            <i class="mdi mdi-plus text-muted"></i>
-          </button>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-          <p class="mb-0 font-weight-normal float-left dropdown-header">Create Section</p>
-          <a class="dropdown-item" data-toggle="modal" data-target="#createProject">
-            <div class="item-thumbnail">
-              <i class="mdi mdi-clipboard-text menu-icon"></i>
-            </div>
-            <div class="item-content flex-grow">
-              <h6 class="ellipsis font-weight-normal mb-0">Project</h6>
-            </div>
-          </a>
-          <a class="dropdown-item">
-            <div class="item-thumbnail">
-                <img src="{% static 'tracker/images/faces/face2.jpg' %}" alt="image" class="profile-pic">
-            </div>
-            <div class="item-content flex-grow">
-              <h6 class="ellipsis font-weight-normal">Bucket
-              </h6>
-              <p class="font-weight-light small-text text-muted mb-0">
-                New product launch
-              </p>
-            </div>
-          </a>
-          <a class="dropdown-item">
-            <div class="item-thumbnail">
-                <img src="{% static 'tracker/images/faces/face3.jpg' %}" alt="image" class="profile-pic">
-            </div>
-            <div class="item-content flex-grow">
-              <h6 class="ellipsis font-weight-normal"> Ticket
-              </h6>
-            </div>
-          </a>
-        </div>
-      </li>
-      <li class="nav-item dropdown mr-1">
-        <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-          <i class="mdi mdi-message-text mx-0"></i>
+          <i class="mdi mdi-plus-circle mx-0"></i>
           <span class="count"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-          <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-          <a class="dropdown-item">
-            <div class="item-thumbnail">
-                <img src="{% static 'tracker/images/faces/face4.jpg' %}" alt="image" class="profile-pic">
+          <p class="mb-0 font-weight-normal float-left dropdown-header">Create Section</p>
+          <a class="dropdown-item" style="align-items: center !important; display: flex !important;">
+            <div class="">
+              <span>
+                <i class="mdi mdi-clipboard-text menu-icon" style="font-size: 25px;"></i>
+              </span>
             </div>
-            <div class="item-content flex-grow">
-              <h6 class="ellipsis font-weight-normal">David Grey
+            <div class="item-content flex-grow p-0">
+              <h6 class="ellipsis mb-0">
+                Project
               </h6>
-              <p class="font-weight-light small-text text-muted mb-0">
-                The meeting is cancelled
-              </p>
             </div>
           </a>
-          <a class="dropdown-item">
-            <div class="item-thumbnail">
-                <img src="{% static 'tracker/images/faces/face2.jpg' %}" alt="image" class="profile-pic">
+
+          <a class="dropdown-item" style="align-items: center !important; display: flex !important;">
+            <div class="">
+              <span >
+                <i class="mdi mdi-checkbox-marked " style="font-size: 25px;"></i>
+              </span>
             </div>
-            <div class="item-content flex-grow">
-              <h6 class="ellipsis font-weight-normal">Tim Cook
+            <div class="item-content flex-grow p-0">
+              <h6 class="ellipsis mb-0">
+                Ticket
               </h6>
-              <p class="font-weight-light small-text text-muted mb-0">
-                New product launch
-              </p>
-            </div>
-          </a>
-          <a class="dropdown-item">
-            <div class="item-thumbnail">
-                <img src="{% static 'tracker/images/faces/face3.jpg' %}" alt="image" class="profile-pic">
-            </div>
-            <div class="item-content flex-grow">
-              <h6 class="ellipsis font-weight-normal"> Johnson
-              </h6>
-              <p class="font-weight-light small-text text-muted mb-0">
-                Upcoming board meeting
-              </p>
             </div>
           </a>
         </div>
@@ -162,9 +112,10 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
           <a class="dropdown-item">
-            <i class="mdi mdi-settings text-primary"></i>
-            Settings
+            <i class="mdi mdi-user settings text-primary"></i>
+            Profile
           </a>
+
           <a class="dropdown-item" href="{% url 'Userlogout' %}">
             <i class="mdi mdi-logout text-primary"></i>
             Logout

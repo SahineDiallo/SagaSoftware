@@ -1,4 +1,5 @@
 {% extends 'tracker/partials/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="over_header card-header py-1 px-2 bkl" style="padding: 0;">
     <div class="d-flex">
@@ -23,15 +24,26 @@
           </div>
     </div>
 </div>
-<div class="cr-edt-tkt" style="display:none">
-
+<div class="cr-edt-tkt p-3">
+    <div class="mb-2 hd_ d-flex align-items-center justify-content-between"> 
+        <h3 class="">New Ticket</h3>
+        <span class="cl_cr"><i class="mdi mdi-close" style="pointer-events:none"></i> </span> 
+    </div>
+    <div class="tkt-frm-bdy pr-1">
+        {{ form.media }}
+        {% crispy form %}
+    </div>
+    <div class="modal-footer justify-content-start">
+        <button type="submit" id="cr_nw_tk" form="createTicketForm" class="btn btn-primary" style="margin-bottom: 12px;">Create</button>
+        <button class="btn btn-secondary cl_cr">Cancel</button>
+    </div>
 </div>
 <div class="bkl-parent">
     <div class="bkl-hd">
         <div class="d-flex justify-content-between align-items-center p-3">
             <h3>All Open</h3>
             <div>
-                <button type="button" class="btn btn-sm btn-primary">
+                <button type="button" id="nw_tkt" class="btn btn-sm btn-primary">
                     <i class="mdi mdi-plus"></i>
                     Ticket
                 </button>
@@ -80,7 +92,7 @@
                     <option value="15">Create On</option>
                 </select>
                 <div class="col-md-3">
-                    <div class="form-group" >
+                    <div class="form-group mb-0" >
                         <select class="form-control" id="assignee_select">
                             {% for member in members %}
                                 <option value="" selected></option>
@@ -91,11 +103,22 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group mb-0">
                         <select class="form-control" id="accountable_select">
                             {% for member in members %}
                                 <option value="" selected></option>
                                 <option>{{member.full_name}}</option>
+                            {% endfor %}
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group mb-0">
+                        <select class="form-control" id="type_select">
+                            <option value="All" selected>All</option>
+                            {% for choice in type_list %}
+                                <option value="{{choice}}">{{choice}}</option>
                             {% endfor %}
                             
                         </select>

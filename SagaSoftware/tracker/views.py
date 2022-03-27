@@ -20,6 +20,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from tickets.models import Ticket
 from tickets.serializers import WriteTicketSerializer
+from tickets.forms import CreateTicketForm
 
 User = get_user_model()
 
@@ -301,9 +302,13 @@ def project_backlog(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     status_choices = [i[0] for i in Ticket.TicketStatus.choices]
     users = project.members.all()
+    form = CreateTicketForm(request.POST or None)
+    type_list = [i[0] for i in Ticket.TicketType.choices]
     context = {
         'project': project, 
-        'members':users, 'status_choices':status_choices
+        'members':users, 'status_choices':status_choices,
+        'type_list': type_list,
+        'form': form
     }
     return render(request, 'tracker/backlog.html', context)
 

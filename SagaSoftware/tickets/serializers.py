@@ -11,6 +11,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ReadTicketSerializer(serializers.ModelSerializer):
+    # DT_RowId = serializers.SerializerMethodField('key')
+
+    # def get_key(self, ticket):
+    #     return ReadTicketSerializer(Ticket.objects.get(pk=ticket.key)).data
     # this serializer will be used for reading data only
     assignee = UserSerializer()
     accountable = UserSerializer()
@@ -21,7 +25,7 @@ class ReadTicketSerializer(serializers.ModelSerializer):
             "key", "subject", "_type", "description",
             "status", "priority", "assignee", "accountable", "created_by", 
             "est_hours", "act_hours", "milestone",'progress', "start_date", "end_date",
-            "created_date", "updated_date",
+            "created_date", "updated_date"
         )
         read_only_fields = fields
 

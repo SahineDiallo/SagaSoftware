@@ -2,8 +2,25 @@ $(document).ready(function() {
     let assignee;
     let accountable;
     let status;
+    let type;
     var url_end = (window.location.pathname).split("/").at(-2)
     let _type = ""
+    var end_date = $('#createTicketForm #id_end_date')
+    var start_date = $('#createTicketForm #id_start_date')
+    $(".tkt-frm-bdy").height($(".cr-edt-tkt.p-3").height() - $(".cr-edt-tkt.p-3 .hd_").height() - $(".cr-edt-tkt.p-3 .modal-footer").height())
+    $('#createTicketForm #id_assignee').chosen();
+    $('#createTicketForm #id_accountable').chosen();
+    $("#nw_tkt").on("click", (e) => {
+        $(".cr-edt-tkt").show('slide', { direction: 'right' }, 500)
+    });
+    $(".cl_cr").on("click", (e) => {
+        $(".cr-edt-tkt").hide('slide', { direction: 'right' }, 500)
+    });
+
+
+    flatpickr(start_date, {});
+    flatpickr(end_date, {});
+    $("#type_select").chosen();
     $("#assignee_select").chosen({ no_results_text: "Oops, no member were found!" });
     $("#accountable_select").chosen({ no_results_text: "Oops, no member were found!" });
     $("#assignee_select").on("change", function(e) {
@@ -12,6 +29,10 @@ $(document).ready(function() {
     });
     $("#accountable_select").on("change", function(e) {
         accountable = this.value
+        table.draw()
+    });
+    $("#type_select").on("change", function(e) {
+        type = this.value
         table.draw()
     })
     $('input[type=radio][name=status_fil]').change(function() {
@@ -29,7 +50,8 @@ $(document).ready(function() {
                 return $.extend({}, d, {
                     "assignee": assignee,
                     "accountable": accountable,
-                    "status": status
+                    "status": status,
+                    "type": type
                 });
             }
         },
@@ -56,12 +78,18 @@ $(document).ready(function() {
             { "targets": 1, "width": "200" }
         ],
 
-        colReorder: {
-            realtime: false
-        },
+        "DT_RowId": "someId",
         "columns": [
             { "data": "key" },
-            { "data": "subject" },
+            {
+                "data": "subject",
+                render: function(data, type) {
+                    if (type === "display") {
+                        return `<span class="d-flex align-items-center"><i class="mdi mdi-dots-horizontal"></i>${data}</span>`
+                    }
+                    return data;
+                }
+            },
             {
 
                 className: `${_type}`,
@@ -210,7 +238,7 @@ $(document).ready(function() {
                 "data": "act_hours"
             },
             { "data": "updated_date" },
-            { "data": "created_date" }
+            { "data": "created_date" },
         ]
 
 
@@ -297,5 +325,10 @@ $(document).ready(function() {
         l = string.split(" ")
         return l[0][0].toUpperCase() + l.at(-1)[0].toUpperCase();
     }
+    $("#cr_nw_tk").on("click", (e) => {
+        e.preventDefault();
+        console.log("ok clicked");
+
+    })
 
 });
