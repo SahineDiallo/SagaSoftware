@@ -66,7 +66,6 @@ $(document).ready(function() {
         fetch(url, { method: 'POST', body: form_data })
             .then(response => response.json())
             .then(data => {
-                console.log("this is the data", data)
                 if (!data.response && data.not_valid) {
                     $("#vert-tabs-right-tabContent #createProjectForm").replaceWith(data.formErrors)
                 } else {

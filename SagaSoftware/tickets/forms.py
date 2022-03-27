@@ -21,11 +21,12 @@ class CreateTicketForm(forms.ModelForm):
     # description = QuillFormField()
     class Meta:
         model = Ticket
-        fields = ("_type", "subject", "description", "status",
-                  "priority", "assignee", "accountable", "start_date", 
-                  "est_hours", "act_hours", "progress", "milestone",
-                  "end_date"
-                )
+        fields = (
+            "_type", "subject", "description", "status",
+            "priority", "assignee", "accountable", "start_date", 
+            "est_hours", "act_hours", "progress", "milestone",
+            "end_date"
+        )
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request", None)

@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from tracker.models import Milestone, Project
-from django_quill.fields import QuillField
+# from django_quill.fields import QuillField
 
 
 
@@ -44,7 +44,7 @@ class Ticket(models.Model):
     created_by   = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="created_tickets", blank=True, null=True)
     assignee     = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="tickets", blank=True, null=True)
     accountable  = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="accountable_tickets", blank=True, null=True)
-    description  = QuillField()
+    description  = models.TextField(blank=True, null=True)
     est_hours    = models.PositiveSmallIntegerField(blank=True, null=True)
     act_hours    = models.PositiveSmallIntegerField(blank=True, null=True)
     progress     = models.PositiveSmallIntegerField(blank=True, null=True, default=0)

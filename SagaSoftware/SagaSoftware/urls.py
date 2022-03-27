@@ -4,7 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from rest_framework import routers
-from tickets.views import TicketModelViewSet
+from tickets.views import TicketModelViewSet, createTicket
+
 
 router = routers.SimpleRouter()
 
@@ -12,6 +13,7 @@ router.register(r'api/tickets/(?P<project_key>[\w-]+)', TicketModelViewSet, base
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/create-ticket/', createTicket, name="create-ticket"),
     path("accounts/", include("accounts.urls")),
     path("trackers/", include("tracker.urls")),
 ] + router.urls

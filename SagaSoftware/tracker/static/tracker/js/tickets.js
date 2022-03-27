@@ -40,6 +40,11 @@ $(document).ready(function() {
         table.draw();
     });
     table = $("#tkts-bkl").DataTable({
+        'sScrollX': true,
+        dom: 'lBfrtip',
+        buttons: [
+            'csv', 'excel', 'pdf', 'print'
+        ],
         "serverSide": true,
         "processing": true,
         fixedHeader: true,
@@ -327,8 +332,43 @@ $(document).ready(function() {
     }
     $("#cr_nw_tk").on("click", (e) => {
         e.preventDefault();
-        console.log("ok clicked");
+        var form = document.querySelector("#createTicketForm")
+        console.log(form);
+        var _form_data = new FormData(form)
+        console.log(_form_data)
+        var url = '/api/create-ticket/';
+        fetch(url, { method: 'POST', body: _form_data, })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.response && data.not_valid) {
+                    $("#createTicketForm").replaceWith(data.formErrors)
+                    $('#createTicketForm #id_assignee').chosen();
+                    $('#createTicketForm #id_accountable').chosen();
+
+                    var end_date = $('#createTicketForm #id_end_date')
+                    var start_date = $('#createTicketForm #id_start_date')
+                    flatpickr(start_date, {});
+                    flatpickr(end_date, {});
+
+                } else {
+                    console.log(data)
+                }
+
+            })
+            .catch(error => { alert('something went wrong.Please try later') })
 
     })
+    $(".ext-prt").on("click", (e) => {
+        if (e.target.classList.contains("buttons-csv")) {
+            $(".dt-buttons .buttons-csv").click();
+        } else if (e.target.classList.contains("buttons-excel")) {
+            $(".dt-buttons .buttons-excel").click();
+        } else if (e.target.classList.contains("buttons-pdf")) {
+            $(".dt-buttons .buttons-pdf").click();
+        } else if (e.target.classList.contains("buttons-print")) {
+            $(".dt-buttons .buttons-print").click();
+        }
+    })
+
 
 });

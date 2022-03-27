@@ -51,10 +51,18 @@
                     <i class="mdi mdi-filter"></i>
                     Filters
                 </button>
-                <button type="button" class="btn btn-sm btn-secondary">
-                    <i class="mdi mdi-content-save"></i>
-                    Save as
-                </button>
+                <div class="dropdown ext-prt">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-content-save"></i>
+                        Save as
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <span class="dropdown-item buttons-csv">CSV</span>
+                      <span class="dropdown-item buttons-excel">Excel</span>
+                      <span class="dropdown-item buttons-pdf">Pdf</span>
+                      <span class="dropdown-item buttons-print">Print</span>
+                    </div>
+                </div>
             </div>
 
         </div>
