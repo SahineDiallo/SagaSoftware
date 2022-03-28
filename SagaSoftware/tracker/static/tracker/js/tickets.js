@@ -90,7 +90,14 @@ $(document).ready(function() {
                 "data": "subject",
                 render: function(data, type) {
                     if (type === "display") {
-                        return `<span class="d-flex align-items-center"><i class="mdi mdi-dots-horizontal"></i>${data}</span>`
+                        return `<span class="d-flex align-items-center">
+                                    <div class="dropdown-menu dropdown-primary">
+                                        <a class="dropdown-item" href="#"><i class="fab fa-apple-pay"></i>&nbsp;&nbsp;Pay</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-bell-slash"></i>&nbsp;&nbsp;Disable alertss</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-envelope"></i>&nbsp;&nbsp;Check mail</a>
+                                    </div>
+                                    ${data}
+                                    </span>`
                     }
                     return data;
                 }
@@ -98,7 +105,7 @@ $(document).ready(function() {
             {
 
                 className: `${_type}`,
-                "data": "_type",
+                "data": "ticket_type",
                 render: function(data, type) {
                     if (type === 'display') {
                         switch (data) {
@@ -191,9 +198,18 @@ $(document).ready(function() {
 
                 "data": "assignee",
                 render: function(data, type) {
-                    var profile = get_first_letters(data.full_name)
+                    let background;
+                    let profile;
+                    if (data) {
+                        profile = get_first_letters(data.full_name)
+                        background = data.background;
+                    } else {
+                        background = "";
+                        profile = ""
+                    }
+
                     if (type === 'display') {
-                        return `<span class="tkts-asg" style="background:${data.background}">${profile}</span> ${data.full_name}`
+                        return `<span class="tkts-asg" style="background:${background}">${profile}</span> ${data.full_name}`
                     }
                     return data;
                 }
@@ -202,9 +218,17 @@ $(document).ready(function() {
 
                 "data": "accountable",
                 render: function(data, type) {
-                    var profile = get_first_letters(data.full_name)
+                    let background;
+                    let profile;
+                    if (data) {
+                        profile = get_first_letters(data.full_name)
+                        background = data.background;
+                    } else {
+                        background = "";
+                        profile = ""
+                    }
                     if (type === 'display') {
-                        return `<span class="tkts-asg" style="background:${data.background}">${profile}</span> ${data.full_name}`
+                        return `<span class="tkts-asg" style="background:${background}">${profile}</span> ${data.full_name}`
                     }
                     return data;
                 }
@@ -231,9 +255,17 @@ $(document).ready(function() {
             {
                 "data": "created_by",
                 render: function(data, type) {
-                    var profile = get_first_letters(data.full_name)
+                    let background;
+                    let profile;
+                    if (data) {
+                        profile = get_first_letters(data.full_name)
+                        background = data.background;
+                    } else {
+                        background = "";
+                        profile = ""
+                    }
                     if (type === 'display') {
-                        return `<span class="tkts-asg" style="background:${data.background}">${profile}</span> ${data.full_name}`
+                        return `<span class="tkts-asg" style="background:${background}">${profile}</span> ${data.full_name}`
                     }
                     return data;
                 }
@@ -333,10 +365,8 @@ $(document).ready(function() {
     $("#cr_nw_tk").on("click", (e) => {
         e.preventDefault();
         var form = document.querySelector("#createTicketForm")
-        console.log(form);
         var _form_data = new FormData(form)
-        console.log(_form_data)
-        var url = '/api/create-ticket/';
+        var url = `/api/create-ticket/${url_end}/`;
         fetch(url, { method: 'POST', body: _form_data, })
             .then(response => response.json())
             .then(data => {
@@ -351,7 +381,8 @@ $(document).ready(function() {
                     flatpickr(end_date, {});
 
                 } else {
-                    console.log(data)
+                    $("#tkts-bkl tbody").prepend(data.template);
+
                 }
 
             })

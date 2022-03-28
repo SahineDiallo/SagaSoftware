@@ -129,7 +129,7 @@ def get_choice(_tuple, order):
 
 ORDER_COLUMN_CHOICES = (
     ('0', 'key'),('1', 'subject'),
-    ('2', '_type'), ('3', 'status'),
+    ('2', 'ticket_type'), ('3', 'status'),
     ('4', 'priority'), ('5', 'assignee'),
     ('6', 'accountable'), ('7', 'progress'), ('8', 'milestone'),
     ('9', 'est'), ('10', 'start_date'),
@@ -161,7 +161,7 @@ def get_tickets_by_kwargs(user, project, **kwargs):
         if _type == "All":
             queryset = queryset
         else:        
-            queryset = queryset.filter(_type__icontains=_type)
+            queryset = queryset.filter(ticket_type__icontains=_type)
 
     if status != None:
         status = status[0]
@@ -181,7 +181,7 @@ def get_tickets_by_kwargs(user, project, **kwargs):
         queryset = queryset.filter(
             Q(key__icontains=search_value)| 
             Q(subject__icontains=search_value)| 
-            Q(_type__icontains=search_value)| 
+            Q(ticket_type__icontains=search_value)| 
             Q(status__icontains=search_value)| 
             Q(priority__icontains=search_value)|
             Q(assignee__last_name__icontains=search_value)|

@@ -22,7 +22,7 @@ class ReadTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = (
-            "key", "subject", "_type", "description",
+            "key", "subject", "ticket_type", "description",
             "status", "priority", "assignee", "accountable", "created_by", 
             "est_hours", "act_hours", "milestone",'progress', "start_date", "end_date",
             "created_date", "updated_date"
@@ -38,7 +38,7 @@ class WriteTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = (
-            "key", "subject", "_type", "description",
+            "key", "subject", "ticket_type", "description",
             "status", "priority", "assignee", "accountable", "created_by", 
             "est_hours", "act_hours", "milestone", "progress", "start_date", "end_date",
             "created_date", "updated_date",

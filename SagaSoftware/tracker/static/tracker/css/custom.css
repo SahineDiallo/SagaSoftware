@@ -1192,6 +1192,10 @@ td span .mdi-trash-can {
     display: inline;
 }
 
+div.dataTables_wrapper div.dataTables_length label {
+    position: absolute;
+}
+
 .ext-prt .dropdown-menu span {
     cursor: pointer;
     padding: 5px 0;
@@ -1493,6 +1497,7 @@ h4.mkr {
 #div_id_progress,
 #div_id_milestone,
 #div_id_priority,
+#div_id_status,
 #div_id_description,
 #div_id__type {
     display: inline-flex;

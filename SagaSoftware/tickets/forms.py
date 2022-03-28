@@ -22,14 +22,13 @@ class CreateTicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = (
-            "_type", "subject", "description", "status",
+            "ticket_type", "subject", "description", "status",
             "priority", "assignee", "accountable", "start_date", 
             "est_hours", "act_hours", "progress", "milestone",
             "end_date"
         )
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request", None)
         super(CreateTicketForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'createTicketForm'
@@ -41,7 +40,7 @@ class CreateTicketForm(forms.ModelForm):
         self.fields["description"].widget.attrs["placeholder"] = "Task description"
         self.helper.layout = Layout(
 
-            Field("_type"),
+            Field("ticket_type"),
             Field("subject"),
             Field("description"),
             HTML(
@@ -64,6 +63,7 @@ class CreateTicketForm(forms.ModelForm):
                 """
             ),
             Field("priority"),
+            Field("status"),
             Div(
                     HTML(
                     """  

@@ -13,7 +13,7 @@ router.register(r'api/tickets/(?P<project_key>[\w-]+)', TicketModelViewSet, base
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/create-ticket/', createTicket, name="create-ticket"),
+    path('api/create-ticket/<slug:project_key>/', createTicket, name="create-ticket"),
     path("accounts/", include("accounts.urls")),
     path("trackers/", include("tracker.urls")),
 ] + router.urls

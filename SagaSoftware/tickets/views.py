@@ -1,7 +1,7 @@
 from email.policy import HTTP
 from django import views
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework import viewsets, status
 from .serializers import ReadTicketSerializer, WriteTicketSerializer, UserSerializer
 from .models import Ticket
@@ -45,27 +45,30 @@ class TicketModelViewSet(viewsets.ModelViewSet):
 
 
 
-def createTicket(request):
+def createTicket(request, project_key):
+    project = get_object_or_404(Project, key=project_key)
     form = CreateTicketForm(request.POST or None)
     result = {}
-    if request.method == "POST":
-        form = CreateTicketForm(request.POST, request=request)
-        if form.is_valid():
-            print("the form is valid")
-            if form.has_changed():
-                result["result"] = True
-                result['not_valid'] = False
-            return JsonResponse(result)
-
-        else:
-            print("the form is not valid")
-            result["response"] = False
-            result['not_valid'] = True
-            context = csrf(request)
-            formWithErrors = render_crispy_form(form, context=context)
-            result["formErrors"] = formWithErrors
-            return JsonResponse(result)
-    # this view should only be called in a fetch or ajax request with post method
-    return JsonResponse({'error': 'Something went wrong. PLease Try again'})
-
+    if form.is_valid():
+        form.save(commit=False)
+        form.instance.project = project
+        form.instance.created_by = request.user
+        print('this is the key from the form itself',form.instance.key)
+        print("this is the key from the project model", project.key_tracker)
+        form.instance.key = project.key_tracker
+        project.key_tracker += 1
+        project.save()
+        template = render_to_string("tracker/new_ticket.html", {'instance': form.instance}, request=request)
+        form.save()
+        result['template'] = template
+        return JsonResponse(result)
+    else:
+        result["response"] = False
+        result['not_valid'] = True
+        context = csrf(request)
+        formWithErrors = render_crispy_form(form, context=context)
+        result["formErrors"] = formWithErrors
+        result["error"] = "error"
+    return JsonResponse(result)
+    
 
