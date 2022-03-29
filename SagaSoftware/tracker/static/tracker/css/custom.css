@@ -1165,6 +1165,13 @@ td span .mdi-trash-can {
     background: white;
 }
 
+.tab-content #id_status {
+    color: white;
+    border: none;
+    padding: 5px 0px;
+    border-radius: 3px;
+}
+
 .btn:focus {
     border: none !important;
 }
@@ -1384,7 +1391,7 @@ table.dataTable td:nth-child(1) {
     color: #fff !important;
     font-weight: 600 !important;
     background: #055ebd;
-    border-left: 8px solid #6d5aff !important;
+    border-left: 6px solid #6d5aff !important;
     padding: 7px;
     width: 110px;
     display: inherit;
@@ -1455,7 +1462,42 @@ table.dataTable td:nth-child(1) {
 
 .mdi-dots-horizontal {
     font-size: 20px;
-    margin-right: 3px
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.cr-edt-tkt.p-3.edt-tkt .tab-pane {
+    padding-left: 0 !important;
+}
+
+#ex1-content label[for='id_status'] {
+    display: none;
+}
+
+.mdi-information {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tkt-opn .dropdown-menu {
+    font-size: 13px;
+}
+
+.tkt-opn span.dropdown-item {
+    padding: 9px 15px;
+    cursor: pointer;
+}
+
+._subj {
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.dataTables_scrollBody {
+    padding-bottom: 100px;
 }
 
 .hd_ {

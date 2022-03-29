@@ -38,49 +38,51 @@ class CreateTicketForm(forms.ModelForm):
         self.fields["description"].label = ""
         self.fields["subject"].widget.attrs["placeholder"] = "Enter a subject for the task"
         self.fields["description"].widget.attrs["placeholder"] = "Task description"
-        self.helper.layout = Layout(
+        if not instance:
+            self.fields['status'].widget.attrs['disabled'] = True
+            self.helper.layout = Layout(
 
-            Field("ticket_type"),
-            Field("subject"),
-            Field("description"),
-            HTML(
-                """  
-                 <h4 class="mkr">People</h4>   
-                """
-            ),
-            Field('assignee'),
-            Field("accountable"),
-            HTML(
-                """  
-                 <h4 class="mkr">Estimated and time</h4>   
-                """
-            ),
-            Field('est_hours'),
-            Field('act_hours'),
-            HTML(
-                """  
-                 <h4 class="mkr">Details</h4>   
-                """
-            ),
-            Field("priority"),
-            Field("status"),
-            Div(
-                    HTML(
+                Field("ticket_type"),
+                Field("subject"),
+                Field("description"),
+                HTML(
                     """  
-                        <label>Dates</label>   
+                    <h4 class="mkr">People</h4>   
                     """
                 ),
-                Field('start_date'),
-                    HTML(
+                Field('assignee'),
+                Field("accountable"),
+                HTML(
                     """  
-                    <span class="mx-2">To</span>   
+                    <h4 class="mkr">Estimated and time</h4>   
                     """
                 ),
-                Field("end_date"), 
-                css_class="d-flex align-items-center justify-content-between"
-            ),
-            
-            Field("progress"),
-            Field("milestone"),
-    
-        )
+                Field('est_hours'),
+                Field('act_hours'),
+                HTML(
+                    """  
+                    <h4 class="mkr">Details</h4>   
+                    """
+                ),
+                Field("priority"),
+                Field("status"),
+                Div(
+                        HTML(
+                        """  
+                            <label>Dates</label>   
+                        """
+                    ),
+                    Field('start_date'),
+                        HTML(
+                        """  
+                        <span class="mx-2">To</span>   
+                        """
+                    ),
+                    Field("end_date"), 
+                    css_class="d-flex align-items-center justify-content-between"
+                ),
+                
+                Field("progress"),
+                Field("milestone"),
+        
+            )

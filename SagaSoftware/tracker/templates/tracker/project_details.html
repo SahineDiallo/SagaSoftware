@@ -62,168 +62,168 @@
     </div>
     <div class="row" style="margin-top: 13px; padding: 0;">
 
-    <div class="col-3 col-sm-2 .proj_settings_nav  p-0">
-            <div class="nav flex-column nav-tabs nav-tabs-right h-100" id="vert-tabs-right-tab" role="tablist" aria-orientation="vertical" style=" border: none;">
-                <span class="set_head align-center"><i class="mdi mdi-settings mr-2"></i>Project Settings</span>
-              <a class="nav-link active" id="vert-tabs-right-home-tab" data-toggle="pill" href="#vert-tabs-right-home" role="tab" aria-controls="vert-tabs-right-home" aria-selected="true">General</a>
-              <a class="nav-link" id="vert-tabs-right-members-tab" data-toggle="pill" href="#vert-tabs-right-members" role="tab" aria-controls="vert-tabs-right-members" aria-selected="false">Members</a>
-              <a class="nav-link" id="vert-tabs-right-milestone-tab" data-toggle="pill" href="#vert-tabs-right-milestone" role="tab" aria-controls="vert-tabs-right-milestone" aria-selected="false">Milestones</a>
-              <a class="nav-link" id="vert-tabs-right-comments-tab" data-toggle="pill" href="#vert-tabs-right-comments" role="tab" aria-controls="vert-tabs-right-comments" aria-selected="false">Comments</a>
-              <a class="nav-link" id="vert-tabs-right-history-tab" data-toggle="pill" href="#vert-tabs-right-history" role="tab" aria-controls="vert-tabs-right-history" aria-selected="false">History</a>
-            </div>
+      <div class="col-3 col-sm-2 .proj_settings_nav  p-0">
+          <div class="nav flex-column nav-tabs nav-tabs-right h-100" id="vert-tabs-right-tab" role="tablist" aria-orientation="vertical" style=" border: none;">
+            <span class="set_head align-center"><i class="mdi mdi-settings mr-2"></i>Project Settings</span>
+            <a class="nav-link active" id="vert-tabs-right-home-tab" data-toggle="pill" href="#vert-tabs-right-home" role="tab" aria-controls="vert-tabs-right-home" aria-selected="true">General</a>
+            <a class="nav-link" id="vert-tabs-right-members-tab" data-toggle="pill" href="#vert-tabs-right-members" role="tab" aria-controls="vert-tabs-right-members" aria-selected="false">Members</a>
+            <a class="nav-link" id="vert-tabs-right-milestone-tab" data-toggle="pill" href="#vert-tabs-right-milestone" role="tab" aria-controls="vert-tabs-right-milestone" aria-selected="false">Milestones</a>
+            <a class="nav-link" id="vert-tabs-right-comments-tab" data-toggle="pill" href="#vert-tabs-right-comments" role="tab" aria-controls="vert-tabs-right-comments" aria-selected="false">Comments</a>
+            <a class="nav-link" id="vert-tabs-right-history-tab" data-toggle="pill" href="#vert-tabs-right-history" role="tab" aria-controls="vert-tabs-right-history" aria-selected="false">History</a>
           </div>
-        <div class="col-9 col-sm-10 proj_set_body">
-          <div class="tab-content" id="vert-tabs-right-tabContent">
-            <div class="tab-pane fade active show" id="vert-tabs-right-home" role="tabpanel" aria-labelledby="vert-tabs-right-home-tab">
-                {% crispy form %}
             </div>
-            <div class="tab-pane fade" id="vert-tabs-right-members" role="tabpanel" aria-labelledby="vert-tabs-right-members-tab">
-                <div class="row">
-                  <div class="d-flex align-items-center justify-content-between flex-grow-1 mb-3">
-                    <h3>Project Members</h3>
-                    <button type="button" class="btn btn-secondary btn-sm add_new_users">
-                     <i class="mdi mdi-plus"></i> Add users to project
-                    </button>
-                  </div>
-                    <div class="col-12">
-                      <div class="card p-3 add_members_section" style="background: #f3f3f3;">
-                          <span class="mem_close_icon"><i class="mdi mdi-close-box"></i></span>
-                          <div class="add_mem_sec">
-                            <div class="d-flex justify-content-center">
-                              <div class="lds-hourglass "></div>
-                            </div>
-                          </div>
+            <div class="col-9 col-sm-10 proj_set_body">
+              <div class="tab-content" id="vert-tabs-right-tabContent">
+                <div class="tab-pane fade active show" id="vert-tabs-right-home" role="tabpanel" aria-labelledby="vert-tabs-right-home-tab">
+                    {% crispy form %}
+                </div>
+                <div class="tab-pane fade" id="vert-tabs-right-members" role="tabpanel" aria-labelledby="vert-tabs-right-members-tab">
+                    <div class="row">
+                      <div class="d-flex align-items-center justify-content-between flex-grow-1 mb-3">
+                        <h3>Project Members</h3>
+                        <button type="button" class="btn btn-secondary btn-sm add_new_users">
+                        <i class="mdi mdi-plus"></i> Add users to project
+                        </button>
                       </div>
-
-                      <div class="card">
-                        <div class="card-header">          
-                          <div class="card-tools d-flex align-items-center">
-                            <div class="input-group input-group-sm" style="width: 450px;">
-                              <input type="text" name="table_search" class="form-control float-right" placeholder="Search by email or last name">
-                              <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                  <i class="fas fa-search"></i>
-                                </button>
+                        <div class="col-12">
+                          <div class="card p-3 add_members_section" style="background: #f3f3f3;">
+                              <span class="mem_close_icon"><i class="mdi mdi-close-box"></i></span>
+                              <div class="add_mem_sec">
+                                <div class="d-flex justify-content-center">
+                                  <div class="lds-hourglass "></div>
+                                </div>
                               </div>
-                              
-                            </div>
-                            {% comment %} <input type="text" name="table_search_role" class="form-control float-right" placeholder="Search by email, role, or last name"> {% endcomment %}
                           </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                          <table class="table table-hover text-nowrap">
-                            <thead>
-                              <tr>
-                                <th>LAST NAME</th>
-                                <th>FIRST NAME</th>
-                                <th>EMAIL</th>
-                                <th>ROLE</th>
-                                <th>JOINED ON</th>
-                                <th>LAST LOGIN</th>
-                                <th>ACTIONS</th>
-                              </tr>
-                            </thead>
-                            <tbody id="proj_mem_list">
-                              {% for member in proj_mem %}
-                              <tr>
-                                <td>{{member.last_name}}</td>
-                                <td>{{member.first_name}}</td>
-                                <td>{{member.email}}</td>
-                                <td>{{member.role}}</td>
-                                <td>{{member.create_on|date:"M d, Y"}}</td>
-                                <td>{{member.last_login|date:"M d, Y"}}</td>
-                                <td>
-                                  <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
-                                    <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
-                                    <span><i class="mdi mdi-eye" ></i></span>
-                                    <span><i class="mdi mdi-trash-can"></i></span>
-                                  </span>
-                                </td>
-                              </tr>
-                              {% empty %}
-                              <p class="empty-instance"> this project has no members currently. Please invite members or add existing ones to the project</p>
-                              {% endfor %}
-                            </tbody>
-                          </table>
-                        </div>
-                        <!-- /.card-body -->
-                      </div>
-                      <!-- /.card -->
-                    </div>
-                  </div>
-            </div>
-            <div class="tab-pane fade" id="vert-tabs-right-milestone" role="tabpanel" aria-labelledby="vert-tabs-right-milestone-tab">
-                <div class="d-flex align-items-center justify-content-between py-3">
-                  <h3 class="card-title m-0">Project Milestones</h3>
-                  <button type="button" id="add_mil" class="btn btn-success btn-sm mr-2">
-                    Add Milestone
-                  </button>
-                  <button type="button" id="edit_mil" class="btn btn-success btn-sm mr-2">
-                    Edit Milestone
-                  </button>
-                </div>
-                <div class="card my-4 p-3 edit_mil_section" style="background: #f3f3f3;">
-                  <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
-                  
-                </div>
-                <div class="card my-4 p-3 add_mil_section" style="background: #f3f3f3;">
-                  <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
-                  {% crispy mile_form %}
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                      <div class="card">
-                        <div class="card-body table-responsive p-0">
-                          <table class="table table-hover text-nowrap">
-                            <thead>
-                              <tr>
-                              <th>MILESTONE NAME</th>
-                                <th>START DATE</th>
-                                <th>END DATE</th>
-                                <th>CREATED BY</th>
-                                <th>ACTIONS</th>
-                              </tr>
-                            </thead>
 
-                            <tbody class="milestones_body">
-                              {% for milestone in milestones %}
-                              <tr data-reg={{milestone.id}}>
-                                <td>{{milestone.name_milestone}}</td>
-                                <td>{{milestone.start_date|date:"M d, Y"}}</td>
-                                <td>{{milestone.end_date|date:"M d, Y"}}</td>
-                                <td><span class="tag tag-success">{{milestone.created_by}}</span></td>
-                                <td>
-                                  <span class="d-flex align-items-center justify-content-around">
-                                    <span data-mil-id-ed="{{milestone.id}}"><i class="mdi mdi-pencil" ></i></span>
-                                    <span data-mil-id-de="{{milestone.id}}"><i class="mdi mdi-trash-can"></i></span>
-                                  </span>                                
-                                </td>
-                              </tr>
-                              {% empty %}   
-                                  <div>                            
-                                    <span class="d-flex flex-column align-items-center justify-content-center p-4 empty">
-                                      <p class="text-center mt-1 empty-instance">This project has no on going milestones</p>
-                                    </span>
-                                  </div>                                 
-                              {% endfor %}
-                              
-                            </tbody>
-                          </table>
+                          <div class="card">
+                            <div class="card-header">          
+                              <div class="card-tools d-flex align-items-center">
+                                <div class="input-group input-group-sm" style="width: 450px;">
+                                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search by email or last name">
+                                  <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                      <i class="fas fa-search"></i>
+                                    </button>
+                                  </div>
+                                  
+                                </div>
+                                {% comment %} <input type="text" name="table_search_role" class="form-control float-right" placeholder="Search by email, role, or last name"> {% endcomment %}
+                              </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                              <table class="table table-hover text-nowrap">
+                                <thead>
+                                  <tr>
+                                    <th>LAST NAME</th>
+                                    <th>FIRST NAME</th>
+                                    <th>EMAIL</th>
+                                    <th>ROLE</th>
+                                    <th>JOINED ON</th>
+                                    <th>LAST LOGIN</th>
+                                    <th>ACTIONS</th>
+                                  </tr>
+                                </thead>
+                                <tbody id="proj_mem_list">
+                                  {% for member in proj_mem %}
+                                  <tr>
+                                    <td>{{member.last_name}}</td>
+                                    <td>{{member.first_name}}</td>
+                                    <td>{{member.email}}</td>
+                                    <td>{{member.role}}</td>
+                                    <td>{{member.create_on|date:"M d, Y"}}</td>
+                                    <td>{{member.last_login|date:"M d, Y"}}</td>
+                                    <td>
+                                      <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
+                                        <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
+                                        <span><i class="mdi mdi-eye" ></i></span>
+                                        <span><i class="mdi mdi-trash-can"></i></span>
+                                      </span>
+                                    </td>
+                                  </tr>
+                                  {% empty %}
+                                  <p class="empty-instance"> this project has no members currently. Please invite members or add existing ones to the project</p>
+                                  {% endfor %}
+                                </tbody>
+                              </table>
+                            </div>
+                            <!-- /.card-body -->
+                          </div>
+                          <!-- /.card -->
                         </div>
-                        <!-- /.card-body -->
                       </div>
-                      <!-- /.card -->
+                </div>
+                <div class="tab-pane fade" id="vert-tabs-right-milestone" role="tabpanel" aria-labelledby="vert-tabs-right-milestone-tab">
+                    <div class="d-flex align-items-center justify-content-between py-3">
+                      <h3 class="card-title m-0">Project Milestones</h3>
+                      <button type="button" id="add_mil" class="btn btn-success btn-sm mr-2">
+                        Add Milestone
+                      </button>
+                      <button type="button" id="edit_mil" class="btn btn-success btn-sm mr-2">
+                        Edit Milestone
+                      </button>
                     </div>
-                  </div>
-            </div>
-            <div class="tab-pane fade" id="vert-tabs-right-comments" role="tabpanel" aria-labelledby="vert-tabs-right-comments-tab">
-               comments parts
-            </div>
-            <div class="tab-pane fade" id="vert-tabs-right-history" role="tabpanel" aria-labelledby="vert-tabs-right-history-tab">
-                history part
-            </div>
-          </div>
+                    <div class="card my-4 p-3 edit_mil_section" style="background: #f3f3f3;">
+                      <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
+                      
+                    </div>
+                    <div class="card my-4 p-3 add_mil_section" style="background: #f3f3f3;">
+                      <span class="mil_close_icon"><i class="mdi mdi-close-box"></i></span>
+                      {% crispy mile_form %}
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <div class="card-body table-responsive p-0">
+                              <table class="table table-hover text-nowrap">
+                                <thead>
+                                  <tr>
+                                  <th>MILESTONE NAME</th>
+                                    <th>START DATE</th>
+                                    <th>END DATE</th>
+                                    <th>CREATED BY</th>
+                                    <th>ACTIONS</th>
+                                  </tr>
+                                </thead>
+
+                                <tbody class="milestones_body">
+                                  {% for milestone in milestones %}
+                                  <tr data-reg={{milestone.id}}>
+                                    <td>{{milestone.name_milestone}}</td>
+                                    <td>{{milestone.start_date|date:"M d, Y"}}</td>
+                                    <td>{{milestone.end_date|date:"M d, Y"}}</td>
+                                    <td><span class="tag tag-success">{{milestone.created_by}}</span></td>
+                                    <td>
+                                      <span class="d-flex align-items-center justify-content-around">
+                                        <span data-mil-id-ed="{{milestone.id}}"><i class="mdi mdi-pencil" ></i></span>
+                                        <span data-mil-id-de="{{milestone.id}}"><i class="mdi mdi-trash-can"></i></span>
+                                      </span>                                
+                                    </td>
+                                  </tr>
+                                  {% empty %}   
+                                      <div>                            
+                                        <span class="d-flex flex-column align-items-center justify-content-center p-4 empty">
+                                          <p class="text-center mt-1 empty-instance">This project has no on going milestones</p>
+                                        </span>
+                                      </div>                                 
+                                  {% endfor %}
+                                  
+                                </tbody>
+                              </table>
+                            </div>
+                            <!-- /.card-body -->
+                          </div>
+                          <!-- /.card -->
+                        </div>
+                      </div>
+                </div>
+                <div class="tab-pane fade" id="vert-tabs-right-comments" role="tabpanel" aria-labelledby="vert-tabs-right-comments-tab">
+                  comments parts
+                </div>
+                <div class="tab-pane fade" id="vert-tabs-right-history" role="tabpanel" aria-labelledby="vert-tabs-right-history-tab">
+                    history part
+                </div>
+              </div>
         </div>
     </div>
 

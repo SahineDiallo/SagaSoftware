@@ -206,3 +206,13 @@ def get_tickets_by_kwargs(user, project, **kwargs):
     result = {'data': data, 'count': count, 'draw': draw}
     return result
 
+
+def get_type_class(type):
+    if type == "TASK":
+        return '_tsk'
+    elif type == "REQUEST":
+        return '_feat'
+    elif type == "BUG":
+        return "_bug"
+    return '_other'
+

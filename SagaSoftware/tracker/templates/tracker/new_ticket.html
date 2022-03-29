@@ -13,12 +13,20 @@
         <span class="_imm">{{instance.priority}}</span> 
     </td>
     <td>
-        <span class="tkts-asg" style="background:#080817">DU</span>
+        {% if instance.assignee %}
+        <span class="tkts-asg" style="background:{{instance.assignee.background}}">{{intance.assignee.get_first_letters}}</span>
          {{instance.assignee}}
+        {% else %}
+        <span class="d-flex justify-content-center"> -- </span>
+        {% endif %}
     </td>
     <td>
-        <span class="tkts-asg" style="background:#8c1207">PP</span>
-         {{instance.accountable}}
+        {% if instance.accountalbe %}
+        <span class="tkts-asg" style="background:{{instance.accountalbe.background}}">{{intance.accountalbe.get_first_letters}}</span>
+         {{instance.accountalbe}}
+        {% else %}
+        <span class="d-flex justify-content-center"> -- </span>
+        {% endif %}
     </td>
     <td>
         <div class="progress">
@@ -32,8 +40,12 @@
     <td>{{instance.start_date}}</td>
     <td>{{instance.end_date}}</td>
     <td>
-        <span class="tkts-asg" style="background:#080817">DU</span>
-         {{instance.create_by}}
+        {% if instance.created_by %}
+        <span class="tkts-asg" style="background:{{instance.created_by.background}}">{{intance.created_by.get_first_letters}}</span>
+         {{instance.created_by}}
+        {% else %}
+        <span class="d-flex justify-content-center"> -- </span>
+        {% endif %}
     </td>
     <td>11</td>
     <td>{{instance.updated_on}}</td>

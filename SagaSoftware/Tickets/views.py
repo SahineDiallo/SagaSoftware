@@ -6,7 +6,7 @@ from rest_framework import viewsets, status
 from .serializers import ReadTicketSerializer, WriteTicketSerializer, UserSerializer
 from .models import Ticket
 from tracker.models import Project
-from accounts.utils import get_tickets_by_kwargs
+from accounts.utils import get_tickets_by_kwargs, get_type_class
 from rest_framework.response import Response
 from .forms import CreateTicketForm
 from django.template.context_processors import csrf
@@ -53,9 +53,7 @@ def createTicket(request, project_key):
         form.save(commit=False)
         form.instance.project = project
         form.instance.created_by = request.user
-        print('this is the key from the form itself',form.instance.key)
-        print("this is the key from the project model", project.key_tracker)
-        form.instance.key = project.key_tracker
+        form.instance.key = f'#-{project.key_tracker}'
         project.key_tracker += 1
         project.save()
         template = render_to_string("tracker/new_ticket.html", {'instance': form.instance}, request=request)
@@ -69,6 +67,18 @@ def createTicket(request, project_key):
         formWithErrors = render_crispy_form(form, context=context)
         result["formErrors"] = formWithErrors
         result["error"] = "error"
+    return JsonResponse(result)
+
+def editTicket(request, project_key):
+    result = dict()
+    project = get_object_or_404(Project, key=project_key)
+    key = '#' + request.GET.get('key')
+    instance = Ticket.objects.get(key=key)
+    type_class = get_type_class(instance.ticket_type)
+    form = CreateTicketForm(request.POST or None, instance=instance)
+    template = render_to_string('tracker/edit_ticket.html', {'form': form, 'type_class': type_class, 'instance':instance}, request=request)
+    result['template'] = template
+    result['success'] = True
     return JsonResponse(result)
     
 

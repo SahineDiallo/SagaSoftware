@@ -88,6 +88,10 @@ class User(AbstractBaseUser):
             return self.projects.all()
         return Project.objects.all()
 
+    def get_first_letters(self):
+        l = self.full_name.split(" ")
+        return l[0][0] + l[0][-1]
+
 
 
 class Profile(models.Model):

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     let assignee;
     let accountable;
     let status;
@@ -67,11 +68,11 @@ $(document).ready(function() {
         "autoWidth": false, // might need this to disable the auto width calc
         select: true,
         "bJQueryUI": true,
-        order: [0, 'des'],
+        order: [0, 'asc'],
         'columnDefs': [{
                 "targets": 0, // your case first column
                 "className": "text-center",
-                "width": '4%'
+                "width": '70'
             },
             {
                 "targets": 3,
@@ -83,21 +84,21 @@ $(document).ready(function() {
             { "targets": 1, "width": "200" }
         ],
 
-        "DT_RowId": "someId",
+        "language": {
+            "processing": `<div class="d-flex justify-content-center" style="margin-top:50%;">
+                                <div class="lds-hourglass "></div>
+                            </div>&emsp;Loading ...`,
+        },
         "columns": [
             { "data": "key" },
             {
                 "data": "subject",
                 render: function(data, type) {
                     if (type === "display") {
-                        return `<span class="d-flex align-items-center">
-                                    <div class="dropdown-menu dropdown-primary">
-                                        <a class="dropdown-item" href="#"><i class="fab fa-apple-pay"></i>&nbsp;&nbsp;Pay</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-bell-slash"></i>&nbsp;&nbsp;Disable alertss</a>
-                                        <a class="dropdown-item" href="#"><i class="far fa-envelope"></i>&nbsp;&nbsp;Check mail</a>
-                                    </div>
+                        return `<span class="_subj">
+                                    <i class="mdi mdi-information tkt-dtls"></i>
                                     ${data}
-                                    </span>`
+                                </span>`
                     }
                     return data;
                 }
@@ -198,39 +199,22 @@ $(document).ready(function() {
 
                 "data": "assignee",
                 render: function(data, type) {
-                    let background;
-                    let profile;
-                    if (data) {
-                        profile = get_first_letters(data.full_name)
-                        background = data.background;
-                    } else {
-                        background = "";
-                        profile = ""
+                    var dt = get_user_chars(data)
+                    if (type === 'display' && data) {
+                        return `<span class="tkts-asg" style="background:${dt.background}">${dt.profile}</span> ${dt.full_name}`
                     }
-
-                    if (type === 'display') {
-                        return `<span class="tkts-asg" style="background:${background}">${profile}</span> ${data.full_name}`
-                    }
-                    return data;
+                    return `<span class="d-flex justify-content-center">${dt}</span>`;
                 }
             },
             {
 
                 "data": "accountable",
                 render: function(data, type) {
-                    let background;
-                    let profile;
-                    if (data) {
-                        profile = get_first_letters(data.full_name)
-                        background = data.background;
-                    } else {
-                        background = "";
-                        profile = ""
+                    var dt = get_user_chars(data)
+                    if (type === 'display' && data) {
+                        return `<span class="tkts-asg" style="background:${dt.background}">${dt.profile}</span> ${dt.full_name}`
                     }
-                    if (type === 'display') {
-                        return `<span class="tkts-asg" style="background:${background}">${profile}</span> ${data.full_name}`
-                    }
-                    return data;
+                    return `<span class="d-flex justify-content-center">${dt}</span>`;
                 }
             },
             {
@@ -246,33 +230,61 @@ $(document).ready(function() {
                     return data;
                 }
             },
-            { "data": "milestone" },
             {
-                "data": "est_hours"
+                "data": "milestone",
+                render: function(data, type) {
+                    if (type === 'display' && data) {
+                        return `<span>${data}</span>`
+                    }
+                    return `<span class="d-flex justify-content-center"> -- </span>`;
+                }
             },
-            { "data": "start_date" },
-            { "data": "end_date" },
+            {
+                "data": "est_hours",
+                render: function(data, type) {
+                    if (type === 'display' && data) {
+                        return `<span>${data}</span>`
+                    }
+                    return `<span class="d-flex justify-content-center"> -- </span>`;
+                }
+            },
+            {
+                "data": "start_date",
+                render: function(data, type) {
+                    if (type === 'display' && data) {
+                        return `<span>${data}</span>`
+                    }
+                    return `<span class="d-flex justify-content-center"> -- </span>`;
+                }
+            },
+            {
+                "data": "end_date",
+                render: function(data, type) {
+                    if (type === 'display' && data) {
+                        return `<span>${data}</span>`
+                    }
+                    return `<span class="d-flex justify-content-center"> -- </span>`;
+                }
+            },
             {
                 "data": "created_by",
                 render: function(data, type) {
-                    let background;
-                    let profile;
-                    if (data) {
-                        profile = get_first_letters(data.full_name)
-                        background = data.background;
-                    } else {
-                        background = "";
-                        profile = ""
+                    var dt = get_user_chars(data)
+                    if (type === 'display' && data) {
+                        return `<span class="tkts-asg" style="background:${dt.background}">${dt.profile}</span> ${dt.full_name}`
                     }
-                    if (type === 'display') {
-                        return `<span class="tkts-asg" style="background:${background}">${profile}</span> ${data.full_name}`
-                    }
-                    return data;
+                    return `<span class="d-flex justify-content-center">${dt}</span>`;
                 }
             },
             {
 
-                "data": "act_hours"
+                "data": "act_hours",
+                render: function(data, type) {
+                    if (type === 'display' && data) {
+                        return `<span>${data}</span>`
+                    }
+                    return `<span class="d-flex justify-content-center"> -- </span>`;
+                }
             },
             { "data": "updated_date" },
             { "data": "created_date" },
@@ -340,7 +352,8 @@ $(document).ready(function() {
     /* Function for child row details*/
     // function getChildRow(data) {
 
-    //     // `data` is the data object for the row
+    //     // `
+    //is the data object for the row
     //     return '<table cellpadding="5" cellspacing="0"' +
     //         ' style="padding-left:50px;">' +
     //         '<tr>' +
@@ -358,12 +371,21 @@ $(document).ready(function() {
     //         '</table>';
     // }
 
-    function get_first_letters(string) {
-        l = string.split(" ")
-        return l[0][0].toUpperCase() + l.at(-1)[0].toUpperCase();
+    function get_user_chars(data) {
+        let profile;
+        let background;
+        let full_name
+        if (data) {
+            var l = data.full_name.split(" ")
+            profile = l[0][0].toUpperCase() + l.at(-1)[0].toUpperCase();
+            background = data.background
+            full_name = data.full_name
+            return { "profile": profile, 'full_name': full_name, 'background': background }
+        } else { return "--" }
     }
     $("#cr_nw_tk").on("click", (e) => {
         e.preventDefault();
+        $('#createTicketForm #id_status').prop('disabled', false);
         var form = document.querySelector("#createTicketForm")
         var _form_data = new FormData(form)
         var url = `/api/create-ticket/${url_end}/`;
@@ -381,8 +403,10 @@ $(document).ready(function() {
                     flatpickr(end_date, {});
 
                 } else {
-                    $("#tkts-bkl tbody").prepend(data.template);
-
+                    $(".cr-edt-tkt .cl_cr").click();
+                    $("#createTicketForm")[0].reset();
+                    alertUser("ticket", 'created_successfully!', 'New')
+                    table.draw();
                 }
 
             })
@@ -401,5 +425,67 @@ $(document).ready(function() {
         }
     })
 
+    function alertUser(key, message, type) {
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.set('notifier', 'delay', 10);
+        alertify.success(`${type} <span class="alert-key">${key} </span>${message}`);
+    };
+    $("#MainEquipDiv").on("click", ".tkt-dtls", (e) => {
+        $(".cr-edt-tkt.p-3.edt-tkt").show('slide', { direction: 'right' }, 500)
+        var tr = e.target.closest('tr');
+        var _key = tr.firstElementChild.textContent.slice(1);
+        var url = `/api/edit-ticket/${url_end}/?key=${_key}`;
 
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    $(".cr-edt-tkt.p-3.edt-tkt").html(data.template)
+                    let selectList = document.querySelector(".cr-edt-tkt.p-3.edt-tkt #id_status")
+                    adjustSelectLength(selectList)
+                }
+
+            })
+            .catch(error => { alert('something went wrong. Please try later') })
+    })
+
+    function adjustSelectLength(selectField) {
+        // get initial width of select element. 
+        // we have to remember there is a dropdown arrow make it a little wider
+        let initialWidth = selectField.offsetWidth
+            // get text content length (not a value length) of widest option.
+        let val = getSelected(selectField).textContent
+        setBackground(selectField, val);
+        let curLength = getSelected(selectField).textContent.length
+        selectField.style.width = curLength + 'px'
+
+        let maxOptValLen = findMaxLengthOpt(selectField)
+            // calc width of single letter 
+        let letterWidth = initialWidth / maxOptValLen
+        let corCoef = 5.875; // Based on visual appearance
+        // add the on change event listener to the select
+        selectField.addEventListener("change", e => {
+            let newOptValLen = getSelected(e.target).textContent.length
+            let curVal = getSelected(e.target).textContent
+            setBackground(selectField, curVal);
+            let correction = (maxOptValLen - newOptValLen) * corCoef
+            let newValueWidth = (newOptValLen * letterWidth) + correction
+            e.target.style.width = newValueWidth + "px"
+        }, false);
+    }
+
+
+    function getSelected(selectEl) {
+        return [...selectEl.options].find(o => o.selected)
+    }
+
+    function findMaxLengthOpt(selectEl) {
+        return [...selectEl.options].reduce((result, o) => o.textContent.length > result ? o.textContent.length : result, 0)
+    }
+
+    backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#7608dd', Close: '#f39219', 'In Progress': '#055ebd' }
+
+    function setBackground(selectel, selectedVal) {
+        selectel.style.background = backgroundOptions[selectedVal]
+    }
 });
