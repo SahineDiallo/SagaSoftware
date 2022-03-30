@@ -1521,7 +1521,8 @@ h4.mkr {
     font-size: 14px;
 }
 
-#createTicketForm label {
+#createTicketForm label,
+#ex1-content label {
     width: 150px;
     font-size: 14px;
     font-weight: 500;
@@ -1544,6 +1545,19 @@ h4.mkr {
 #div_id__type {
     display: inline-flex;
     align-items: center;
+}
+
+.codex-editor--narrow .codex-editor__redactor {
+    margin-right: 50px;
+    width: 360px;
+}
+
+.codex-editor {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 1;
+    height: 100px;
 }
 
 #div_id_assignee label,
@@ -1584,4 +1598,12 @@ a.chosen-single {
     height: 35px;
     border: 1px solid #f3f3f3;
     border-bottom: 2px solid #e8e8e8;
+}
+
+.tab-content #id_status {
+    margin-top: 15px;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 0;
+    color: white;
 }

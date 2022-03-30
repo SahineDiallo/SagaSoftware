@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     #third party libraries I guess
     'crispy_forms',
     'rest_framework',
-    'django_quill',
+    'django_editorjs_fields',
 ]
 
 AUTH_USER_MODEL = (
@@ -162,22 +162,6 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-QUILL_CONFIGS = {
-    'default':{
-        'theme': 'snow',
-        'modules': {
-            'syntax': True,
-            'toolbar': [
-                [
-                    {'font': []},
-                    {'header': []},
-                    {'align': []},
-                    'bold', 'italic', 'underline', 'strike', 'blockquote',
-                    # {'background': []},
-                ],
-                ['code-block', 'link'],
-                ['clean'],
-            ]
-        }
-    }
+TINYMCE_DEFAULT_CONFIG = {
+    'content_css': 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
 }

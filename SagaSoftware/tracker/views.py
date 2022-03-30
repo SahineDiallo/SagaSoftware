@@ -276,7 +276,6 @@ def edit_milestone(request, mil_id):
             context = csrf(request)
             formWithErrors = render_crispy_form(form, context=context)
             return JsonResponse({'success': False, 'formErrors': formWithErrors, })
-    print("response given")
     return JsonResponse({'template': template, 'success': True, 'mil_id': mil_id})
 
 def delete_milestone(request, mil_id):
@@ -297,7 +296,7 @@ def project_board(request, site_slug, project_key):
     context = {}
     return render(request, 'tracker/board.html', context)
 
-
+@login_required
 def project_backlog(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     status_choices = [i[0] for i in Ticket.TicketStatus.choices]
