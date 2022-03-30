@@ -2,8 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from tracker.models import Milestone, Project
-from django_editorjs_fields import EditorJsTextField
-
+from django_quill.fields import QuillField
 
 
 User = settings.AUTH_USER_MODEL
@@ -44,30 +43,7 @@ class Ticket(models.Model):
     created_by   = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="created_tickets", blank=True, null=True)
     assignee     = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="tickets", blank=True, null=True)
     accountable  = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="accountable_tickets", blank=True, null=True)
-    description  = EditorJsTextField(
-        plugins=[
-            "@editorjs/header",
-            "editorjs-github-gist-plugin",
-            "@editorjs/code@2.6.0",  # version allowed :)
-            "@editorjs/list@latest",
-            "@editorjs/inline-code",
-            "@editorjs/table",
-        ],
-        tools={
-            "Gist": {
-                "class": "Gist"  # Include the plugin class. See docs Editor.js plugins
-            },
-            "Image": {
-                "config": {
-                    "endpoints": {
-                        "byFile": "/editorjs/image_upload/"  # Your custom backend file uploader endpoint
-                    }
-                }
-            }
-        },
-        null=True,
-        blank=True
-    )
+    description  = QuillField(default="some description")
     est_hours    = models.PositiveSmallIntegerField(blank=True, null=True)
     act_hours    = models.PositiveSmallIntegerField(blank=True, null=True)
     progress     = models.PositiveSmallIntegerField(blank=True, null=True, default=0)

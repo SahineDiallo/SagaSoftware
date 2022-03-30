@@ -445,6 +445,15 @@ $(document).ready(function() {
                     adjustSelectLength(selectList)
                     $('#ex1-content #id_assignee').chosen();
                     $('#ex1-content #id_accountable').chosen();
+                    var description = document.getElementById('descpt')
+                    console.log("this is the description", description)
+                    const options = {
+                        theme: "snow",
+                        enable: false
+                    };
+
+                    var quill = new Quill(description, options);
+
                 }
 
             })
@@ -491,9 +500,9 @@ $(document).ready(function() {
         selectel.style.background = backgroundOptions[selectedVal]
     };
 
-    $(".cr-edt-tkt p-3.edt-tkt").on("click", '.mdi-close.cl_cr', (e) => {
+    $(".cr-edt-tkt.p-3.edt-tkt").on("click", '.mdi-close.cl_cr', (e) => {
         console.log("ok")
-        $('.cr-edt-tkt p-3.edt-tkt').hide('slide', { direction: 'right' }, 500)
+        $('.cr-edt-tkt.p-3.edt-tkt').hide('slide', { direction: 'right' }, 500)
     })
 
 });

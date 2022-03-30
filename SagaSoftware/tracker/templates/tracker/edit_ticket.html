@@ -1,5 +1,4 @@
 {% load crispy_forms_tags %}
-{% load editorjs %}
 <!-- Tabs navs -->
 <ul class="nav nav-tabs nav-justified mb-3 tkt-dtls-menu border-0" id="ex1" role="tablist">
     <li class="nav-item" role="presentation">
@@ -35,7 +34,7 @@
             <h4 class="{{type_class}} mr-3">{{instance.ticket_type}}</h4>
             <p class="flex-grow-1" style="font-weight:500;">{{instance.subject}}</p>
         </div>
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mb-3">
             {{form.status}}
             <span class="ml-3" style="font-size:12px; margin-top:10px;">
                 
@@ -51,7 +50,7 @@
             {% else %}
                 <span class="text-muted">Click to change ticket description</span>
             {% endif %} {% endcomment %}
-            {{instance.description|editorjs}}
+            {{instance.description}}
         </div>
         <div>
             <h4 class="mkr">People</h4>

@@ -1,9 +1,10 @@
 from django import forms
 from .models import Ticket
 from crispy_forms.helper import FormHelper
+from django_quill.forms import QuillFormField
+
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from django.forms.widgets import HiddenInput
-from django_editorjs_fields import EditorJsWidget
 from crispy_forms.layout import (
     Layout,
     Submit,
@@ -22,10 +23,6 @@ class CreateTicketForm(forms.ModelForm):
     # description = forms.CharField(widget=TinyMCE(mce_attrs={'width': 500}))
     class Meta:
         model = Ticket
-        widgets = {
-            'body_editorjs': EditorJsWidget(config={'minHeight': 100}),
-            # 'body_editorjs_text': EditorJsWidget(plugins=["@editorjs/image", "@editorjs/header"])
-        }
         fields = (
             "ticket_type", "subject", "description", "status",
             "priority", "assignee", "accountable", "start_date", 

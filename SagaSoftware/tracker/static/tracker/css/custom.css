@@ -1533,6 +1533,20 @@ h4.mkr {
     min-width: 198px;
 }
 
+.ql-picker-label svg {
+    width: 0px !important;
+}
+
+.ql-header,
+.ql-size .ql-picker-label:after {
+    color: black !important;
+    content: '\f078';
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: 1px !important;
+    right: 0;
+}
+
 #div_id_assignee,
 #div_id_accountable,
 #div_id_est_hours,
