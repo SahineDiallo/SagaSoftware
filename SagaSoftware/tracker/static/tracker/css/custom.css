@@ -1470,8 +1470,36 @@ table.dataTable td:nth-child(1) {
     padding-left: 0 !important;
 }
 
-#ex1-content label[for='id_status'] {
+#ex1-content label[for='id_status'],
+#ex1-content label[for='id_subject'] {
     display: none;
+}
+
+#ex1-content #div_id_subject {
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+#ex1-content {
+    overflow-y: auto;
+}
+
+#ex1-content .form-control:focus,
+.dataTables_wrapper select:focus {
+    color: #495057;
+    background-color: #fff8a226;
+    border: 2px solid #80bdff;
+    outline: 0;
+    /* box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%); */
+}
+
+#ex1-content #id_status option {
+    background: white !important;
+    color: black;
+}
+
+#ex1-content #id_subject {
+    font-weight: 500;
 }
 
 .mdi-information {
@@ -1527,6 +1555,7 @@ h4.mkr {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: .03rem;
+    margin-bottom: 0;
 }
 
 #createTicketForm select {
@@ -1545,6 +1574,14 @@ h4.mkr {
     position: absolute;
     top: 1px !important;
     right: 0;
+}
+
+form#editTicketForm input:not(.chosen-search-input) {
+    border: none;
+}
+
+form#editTicketForm input:hover {
+    border: 1px solid #f3f3f3;
 }
 
 #div_id_assignee,

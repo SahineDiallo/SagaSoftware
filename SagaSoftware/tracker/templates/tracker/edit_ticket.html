@@ -29,52 +29,65 @@
 <!-- Tabs content -->
   <div class="tab-content" id="ex1-content">
     <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1" >
-        
-        <div class=" d-flex">
-            <h4 class="{{type_class}} mr-3">{{instance.ticket_type}}</h4>
-            <p class="flex-grow-1" style="font-weight:500;">{{instance.subject}}</p>
-        </div>
-        <div class="d-flex align-items-center mb-3">
-            {{form.status}}
-            <span class="ml-3" style="font-size:12px; margin-top:10px;">
-                
-                <div class="d-flex flex-column">
-                    <span>{{instance.key}} created by {{instance.created_by}}</span>
-                    <span> Updated: {{instance.updated_date}}</span>
-                </div>
-            </span>
-        </div>
-        <div id="descpt">
-            {% comment %} {% if instance.description %}
-                {{instance.description}}
-            {% else %}
-                <span class="text-muted">Click to change ticket description</span>
-            {% endif %} {% endcomment %}
-            {{instance.description}}
-        </div>
-        <div>
-            <h4 class="mkr">People</h4>
-            {{form.assignee|as_crispy_field}}  
-            {{form.accountable|as_crispy_field}}
-        </div>
-        <div class="">
-            <h4 class="mkr">Estimated and Time</h4>
-            {{form.est_hours|as_crispy_field}} 
-            {{form.act_hours|as_crispy_field}} 
-        </div>
-        <div class="">
-            <h4 class="mkr">Details</h4>
-            {{form.priority|as_crispy_field}}
-            <div class="d-flex align-items-center justify-content-between">
-                <label>Dates</label>
-                {{form.start_date|as_crispy_field}}
-                <span class="mx-2">To</span>
-                {{form.end_date|as_crispy_field}}
+        <form method="POST" id="editTicketForm">
+            {% csrf_token %}
+            <div class="d-flex align-items-center mb-3">
+                <h4 class="{{type_class}} mr-2 mb-0">{{instance.ticket_type}}</h4>
+                {{form.subject|as_crispy_field}}
             </div>
-        </div>
-        {{form.progress|as_crispy_field}}
-        {{form.milestone|as_crispy_field}}
+            <div class="d-flex align-items-center mb-3">
+                {{form.status}}
+                <span class="ml-3" style="font-size:12px; margin-top:10px;">
+                    
+                    <div class="d-flex flex-column">
+                        <span>{{instance.key}} created by {{instance.created_by}}</span>
+                        <span> Updated: {{instance.updated_date}}</span>
+                    </div>
+                </span>
+            </div>
+            <div id="descpt">
+                {% comment %} {% if instance.description %}
+                    {{instance.description}}
+                {% else %}
+                    <span class="text-muted">Click to change ticket description</span>
+                {% endif %} {% endcomment %}
+                {{instance.description}}
+            </div>
+            <div>
+                <h4 class="mkr">People</h4>
+                <div>
+                    {{form.assignee|as_crispy_field}}
+                    {% if instance.assignee %}
+                    <span class="tkts-asg ml-2" style="background:{{instance.assignee.background}}">{{instance.assignee.get_first_letters}}</span>  
+                    {% endif %}
+                </div>
+                <div >
+                    {{form.accountable|as_crispy_field}}
+                    {% if instance.accountable %}
+                        <span class="tkts-asg ml-2" style="background:{{instance.accountable.background}}">{{instance.accountable.get_first_letters}}</span> 
+                    {% endif %}
+                </div>
+            </div>
+            <div class="">
+                <h4 class="mkr">Estimated and Time</h4>
+                {{form.est_hours|as_crispy_field}} 
+                {{form.act_hours|as_crispy_field}} 
+            </div>
+            <div class="">
+                <h4 class="mkr">Details</h4>
+                {{form.priority|as_crispy_field}}
+                <div class="d-flex align-items-center justify-content-between">
+                    <label>Dates</label>
+                    {{form.start_date|as_crispy_field}}
+                    <span class="mx-2">To</span>
+                    {{form.end_date|as_crispy_field}}
+                </div>
+            </div>
+            {{form.progress|as_crispy_field}}
+            {{form.milestone|as_crispy_field}}
+        </form>
     </div>
+    
     <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
       Tab 2 content
     </div>

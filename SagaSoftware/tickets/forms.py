@@ -40,6 +40,8 @@ class CreateTicketForm(forms.ModelForm):
         self.fields["description"].label = ""
         self.fields["subject"].widget.attrs["placeholder"] = "Enter a subject for the task"
         self.fields["description"].widget.attrs["placeholder"] = "Task description"
+        self.fields["est_hours"].widget.attrs["placeholder"] = "__"
+        self.fields["act_hours"].widget.attrs["placeholder"] = "__"
         if not instance:
             self.fields['status'].widget.attrs['disabled'] = True
             self.helper.layout = Layout(

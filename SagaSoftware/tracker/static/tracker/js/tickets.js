@@ -441,18 +441,24 @@ $(document).ready(function() {
             .then(data => {
                 if (data.success) {
                     $(".cr-edt-tkt.p-3.edt-tkt").html(data.template)
+                    $(".cr-edt-tkt.p-3.edt-tkt #ex1-content").height($(".cr-edt-tkt.p-3.edt-tkt").height() - $(".cr-edt-tkt.p-3.edt-tkt .tkt-dtls-menu").height())
                     let selectList = document.querySelector(".cr-edt-tkt.p-3.edt-tkt #id_status")
                     adjustSelectLength(selectList)
                     $('#ex1-content #id_assignee').chosen();
                     $('#ex1-content #id_accountable').chosen();
-                    var description = document.getElementById('descpt')
-                    console.log("this is the description", description)
-                    const options = {
-                        theme: "snow",
-                        enable: false
-                    };
+                    var end_date = $('.cr-edt-tkt.p-3.edt-tkt #id_end_date')
+                    var start_date = $('.cr-edt-tkt.p-3.edt-tkt #id_start_date')
+                    flatpickr(start_date, {});
+                    flatpickr(end_date, {});
+                    // var description = document.getElementById('descpt')
+                    // const options = {
+                    //     theme: "snow",
+                    //     enable: false
+                    // };
 
-                    var quill = new Quill(description, options);
+                    // var quill = Quill(description, options);
+                    // var icons = quill.import('ui/icons');
+                    // icons['bold'] = '<i class="fa fa-bold" aria-hidden="true"></i>';
 
                 }
 
@@ -473,7 +479,7 @@ $(document).ready(function() {
         let maxOptValLen = findMaxLengthOpt(selectField)
             // calc width of single letter 
         let letterWidth = initialWidth / maxOptValLen
-        let corCoef = 2.875; // Based on visual appearance
+        let corCoef = 5.875; // Based on visual appearance
         // add the on change event listener to the select
         selectField.addEventListener("change", e => {
             let newOptValLen = getSelected(e.target).textContent.length
@@ -503,6 +509,15 @@ $(document).ready(function() {
     $(".cr-edt-tkt.p-3.edt-tkt").on("click", '.mdi-close.cl_cr', (e) => {
         console.log("ok")
         $('.cr-edt-tkt.p-3.edt-tkt').hide('slide', { direction: 'right' }, 500)
+    });
+
+    $('.cr-edt-tkt.p-3.edt-tkt').on('focusout', 'input', (e) => {
+
+        console.log("there was a focus out somewhere")
+    });
+    $('.cr-edt-tkt.p-3.edt-tkt').on('change', 'select', (e) => {
+
+        console.log("there was an select change somewhere")
     })
 
 });
