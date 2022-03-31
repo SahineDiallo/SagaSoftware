@@ -301,7 +301,7 @@ def project_backlog(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     status_choices = [i[0] for i in Ticket.TicketStatus.choices]
     users = project.members.all()
-    form = CreateTicketForm(request.POST or None)
+    form = CreateTicketForm(request.POST or None, request=request)
     type_list = [i[0] for i in Ticket.TicketType.choices]
     context = {
         'project': project, 

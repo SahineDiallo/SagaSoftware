@@ -1,7 +1,9 @@
 from django import forms
+from django.shortcuts import get_object_or_404
 from .models import Ticket
 from crispy_forms.helper import FormHelper
 from django_quill.forms import QuillFormField
+from tracker.models import Project
 
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from django.forms.widgets import HiddenInput
@@ -31,7 +33,10 @@ class CreateTicketForm(forms.ModelForm):
         )
 
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
         super(CreateTicketForm, self).__init__(*args, **kwargs)
+        url_end = (self.request.get_full_path()).split("/")[-2]
+        project = get_object_or_404(Project, key=url_end)
         self.helper = FormHelper()
         self.helper.form_id = 'createTicketForm'
         instance = kwargs.get("instance", None)
@@ -42,6 +47,8 @@ class CreateTicketForm(forms.ModelForm):
         self.fields["description"].widget.attrs["placeholder"] = "Task description"
         self.fields["est_hours"].widget.attrs["placeholder"] = "__"
         self.fields["act_hours"].widget.attrs["placeholder"] = "__"
+        self.fields['assignee'].queryset = project.members.all()
+        self.fields['accountable'].queryset = project.members.all()
         if not instance:
             self.fields['status'].widget.attrs['disabled'] = True
             self.helper.layout = Layout(

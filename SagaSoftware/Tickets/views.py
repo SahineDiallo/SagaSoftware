@@ -47,7 +47,7 @@ class TicketModelViewSet(viewsets.ModelViewSet):
 
 def createTicket(request, project_key):
     project = get_object_or_404(Project, key=project_key)
-    form = CreateTicketForm(request.POST or None)
+    form = CreateTicketForm(request.POST or None, request=request)
     result = {}
     if form.is_valid():
         form.save(commit=False)
@@ -75,7 +75,7 @@ def editTicket(request, project_key):
     key = '#' + request.GET.get('key')
     instance = Ticket.objects.get(key=key)
     type_class = get_type_class(instance.ticket_type)
-    form = CreateTicketForm(request.POST or None, instance=instance)
+    form = CreateTicketForm(request.POST or None, instance=instance, request=request)
     template = render_to_string('tracker/edit_ticket.html', {'form': form, 'type_class': type_class, 'instance':instance}, request=request)
     result['template'] = template
     result['success'] = True
