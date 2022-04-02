@@ -491,9 +491,8 @@ $(document).ready(function() {
         selectel.style.background = backgroundOptions[selectedVal]
     };
 
-    $(".cr-edt-tkt p-3.edt-tkt").on("click", '.mdi-close.cl_cr', (e) => {
-        console.log("ok")
-        $('.cr-edt-tkt p-3.edt-tkt').hide('slide', { direction: 'right' }, 500)
-    })
+    $(".cr-edt-tkt.p-3.edt-tkt").on("click", '.mdi-close.cl_cr', (e) => {
+        $('.cr-edt-tkt.p-3.edt-tkt').hide('slide', { direction: 'right' }, 500)
+    });
 
 });

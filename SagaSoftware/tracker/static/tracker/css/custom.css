@@ -1556,6 +1556,11 @@ h4.mkr {
     font-weight: 500;
     letter-spacing: .03rem;
     margin-bottom: 0;
+    color: #3e3737;
+}
+h4._tsk.mr-2.mb-0._ty_cl:hover {
+    border: 1px solid #f3f3f3;
+    padding: 4px;
 }
 
 #createTicketForm select {

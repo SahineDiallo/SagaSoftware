@@ -516,8 +516,42 @@ $(document).ready(function() {
         console.log("there was a focus out somewhere")
     });
     $('.cr-edt-tkt.p-3.edt-tkt').on('change', 'select', (e) => {
+        $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
+    });
 
-        console.log("there was an select change somewhere")
+    $(".cr-edt-tkt.p-3.edt-tkt").on("click", '._ty_cl', (e)=> {
+        $(e.target).parent().addClass('d-none')
+        e.target.parentElement.previousElementSibling.classList.remove('d-none')
     })
+    $('.cr-edt-tkt.p-3.edt-tkt').on('click', '#edt_tkt_frm', (e) => {
+       console.log("the butn has been clicked")
+       e.preventDefault()
+       var form = document.querySelector(".cr-edt-tkt.p-3.edt-tkt #editTicketForm");
+       var form_data = new FormData(form)
+       console.log(form_data)
+       var key = document.querySelector(".cr-edt-tkt.p-3.edt-tkt .inst_key").textContent.slice(1)
+       var url = `/api/edit-ticket/${url_end}/?key=${key}`;
+       fetch(url, {method:'POST', body: form_data})
+       .then(res => res.json())
+       .then(data => {
+           if(data.form_changed) {
+               if (data.fname === "ticket_type") {
+                   var cur_type = document.querySelector(".cr-edt-tkt.p-3.edt-tkt ._ty_cl")
+                   var cur_class = cur_type.classList[3]
+                   $(cur_type).removeClass(cur_class).addClass(data.type_class)
+                   cur_type.textContent = data.fvalue
+                   $(cur_type).parent().prev().addClass('d-none');
+                   $(cur_type).parent().removeClass('d-none')
+   
+               }
+           }
+       })
+       .catch(error => {
+            console.log(error)
+           alert("Something went wrong. Please try later!");
+           
+       })
+    });
+
 
 });

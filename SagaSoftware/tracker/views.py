@@ -267,7 +267,6 @@ def edit_milestone(request, mil_id):
         "tracker/edit_milestone.html", {'form': form, 'mil_id': mil_id, }, request=request)
     if request.method == "POST":
         if form.is_valid():
-            print("the form is valid for editing the milestone")
             form.save()
             template = render_to_string(
                 "tracker/edited_milestone.html", {'form': form, 'milestone': form.instance, }, request=request)
