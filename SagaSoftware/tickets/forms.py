@@ -47,6 +47,7 @@ class CreateTicketForm(forms.ModelForm):
         self.fields["description"].widget.attrs["placeholder"] = "Task description"
         self.fields["est_hours"].widget.attrs["placeholder"] = "__"
         self.fields["act_hours"].widget.attrs["placeholder"] = "__"
+        self.fields["progress"].widget.attrs["placeholder"] = "0"
         self.fields['assignee'].queryset = project.members.all()
         self.fields['accountable'].queryset = project.members.all()
         if not instance:

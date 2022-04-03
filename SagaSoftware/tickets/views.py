@@ -117,8 +117,16 @@ def validateSubject(request):
 
 def validatePositiveInput(request):
     val = request.GET.get('value')
-    result = int(val) >= 0
-    return JsonResponse({'success': result})
+    name = request.GET.get('name')
+    print(name)
+    if val != '':
+        result = int(val) >= 0 and val.isdigit()
+        if name == 'progress' and int(val) > 100:
+            result = False
+        return JsonResponse({'success': result})
+    return JsonResponse({'success': True})
+
+
 
 
     

@@ -500,7 +500,7 @@ $(document).ready(function() {
         return [...selectEl.options].reduce((result, o) => o.textContent.length > result ? o.textContent.length : result, 0)
     }
 
-    backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#7608dd', Close: '#f39219', 'In Progress': '#055ebd' }
+    backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#f39219', Close: '#f39219', 'In Progress': '#055ebd' }
 
     function setBackground(selectel, selectedVal) {
         selectel.style.background = backgroundOptions[selectedVal]
@@ -512,8 +512,10 @@ $(document).ready(function() {
     });
 
     $('.cr-edt-tkt.p-3.edt-tkt').on('focusout', 'input', (e) => {
+        var c_list = e.target.classList
+        if (c_list.contains('chosen-search-input') | c_list.contains('is-invalid')) return false
+        $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
 
-        console.log("there was a focus out somewhere")
     });
     $('.cr-edt-tkt.p-3.edt-tkt').on('change', 'select', (e) => {
         $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
@@ -524,43 +526,7 @@ $(document).ready(function() {
         e.target.parentElement.previousElementSibling.classList.remove('d-none')
     })
     $('.cr-edt-tkt.p-3.edt-tkt').on('click', '#edt_tkt_frm', (e) => {
-       console.log("the butn has been clicked")
-       e.preventDefault()
-       var form = document.querySelector(".cr-edt-tkt.p-3.edt-tkt #editTicketForm");
-       var form_data = new FormData(form)
-       console.log(form_data)
-       var key = document.querySelector(".cr-edt-tkt.p-3.edt-tkt .inst_key").textContent.slice(1)
-       var url = `/api/edit-ticket/${url_end}/?key=${key}`;
-       fetch(url, {method:'POST', body: form_data})
-       .then(res => res.json())
-       .then(data => {
-           if(data.form_changed) {
-               if (data.fname === "ticket_type") {
-                   var cur_type = document.querySelector(".cr-edt-tkt.p-3.edt-tkt ._ty_cl")
-                   var cur_class = cur_type.classList[3]
-                   $(cur_type).removeClass(cur_class).addClass(data.type_class)
-                   cur_type.textContent = data.fvalue
-                   $(cur_type).parent().prev().addClass('d-none');
-                   $(cur_type).parent().removeClass('d-none')
-   
-               } else if(data.fname === "assignee" | data.fname === "accountable"){
-                   var ass_or_acc = document.querySelector(`.cr-edt-tkt.p-3.edt-tkt .tkts-asg.ml-2.${data.fname.slice(0, 3)}`)
-                   if (ass_or_acc.classList.contains('d-none') ){
-                       $(ass_or_acc).removeClass('d-none') 
-                   }
-                   if (!data.fvalue) {
-                       ass_or_acc.classList.add('d-none')
-                   }
-                   ass_or_acc.style.background = data.background
-                   ass_or_acc.textContent = data.first_letters
-               }
-           }
-       })
-       .catch(error => {
-            console.log(error)
-           alert("Something went wrong. Please try later!");
-           
-       })
+        updateTicket(e);
     });
 
     $(".cr-edt-tkt.p-3.edt-tkt").on('input', ' #id_subject', (e)=> {
@@ -583,8 +549,70 @@ $(document).ready(function() {
             }
         })
     }
-    function validatePositive(val, target) {
-        
+    function validatePositive(val, target, name="") {
+        var url = `/api/validate-number/?value=${val}&name=${name}`
+        fetch(url)
+        .then(res=> res.json())
+        .then(data=> {
+            console.log(data)
+            if (!data.success) {
+                console.log('this is not valid at all')
+                $(target).addClass('is-invalid');
+                $('.cr-edt-tkt.p-3.edt-tkt #error_1_id_subject').removeClass('d-none')
+            } else {
+                console.log('the data is valid');
+                $(target).removeClass('is-invalid');
+                $('.cr-edt-tkt.p-3.edt-tkt #error_1_id_subject').addClass('d-none')
+            }
+        })
+    }
+    $(".cr-edt-tkt.p-3.edt-tkt").on('input', ' #id_progress', (e)=> {
+        console.log($(e.target).attr('name'))
+        validatePositive(e.target.value, e.target, $(e.target).attr('name'))
+    });
+    $(".cr-edt-tkt.p-3.edt-tkt").on('input', ' #id_act_hours', (e)=> {
+        validatePositive(e.target.value, e.target)
+    });
+    $(".cr-edt-tkt.p-3.edt-tkt").on('input', ' #id_est_hours', (e)=> {
+        validatePositive(e.target.value, e.target)
+    });
+    function updateTicket(e) {
+        e.preventDefault()
+        var form = document.querySelector(".cr-edt-tkt.p-3.edt-tkt #editTicketForm");
+        var form_data = new FormData(form)
+        var key = document.querySelector(".cr-edt-tkt.p-3.edt-tkt .inst_key").textContent.slice(1)
+        var url = `/api/edit-ticket/${url_end}/?key=${key}`;
+        fetch(url, {method:'POST', body: form_data})
+        .then(res => res.json())
+        .then(data => {
+            if(data.form_changed) {
+                if (data.fname === "ticket_type") {
+                    var cur_type = document.querySelector(".cr-edt-tkt.p-3.edt-tkt ._ty_cl")
+                    var cur_class = cur_type.classList[3]
+                    $(cur_type).removeClass(cur_class).addClass(data.type_class)
+                    cur_type.textContent = data.fvalue
+                    $(cur_type).parent().prev().addClass('d-none');
+                    $(cur_type).parent().removeClass('d-none')
+    
+                } else if(data.fname === "assignee" | data.fname === "accountable"){
+                    var ass_or_acc = document.querySelector(`.cr-edt-tkt.p-3.edt-tkt .tkts-asg.ml-2.${data.fname.slice(0, 3)}`)
+                    if (ass_or_acc.classList.contains('d-none') ){
+                        $(ass_or_acc).removeClass('d-none') 
+                    }
+                    if (!data.fvalue) {
+                        ass_or_acc.classList.add('d-none')
+                    }
+                    ass_or_acc.style.background = data.background
+                    ass_or_acc.textContent = data.first_letters
+                }
+                alertUser(`${data.fname} `, 'has been updated with success', "Ticket's ")
+            }
+        })
+        .catch(error => {
+             console.log(error)
+            alert("Something went wrong. Please try later!");
+            
+        });
     }
 
 });
