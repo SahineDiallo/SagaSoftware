@@ -1581,7 +1581,8 @@ h4._tsk.mr-2.mb-0._ty_cl:hover {
     right: 0;
 }
 
-form#editTicketForm input:not(.chosen-search-input) {
+form#editTicketForm input:not(.chosen-search-input)
+{
     border: none;
 }
 

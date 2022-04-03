@@ -97,6 +97,7 @@ def editTicket(request, project_key):
                 result['not_valid'] = False
                 return JsonResponse(result)
         else:
+            print(form.errors.as_json())
             context = csrf(request)
             formWithErrors = render_crispy_form(form, context=context)
             return JsonResponse({})
@@ -105,6 +106,19 @@ def editTicket(request, project_key):
     result['template'] = template
     result['success'] = True
     return JsonResponse(result)
+
+
+def validateSubject(request):
+    subject = request.GET.get('subject')
+    result = subject.strip() != ''
+    return JsonResponse({'success': result})
+    
+
+
+def validatePositiveInput(request):
+    val = request.GET.get('value')
+    result = int(val) >= 0
+    return JsonResponse({'success': result})
 
 
     

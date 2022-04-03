@@ -7,7 +7,9 @@ from rest_framework import routers
 from tickets.views import (
     TicketModelViewSet, 
     createTicket,
-    editTicket
+    editTicket,
+    validatePositiveInput,
+    validateSubject,
 )
 
 
@@ -19,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/create-ticket/<slug:project_key>/', createTicket, name="create-ticket"),
     path('api/edit-ticket/<slug:project_key>/', editTicket, name="edit-ticket"),
+    path('api/validate-subject/', validateSubject, name='validate-subject'),
+    path('api/validate-number/', validatePositiveInput, name='validate-positive-input'),
     path("accounts/", include("accounts.urls")),
     path("trackers/", include("tracker.urls")),
 ] + router.urls

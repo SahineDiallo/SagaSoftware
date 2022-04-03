@@ -563,5 +563,28 @@ $(document).ready(function() {
        })
     });
 
+    $(".cr-edt-tkt.p-3.edt-tkt").on('input', ' #id_subject', (e)=> {
+        validateSubject(e.target.value, e.target)
+    });
+    function validateSubject(val, target) {
+        var url = `/api/validate-subject/?subject=${val}`
+        fetch(url)
+        .then(res=> res.json())
+        .then(data=> {
+            console.log(data)
+            if (!data.success) {
+                console.log('this is not valid at all')
+                $(target).addClass('is-invalid');
+                $('.cr-edt-tkt.p-3.edt-tkt #error_1_id_subject').removeClass('d-none')
+            } else {
+                console.log('the data is valid');
+                $(target).removeClass('is-invalid');
+                $('.cr-edt-tkt.p-3.edt-tkt #error_1_id_subject').addClass('d-none')
+            }
+        })
+    }
+    function validatePositive(val, target) {
+        
+    }
 
 });

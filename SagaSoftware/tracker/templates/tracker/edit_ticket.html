@@ -37,6 +37,9 @@
                     <h4 class="mr-2 mb-0 _ty_cl {{type_class}}">{{instance.ticket_type}}</h4>
                 </div>
                 {{form.subject|as_crispy_field}}
+                <span id="error_1_id_subject" class="invalid-feedback d-none">
+                    <strong>This field is required.</strong>
+                </span>
             </div>
             <div class="d-flex align-items-center mb-3">
                 {{form.status}}
@@ -86,7 +89,7 @@
             {{form.progress|as_crispy_field}}
             {{form.milestone|as_crispy_field}}
 
-            <button type="submit" id="edt_tkt_frm" class="btn btn-primary">edit</button>
+            <button type="submit" id="edt_tkt_frm" class="btn btn-primary d-none">edit</button>
         </form>
     </div>
     
