@@ -76,20 +76,22 @@ def editTicket(request, project_key):
     instance = Ticket.objects.get(key=key)
     type_class = get_type_class(instance.ticket_type)
     form = CreateTicketForm(request.POST or None, instance=instance, request=request)
-    print(form.is_bound)
     if request.method == "POST":
         if form.is_valid():
-            print('the form is valid')
             if form.has_changed():
-                print('the form has changed')
                 result["form_changed"] = True
                 field_name = form.changed_data[0]
                 field_obj = Ticket._meta.get_field(field_name)
                 field_value = field_obj.value_from_object(instance)
                 result["fname"] = field_name
-                print(field_value)
                 if field_name == "ticket_type":
                     result['type_class'] = get_type_class(field_value)
+                elif field_name == "assignee" and form.instance.assignee != None:
+                    result['background'] = form.instance.assignee.background
+                    result['first_letters'] = form.instance.assignee.get_first_letters()
+                elif field_name == "accountable" and form.instance.accountable != None:
+                    result['background'] = form.instance.accountable.background
+                    result['first_letters'] = form.instance.accountable.get_first_letters()
                 result["fvalue"] = field_value
                 form.save()
                 result['not_valid'] = False

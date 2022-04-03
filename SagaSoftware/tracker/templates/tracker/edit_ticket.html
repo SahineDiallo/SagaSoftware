@@ -52,20 +52,19 @@
             </div>
             <div id="descpt">
                 {{form.media}}
-                {{form.description}}
+                {{form.description|as_crispy_field}}
             </div>
             <div>
                 <h4 class="mkr">People</h4>
                 <div>
                     {{form.assignee|as_crispy_field}}
-                    {% if instance.assignee %}
-                    <span class="tkts-asg ml-2" style="background:{{instance.assignee.background}}">{{instance.assignee.get_first_letters}}</span>  
-                    {% endif %}
+                    
+                    <span class="tkts-asg ml-2 ass {% if not instance.assignee %} d-none {% endif %}" style="background:{{instance.assignee.background}}">{{instance.assignee.get_first_letters}}</span>  
                 </div>
                 <div >
                     {{form.accountable|as_crispy_field}}
                     {% if instance.accountable %}
-                        <span class="tkts-asg ml-2" style="background:{{instance.accountable.background}}">{{instance.accountable.get_first_letters}}</span> 
+                        <span class="tkts-asg ml-2 acc {% if not instance.accountable %} d-none {% endif %}" style="background:{{instance.accountable.background}}">{{instance.accountable.get_first_letters}}</span> 
                     {% endif %}
                 </div>
             </div>

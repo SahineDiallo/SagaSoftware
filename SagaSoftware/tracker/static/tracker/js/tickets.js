@@ -543,6 +543,16 @@ $(document).ready(function() {
                    $(cur_type).parent().prev().addClass('d-none');
                    $(cur_type).parent().removeClass('d-none')
    
+               } else if(data.fname === "assignee" | data.fname === "accountable"){
+                   var ass_or_acc = document.querySelector(`.cr-edt-tkt.p-3.edt-tkt .tkts-asg.ml-2.${data.fname.slice(0, 3)}`)
+                   if (ass_or_acc.classList.contains('d-none') ){
+                       $(ass_or_acc).removeClass('d-none') 
+                   }
+                   if (!data.fvalue) {
+                       ass_or_acc.classList.add('d-none')
+                   }
+                   ass_or_acc.style.background = data.background
+                   ass_or_acc.textContent = data.first_letters
                }
            }
        })
