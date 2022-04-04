@@ -1471,11 +1471,13 @@ table.dataTable td:nth-child(1) {
 }
 
 #ex1-content label[for='id_status'],
-#ex1-content label[for='id_subject'] {
+#ex1-content label[for='id_subject'],
+#editFullTicketForm label[for='id_subject'] {
     display: none;
 }
 
-#ex1-content #div_id_subject {
+#ex1-content #div_id_subject,
+#editFullTicketForm #div_id_subject{
     margin-bottom: 0;
     flex-grow: 1;
 }
@@ -1485,6 +1487,7 @@ table.dataTable td:nth-child(1) {
 }
 
 #ex1-content .form-control:focus,
+#editFullTicketForm .form-control:focus,
 .dataTables_wrapper select:focus {
     color: #495057;
     background-color: #fff8a226;
@@ -1493,7 +1496,8 @@ table.dataTable td:nth-child(1) {
     /* box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%); */
 }
 
-#ex1-content #id_status option {
+#ex1-content #id_status option,
+#editFullTicketForm #id_status option {
     background: white !important;
     color: black;
 }
@@ -1550,7 +1554,8 @@ h4.mkr {
 }
 
 #createTicketForm label,
-#ex1-content label {
+#ex1-content label,
+#editFullTicketForm label {
     width: 150px;
     font-size: 14px;
     font-weight: 500;
@@ -1659,7 +1664,8 @@ a.chosen-single {
     border-bottom: 2px solid #e8e8e8;
 }
 
-.tab-content #id_status {
+.tab-content #id_status,
+#editFullTicketForm #id_status {
     margin-top: 15px;
     border: none;
     border-radius: 3px;

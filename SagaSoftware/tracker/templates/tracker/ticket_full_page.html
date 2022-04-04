@@ -24,7 +24,7 @@
           </div>
     </div>
 </div>
-<div class="row" style="background:#fff;">
+<div class="row pt-3 pl-3" style="background:#fff; margin-top: 16px;">
 
     <div class="col-md-8 border-right">
         <form method="POST" id="editFullTicketForm">
@@ -98,9 +98,38 @@
             <button type="submit" id="edt_tkt_frm" class="btn btn-primary d-none">edit</button>
         </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 border-left">
+        <!-- Tabs navs -->
+        <ul class="nav nav-tabs nav-justified mb-3 tkt-dtls-menu border-0" id="ex2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="history1" data-toggle="tab" href="#History" role="tab"  aria-selected="true">
+                    History
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="comment1" data-toggle="tab" href="#Comments" role="tab" aria-selected="false">
+                    Comments
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="full-page"  href="" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">
+                    <i class="mdi mdi-24px mdi-redo-variant" style="line-height: 0;"></i>
+                </a>
+            </li>
 
-
+        </ul>
+        <!-- Tabs navs -->
+        
+        <!-- Tabs content -->
+        <div class="tab-content" id="ex1-content">
+            <div class="tab-pane fade show active" id="History" role="tabpanel" aria-labelledby="ex1-tab-1" >
+                tab of the history
+            </div>
+            
+            <div class="tab-pane fade" id="Comments" role="tabpanel" aria-labelledby="ex1-tab-3">
+                Tab 3 content
+            </div>
+        </div>
     </div>
 </div>
     

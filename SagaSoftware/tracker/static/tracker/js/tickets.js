@@ -6,11 +6,19 @@ $(document).ready(function() {
     let type;
     var url_end = (window.location.pathname).split("/").at(-2)
     let _type = ""
+    let backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#f39219', Closed: '#7608dd', 'In Progress': '#055ebd' }
     var end_date = $('#createTicketForm #id_end_date')
     var start_date = $('#createTicketForm #id_start_date')
     $(".tkt-frm-bdy").height($(".cr-edt-tkt.p-3").height() - $(".cr-edt-tkt.p-3 .hd_").height() - $(".cr-edt-tkt.p-3 .modal-footer").height())
     $('#createTicketForm #id_assignee').chosen();
     $('#createTicketForm #id_accountable').chosen();
+    $('#editFullTicketForm #id_assignee').chosen();
+    $('#editFullTicketForm #id_accountable').chosen();
+    var ticket_full_pg_status = document.querySelector("#editFullTicketForm #id_status")
+    if (ticket_full_pg_status !== null ) {
+        adjustSelectLength(ticket_full_pg_status)
+    }
+
     $("#nw_tkt").on("click", (e) => {
         $(".cr-edt-tkt.nw_tkt").show('slide', { direction: 'right' }, 500)
     });
@@ -438,8 +446,6 @@ $(document).ready(function() {
             // get text content length (not a value length) of widest option.
         let val = getSelected(selectField).textContent
         setBackground(selectField, val);
-        // let curLength = getSelected(selectField).textContent.length
-        // selectField.style.width = curLength + 'px'
 
         let maxOptValLen = findMaxLengthOpt(selectField)
             // calc width of single letter 
@@ -465,14 +471,11 @@ $(document).ready(function() {
         return [...selectEl.options].reduce((result, o) => o.textContent.length > result ? o.textContent.length : result, 0)
     }
 
-    backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#f39219', Closed: '#7608dd', 'In Progress': '#055ebd' }
-
     function setBackground(selectel, selectedVal) {
         selectel.style.background = backgroundOptions[selectedVal]
     };
 
     $(".cr-edt-tkt.p-3.edt-tkt").on("click", '.mdi-close.cl_cr', (e) => {
-        console.log("ok")
         $('.cr-edt-tkt.p-3.edt-tkt').hide('slide', { direction: 'right' }, 500)
     });
 

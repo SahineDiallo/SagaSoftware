@@ -118,7 +118,7 @@ def editTicket(request, project_key):
             return JsonResponse({'success': False})
     context = {
         'form': form, 'type_class': type_class, 
-        'instance':instance, 'key': instance.key[1:],
+        'instance':instance, 'key': instance.key[2:],
     }
         
     template = render_to_string('tracker/edit_ticket.html', context, request=request)
@@ -147,11 +147,15 @@ def validatePositiveInput(request):
 
 
 def ticketFullDetailsPage(request, site_slug, project_key, ticket_key):
-    ticket_key = "#" + ticket_key
+    ticket_key = "#." + ticket_key
     ticket = get_object_or_404(Ticket, key=ticket_key)
+    type_class = get_type_class(ticket.ticket_type) 
     project = get_object_or_404(Project, key=project_key)
     form = CreateTicketForm(request.POST or None, instance=ticket, request=request)
-    context = {'instance': ticket,"form": form, 'project': project}
+    context = {
+        'instance': ticket,"form": form, 'project': project,
+        'type_class': type_class
+    }
     return render(request, 'tracker/ticket_full_page.html', context)
 
 
