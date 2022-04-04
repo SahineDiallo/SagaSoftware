@@ -1,3 +1,4 @@
+from urllib.parse import parse_qs
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
@@ -19,7 +20,7 @@ class Ticket(models.Model):
         TODO = "Todo", _("Todo")
         IN_PROGRESS = "In Progress", _("In Progress")
         RESOLVED = "Resolved", _("Resolved")
-        CLOSED =  "Closed", _("Close")
+        CLOSED =  "Closed", _("Closed")
 
     class TicketPriority(models.TextChoices):
         NORMAL = "Normal", _("Normal")
@@ -57,4 +58,25 @@ class Ticket(models.Model):
 
     def __str__(self):
         return self.ticket_type
+
+
+    def get_ticket_status(self):
+        if self.status == "Open":
+            return "_open"
+        elif self.status == "Todo":
+            return "_todo"
+        elif self.status == "In Progress":
+            return "_in_prog"       
+        elif self.status == "Resolved":
+            return "_on_hold"
+        return "_done"
+
+    def get_ticket_priority(self):
+        if self.priority == "Normal":
+            return "_norm"
+        elif self.priority == "High":
+            return "_high"
+        elif self.priority == "Low":
+            return "_low"
+        return "_imm"
 

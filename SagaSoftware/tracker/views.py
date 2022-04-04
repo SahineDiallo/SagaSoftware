@@ -249,7 +249,6 @@ def create_milestone(request, project_key, **kwargs):
             "tracker/new_milestone.html", {'milestone': instance, })
         result['valid'] = True
         result['template'] = template
-        print("the form is valid")
         return JsonResponse(result)
     result['valid'] = False
     context = csrf(request)

@@ -1,0 +1,66 @@
+
+    <td class="text-center sorting_1">
+        <span id="key_{{key}}">{{instance.key}}</span>
+    </td>
+    <td><span class="_subj">
+        <i class="mdi mdi-information tkt-dtls"></i>{{instance.subject}}</span>
+    </td>
+    <td>
+        <span class="{{new_cl}}">{{instance.ticket_type}}</span> 
+    </td>
+    <td class=" pr-0">
+        <span class="{{instance.get_ticket_status}}">{{instance.status}}</span> 
+    </td>
+    <td class=" px-0">
+        <span class="{{instance.get_ticket_priority}}">{{instance.priority}}</span> 
+    </td>
+    <td>
+        {% if instance.assignee %}
+        <span class="tkts-asg" style="background:{{instance.assignee.background}}">{{instance.assignee.get_first_letters}}</span>
+         {{instance.assignee}}
+        {% else %}
+        <span class="d-flex justify-content-center"> -- </span>
+        {% endif %}
+    </td>
+    <td>
+        {% if instance.accountable %}
+        <span class="tkts-asg" style="background:{{instance.accountable.background}}">{{instance.accountable.get_first_letters}}</span>
+         {{instance.accountable}}
+        {% else %}
+        <span class="d-flex justify-content-center"> -- </span>
+        {% endif %}
+    </td>
+    <td>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{instance.progress}}%" aria-valuenow="{{instance.progress}}" aria-valuemin="0" aria-valuemax="100">
+                {{instance.progress}}%
+            </div>
+        </div>
+    </td>
+    <td>
+        {% if instance.milestone %}
+            {{instance.milestone}}
+         {% else %}
+            <span class="d-flex justify-content-center"> -- </span>
+         {% endif %}
+    </td>
+    <td>{{instance.estimated_hours}}</td>
+    <td>{{instance.start_date}}</td>
+    <td>{{instance.end_date}}</td>
+    <td>
+        {% if instance.created_by %}
+        <span class="tkts-asg" style="background:{{instance.created_by.background}}">{{intance.created_by.get_first_letters}}</span>
+         {{instance.created_by}}
+        {% else %}
+        <span class="d-flex justify-content-center"> -- </span>
+        {% endif %}
+    </td>
+    <td>
+        {% if instance.act_hours %}
+            {{instance.act_hours}}
+        {% else %}
+            <span class="d-flex justify-content-center"> -- </span>
+        {% endif %}
+    </td>
+    <td>{{instance.updated_on}}</td>
+    <td>{{instance.created_on}}td>

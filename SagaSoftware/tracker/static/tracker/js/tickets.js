@@ -90,7 +90,17 @@ $(document).ready(function() {
                             </div>&emsp;Loading ...`,
         },
         "columns": [
-            { "data": "key" },
+
+            { 
+                "data": "key",
+                render: function(data, type) {
+                    if (type === "display") {
+                        return `<span id="key_${data.trim().slice(2)}"> ${data} </span>`
+                    }
+                    return data;
+                }
+            },
+
             {
                 "data": "subject",
                 render: function(data, type) {
@@ -325,51 +335,6 @@ $(document).ready(function() {
             table.column(i).visible(1);
         }
     }
-    // $('#tkts-bkl tbody').on('click',
-    //     'td.details-control',
-    //     function() {
-
-    //         var tr = $(this).closest('tr');
-    //         var row = table.row(tr);
-
-    //         if (row.child.isShown()) {
-
-    //             // Closing the already opened row           
-    //             row.child.hide();
-
-    //             // Removing class to hide
-    //             tr.removeClass('shown');
-    //         } else {
-
-    //             // Show the child row for detail
-    //             // information
-    //             row.child(getChildRow()).show();
-
-    //             // To show details,add the below class
-    //             tr.addClass('shown');
-    //         }
-    //     });
-    /* Function for child row details*/
-    // function getChildRow(data) {
-
-    //     // `
-    //is the data object for the row
-    //     return '<table cellpadding="5" cellspacing="0"' +
-    //         ' style="padding-left:50px;">' +
-    //         '<tr>' +
-    //         '<td>Full name:</td>' +
-    //         '<td>' + "name" + '</td>' +
-    //         '</tr>' +
-    //         '<tr>' +
-    //         '<td>Address in detail:</td>' +
-    //         '<td>' + "something as a data" + '</td>' +
-    //         '</tr>' +
-    //         '<tr>' +
-    //         '<td>Extra details like ID:</td>' +
-    //         '<td>' + "employee" + '</td>' +
-    //         '</tr>' +
-    //         '</table>';
-    // }
 
     function get_user_chars(data) {
         let profile;
@@ -433,7 +398,7 @@ $(document).ready(function() {
     $("#MainEquipDiv").on("click", ".tkt-dtls", (e) => {
         $(".cr-edt-tkt.p-3.edt-tkt").show('slide', { direction: 'right' }, 500)
         var tr = e.target.closest('tr');
-        var _key = tr.firstElementChild.textContent.slice(1);
+        var _key = tr.firstElementChild.firstElementChild.textContent.trim().slice(1);
         var url = `/api/edit-ticket/${url_end}/?key=${_key}`;
 
         fetch(url)
@@ -500,7 +465,7 @@ $(document).ready(function() {
         return [...selectEl.options].reduce((result, o) => o.textContent.length > result ? o.textContent.length : result, 0)
     }
 
-    backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#f39219', Close: '#f39219', 'In Progress': '#055ebd' }
+    backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#f39219', Closed: '#7608dd', 'In Progress': '#055ebd' }
 
     function setBackground(selectel, selectedVal) {
         selectel.style.background = backgroundOptions[selectedVal]
@@ -537,13 +502,10 @@ $(document).ready(function() {
         fetch(url)
         .then(res=> res.json())
         .then(data=> {
-            console.log(data)
             if (!data.success) {
-                console.log('this is not valid at all')
                 $(target).addClass('is-invalid');
                 $('.cr-edt-tkt.p-3.edt-tkt #error_1_id_subject').removeClass('d-none')
             } else {
-                console.log('the data is valid');
                 $(target).removeClass('is-invalid');
                 $('.cr-edt-tkt.p-3.edt-tkt #error_1_id_subject').addClass('d-none')
             }
@@ -554,9 +516,7 @@ $(document).ready(function() {
         fetch(url)
         .then(res=> res.json())
         .then(data=> {
-            console.log(data)
             if (!data.success) {
-                console.log('this is not valid at all')
                 $(target).addClass('is-invalid');
                 $('.cr-edt-tkt.p-3.edt-tkt #error_1_id_subject').removeClass('d-none')
             } else {
@@ -606,6 +566,9 @@ $(document).ready(function() {
                     ass_or_acc.textContent = data.first_letters
                 }
                 alertUser(`${data.fname} `, 'has been updated with success', "Ticket's ")
+                var tr = document.querySelector(`#key_${key.slice(1)}`).closest('tr')
+                $(tr).html("")
+                $(tr).html(data.template) // update the edited table row
             }
         })
         .catch(error => {

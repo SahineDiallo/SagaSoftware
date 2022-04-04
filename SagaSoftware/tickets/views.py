@@ -53,7 +53,7 @@ def createTicket(request, project_key):
         form.save(commit=False)
         form.instance.project = project
         form.instance.created_by = request.user
-        form.instance.key = f'#-{project.key_tracker}'
+        form.instance.key = f'#.{project.key_tracker}'
         project.key_tracker += 1
         project.save()
         template = render_to_string("tracker/new_ticket.html", {'instance': form.instance}, request=request)
@@ -86,6 +86,8 @@ def editTicket(request, project_key):
                 result["fname"] = field_name
                 if field_name == "ticket_type":
                     result['type_class'] = get_type_class(field_value)
+                elif field_name == 'progress' and field_value == "":
+                    form.instance.progress = 0
                 elif field_name == "assignee" and form.instance.assignee != None:
                     result['background'] = form.instance.assignee.background
                     result['first_letters'] = form.instance.assignee.get_first_letters()
@@ -95,12 +97,23 @@ def editTicket(request, project_key):
                 result["fvalue"] = field_value
                 form.save()
                 result['not_valid'] = False
+                new_t_cl = get_type_class(form.instance.ticket_type)
+                tem_key = form.instance.key[2:]
+                template = render_to_string(
+                    "tracker/edited_ticket.html", {
+                        'instance': form.instance,
+                        'new_cl':new_t_cl, 'key': tem_key
+                    }, request=request
+                )
+                result['template'] = template
                 return JsonResponse(result)
+            else:
+                pass
         else:
-            print(form.errors.as_json())
+            #print(form.errors.as_json())
             context = csrf(request)
             formWithErrors = render_crispy_form(form, context=context)
-            return JsonResponse({})
+            return JsonResponse({'success': False})
         
     template = render_to_string('tracker/edit_ticket.html', {'form': form, 'type_class': type_class, 'instance':instance}, request=request)
     result['template'] = template
