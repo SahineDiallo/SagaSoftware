@@ -1,4 +1,6 @@
 from email.policy import HTTP
+from multiprocessing import context
+from tracemalloc import get_object_traceback
 from django import views
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
@@ -114,8 +116,12 @@ def editTicket(request, project_key):
             context = csrf(request)
             formWithErrors = render_crispy_form(form, context=context)
             return JsonResponse({'success': False})
+    context = {
+        'form': form, 'type_class': type_class, 
+        'instance':instance, 'key': instance.key[1:],
+    }
         
-    template = render_to_string('tracker/edit_ticket.html', {'form': form, 'type_class': type_class, 'instance':instance}, request=request)
+    template = render_to_string('tracker/edit_ticket.html', context, request=request)
     result['template'] = template
     result['success'] = True
     return JsonResponse(result)
@@ -138,6 +144,15 @@ def validatePositiveInput(request):
             result = False
         return JsonResponse({'success': result})
     return JsonResponse({'success': True})
+
+
+def ticketFullDetailsPage(request, site_slug, project_key, ticket_key):
+    ticket_key = "#" + ticket_key
+    ticket = get_object_or_404(Ticket, key=ticket_key)
+    project = get_object_or_404(Project, key=project_key)
+    form = CreateTicketForm(request.POST or None, instance=ticket, request=request)
+    context = {'instance': ticket,"form": form, 'project': project}
+    return render(request, 'tracker/ticket_full_page.html', context)
 
 
 

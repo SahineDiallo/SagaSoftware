@@ -1,35 +1,33 @@
+{% extends 'tracker/partials/base.html' %}
 {% load crispy_forms_tags %}
-<!-- Tabs navs -->
-<ul class="nav nav-tabs nav-justified mb-3 tkt-dtls-menu border-0" id="ex1" role="tablist">
-    <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="ex1-tab-1" data-toggle="tab" href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">
-            OverView
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="ex1-tab-2" data-toggle="tab" href="#ex1-tabs-2" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">
-            History
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="ex1-tab-3" data-toggle="tab" href="#ex1-tabs-3" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">
-            Comments
-        </a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="full-page"  href="{% url 'ticket-details-page' site_slug=site_slug project_key=project_key ticket_key=key %}" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">
-            <i class="mdi mdi-24px mdi-arrow-expand" style="line-height: 0;"></i>
-        </a>
-        <i class="mdi mdi-24px mdi-close cl_cr"></i>
-    </li>
+{% block content %}
+<div class="over_header card-header py-1 px-2 bkl" style="padding: 0;">
+    <div class="d-flex">
+        <div class="d-flex align-items-center">
+            <div class="default-profile-picture2">
+                <span class="active_project_icon" style="color:{{project.project_color}}"><i class="mdi {{project.project_icon}} mdi-36px"></i></span>
+            </div>
+            <div class="d-flex ml-2 mt-1 flex-column">
+                <p class="lead2 m-0" style="font-size: 17px;">
+                    <span class="active_project" style="font-weight: 500;">{{project.name}}</span>
+                    <span class="active_project_key" style="font-style:italic;"> ({{project.key}})</span>
+                </p>
+                <span class="m-0 text-muted proj_type" style="font-size: 13px;">{{project.project_type}}</span>
+            </div> 
+        </div>
+        <div class="ml-auto d-flex align-items-center">
+            <span class="mr-2">members</span>
+            <span class="badge badge-danger mr-3">20</span>
+            {% if not request.user.is_developer %}
+              <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary btn-sm mr-2">Invite New members</button>
+            {% endif %}
+          </div>
+    </div>
+</div>
+<div class="row" style="background:#fff;">
 
-</ul>
-<!-- Tabs navs -->
-  
-<!-- Tabs content -->
-  <div class="tab-content" id="ex1-content">
-    <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1" >
-        <form method="POST" id="editTicketForm">
+    <div class="col-md-8 border-right">
+        <form method="POST" id="editFullTicketForm">
             {% csrf_token %}
             <div class="d-flex align-items-center mb-3">
                 <div class="d-none">{{form.ticket_type|as_crispy_field}}</div>
@@ -47,7 +45,7 @@
             <div class="d-flex align-items-center mb-3">
                 {{form.status}}
                 <span class="ml-3" style="font-size:12px; margin-top:10px;">           
-                    <div class="d-flex flex-column" style="color: #474040;">
+                    <div class="d-flex" style="color: #474040;">
                         <span>
                             <span class="inst_key">{{instance.key}}</span>
                              created by {{instance.created_by}}
@@ -100,12 +98,11 @@
             <button type="submit" id="edt_tkt_frm" class="btn btn-primary d-none">edit</button>
         </form>
     </div>
+    <div class="col-md-4">
+
+
+    </div>
+</div>
     
-    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-      Tab 2 content
-    </div>
-    <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-      Tab 3 content
-    </div>
-  </div>
-  <!-- Tabs content -->
+{% endblock content %}
+    

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views as tracker_views
+from tickets.views import ticketFullDetailsPage
 
 urlpatterns = [
      path("create_site/", tracker_views.create_site, name="site_creation"),
@@ -26,7 +27,8 @@ urlpatterns = [
           tracker_views.project_home, name="home"),
      path("<slug:site_slug>/projects/tickets/<slug:project_key>/",
           tracker_views.project_tickets, name="tickets"),
-
+     path("<slug:site_slug>/projects/tickets/edit-ticket/<slug:ticket_key>/<slug:project_key>/",
+          ticketFullDetailsPage, name="ticket-details-page"),
      path("<slug:site_slug>/projects/add-members/<slug:project_key>/",
           tracker_views.add_members_to_project, name="add_members"),
      

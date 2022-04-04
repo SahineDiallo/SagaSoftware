@@ -1581,12 +1581,14 @@ h4._tsk.mr-2.mb-0._ty_cl:hover {
     right: 0;
 }
 
-form#editTicketForm input:not(.chosen-search-input)
+form#editTicketForm input:not(.chosen-search-input),
+form#editFullTicketForm input:not(.chosen-search-input)
 {
     border: none;
 }
 
-form#editTicketForm input:hover {
+form#editTicketForm input:hover,
+form#editFullTicketForm input:hover {
     border: 1px solid #f3f3f3;
 }
 
