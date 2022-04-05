@@ -479,20 +479,60 @@ $(document).ready(function() {
         $('.cr-edt-tkt.p-3.edt-tkt').hide('slide', { direction: 'right' }, 500)
     });
 
-    $('.cr-edt-tkt.p-3.edt-tkt').on('focusout', 'input', (e) => {
-        var c_list = e.target.classList
-        if (c_list.contains('chosen-search-input') | c_list.contains('is-invalid')) return false
-        $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
+    // $('.cr-edt-tkt.p-3.edt-tkt').on('change', 'input', (e) => {
+    //     var c_list = e.target.classList
+    //     if (c_list.contains('chosen-search-input') | c_list.contains('is-invalid')) return false
+    //     $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
+
+    // });
+    var selector_list = [".cr-edt-tkt.p-3.edt-tkt", ".full_tkt_edt"]
+    selector_list.forEach((selector, index) => {
+        $(selector).on("change", 'select', (e)=> {
+            if(index === 1 ) {
+                $('.full_tkt_edt #edt_full_tkt_frm').click();
+            } else {
+                $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
+            }
+        });
+
+        $(selector).on("click", '._ty_cl', (e)=> {
+            $(e.target).parent().addClass('d-none')
+            e.target.parentElement.previousElementSibling.classList.remove('d-none')
+        });
+
+        $(selector).on('change', 'input', (e) => {
+            var c_list = e.target.classList
+            if (c_list.contains('chosen-search-input') | c_list.contains('is-invalid')) return false
+            if(index === 1 ) {
+                $('.full_tkt_edt #edt_full_tkt_frm').click();
+            } else {
+                $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
+            }
+        });
+        
+        $(selector).on('click', '.sbmt_frm', (e) => {
+            var form_id = e.target.closest('form').getAttribute('id');
+            updateTicket(e, index, selector, form_id)
+        });
 
     });
-    $('.cr-edt-tkt.p-3.edt-tkt').on('change', 'select', (e) => {
-        $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
-    });
 
-    $(".cr-edt-tkt.p-3.edt-tkt").on("click", '._ty_cl', (e)=> {
-        $(e.target).parent().addClass('d-none')
-        e.target.parentElement.previousElementSibling.classList.remove('d-none')
-    })
+
+    // selector_list.forEach((selector, index) => {
+    //     $(selector).on("click", '._ty_cl', (e)=> {
+    //         $(e.target).parent().addClass('d-none')
+    //         e.target.parentElement.previousElementSibling.classList.remove('d-none')
+    //     })
+
+    // })
+
+
+    // $(".cr-edt-tkt.p-3.edt-tkt").on("click", '._ty_cl', (e)=> {
+    //     $(e.target).parent().addClass('d-none')
+    //     e.target.parentElement.previousElementSibling.classList.remove('d-none')
+    // })
+
+
     $('.cr-edt-tkt.p-3.edt-tkt').on('click', '#edt_tkt_frm', (e) => {
         updateTicket(e);
     });
@@ -539,18 +579,18 @@ $(document).ready(function() {
     $(".cr-edt-tkt.p-3.edt-tkt").on('input', ' #id_est_hours', (e)=> {
         validatePositive(e.target.value, e.target)
     });
-    function updateTicket(e) {
-        e.preventDefault()
-        var form = document.querySelector(".cr-edt-tkt.p-3.edt-tkt #editTicketForm");
+    function updateTicket(e, index, selector, form_id) {
+        e.preventDefault();
+        var form = document.querySelector(`${selector} #${form_id}`);
         var form_data = new FormData(form)
-        var key = document.querySelector(".cr-edt-tkt.p-3.edt-tkt .inst_key").textContent.slice(1)
+        var key = document.querySelector(`${selector} .inst_key`).textContent.slice(1)
         var url = `/api/edit-ticket/${url_end}/?key=${key}`;
         fetch(url, {method:'POST', body: form_data})
         .then(res => res.json())
         .then(data => {
             if(data.form_changed) {
                 if (data.fname === "ticket_type") {
-                    var cur_type = document.querySelector(".cr-edt-tkt.p-3.edt-tkt ._ty_cl")
+                    var cur_type = document.querySelector(`${selector} ._ty_cl`)
                     var cur_class = cur_type.classList[3]
                     $(cur_type).removeClass(cur_class).addClass(data.type_class)
                     cur_type.textContent = data.fvalue
@@ -558,7 +598,7 @@ $(document).ready(function() {
                     $(cur_type).parent().removeClass('d-none')
     
                 } else if(data.fname === "assignee" | data.fname === "accountable"){
-                    var ass_or_acc = document.querySelector(`.cr-edt-tkt.p-3.edt-tkt .tkts-asg.ml-2.${data.fname.slice(0, 3)}`)
+                    var ass_or_acc = document.querySelector(`${selector} .tkts-asg.ml-2.${data.fname.slice(0, 3)}`)
                     if (ass_or_acc.classList.contains('d-none') ){
                         $(ass_or_acc).removeClass('d-none') 
                     }
@@ -569,9 +609,12 @@ $(document).ready(function() {
                     ass_or_acc.textContent = data.first_letters
                 }
                 alertUser(`${data.fname} `, 'has been updated with success', "Ticket's ")
-                var tr = document.querySelector(`#key_${key.slice(1)}`).closest('tr')
-                $(tr).html("")
-                $(tr).html(data.template) // update the edited table row
+                if(index === 0 ) {
+                    var tr = document.querySelector(`#key_${key.slice(1)}`).closest('tr')
+                    $(tr).html("")
+                    $(tr).html(data.template) // update the edited table row
+                }
+                
             }
         })
         .catch(error => {
