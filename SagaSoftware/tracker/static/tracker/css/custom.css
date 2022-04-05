@@ -1501,6 +1501,13 @@ table.dataTable td:nth-child(1) {
     background: white !important;
     color: black;
 }
+.empt_hist {
+    font-size: 13px;
+    color: #828485;
+    background: #e9e6e6;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
 
 #ex1-content #id_subject {
     font-weight: 500;

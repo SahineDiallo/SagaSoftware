@@ -8,13 +8,16 @@ from rest_framework import viewsets, status
 from .serializers import ReadTicketSerializer, WriteTicketSerializer, UserSerializer
 from .models import Ticket
 from tracker.models import Project
-from accounts.utils import get_tickets_by_kwargs, get_type_class
+from accounts.utils import (
+    get_tickets_by_kwargs, get_type_class, 
+    createTicketHistory, get_val_from_ordDict
+)
 from rest_framework.response import Response
 from .forms import CreateTicketForm
 from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
 from django.template.loader import render_to_string
-
+import json
 # from rest_framework.pagination import LimitOffsetPagination
 
 
@@ -77,12 +80,14 @@ def editTicket(request, project_key):
     key = '#' + request.GET.get('key')
     instance = Ticket.objects.get(key=key)
     type_class = get_type_class(instance.ticket_type)
+    old_inst = ReadTicketSerializer(instance).data
     form = CreateTicketForm(request.POST or None, instance=instance, request=request)
     if request.method == "POST":
         if form.is_valid():
             if form.has_changed():
                 result["form_changed"] = True
                 field_name = form.changed_data[0]
+                old_val = get_val_from_ordDict(field_name, old_inst)
                 field_obj = Ticket._meta.get_field(field_name)
                 field_value = field_obj.value_from_object(instance)
                 result["fname"] = field_name
@@ -96,8 +101,13 @@ def editTicket(request, project_key):
                 elif field_name == "accountable" and form.instance.accountable != None:
                     result['background'] = form.instance.accountable.background
                     result['first_letters'] = form.instance.accountable.get_first_letters()
-                result["fvalue"] = field_value
+                result["fvalue"] = field_value #using the get attribute to get the old val of the inst
                 form.save()
+                new_inst = ReadTicketSerializer(form.instance).data
+                new_val = get_val_from_ordDict(field_name, new_inst)
+                print(new_val)
+                tkt_hist = createTicketHistory(request, form.instance, field_name, old_val, new_val)
+                hist_template = render_to_string( "tracker/ticket_history.html", { 'instance': tkt_hist,}, request=request)
                 result['not_valid'] = False
                 new_t_cl = get_type_class(form.instance.ticket_type)
                 tem_key = form.instance.key[2:]
@@ -108,6 +118,7 @@ def editTicket(request, project_key):
                     }, request=request
                 )
                 result['template'] = template
+                result['hist_template'] = hist_template
                 return JsonResponse(result)
             else:
                 pass

@@ -509,22 +509,25 @@ $(document).ready(function() {
                 $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
             }
         });
-        
+
         $(selector).on('click', '.sbmt_frm', (e) => {
             var form_id = e.target.closest('form').getAttribute('id');
             updateTicket(e, index, selector, form_id)
+        });
+        $(selector).on('keydown', 'form', (event)=> {
+            if(event.keyCode == 13 && !$(document.activeElement).is('textarea')) {
+              event.preventDefault();
+              let el = document.querySelector( ':focus' );
+              if( el ) el.blur();
+              return false;
+    
+            };
         });
 
     });
 
 
-    // selector_list.forEach((selector, index) => {
-    //     $(selector).on("click", '._ty_cl', (e)=> {
-    //         $(e.target).parent().addClass('d-none')
-    //         e.target.parentElement.previousElementSibling.classList.remove('d-none')
-    //     })
 
-    // })
 
 
     // $(".cr-edt-tkt.p-3.edt-tkt").on("click", '._ty_cl', (e)=> {
@@ -614,6 +617,9 @@ $(document).ready(function() {
                     $(tr).html("")
                     $(tr).html(data.template) // update the edited table row
                 }
+                var empty_hist = $(`${selector} .tkt_hist .empt_hist`)
+                if(empty_hist.length) {$(empty_hist.fadeOut())}
+                $(`${selector} .tkt_hist`).append(data.hist_template)
                 
             }
         })

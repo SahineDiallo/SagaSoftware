@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas clr-bk" id="sidebar" style="background: {{activeProjectBg}}">
   <ul class="nav">
     <li class="nav-item {% if 'dashbaord' in request.get_full_path %}active{% endif %}">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{% url 'dashboard' site_slug=site_slug %}">
         <i class="mdi mdi-chart-bar-stacked menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>

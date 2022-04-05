@@ -12,7 +12,7 @@ urlpatterns = [
      path("<slug:site_slug>/create_project/",
           tracker_views.createProject, name="create_project"),
      path("<slug:site_slug>/dashboard/",
-          tracker_views.DashbaordView.as_view(), name="dashbaord"),
+          tracker_views.DashbaordView.as_view(), name="dashboard"),
      path("<slug:site_slug>/projects/settings/<slug:project_key>/",
           tracker_views.ProjectDetailView.as_view(), name="project_details"),
      path("<slug:site_slug>/projects/edit/<slug:project_key>/",

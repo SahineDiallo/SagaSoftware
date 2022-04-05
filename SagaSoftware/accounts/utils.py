@@ -9,7 +9,7 @@ from django.template.loader import get_template
 from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
-from tickets.models import Ticket
+from tickets.models import Ticket, TicketHistory
 from django.db.models import Q
 
 colorPickerList = {
@@ -216,3 +216,16 @@ def get_type_class(type):
         return "_bug"
     return '_other'
 
+
+def createTicketHistory(request, ticket, f_name, old_val, new_val):
+    hist_instance = TicketHistory.objects.create(
+        author=request.user,
+        ticket=ticket, field_name=f_name, old_value=old_val, 
+        new_value=new_val, updated=ticket.updated_date
+    )
+    return hist_instance
+
+def get_val_from_ordDict(f_name, ord_dict):
+    if f_name == 'assignee' or f_name == 'accountable':
+        return list(ord_dict[f_name].items())[0][1] #need to get the full_name
+    return ord_dict[f_name]

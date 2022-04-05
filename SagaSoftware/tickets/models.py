@@ -55,7 +55,6 @@ class Ticket(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
-
     def __str__(self):
         return self.ticket_type
 
@@ -80,3 +79,15 @@ class Ticket(models.Model):
             return "_low"
         return "_imm"
 
+
+class TicketHistory(models.Model):
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="histories")
+    author = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, blank=True, related_name="author")
+    field_name = models.CharField(max_length=200)
+    old_value = models.CharField(max_length=200)
+    new_value = models.CharField(max_length=200)
+    updated = models.DateTimeField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.author} updated {self.ticket.key}'

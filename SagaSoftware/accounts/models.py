@@ -90,7 +90,7 @@ class User(AbstractBaseUser):
 
     def get_first_letters(self):
         l = self.full_name.split(" ")
-        return l[0][0].upper() + l[1][0].upper()
+        return l[0][0].upper() + l[-1][0].upper()
 
 
 
