@@ -2,7 +2,8 @@
     <div class="d-flex flex-column">
         <div class="item-thumbnail">
             <span class="tkts-asg" style="background:{{instance.author.background}}">{{instance.author.get_first_letters}}</span>
-            <span class="trending-action ml-2" style="font-size:12px;"> {{instance.author.full_name}} updated the <strong>{{instance.field_name}}</strong> of: {{instance.ticket.key}}
+            <span class="trending-action ml-2" style="font-size:12px;">
+                <span class="author"> {{instance.author.full_name}} </span>updated the <strong>{{instance.field_name}}</strong> of: {{instance.ticket.key}}
         </span></div>
         <div class="trending-values ml-5">
             <span style="font-size:12px;">from {{instance.old_value}} to <strong>{{instance.new_value}}</strong></span>

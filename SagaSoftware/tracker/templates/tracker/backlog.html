@@ -1,6 +1,7 @@
 {% extends 'tracker/partials/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load static %}
 <div class="over_header card-header py-1 px-2 bkl" style="padding: 0;">
     <div class="d-flex">
         <div class="d-flex align-items-center">
@@ -56,13 +57,13 @@
 <div class="bkl-parent">
     <div class="bkl-hd">
         <div class="d-flex justify-content-between align-items-center p-3">
-            <h3>All Open</h3>
+            <h3 class="cur_filter">All Open</h3>
             <div>
                 <button type="button" id="nw_tkt" class="btn btn-sm btn-primary">
                     <i class="mdi mdi-plus"></i>
                     Ticket
                 </button>
-                <button type="button" class="btn btn-sm btn-secondary">
+                <button type="button" id="filter_btn" class="btn btn-sm btn-secondary ">
                     <i class="mdi mdi-filter"></i>
                     Filters
                 </button>
@@ -82,7 +83,7 @@
 
         </div>
         <div class="filters p-3">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center mb-2">
                 <span class="mb-3 mr-3">Status: </span>
                 <div class="status_filter">
                     <input type="radio"  name="status_fil" id="All" checked value="All">
@@ -95,28 +96,32 @@
                     <label class="status_check_label" for="not_closed">Not Closed</label>                
                 </div>
             </div>
-            <div class="d-flex align-items-center ">
-                <select multiple="multiple" name="toggle_columns" id="toggle_columns">
-                    <option value="0">Key</option>
-                    <option value="1">Subject</option>
-                    <option value="2">Type</option>
-                    <option value="3">Status</option>
-                    <option value="4">Priority</option>
-                    <option value="5">Assignee</option>
-                    <option value="6">Accountable</option>
-                    <option value="7">Progress</option>
-                    <option value="8">Milestone</option>
-                    <option value="9">Estimated Hours</option>
-                    <option value="10">Start Date</option>
-                    <option value="11">End Date</option>
-                    <option value="12">Created By</option>
-                    <option value="13">Actual Hours</option>
-                    <option value="14">Update On</option>
-                    <option value="15">Create On</option>
-                </select>
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column">
+                    <label for="toggle_columns">View Options</label>
+                    <select multiple="multiple" name="toggle_columns" id="toggle_columns">
+                        <option value="0">Key</option>
+                        <option value="1">Subject</option>
+                        <option value="2">Type</option>
+                        <option value="3">Status</option>
+                        <option value="4">Priority</option>
+                        <option value="5">Assignee</option>
+                        <option value="6">Accountable</option>
+                        <option value="7">Progress</option>
+                        <option value="8">Milestone</option>
+                        <option value="9">Estimated Hours</option>
+                        <option value="10">Start Date</option>
+                        <option value="11">End Date</option>
+                        <option value="12">Created By</option>
+                        <option value="13">Actual Hours</option>
+                        <option value="14">Update On</option>
+                        <option value="15">Create On</option>
+                    </select>
+                </div>
                 <div class="col-md-3">
+                    <label for="assignee_select">Assignee</label>
                     <div class="form-group mb-0" >
-                        <select class="form-control" id="assignee_select">
+                        <select class="form-control" id="assignee_select" data-placeholder="Filter by assignee">
                             {% for member in members %}
                                 <option value="" selected></option>
                                 <option>{{member.full_name}}</option>
@@ -127,7 +132,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group mb-0">
-                        <select class="form-control" id="accountable_select">
+                        <label for="accountable_select">Accountable</label>
+                        <select class="form-control" id="accountable_select" data-placeholder="Filter by accountable">
                             {% for member in members %}
                                 <option value="" selected></option>
                                 <option>{{member.full_name}}</option>
@@ -137,8 +143,9 @@
                     </div>
                 </div>
                 <div class="col-md-2">
+                    <label for="type_select">Type</label>
                     <div class="form-group mb-0">
-                        <select class="form-control" id="type_select">
+                        <select class="form-control" id="type_select" data-placeholder="Filter by type">
                             <option value="All" selected>All</option>
                             {% for choice in type_list %}
                                 <option value="{{choice}}">{{choice}}</option>
@@ -177,3 +184,16 @@
     </div>
 </div>
 {% endblock content %}
+{% block scripts %}
+<script src="{% static 'tracker/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'tracker/js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'tracker/js/dataTables.fixedColumns.min.js' %}"></script>
+<script src="//cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="//cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="//cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+<script src="{% static 'tracker/js/multiple-select.min.js' %}"></script>
+
+{% endblock scripts %}

@@ -167,6 +167,8 @@ def get_tickets_by_kwargs(user, project, **kwargs):
         status = status[0]
         if status == 'not_closed':
             queryset = queryset.exclude(status='Closed')
+        elif status == 'All':
+            queryset = queryset
         else:
             queryset = queryset.filter(status=status)
 
@@ -229,3 +231,4 @@ def get_val_from_ordDict(f_name, ord_dict):
     if f_name == 'assignee' or f_name == 'accountable':
         return list(ord_dict[f_name].items())[0][1] #need to get the full_name
     return ord_dict[f_name]
+

@@ -1018,6 +1018,12 @@ li.d-flex.header span {
     outline: none;
     display: none;
 }
+.d-flex.align-items-center.p_subj .dropdown-item {
+    padding: 10px 15px;
+}
+.d-flex.align-items-center.p_subj .dropdown-item:active {
+    color: #000 !important;
+}
 
 .new-status .badge {
     min-width: 150px;
@@ -1229,8 +1235,8 @@ table#tkts-bkl {
 }
 
 .subj {
-    min-width: 200px;
-    max-width: 270px;
+    min-width: 300px;
+    max-width: 290px;
 }
 
 #tkts-bkl_wrapper div:nth-child(even) .col-sm-12 {
@@ -1485,6 +1491,13 @@ table.dataTable td:nth-child(1) {
 #ex1-content {
     overflow-y: auto;
 }
+.filters.p-3 label {
+    font-size: 13px;
+    font-weight: 500;
+}
+/* .filters.p-3 {
+    display: none;
+} */
 
 #ex1-content .form-control:focus,
 #editFullTicketForm .form-control:focus,
@@ -1495,6 +1508,12 @@ table.dataTable td:nth-child(1) {
     outline: 0;
     /* box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%); */
 }
+span.author {
+    font-weight: 700;
+    color: #00458f;
+}
+
+
 
 #ex1-content #id_status option,
 #editFullTicketForm #id_status option {
@@ -1528,7 +1547,7 @@ table.dataTable td:nth-child(1) {
 }
 
 ._subj {
-    max-width: 300px;
+    max-width: 270px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -1537,6 +1556,13 @@ table.dataTable td:nth-child(1) {
 
 .dataTables_scrollBody {
     padding-bottom: 100px;
+}
+.p_subj {
+    transition: all ease .3s;
+    display: none;
+}
+table tbody tr:hover .p_subj {
+    display: block;
 }
 
 .hd_ {

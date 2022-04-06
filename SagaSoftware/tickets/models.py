@@ -91,3 +91,15 @@ class TicketHistory(models.Model):
 
     def __str__(self):
         return f'{self.author} updated {self.ticket.key}'
+
+
+class Comment(models.Model):
+    body = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='comments')
+    ticket = models.ForeignKey(Ticket, related_name='comments', on_delete=models.CASCADE)
+    updated = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.author}'s comment"

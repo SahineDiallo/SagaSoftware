@@ -46,6 +46,13 @@ $(document).ready(function() {
     })
     $('input[type=radio][name=status_fil]').change(function() {
         status = this.value;
+        if (this.value === "All") {
+            $(".cur_filter").text(`All`)
+        } else if (this.value === "not_closed") {
+            $(".cur_filter").text("All Open")
+        } else {
+            $(".cur_filter").text(this.value)
+        }
         table.draw();
     });
     table = $("#tkts-bkl").DataTable({
@@ -93,9 +100,10 @@ $(document).ready(function() {
         ],
 
         "language": {
-            "processing": `<div class="d-flex justify-content-center" style="margin-top:50%;">
-                                <div class="lds-hourglass "></div>
-                            </div>&emsp;Loading ...`,
+            "processing": `
+            <div class="d-flex justify-content-center">
+                <div class="lds-hourglass "></div>
+            </div>&emsp;`,
         },
         "columns": [
 
@@ -113,10 +121,28 @@ $(document).ready(function() {
                 "data": "subject",
                 render: function(data, type) {
                     if (type === "display") {
-                        return `<span class="_subj">
-                                    <i class="mdi mdi-information tkt-dtls"></i>
-                                    ${data}
-                                </span>`
+                        return `<div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center p_subj">
+                                        <i class="mdi mdi-information tkt-dtls"></i>
+                                        <div class="dropdown">
+                                            <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#">
+                                                <i class="mdi mdi-book-open mr-2"></i>
+                                                ticket details
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="mdi mdi-fullscreen mr-2"></i>
+                                                See full details
+                                            </a>
+                                            <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-2"></i>delete </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="_subj">
+                                        ${data}
+                                    </span>
+                                </div>`
                     }
                     return data;
                 }
@@ -321,6 +347,7 @@ $(document).ready(function() {
                 s = selectedCols[i]
                 table.column(s).visible(1);
             }
+            $("#tkts-bkl").css('width', '100%')
         },
         onCheckAll: function() {
             showAllColumns()
@@ -479,12 +506,6 @@ $(document).ready(function() {
         $('.cr-edt-tkt.p-3.edt-tkt').hide('slide', { direction: 'right' }, 500)
     });
 
-    // $('.cr-edt-tkt.p-3.edt-tkt').on('change', 'input', (e) => {
-    //     var c_list = e.target.classList
-    //     if (c_list.contains('chosen-search-input') | c_list.contains('is-invalid')) return false
-    //     $('.cr-edt-tkt.p-3.edt-tkt #edt_tkt_frm').click();
-
-    // });
     var selector_list = [".cr-edt-tkt.p-3.edt-tkt", ".full_tkt_edt"]
     selector_list.forEach((selector, index) => {
         $(selector).on("change", 'select', (e)=> {
@@ -526,19 +547,6 @@ $(document).ready(function() {
 
     });
 
-
-
-
-
-    // $(".cr-edt-tkt.p-3.edt-tkt").on("click", '._ty_cl', (e)=> {
-    //     $(e.target).parent().addClass('d-none')
-    //     e.target.parentElement.previousElementSibling.classList.remove('d-none')
-    // })
-
-
-    $('.cr-edt-tkt.p-3.edt-tkt').on('click', '#edt_tkt_frm', (e) => {
-        updateTicket(e);
-    });
 
     $(".cr-edt-tkt.p-3.edt-tkt").on('input', ' #id_subject', (e)=> {
         validateSubject(e.target.value, e.target)
@@ -629,5 +637,9 @@ $(document).ready(function() {
             
         });
     }
+
+    $("#filter_btn").on("click", (e)=> {
+        $(".filters.p-3").slideToggle("slow");
+    });
 
 });

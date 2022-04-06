@@ -105,7 +105,6 @@ def editTicket(request, project_key):
                 form.save()
                 new_inst = ReadTicketSerializer(form.instance).data
                 new_val = get_val_from_ordDict(field_name, new_inst)
-                print(new_val)
                 tkt_hist = createTicketHistory(request, form.instance, field_name, old_val, new_val)
                 hist_template = render_to_string( "tracker/ticket_history.html", { 'instance': tkt_hist,}, request=request)
                 result['not_valid'] = False
