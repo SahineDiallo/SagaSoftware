@@ -1104,10 +1104,14 @@ span.user-p-img {
     height: 32px;
     width: 32px;
     border-radius: 50px;
-    border: 2px solid #6a6a6a;
+    border: 2px solid #6a6a6a38;
     display: inline-block;
     line-height: 30px;
     text-align: center;
+    margin-left: -5px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .04rem;
 }
 .full_tkt_edt .col-md-8.border-right,
 .full_tkt_edt .col-md-4.border-left {

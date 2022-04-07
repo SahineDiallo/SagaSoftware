@@ -39,7 +39,7 @@ class Ticket(models.Model):
     project      = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tickets')
     subject      = models.CharField(max_length=255)
     ticket_type  = models.CharField(max_length=50, choices=TicketType.choices, default=TicketType.TASK)
-    status       = models.CharField(max_length=50, choices=TicketStatus.choices, default=TicketStatus.TODO)
+    status       = models.CharField(max_length=50, choices=TicketStatus.choices, default=TicketStatus.OPEN)
     priority     = models.CharField(max_length=20, choices=TicketPriority.choices, default=TicketPriority.NORMAL)
     created_by   = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="created_tickets", blank=True, null=True)
     assignee     = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="tickets", blank=True, null=True)

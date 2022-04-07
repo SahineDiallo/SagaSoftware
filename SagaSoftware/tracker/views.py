@@ -292,8 +292,8 @@ def project_home(request, site_slug, project_key):
 @login_required
 def project_board(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
-    
-    context = {'project': project}
+    form = CreateTicketForm(request.POST or None, request=request)
+    context = {'project': project, 'form': form,}
     return render(request, 'tracker/board.html', context)
 
 @login_required

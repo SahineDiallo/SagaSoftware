@@ -10,6 +10,7 @@ from tickets.views import (
     editTicket,
     validatePositiveInput,
     validateSubject,
+    updateBoardStatus,
 )
 
 
@@ -23,6 +24,7 @@ urlpatterns = [
     path('api/edit-ticket/<slug:project_key>/', editTicket, name="edit-ticket"),
     path('api/validate-subject/', validateSubject, name='validate-subject'),
     path('api/validate-number/', validatePositiveInput, name='validate-positive-input'),
+    path('api/<slug:site_slug>/<slug:project_key>/<slug:ticket_key>/', updateBoardStatus, name='updated-board-status'),
     path("accounts/", include("accounts.urls")),
     path("trackers/", include("tracker.urls")),
 ] + router.urls

@@ -20,10 +20,14 @@ $(document).ready(function() {
     if (ticket_full_pg_status !== null ) {
         adjustSelectLength(ticket_full_pg_status)
     }
-
-    $("#nw_tkt").on("click", (e) => {
-        $(".cr-edt-tkt.nw_tkt").show('slide', { direction: 'right' }, 500)
-    });
+    ["#nw_tkt", "#add_tkt"].forEach((selector, index) => {
+        $(selector).on("click", (e) => {
+            $(".cr-edt-tkt.nw_tkt").show('slide', { direction: 'right' }, 500)
+        })
+    })
+    // $("#nw_tkt").on("click", (e) => {
+    //     $(".cr-edt-tkt.nw_tkt").show('slide', { direction: 'right' }, 500)
+    // });
     $(".cl_cr").on("click", (e) => {
         $(".cr-edt-tkt").hide('slide', { direction: 'right' }, 500)
     });
@@ -408,6 +412,10 @@ $(document).ready(function() {
                 } else {
                     $(".cr-edt-tkt .cl_cr").click();
                     $("#createTicketForm")[0].reset();
+                    if(window.location.pathname.includes('board')){
+                        $('._stat.open').append(data.card_template)
+                        $('._stat').sortable('refresh')
+                    }
                     alertUser("ticket", 'created_successfully!', 'New')
                     table.draw();
                 }
@@ -644,5 +652,11 @@ $(document).ready(function() {
     $("#filter_btn").on("click", (e)=> {
         $(".filters.p-3").slideToggle("slow");
     });
+    $('.add-ticket').on("click", (e)=> {
+        console.log('add ticket')
+    })
+    $('.add-project').on("click", (e)=> {
+        console.log('add project')
+    })
 
 });

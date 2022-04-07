@@ -61,8 +61,10 @@ def createTicket(request, project_key):
         form.instance.key = f'#.{project.key_tracker}'
         project.key_tracker += 1
         project.save()
+        card_template = render_to_string('tracker/new_card.html', {'ticket': form.instance}, request=request)
         template = render_to_string("tracker/new_ticket.html", {'instance': form.instance}, request=request)
         form.save()
+        result['card_template'] =card_template
         result['template'] = template
         return JsonResponse(result)
     else:
@@ -166,6 +168,16 @@ def ticketFullDetailsPage(request, site_slug, project_key, ticket_key):
         'type_class': type_class
     }
     return render(request, 'tracker/ticket_full_page.html', context)
+
+
+def updateBoardStatus(request, site_slug, project_key, ticket_key):
+    #put here a try and except block
+    ticket = get_object_or_404(Ticket, key='#.'+ticket_key)
+    new_status = request.GET.get('new_status')
+    ticket.status = new_status
+    ticket.save()
+    print(ticket.priority)
+    return JsonResponse({'success': True})
 
 
 
