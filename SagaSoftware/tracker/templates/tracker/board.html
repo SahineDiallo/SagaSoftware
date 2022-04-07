@@ -1,0 +1,112 @@
+{% extends 'tracker/partials/base.html' %}
+{% load static %}
+{% block content %}
+<div class="over_header card-header py-1 px-2 bkl" style="padding: 0;">
+    <div class="d-flex">
+        <div class="d-flex align-items-center">
+            <div class="default-profile-picture2">
+                <span class="active_project_icon" style="color:{{project.project_color}}"><i class="mdi {{project.project_icon}} mdi-36px"></i></span>
+            </div>
+            <div class="d-flex ml-2 mt-1 flex-column">
+                <p class="lead2 m-0" style="font-size: 17px;">
+                    <span class="active_project" style="font-weight: 500;">{{project.name}}</span>
+                    <span class="active_project_key" style="font-style:italic;"> ({{project.key}})</span>
+                </p>
+                <span class="m-0 text-muted proj_type" style="font-size: 13px;">{{project.project_type}}</span>
+            </div> 
+        </div>
+        <div class="ml-auto d-flex align-items-center">
+            <span class="mr-2">members</span>
+            <span class="badge badge-danger mr-3">20</span>
+            {% if not request.user.is_developer %}
+              <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary btn-sm mr-2">Invite New members</button>
+            {% endif %}
+          </div>
+    </div>
+</div>
+<div class="d-flex pt-3 justify-content-center">
+    <div class="_stat open">
+        <h5>Open</h5>
+        {% for ticket in projects.tickets.all %}
+            {% if ticket.status == 'Open' %}
+                <div class="card">
+                    <div class="card-body p-0">
+                        
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="_stat todo">
+        <h5>todo</h5>
+        {% for ticket in project.tickets.all %}
+            {% if ticket.status == 'Todo' %}
+                <div class="card">
+                    <div class="card-body p-0">
+                        
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="_stat in_pro">
+        <h5>In Progress</h5>
+        {% for ticket in project.tickets.all %}
+            {% if ticket.status == 'In Progress' %}
+                <div class="card" data-key="{{ticket.key}}" style="border-left: 5px solid {{ticket.get_ticket_priority_background}}">
+                    <div class="card-body p-2">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span class="{{ticket.get_ticket_type}}">{{ticket.ticket_type}}</span>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ticket.progress}}%" aria-valuenow="{{ticket.progress}}" aria-valuemin="0" aria-valuemax="100">
+                                    {{ticket.progress}}%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-2"><span class="_c_subj">{{ticket.subject}}</span></div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="flex align-items-center">
+                                <span class="badge _c_badge" style="background:{{ticket.get_ticket_priority_background}}; ">
+                                {{ticket.priority}}
+                                </span>
+                                <span class="tkt_key">{{ticket.key}}</span>
+                            </div>
+                            <span class="tkts-asg" style="background:{{ticket.assignee.background}}">{{ticket.assignee.get_first_letters}}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="_stat resolved">
+        <h5>Resolved</h5>
+        {% for ticket in project.tickets.all %}
+            {% if ticket.status == 'Resolved' %}
+                <div class="card">
+                    <div class="card-body p-0">
+                        
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="_stat closed">
+        <h5>Closed</h5>
+        {% for ticket in project.tickets.all %}
+            {% if ticket.status == 'Closed' %}
+                <div class="card">
+                    <div class="card-body p-0">
+                        
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'tracker/js/board.js' %}"></script>
+<script src="{% static 'tracker/js/jquery.ui.sortable.min.js' %}"></script>
+{% endblock scripts %}

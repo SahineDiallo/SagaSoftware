@@ -80,6 +80,25 @@ class Ticket(models.Model):
         return "_imm"
 
 
+    def get_ticket_priority_background(self):
+        if self.priority == "Normal":
+            return "#ff7423"
+        elif self.priority == "High":
+            return "#f9605b"
+        elif self.priority == "Low":
+            return "#82807f"
+        return "#e60c05"
+    
+    def get_ticket_type(self):
+        if self.ticket_type == "TASK":
+            return '_tsk'
+        elif self.ticket_type == "REQUEST":
+            return '_feat'
+        elif self.ticket_type == "BUG":
+            return "_bug"
+        return '_other'
+
+
 class TicketHistory(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="histories")
     author = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, blank=True, related_name="author")

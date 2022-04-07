@@ -2,8 +2,29 @@
     <td class="text-center sorting_1">
         <span id="key_{{key}}">{{instance.key}}</span>
     </td>
-    <td><span class="_subj">
-        <i class="mdi mdi-information tkt-dtls"></i>{{instance.subject}}</span>
+    <td>
+        <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center p_subj">
+                <i class="mdi mdi-information tkt-dtls"></i>
+                <div class="dropdown">
+                    <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item">
+                        <i class="mdi mdi-book-open mr-2"></i>
+                        ticket details
+                    </a>
+                    <a class="dropdown-item" href="{% url 'ticket-details-page' site_slug=site_slug ticket_key=key project_key=project_key %}">
+                        <i class="mdi mdi-fullscreen mr-2"></i>
+                        See full details
+                    </a>
+                    <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-2"></i>delete </a>
+                    </div>
+                </div>
+            </div>
+            <span class="_subj">
+                {{instance.subject}}
+            </span>
+        </div>
     </td>
     <td>
         <span class="{{new_cl}}">{{instance.ticket_type}}</span> 

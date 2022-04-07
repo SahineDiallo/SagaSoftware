@@ -280,7 +280,8 @@ def delete_milestone(request, mil_id):
     milestone = get_object_or_404(Milestone, id=mil_id)
     milestone.delete()
     return JsonResponse({'success': True,})
-    
+
+@login_required   
 def project_home(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     
@@ -288,10 +289,11 @@ def project_home(request, site_slug, project_key):
     return render(request, 'tracker/home.html', context)
 
 
+@login_required
 def project_board(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     
-    context = {}
+    context = {'project': project}
     return render(request, 'tracker/board.html', context)
 
 @login_required

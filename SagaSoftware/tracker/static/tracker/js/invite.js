@@ -26,7 +26,7 @@ $(document).ready(function() {
                         if (datas.no_emails) {
                             alert("Please provide at least one email to send an invitation!")
                         } else {
-                            $("#invitationModal .close").click();
+                            $("#invitationsModal .close").click();
                             $(form)[0].reset();
                             alertUser("", 'invitations has been sent successfully!', "New")
                         }
@@ -74,4 +74,8 @@ $(document).ready(function() {
         alertify.set('notifier', 'delay', 10);
         alertify.success(`${type} <span class="alert-key">${key} </span>${message}`);
     };
+
+    $("#invitationsModal .close").on("click", (e) => {
+        $("#InviteForm")[0].reset();
+    })
 })

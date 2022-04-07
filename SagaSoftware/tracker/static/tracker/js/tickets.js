@@ -4,7 +4,9 @@ $(document).ready(function() {
     let accountable;
     let status;
     let type;
+    let h_key;
     var url_end = (window.location.pathname).split("/").at(-2)
+    var site_slug = (window.location.pathname).split("/")[2]
     let _type = ""
     let backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#f39219', Closed: '#7608dd', 'In Progress': '#055ebd' }
     var end_date = $('#createTicketForm #id_end_date')
@@ -111,6 +113,7 @@ $(document).ready(function() {
                 "data": "key",
                 render: function(data, type) {
                     if (type === "display") {
+                        h_key = data.trim().slice(2)
                         return `<span id="key_${data.trim().slice(2)}"> ${data} </span>`
                     }
                     return data;
@@ -131,7 +134,7 @@ $(document).ready(function() {
                                                 <i class="mdi mdi-book-open mr-2"></i>
                                                 ticket details
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="/trackers/${site_slug}/projects/tickets/edit-ticket/${h_key}/${url_end}/">
                                                 <i class="mdi mdi-fullscreen mr-2"></i>
                                                 See full details
                                             </a>

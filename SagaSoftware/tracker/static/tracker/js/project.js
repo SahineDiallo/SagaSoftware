@@ -95,12 +95,10 @@ $(document).ready(function() {
         $(e.target).attr("disabled", true)
     })
     $(".add_members_section").on("click", (e) => {
-        console.log($(e.target).attr("id"))
         if ($(e.target).attr("id") === "add_new_members") return addNewMembersFunc(e);
     });
 
     function addNewMembersFunc(e) {
-        console.log("ok")
         e.preventDefault();
         var _form = document.querySelector("#add_proj_members")
         var url = `/trackers/${site_slug}/projects/add-members/${url_end}/`
@@ -267,8 +265,7 @@ $(document).ready(function() {
                     if (!data.response && data.not_valid) {
                         $("#vert-tabs-right-tabContent #createProjectForm").replaceWith(data.formErrors)
                     } else {
-                        console.log(data.name)
-                        currVal = data.value
+
                         setTimeout(() => {
 
                             // ALERT THE USER ABOUT THE THEME CHANGE
@@ -308,7 +305,6 @@ $(document).ready(function() {
 
     $("#remove_mem").on("click", (e) => {
         var user_id = document.querySelector("#RemoveMemberModal .modal-body").getAttribute('data-reg')
-        console.log(user_id)
         var url = `/trackers/${site_slug}/projects/remove-member/${url_end}/${user_id}/`
         fetch(url)
             .then(resp => resp.json())
@@ -326,10 +322,8 @@ $(document).ready(function() {
     function createProjectFunc(e) {
         e.preventDefault();
         var _form = document.getElementById("createProjectForm")
-        console.log(_form)
         var url = `/trackers/${site_slug}/create_project/`
         data = new FormData(_form)
-        console.log("this isthe data from the form", data)
         fetch(url, {
                 method: 'POST',
                 body: data,
@@ -422,7 +416,6 @@ $(document).ready(function() {
         hover_open.attr("style", `background:${color};`)
         sidebarLi.attr("style", "border-bottom: none;")
         $("#sidebar ul li.borderBottom").attr("style", `border-bottom: 1px solid #f3f3f373;`)
-        console.log(color)
         if (color === "#ffffff") {
             $(".navbar-brand-wrapper").attr("style", `background:#ffffff;`)
             $(".navbar-menu-wrapper").attr("style", `background:#ffffff;`)
@@ -504,7 +497,6 @@ $(document).ready(function() {
                         $("#vert-tabs-right-tabContent #createProjectForm").replaceWith(data.formErrors)
                         $(_icon).next().fadeOut()
                     } else {
-                        console.log(data.name)
                         currVal = data.value
                         setTimeout(() => {
                             $(_icon).next().fadeOut();
@@ -528,7 +520,6 @@ $(document).ready(function() {
         e.stopImmediatePropagation();
         var $el = e.target
         if ($(e.target).attr("type") === "radio") {
-            console.log('radio')
             editRadionBtn();
         }
         if ($el.classList.contains("change-theme-btn")) {
@@ -608,7 +599,6 @@ $(document).ready(function() {
         fetch(url, { method: 'POST', body: form_data })
             .then(response => response.json())
             .then(data => {
-                console.log("this is the data", data)
                 if (!data.response && data.not_valid) {
                     data.formErrors ? $("#nav-general #createProjectForm").replaceWith(data.formErrors) : ""
 
@@ -645,7 +635,6 @@ $(document).ready(function() {
         fetch(url, { method: 'POST', body: form_data })
             .then(res => res.json())
             .then(data => {
-                console.log("data", data)
                     // if success : close the modal, alert the user and update the datatable
                 if (data.success) {
                     $('#editRoleModal').modal('toggle');

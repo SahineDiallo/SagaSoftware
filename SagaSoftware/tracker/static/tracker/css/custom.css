@@ -1099,6 +1099,21 @@ li.d-flex.header span {
         transform: scale(1.0);
     }
 }
+span.user-p-img {
+    color: #fff;
+    height: 32px;
+    width: 32px;
+    border-radius: 50px;
+    border: 2px solid #6a6a6a;
+    display: inline-block;
+    line-height: 30px;
+    text-align: center;
+}
+.full_tkt_edt .col-md-8.border-right,
+.full_tkt_edt .col-md-4.border-left {
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
 
 td span .mdi-pencil,
 td span .mdi-trash-can {
@@ -1331,6 +1346,13 @@ table.dataTable td:nth-child(1) {
     padding: 7px 15px;
     width: 100px;
     border-right: 6px solid #ffaa78;
+}
+.badge._c_badge {
+    color: white;
+    border-radius: 2px;
+    padding: 2px 9px;
+    font-weight: 600;
+    letter-spacing: .03rem;
 }
 
 ._low {
@@ -1710,4 +1732,87 @@ a.chosen-single {
     margin-top: 0.25rem;
     font-size: 80%;
     color: #dc3545;
+}
+._stat {
+    min-width: 270px;
+    max-width: 270px;
+    height: calc(100vh - 200px); 
+    background: #ecedf3;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+._stat h5 {
+    box-shadow: 0px 5px 8px rgb(0 0 0 / 24%);
+}
+._stat.open{
+    border-top:5px solid #05b1eb;
+
+}
+._stat.open h5 {
+    background: #e7f3f7;
+}
+.sortable-placeholder {
+    border: 2px dotted #646464;
+    margin: 0 1em 1em 0;
+    height: 100px;
+    border-radius: 5px;
+}
+._stat .card {
+    margin-right: 10px;
+    margin-left: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+._stat.todo {
+    border-top: 5px solid #039b24;
+
+}
+._stat.todo h5 {
+    background: #f6fff8;
+}
+
+._stat.in_pro {
+    border-top: 5px solid #055ebd;
+    
+}
+._stat.in_pro h5 {
+    background: #dcedff;
+}
+._stat.closed{
+    border-top:5px solid #7608dd;
+    
+}
+._stat.closed h5 {
+    background: #e8d3fb;
+}
+._stat.resolved{
+    border-top:5px solid #f39219;
+}
+._stat  {
+    background: transparent !important;
+}
+._stat.resolved h5 {
+    background: #fffbf5;
+}
+._stat h5 {text-transform:capitalize; padding: 10px}
+
+._stat .card {
+margin-bottom: 3px;
+background: #f9f9f9;
+box-shadow: 0px 5px 8px rgb(0 0 0 / 24%);
+}
+._stat .card .progress {
+    min-width: 70px;
+    color : black;
+}
+
+._c_subj {
+    font-size: 12px;
+    font-weight: 500;
+    color: #465062;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
