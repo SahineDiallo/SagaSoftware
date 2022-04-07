@@ -441,41 +441,59 @@ $(document).ready(function() {
         alertify.set('notifier', 'delay', 10);
         alertify.success(`${type} <span class="alert-key">${key} </span>${message}`);
     };
-    $("#MainEquipDiv").on("click", ".tkt-dtls", (e) => {
-        $(".cr-edt-tkt.p-3.edt-tkt").show('slide', { direction: 'right' }, 500)
-        var tr = e.target.closest('tr');
-        var _key = tr.firstElementChild.firstElementChild.textContent.trim().slice(1);
-        var url = `/api/edit-ticket/${url_end}/?key=${_key}`;
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    $(".cr-edt-tkt.p-3.edt-tkt").html(data.template)
-                    $(".cr-edt-tkt.p-3.edt-tkt #ex1-content").height($(".cr-edt-tkt.p-3.edt-tkt").height() - $(".cr-edt-tkt.p-3.edt-tkt .tkt-dtls-menu").height())
-                    let selectList = document.querySelector(".cr-edt-tkt.p-3.edt-tkt #id_status")
-                    adjustSelectLength(selectList)
-                    $('#ex1-content #id_assignee').chosen();
-                    $('#ex1-content #id_accountable').chosen();
-                    var end_date = $('.cr-edt-tkt.p-3.edt-tkt #id_end_date')
-                    var start_date = $('.cr-edt-tkt.p-3.edt-tkt #id_start_date')
-                    flatpickr(start_date, {});
-                    flatpickr(end_date, {});
-                    // var description = document.getElementById('descpt')
-                    // const options = {
-                    //     theme: "snow",
-                    //     enable: false
-                    // };
-
-                    // var quill = Quill(description, options);
-                    // var icons = quill.import('ui/icons');
-                    // icons['bold'] = '<i class="fa fa-bold" aria-hidden="true"></i>';
-
-                }
-
-            })
-            .catch(error => { alert('something went wrong. Please try later') })
+    ["#MainEquipDiv", '.card'].forEach((selector, index)=> {
+        $(selector).on('click', ".tkt-dtls", (e)=> {
+            $(".cr-edt-tkt.p-3.edt-tkt").show('slide', { direction: 'right' }, 500)
+            let _key;
+            let tr;
+            let card;
+            if (index === 0) {
+                tr = e.target.closest('tr');
+                _key = tr.firstElementChild.firstElementChild.textContent.trim().slice(1);
+            } else {
+                card = e.target.closest('.card')
+                _key = card.getAttribute('data-key');
+            }
+            var url = `/api/edit-ticket/${url_end}/?key=${_key}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        $(".cr-edt-tkt.p-3.edt-tkt").html(data.template)
+                        $(".cr-edt-tkt.p-3.edt-tkt #ex1-content").height($(".cr-edt-tkt.p-3.edt-tkt").height() - $(".cr-edt-tkt.p-3.edt-tkt .tkt-dtls-menu").height())
+                        let selectList = document.querySelector(".cr-edt-tkt.p-3.edt-tkt #id_status")
+                        adjustSelectLength(selectList)
+                        $('#ex1-content #id_assignee').chosen();
+                        $('#ex1-content #id_accountable').chosen();
+                        var end_date = $('.cr-edt-tkt.p-3.edt-tkt #id_end_date')
+                        var start_date = $('.cr-edt-tkt.p-3.edt-tkt #id_start_date')
+                        flatpickr(start_date, {});
+                        flatpickr(end_date, {});
+                        // var description = document.getElementById('descpt')
+                        // const options = {
+                        //     theme: "snow",
+                        //     enable: false
+                        // };
+    
+                        // var quill = Quill(description, options);
+                        // var icons = quill.import('ui/icons');
+                        // icons['bold'] = '<i class="fa fa-bold" aria-hidden="true"></i>';
+    
+                    }
+    
+                })
+                .catch(error => { alert('something went wrong. Please try later') })
+        })
     })
+    // $("#MainEquipDiv").on("click", ".tkt-dtls", (e) => {
+    //     $(".cr-edt-tkt.p-3.edt-tkt").show('slide', { direction: 'right' }, 500)
+    //     var tr = e.target.closest('tr');
+    //     var _key = tr.firstElementChild.firstElementChild.textContent.trim().slice(1);
+    //     var url = `/api/edit-ticket/${url_end}/?key=${_key}`;
+
+        
+    // })
 
     function adjustSelectLength(selectField) {
         // get initial width of select element. 

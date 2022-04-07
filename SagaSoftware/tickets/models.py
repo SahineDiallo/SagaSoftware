@@ -98,6 +98,9 @@ class Ticket(models.Model):
             return "_bug"
         return '_other'
 
+    def partial_key(self):
+        return self.key[2:]
+
 
 class TicketHistory(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="histories")

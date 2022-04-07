@@ -1497,6 +1497,9 @@ table.dataTable td:nth-child(1) {
     margin-right: 3px;
     cursor: pointer;
 }
+.mdi-dots-vertical {
+    cursor: pointer;
+}
 
 .cr-edt-tkt.p-3.edt-tkt .tab-pane {
     padding-left: 0 !important;
