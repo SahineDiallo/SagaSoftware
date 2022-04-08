@@ -293,7 +293,13 @@ def project_home(request, site_slug, project_key):
 def project_board(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     form = CreateTicketForm(request.POST or None, request=request)
-    context = {'project': project, 'form': form,}
+    members = project.members.all()[:3]
+    left_members_count = project.members.all()[3:].count()
+    context = {
+        'project': project, 'form': form,
+        'members': members,
+        'count':left_members_count
+    }
     return render(request, 'tracker/board.html', context)
 
 @login_required
@@ -301,13 +307,16 @@ def project_backlog(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     status_choices = [i[0] for i in Ticket.TicketStatus.choices]
     users = project.members.all()
+    count = project.members.all()[3:].count()
+    members = project.members.all()[:3]
     form = CreateTicketForm(request.POST or None, request=request)
     type_list = [i[0] for i in Ticket.TicketType.choices]
     context = {
         'project': project, 
-        'members':users, 'status_choices':status_choices,
+        'users':users, 'status_choices':status_choices,
         'type_list': type_list,
-        'form': form
+        'form': form, 'count': count,
+        'members': members,
     }
     return render(request, 'tracker/backlog.html', context)
 

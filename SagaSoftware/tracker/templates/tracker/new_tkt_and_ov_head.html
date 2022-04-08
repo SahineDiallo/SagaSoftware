@@ -1,0 +1,57 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<div class="over_header card-header py-1 px-2 bkl" style="padding: 0;">
+    <div class="d-flex">
+        <div class="d-flex align-items-center">
+            <div class="default-profile-picture2">
+                <span class="active_project_icon" style="color:{{project.project_color}}"><i class="mdi {{project.project_icon}} mdi-36px"></i></span>
+            </div>
+            <div class="d-flex ml-2 mt-1 flex-column">
+                <p class="lead2 m-0" style="font-size: 17px;">
+                    <span class="active_project" style="font-weight: 500;">{{project.name}}</span>
+                    <span class="active_project_key" style="font-style:italic;"> ({{project.key}})</span>
+                </p>
+                <span class="m-0 text-muted proj_type" style="font-size: 13px;">{{project.project_type}}</span>
+            </div> 
+        </div>
+        <div class="ml-auto d-flex align-items-center">
+            <div class="d-flex align-items-center mr-3">
+                {% for member in members %}
+                <span class="user-p-img" style="background:{{member.background}};">{{member.get_first_letters}}</span>
+                {% endfor %}
+
+                {% if count != 0 %}
+                    <span class="user-p-img" style="background:#f3f3f3; color:black;">+{{count}}</span>
+                {% endif %}
+            </div>
+            {% if not request.user.is_developer %}
+              <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary btn-sm mr-2">Invite New members</button>
+            {% endif %}
+          </div>
+    </div>
+</div>
+<div class="cr-edt-tkt p-3 nw_tkt">
+    <div class="mb-2 hd_ d-flex align-items-center justify-content-between"> 
+        <h3 class="">New Ticket</h3>
+        <span class="cl_cr"><i class="mdi mdi-close" style="pointer-events:none"></i> </span> 
+    </div>
+    <div class="tkt-frm-bdy pr-1">
+        {{ form.media }}
+        {% crispy form %}
+    </div>
+    <div class="modal-footer justify-content-start">
+        <button type="submit" id="cr_nw_tk" form="createTicketForm" class="btn btn-primary" style="margin-bottom: 12px;">Create</button>
+        <button class="btn btn-secondary cl_cr">Cancel</button>
+    </div>
+</div>
+<div class="cr-edt-tkt p-3 edt-tkt">
+    <div class="mb-2 hd_ d-flex align-items-center justify-content-between"> 
+        <h3 class="">Edit Ticket</h3>
+        <span class="cl_cr"><i class="mdi mdi-close" style="pointer-events:none"></i> </span> 
+    </div>
+    <div class="tkt-frm-bdy pr-1">
+        <div class="d-flex justify-content-center" style="margin-top:50%;">
+            <div class="lds-hourglass "></div>
+        </div>
+    </div>
+</div>

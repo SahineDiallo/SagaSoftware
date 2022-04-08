@@ -453,7 +453,8 @@ $(document).ready(function() {
                 _key = tr.firstElementChild.firstElementChild.textContent.trim().slice(1);
             } else {
                 card = e.target.closest('.card')
-                _key = card.getAttribute('data-key');
+                _key = card.getAttribute('data-key').trim().slice(1);
+                
             }
             var url = `/api/edit-ticket/${url_end}/?key=${_key}`;
             fetch(url)
@@ -486,14 +487,6 @@ $(document).ready(function() {
                 .catch(error => { alert('something went wrong. Please try later') })
         })
     })
-    // $("#MainEquipDiv").on("click", ".tkt-dtls", (e) => {
-    //     $(".cr-edt-tkt.p-3.edt-tkt").show('slide', { direction: 'right' }, 500)
-    //     var tr = e.target.closest('tr');
-    //     var _key = tr.firstElementChild.firstElementChild.textContent.trim().slice(1);
-    //     var url = `/api/edit-ticket/${url_end}/?key=${_key}`;
-
-        
-    // })
 
     function adjustSelectLength(selectField) {
         // get initial width of select element. 
@@ -649,15 +642,27 @@ $(document).ready(function() {
                     ass_or_acc.textContent = data.first_letters
                 }
                 alertUser(`${data.fname} `, 'has been updated with success', "Ticket's ")
+                var board = window.location.pathname.includes('board')
                 if(index === 0 ) {
-                    var tr = document.querySelector(`#key_${key.slice(1)}`).closest('tr')
-                    $(tr).html("")
-                    $(tr).html(data.template) // update the edited table row
+                    
+                    if (board) {
+                       var card = document.querySelector(`.card[data-key="#${key}"]`)
+                       console.log(card)
+                       $(card).replaceWith(data.card_template)
+                       $("._stat").sortable('refresh'); 
+                    } else {                       
+                        var tr = document.querySelector(`#key_${key.slice(1)}`).closest('tr')
+                        $(tr).html("")
+                        $(tr).html(data.template) // update the edited table row
+                    }
+                    
                 }
-                var empty_hist = $(`${selector} .tkt_hist .empt_hist`)
-                if(empty_hist.length) {$(empty_hist.fadeOut())}
-                $(`${selector} .tkt_hist`).append(data.hist_template)
-                
+                if(!board) {
+                    var empty_hist = $(`${selector} .tkt_hist .empt_hist`)
+                    if(empty_hist.length) {$(empty_hist.fadeOut())}
+                    $(`${selector} .tkt_hist`).append(data.hist_template)
+                }
+                               
             }
         })
         .catch(error => {

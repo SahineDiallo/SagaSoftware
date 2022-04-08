@@ -109,6 +109,7 @@ def editTicket(request, project_key):
                 new_val = get_val_from_ordDict(field_name, new_inst)
                 tkt_hist = createTicketHistory(request, form.instance, field_name, old_val, new_val)
                 hist_template = render_to_string( "tracker/ticket_history.html", { 'instance': tkt_hist,}, request=request)
+                card_template = render_to_string('tracker/new_card.html', {'ticket':form.instance,}, request=request)
                 result['not_valid'] = False
                 new_t_cl = get_type_class(form.instance.ticket_type)
                 tem_key = form.instance.key[2:]
@@ -120,6 +121,7 @@ def editTicket(request, project_key):
                 )
                 result['template'] = template
                 result['hist_template'] = hist_template
+                result['card_template'] = card_template
                 return JsonResponse(result)
             else:
                 pass
