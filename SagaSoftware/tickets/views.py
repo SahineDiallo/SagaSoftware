@@ -175,10 +175,12 @@ def ticketFullDetailsPage(request, site_slug, project_key, ticket_key):
 def updateBoardStatus(request, site_slug, project_key, ticket_key):
     #put here a try and except block
     ticket = get_object_or_404(Ticket, key='#.'+ticket_key)
+    old_val = ticket.status
     new_status = request.GET.get('new_status')
     ticket.status = new_status
     ticket.save()
-    print(ticket.priority)
+    new_val = ticket.status
+    createTicketHistory(request, ticket, 'status', old_val, new_val)
     return JsonResponse({'success': True})
 
 
