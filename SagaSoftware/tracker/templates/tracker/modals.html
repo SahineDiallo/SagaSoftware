@@ -16,8 +16,32 @@
                 </div>      
             </div>
         </div>
-      </div>
-      <!-- End of the invitation modal-->
+    </div>
+    <!-- End of the invitation modal-->
+
+
+    <!--Invitation Modal -->
+    <div class="modal fade" id="deleteTicketModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Ticket</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>            
+                <div class="modal-body">
+                    <p>You are about to delete this ticket in the project </p>
+                    <span class="text-muted mt-2">this action cannot be undone</span>
+                    <div class="d-flex align-items-center justify-content-center my-3">
+                        <button  id="del-tkt" class="btn btn-danger float-right">Yes, Delete</button>
+                        <button  id="cnl-tkt" class="btn btn-secondary ml-3">Cancel</button>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>
+    <!-- End of the invitation modal-->
 
       <!--Edit user role Modal -->
     <div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog">
@@ -102,40 +126,4 @@
             </div>
         </div>
       </div>
-       {% comment %} <div class="modal fade" id="createLabel" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Creating New Label</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-        </div> 
-          <div class="modal-body">          
-              {% crispy labelForm %}
-             
-          </div>
-        </div>
-    </div>
-  </div>
-  <!-- end of the status creation modal -->
-  <div class="modal fade" id="createStatus" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Creating New Status</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div> 
-          <div class="modal-body">          
-              {% crispy statusForm %}
-              
-          </div>
-        </div>
-    </div>
-  </div>
-  <!-- end of the status creation modal -->
 
- {% endcomment %}
-  {% comment %} {% include 'tracker/project-details.html' %} {% endcomment %}

@@ -13,15 +13,11 @@
                     <div class="dropdown">
                         <i class="mdi mdi-dots-vertical type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">
-                            <i class="mdi mdi-book-open mr-2"></i>
-                            ticket details
-                        </a>
                         <a class="dropdown-item" href="{% url 'ticket-details-page' site_slug=site_slug project_key=project_key ticket_key=ticket.partial_key %}">
                             <i class="mdi mdi-fullscreen mr-2"></i>
                             See full details
                         </a>
-                        <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-2"></i>delete </a>
+                        <a class="dropdown-item tkt-delete" ><i class="mdi mdi-delete mr-2"></i>delete </a>
                         </div>
                     </div>
                 </div>

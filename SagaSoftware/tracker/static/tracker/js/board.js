@@ -14,7 +14,11 @@ $(document).ready(function() {
             var url = `/api/${site_slug}/${url_end}/${ticket_key}/?new_status=${new_status}`;
             fetch(url)
             .then(res => res.json())
-            .then(data=> {if(data.success) {console.log("ok")}})
+            .then(data=> {
+                if(data.success) return;
+                alert('Something went wrong. Please try later!') 
+                
+            })
             .catch(error=> {
                 console.log(error);
                 alert('Something went wrong! Please try later');

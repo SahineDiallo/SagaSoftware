@@ -134,15 +134,12 @@ $(document).ready(function() {
                                         <div class="dropdown">
                                             <i class="mdi mdi-dots-horizontal" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">
-                                                <i class="mdi mdi-book-open mr-2"></i>
-                                                ticket details
-                                            </a>
+                                            
                                             <a class="dropdown-item" href="/trackers/${site_slug}/projects/tickets/edit-ticket/${h_key}/${url_end}/">
                                                 <i class="mdi mdi-fullscreen mr-2"></i>
                                                 See full details
                                             </a>
-                                            <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-2"></i>delete </a>
+                                            <a class="dropdown-item tkt-delete"><i class="mdi mdi-delete mr-2"></i>delete </a>
                                             </div>
                                         </div>
                                     </div>
@@ -442,7 +439,7 @@ $(document).ready(function() {
         alertify.success(`${type} <span class="alert-key">${key} </span>${message}`);
     };
 
-    ["#MainEquipDiv", '.card'].forEach((selector, index)=> {
+    ["#MainEquipDiv", '._stat__child'].forEach((selector, index)=> {
         $(selector).on('click', ".tkt-dtls", (e)=> {
             $(".cr-edt-tkt.p-3.edt-tkt").show('slide', { direction: 'right' }, 500)
             let _key;
@@ -485,9 +482,39 @@ $(document).ready(function() {
     
                 })
                 .catch(error => { alert('something went wrong. Please try later') })
+        });
+
+        $(selector).on('click', ".tkt-delete", (e) => {
+            $("#deleteTicketModal").modal();
+            var key = e.target.closest('.card').getAttribute('data-key').trim().slice(2)
+            $("#deleteTicketModal .modal-body").attr('data-key', key)
         })
     })
-
+    $("#cnl-tkt").on("click", (e)=> {$("#deleteTicketModal").modal('hide');});
+    $("#del-tkt").on("click", (e)=> {
+        var key = e.target.closest('.modal-body').getAttribute('data-key')
+        deleteTicket(key);
+    })
+    function deleteTicket(key) {
+        var url = `/api/${site_slug}/${url_end}/tickets/delete/${key}/`
+        fetch(url)
+        .then(resp=> resp.json())
+        .then(data=> {
+            if (data.success) {
+                var board = window.location.pathname.includes('board')
+                if (board) {
+                    var card = $(`.card[data-key="#.${key}"]`)
+                    $(card).fadeOut();
+                    $("#deleteTicketModal").modal('hide');
+                    alertUser('ticket', 'has been deleted with success', 'your')
+                }
+            }
+        })
+        .catch(error=> {
+            console.log(error);
+            alert('Something went wrong. Please try later');
+        })
+    }
     function adjustSelectLength(selectField) {
         // get initial width of select element. 
         // we have to remember there is a dropdown arrow make it a little wider
@@ -647,7 +674,6 @@ $(document).ready(function() {
                     
                     if (board) {
                        var card = document.querySelector(`.card[data-key="#${key}"]`)
-                       console.log(card)
                        $(card).replaceWith(data.card_template)
                        $("._stat").sortable('refresh'); 
                     } else {                       
@@ -675,11 +701,11 @@ $(document).ready(function() {
     $("#filter_btn").on("click", (e)=> {
         $(".filters.p-3").slideToggle("slow");
     });
-    $('.add-ticket').on("click", (e)=> {
-        console.log('add ticket')
-    })
-    $('.add-project').on("click", (e)=> {
-        console.log('add project')
-    })
+    // $('.add-project').on("click", (e)=> {
+    //     console.log('add project')
+    // })
+
+
+
 
 });
