@@ -6,19 +6,16 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from rest_framework import viewsets, status
 from .serializers import ReadTicketSerializer, WriteTicketSerializer, UserSerializer
-from .models import Ticket
+from .models import Ticket, TicketHistory
 from tracker.models import Project
 from accounts.utils import (
-    get_tickets_by_kwargs, get_type_class, 
-    createTicketHistory, get_val_from_ordDict
+    get_tickets_by_kwargs, get_type_class, get_val_from_ordDict
 )
 from rest_framework.response import Response
 from .forms import CreateTicketForm
 from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
 from django.template.loader import render_to_string
-import json
-# from rest_framework.pagination import LimitOffsetPagination
 
 
 class TicketModelViewSet(viewsets.ModelViewSet):
@@ -64,6 +61,11 @@ def createTicket(request, project_key):
         card_template = render_to_string('tracker/new_card.html', {'ticket': form.instance}, request=request)
         template = render_to_string("tracker/new_ticket.html", {'instance': form.instance}, request=request)
         form.save()
+        TicketHistory.objects.create(
+            author=request.user, ticket=form.instance,
+            project=project, hist_type=2
+        )
+        
         result['card_template'] =card_template
         result['template'] = template
         return JsonResponse(result)
@@ -111,7 +113,10 @@ def editTicket(request, project_key):
                 form.save()
                 new_inst = ReadTicketSerializer(form.instance).data
                 new_val = get_val_from_ordDict(field_name, new_inst)
-                tkt_hist = createTicketHistory(request, form.instance, field_name, old_val, new_val)
+                tkt_hist = TicketHistory.objects.create(
+                    author=request.user, ticket=form.instance, field_name=field_name,
+                    project=project, old_value=old_val, new_value=new_val
+                )
                 hist_template = render_to_string( "tracker/ticket_history.html", { 'instance': tkt_hist,}, request=request)
                 card_template = render_to_string('tracker/new_card.html', {'ticket':form.instance,}, request=request)
                 result['not_valid'] = False
@@ -174,7 +179,7 @@ def ticketFullDetailsPage(request, site_slug, project_key, ticket_key):
     form = CreateTicketForm(request.POST or None, instance=ticket, request=request)
     context = {
         'instance': ticket,"form": form, 'project': project,
-        'type_class': type_class
+        'type_class': type_class, 
     }
     return render(request, 'tracker/ticket_full_page.html', context)
 
@@ -188,7 +193,10 @@ def updateBoardStatus(request, site_slug, project_key, ticket_key):
         ticket.status = new_status
         ticket.save()
         new_val = ticket.status
-        createTicketHistory(request, ticket, 'status', old_val, new_val)
+        TicketHistory.objects.create(
+            author=request.user, ticket=ticket, field_name='status',
+            project=project, old_value=old_val, new_value=new_val
+        )
         return JsonResponse({'success': True})
     except Ticket.DoesNotExist:
         return JsonResponse({'success': False})

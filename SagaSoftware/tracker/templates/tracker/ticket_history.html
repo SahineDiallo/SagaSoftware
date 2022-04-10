@@ -1,15 +1,19 @@
+{% load customTimeSince %}
 <div class="trending d-flex mb-2 justify-content-between align-items-center">
-    <div class="d-flex flex-column">
-        <div class="item-thumbnail">
-            <span class="tkts-asg" style="background:{{instance.author.background}}">{{instance.author.get_first_letters}}</span>
-            <span class="trending-action ml-2" style="font-size:12px;">
-                <span class="author"> {{instance.author.full_name}} </span>updated the <strong>{{instance.field_name}}</strong> of: {{instance.ticket.key}}
-        </span></div>
-        <div class="trending-values ml-5">
-            <span style="font-size:12px;">from {{instance.old_value}} to <strong>{{instance.new_value}}</strong></span>
+    <div class="d-flex">
+        <span class="tkts-asg" style="background:{{instance.author.background}}">{{instance.author.get_first_letters}}</span>
+        <div class="flex-grow-1 d-flex flex-column mt-1">
+            <div class="item-thumbnail">            
+                <span class="trending-action ml-2" style="font-size:12px;">
+                    <span class="author"> {{instance.author.full_name}} </span>updated the <strong>{{instance.field_name}}</strong> of: {{instance.ticket.key}}
+                </span>
+            </div>
+            <div class="trending-values mt-1">
+                <span style="font-size:12px;">from {{instance.old_value}} to <strong>{{instance.new_value}}</strong></span>
+            </div>    
         </div>
     </div>
-    <div>
-        <span style="font-size: 10px "> {{instance.updated|timesince}} ago </span>
+    <div style="min-width: 100px;">
+        <span class="ml-3" style="font-size: 10px"> {{instance.created_on|timesince|upto:','}} ago </span>
     </div>
 </div>

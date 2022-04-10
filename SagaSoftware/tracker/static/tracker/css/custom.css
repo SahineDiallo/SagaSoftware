@@ -1280,6 +1280,11 @@ table.dataTable td:nth-child(1) {
     word-break: break-all;
     white-space: pre-line;
 }
+#History {
+
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
+}
 .p_home .updates,
 .p_home .chrt {
     background: #fff;
