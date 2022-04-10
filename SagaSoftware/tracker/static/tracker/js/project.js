@@ -12,25 +12,28 @@ $(document).ready(function() {
     var sidebar = document.querySelector("#sidebar")
     var navbar_ = document.querySelector("nav.navbar.col-lg-12")
     var style = $("#sidebar").attr('style')
-    if (style.includes("fff")) {
-        if (sidebar.classList.contains("clr-wt")) {
-            $(sidebar).removeClass('clr-wt')
+    if (!window.location.pathname.includes('dashboard')) {
+        if (style.includes("fff")) {
+            if (sidebar.classList.contains("clr-wt")) {
+                $(sidebar).removeClass('clr-wt')
+            }
+            if (navbar_.classList.contains("clr-wt")) {
+                $(navbar_).removeClass('clr-wt')
+            }
+            $(sidebar).addClass("clr-bk")
+            $(navbar_).addClass('clr-bk')
+        } else {
+            if (sidebar.classList.contains("clr-bk")) {
+                $(sidebar).removeClass('clr-bk')
+            }
+            if (navbar_.classList.contains("clr-bk")) {
+                $(navbar_).removeClass('clr-bk')
+            }
+            $(sidebar).addClass("clr-wt")
+            $(navbar_).addClass('clr-wt')
         }
-        if (navbar_.classList.contains("clr-wt")) {
-            $(navbar_).removeClass('clr-wt')
-        }
-        $(sidebar).addClass("clr-bk")
-        $(navbar_).addClass('clr-bk')
-    } else {
-        if (sidebar.classList.contains("clr-bk")) {
-            $(sidebar).removeClass('clr-bk')
-        }
-        if (navbar_.classList.contains("clr-bk")) {
-            $(navbar_).removeClass('clr-bk')
-        }
-        $(sidebar).addClass("clr-wt")
-        $(navbar_).addClass('clr-wt')
     }
+
 
     document.querySelector("#createProject .modal-content .modal-body").addEventListener("keyup", (e) => {
         if (e.target.tagName === "INPUT") return checkAndRemoveInvalidClass(e)

@@ -103,11 +103,16 @@ class Ticket(models.Model):
 
 
 class TicketHistory(models.Model):
+    hist_type = (
+         (1, 'update'),
+         (2, 'new_ticket'),
+    )
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="histories")
     author = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, blank=True, related_name="author")
     field_name = models.CharField(max_length=200)
     old_value = models.CharField(max_length=200)
     new_value = models.CharField(max_length=200)
+    hist_type = models.CharField(max_length=20, choices=hist_type, default=1)
     updated = models.DateTimeField()
     created_on = models.DateTimeField(auto_now_add=True)
 

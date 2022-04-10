@@ -1,0 +1,89 @@
+{% extends 'tracker/partials/base.html' %}
+{% block content %}
+<div class="row p_home">
+    <div class="col-md-8 border-right">
+        <div class="d-flex align-items-end">
+            <h4>{{project}} Home: </h4>
+            <p class='ml-3'>Recent updates</p>
+        </div>
+        <div class="updates">
+            {% for history in histories %}
+            
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4 border-left">
+        <h4>Status</h4>
+        <div class="p_stat_cht chrt">
+            <canvas id="status_chrt"></canvas>
+        </div>
+            <h4>Burndown Chart</h4>
+        <div class="p_mil_bdwn chrt">
+            <p> here should go the project milestones burndown charts</p>
+        </div>
+    </div>
+</div>   
+
+{% endblock content %}
+{% block scripts %}
+<script>
+    var projectStatusCanvas = $("#status_chrt").get(0).getContext("2d");
+    var data = {
+      labels: [ {% for ticket in tickets %} '{{ticket.status}}', {% endfor %}],
+      datasets: [
+        {
+          label: 'Project status',
+          data: [{% for ticket in tickets %} '{{ticket.status__count}}', {% endfor %}],
+          borderColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+          ],
+          backgroundColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 2,
+          fill: false,
+          pointBackgroundColor: "#fff"
+        }
+      ]
+    };
+    var options = {
+      indexAxis: 'y',
+      scales: {
+        yAxes: [{
+          display: true,
+          gridLines: {
+            drawBorder: false,
+            lineWidth: 1,
+            color: "#e9e9e9",
+            zeroLineColor: "#e9e9e9",
+          },
+          ticks: {
+            min: 0,
+            //max: 100,
+            fontColor: "#6c7383",
+            fontSize: 16,
+            fontStyle: 300,
+          }
+        }],
+        
+      },
+      stepsize: 1,
+    };
+    var statusChart = new Chart(projectStatusCanvas, {
+      type: 'bar',
+      data: data,
+      options: options
+    });
+    //document.getElementById('cash-deposits-chart-legend').innerHTML = cashDeposits.generateLegend();
+  
+
+</script>
+{% endblock scripts %}

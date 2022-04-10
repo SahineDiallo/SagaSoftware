@@ -8,6 +8,7 @@ $(document).ready(function() {
     var url_end = (window.location.pathname).split("/").at(-2)
     var site_slug = (window.location.pathname).split("/")[2]
     let _type = ""
+    let board_page = window.location.pathname.includes('board');
     let backgroundOptions = { Todo: '#039b24', Open: '#05b1eb', Resolved: '#f39219', Closed: '#7608dd', 'In Progress': '#055ebd' }
     var end_date = $('#createTicketForm #id_end_date')
     var start_date = $('#createTicketForm #id_start_date')
@@ -409,7 +410,7 @@ $(document).ready(function() {
                 } else {
                     $(".cr-edt-tkt .cl_cr").click();
                     $("#createTicketForm")[0].reset();
-                    if(window.location.pathname.includes('board')){
+                    if(board_page){
                         $('._stat.open').append(data.card_template)
                         $('._stat').sortable('refresh')
                     }
@@ -486,7 +487,14 @@ $(document).ready(function() {
 
         $(selector).on('click', ".tkt-delete", (e) => {
             $("#deleteTicketModal").modal();
-            var key = e.target.closest('.card').getAttribute('data-key').trim().slice(2)
+            let key;
+            if(baord_page) {
+                key = e.target.closest('.card').getAttribute('data-key').trim().slice(2)
+            } else {
+                var tr = e.target.closest('tr')
+                key = tr.firstElementChild.firstElementChild.textContent.trim().slice(2)
+            }
+            
             $("#deleteTicketModal .modal-body").attr('data-key', key)
         })
     })
@@ -501,12 +509,14 @@ $(document).ready(function() {
         .then(resp=> resp.json())
         .then(data=> {
             if (data.success) {
-                var board = window.location.pathname.includes('board')
-                if (board) {
+
+                if (board_page) {
                     var card = $(`.card[data-key="#.${key}"]`)
                     $(card).fadeOut();
                     $("#deleteTicketModal").modal('hide');
                     alertUser('ticket', 'has been deleted with success', 'your')
+                } else {
+                    // get the tr to delete and remove it from the dom
                 }
             }
         })
@@ -669,10 +679,9 @@ $(document).ready(function() {
                     ass_or_acc.textContent = data.first_letters
                 }
                 alertUser(`${data.fname} `, 'has been updated with success', "Ticket's ")
-                var board = window.location.pathname.includes('board')
                 if(index === 0 ) {
                     
-                    if (board) {
+                    if (board_page) {
                        var card = document.querySelector(`.card[data-key="#${key}"]`)
                        $(card).replaceWith(data.card_template)
                        $("._stat").sortable('refresh'); 
@@ -683,7 +692,7 @@ $(document).ready(function() {
                     }
                     
                 }
-                if(!board) {
+                if(!board_page) {
                     var empty_hist = $(`${selector} .tkt_hist .empt_hist`)
                     if(empty_hist.length) {$(empty_hist.fadeOut())}
                     $(`${selector} .tkt_hist`).append(data.hist_template)

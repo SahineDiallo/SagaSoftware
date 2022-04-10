@@ -80,10 +80,14 @@ def editTicket(request, project_key):
     result = dict()
     project = get_object_or_404(Project, key=project_key)
     key = '#' + request.GET.get('key')
-    instance = Ticket.objects.get(key=key)
-    type_class = get_type_class(instance.ticket_type)
-    old_inst = ReadTicketSerializer(instance).data
-    form = CreateTicketForm(request.POST or None, instance=instance, request=request)
+    try:
+        instance = project.tickets.get(key=key)
+        type_class = get_type_class(instance.ticket_type)
+        old_inst = ReadTicketSerializer(instance).data
+        form = CreateTicketForm(request.POST or None, instance=instance, request=request)
+        type_class = get_type_class(instance.ticket_type)
+    except Ticket.DoesNotExist:
+        pass #need to render a 403 page and the let's the user know that there is an error
     if request.method == "POST":
         if form.is_valid():
             if form.has_changed():
@@ -161,9 +165,12 @@ def validatePositiveInput(request):
 
 def ticketFullDetailsPage(request, site_slug, project_key, ticket_key):
     ticket_key = "#." + ticket_key
-    ticket = get_object_or_404(Ticket, key=ticket_key)
-    type_class = get_type_class(ticket.ticket_type) 
     project = get_object_or_404(Project, key=project_key)
+    try:
+        ticket = project.tickets.get(key=ticket_key)
+        type_class = get_type_class(ticket.ticket_type) 
+    except Ticket.DoesNotExist:
+        pass # need the render a 403 page error here
     form = CreateTicketForm(request.POST or None, instance=ticket, request=request)
     context = {
         'instance': ticket,"form": form, 'project': project,
@@ -173,8 +180,9 @@ def ticketFullDetailsPage(request, site_slug, project_key, ticket_key):
 
 
 def updateBoardStatus(request, site_slug, project_key, ticket_key):
+    project = Project.objects.get(key=project_key)
     try:
-        ticket = Ticket.objects.get(key='#.'+ticket_key)
+        ticket = project.tickets.get(key='#.'+ticket_key)
         old_val = ticket.status
         new_status = request.GET.get('new_status')
         ticket.status = new_status
@@ -188,7 +196,7 @@ def updateBoardStatus(request, site_slug, project_key, ticket_key):
 def deleteTicket(request, site_slug, project_key, ticket_key):
     project = get_object_or_404(Project, key=project_key)
     try: 
-        ticket = Ticket.objects.get(key='#.' + ticket_key)
+        ticket = project.tickets.get(key='#.' + ticket_key)
         ticket.delete()
         return JsonResponse({'success': True})
     except Ticket.DoesNotExist:

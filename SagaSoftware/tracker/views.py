@@ -1,3 +1,4 @@
+from re import S
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.generic import View
@@ -21,6 +22,7 @@ from django.contrib.auth import get_user_model
 from tickets.models import Ticket
 from tickets.serializers import WriteTicketSerializer
 from tickets.forms import CreateTicketForm
+from django.db.models import Count
 
 User = get_user_model()
 
@@ -284,8 +286,10 @@ def delete_milestone(request, mil_id):
 @login_required   
 def project_home(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
-    
-    context = {}
+    tickets = project.tickets.values('status').annotate(Count('status'))
+    context = {
+        'project': project, 'tickets':tickets,
+    }
     return render(request, 'tracker/home.html', context)
 
 
