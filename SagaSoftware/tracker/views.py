@@ -286,9 +286,14 @@ def delete_milestone(request, mil_id):
 @login_required   
 def project_home(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
+    form = CreateTicketForm(request.POST or None, request=request)
     tickets = project.tickets.values('status').annotate(Count('status'))
+    members = project.members.all()[:3]
+    left_members_count = project.members.all()[3:].count()
+
     context = {
-        'project': project, 'tickets':tickets,
+        'project': project, 'tickets':tickets, 'form': form,
+        'members': members, 'count': left_members_count,
     }
     return render(request, 'tracker/home.html', context)
 

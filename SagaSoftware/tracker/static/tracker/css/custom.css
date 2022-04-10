@@ -1288,8 +1288,15 @@ table.dataTable td:nth-child(1) {
     padding: 20px;
     margin-bottom: 20px;
 }
-
-
+.p_mil_bdwn.chrt .badge {
+    min-width: 80px;
+}
+.prios {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .03rem;
+}
 .tkts-asg,
 .tkts-rpt {
     background: blueviolet;
