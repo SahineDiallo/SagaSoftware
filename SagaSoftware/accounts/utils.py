@@ -219,11 +219,12 @@ def get_type_class(type):
     return '_other'
 
 
-def createTicketHistory(request, ticket, f_name, old_val, new_val):
+def createTicketHistory(request, ticket, f_name, old_val, new_val, _type=None):
+    hist_type = _type if _type != None else 1
     hist_instance = TicketHistory.objects.create(
         author=request.user,
         ticket=ticket, field_name=f_name, old_value=old_val, 
-        new_value=new_val, updated=ticket.updated_date
+        new_value=new_val, updated=ticket.updated_date, hist_type=hist_type
     )
     return hist_instance
 

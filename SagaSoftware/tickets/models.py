@@ -109,11 +109,11 @@ class TicketHistory(models.Model):
     )
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="histories")
     author = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, blank=True, related_name="author")
-    field_name = models.CharField(max_length=200)
-    old_value = models.CharField(max_length=200)
-    new_value = models.CharField(max_length=200)
+    field_name = models.CharField(max_length=200, blank=True, null=True)
+    old_value = models.CharField(max_length=200, blank=True, null=True)
+    new_value = models.CharField(max_length=200, blank=True, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='ticket_histories', blank=True, null=True)
     hist_type = models.CharField(max_length=20, choices=hist_type, default=1)
-    updated = models.DateTimeField()
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
