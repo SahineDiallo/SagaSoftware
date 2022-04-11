@@ -43,3 +43,11 @@ class WriteTicketSerializer(serializers.ModelSerializer):
             "est_hours", "act_hours", "milestone", "progress", "start_date", "end_date",
             "created_date", "updated_date",
         )
+
+
+class timeLineData(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = (
+            'key', 'subject', 'start_date', 'end_date',
+        )

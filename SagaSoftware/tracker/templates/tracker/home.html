@@ -3,28 +3,34 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% include 'tracker/new_tkt_and_ov_head.html' %}
-<div class="row p_home pt-5">
-    <div class="col-md-8 border-right">
+<div class="row p_home pt-5 flex-column">
+    <div class="border-right">
         <div class="d-flex align-items-end">
             <h4>{{project}} Home: </h4>
             <p class='ml-3'>Recent updates</p>
         </div>
-        <div class="updates">
-            {% for history in histories %}
-            
+        {% comment %} <div class="updates">
+            {% for instance in project.ticket_histories.all %}
+            {% include 'tracker/ticket_history.html' %}
             {% endfor %}
-        </div>
+        </div> {% endcomment %}
+        <canvas id="calendarChrt"></canvas>
     </div>
-    <div class="col-md-4 border-left">
+    <div class="border-left d-flex">
+      <div class="col-md-4">
         <h4>Burndown Chart</h4>
         <div class="p_mil_bdwn chrt">
             <p class="empt_hist"> here should go the project milestones burndown charts</p>
             <canvas id="burndownChrt"></canvas>
-          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
         <h4>Status</h4>
         <div class="p_stat_cht chrt">
             <canvas id="status_chrt"></canvas>
         </div>
+      </div>
+      <div class="col-md-4">
         <h4>Priority</h4>
         <div class="p_mil_bdwn chrt">
             <canvas id="priority_chrt"></canvas>
@@ -47,7 +53,7 @@
                 </div>
             </div>
         </div>
-        
+      </div>
     </div>
 </div>   
 
@@ -272,5 +278,71 @@
       options: options
     });
   </script>
+  <script>
+    // setup 
+    const _data = {
+      labels: ['#.5', '#.12', '#.10', '#.23', '#.9', '#.3', '#.0'],
+      datasets: [{
+        label: 'Tickets TimeLine View',
+        data: [
+          ['2022-02-04', '2022-02-09'],
+          ['2022-02-01', '2022-02-05'],
+          ['2022-02-12', '2022-02-16'],
+          ['2022-02-09', '2022-02-11'],
+          ['2022-02-03', '2022-02-14'],
+          ['2022-02-07', '2022-02-10'],
+          ['2022-02-12', '2022-02-23']
+        ],
+        backgroundColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        borderColor: [
+          'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
+        ],
+        barPercentage: .3
+      }]
+    };
+
+    // config 
+    const _config = {
+      type: 'bar',
+      data: _data,
+      options: {
+        indexAxis: 'y',
+        scales: {
+          x: {
+            position: 'top',
+            min: '2022-02-01',
+            type: 'time',
+            time: {
+              unit: 'day'
+            }
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('calendarChrt'),
+      _config
+    );
+    </script>
+
 
 {% endblock scripts %}
