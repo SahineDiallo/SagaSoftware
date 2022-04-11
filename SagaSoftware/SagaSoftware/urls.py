@@ -11,7 +11,8 @@ from tickets.views import (
     validatePositiveInput,
     validateSubject,
     updateBoardStatus,
-    deleteTicket
+    deleteTicket, 
+    timelineApiData
 )
 
 
@@ -27,6 +28,7 @@ urlpatterns = [
     path('api/validate-number/', validatePositiveInput, name='validate-positive-input'),
     path('api/<slug:site_slug>/<slug:project_key>/<slug:ticket_key>/', updateBoardStatus, name='updated-board-status'),
     path('api/<slug:site_slug>/<slug:project_key>/tickets/delete/<slug:ticket_key>/', deleteTicket, name='delete-ticket'),
+    path('api/<slug:project_key>/timelinedata/', timelineApiData, name="timelineData" ),
     path("accounts/", include("accounts.urls")),
     path("trackers/", include("tracker.urls")),
 ] + router.urls

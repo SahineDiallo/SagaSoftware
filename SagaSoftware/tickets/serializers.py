@@ -45,7 +45,7 @@ class WriteTicketSerializer(serializers.ModelSerializer):
         )
 
 
-class timeLineData(serializers.ModelSerializer):
+class timeLineDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = (

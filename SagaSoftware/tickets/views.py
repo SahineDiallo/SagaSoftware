@@ -5,12 +5,13 @@ from django import views
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from rest_framework import viewsets, status
-from .serializers import ReadTicketSerializer, WriteTicketSerializer, UserSerializer
+from .serializers import ReadTicketSerializer, timeLineDataSerializer, WriteTicketSerializer, UserSerializer
 from .models import Ticket, TicketHistory
 from tracker.models import Project
 from accounts.utils import (
     get_tickets_by_kwargs, get_type_class, get_val_from_ordDict
 )
+import datetime
 from rest_framework.response import Response
 from .forms import CreateTicketForm
 from django.template.context_processors import csrf
@@ -212,8 +213,21 @@ def deleteTicket(request, site_slug, project_key, ticket_key):
 
 
 def timelineApiData(request, project_key):
-    
-    pass
+    labels  = []
+    date_ranges = []
+    start_dates = []
+    project = get_object_or_404(Project, key=project_key)
+    tickets = Ticket.objects.filter(project=project)
+    serializer = timeLineDataSerializer(tickets, many=True)
+    for data in serializer.data:
+        labels.append(f"{data['key']} {data['subject']}"[:100])
+        start_date = f"{data['start_date']}"
+        end_date = f"{data['end_date']}"
+        start_dates.append(start_date)
+        date_ranges.append([start_date, end_date ])
+
+    print(start_dates)
+    return JsonResponse({'min_date': str(min(start_dates)), 'labels': labels, 'success': True, 'date_ranges': date_ranges})
 
 
 
