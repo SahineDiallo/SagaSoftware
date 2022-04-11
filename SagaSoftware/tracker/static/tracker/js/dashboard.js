@@ -47,7 +47,7 @@ $(document).ready(function() {
           scales: {
             x: {
               position: 'top',
-              min: '2022-02-01',
+              min: data.min_date,
               type: 'time',
               time: {
                 unit: 'day'

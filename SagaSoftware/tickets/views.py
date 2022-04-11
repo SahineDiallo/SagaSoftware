@@ -223,10 +223,13 @@ def timelineApiData(request, project_key):
         labels.append(f"{data['key']} {data['subject']}"[:100])
         start_date = f"{data['start_date']}"
         end_date = f"{data['end_date']}"
-        start_dates.append(start_date)
+        new_start = datetime.datetime.strptime(start_date, '%b %d, %Y') if start_date != 'None' else start_date
+        if new_start != 'None':
+            start_dates.append(new_start)
+        print("this is the new start ", new_start)
         date_ranges.append([start_date, end_date ])
 
-    print(start_dates)
+    print(min(start_dates))
     return JsonResponse({'min_date': str(min(start_dates)), 'labels': labels, 'success': True, 'date_ranges': date_ranges})
 
 
