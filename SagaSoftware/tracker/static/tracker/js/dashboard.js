@@ -2,7 +2,6 @@ $(document).ready(function() {
   var months =['Jan', 'Feb', 'Mar', 'Apr', 'Jun', "Jul", "Agu", "Oct", "Nov", "Dec"]
   var url_end = (window.location.pathname).split("/").at(-2)
   if (window.location.pathname.includes('home')) {
-    console.log("we are in the home page")
     var url = `/api/${url_end}/timelinedata/`
     fetch(url)
     .then(resp=> resp.json())
@@ -14,25 +13,29 @@ $(document).ready(function() {
         datasets: [{
           label: 'Tickets TimeLine View',
           data: date_ranges,
+          ticket_completion: data.progress,
           backgroundColor: [
-            'rgba(255, 26, 104, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
+            'rgba(255, 26, 104, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255,0.2)',
+            'rgba(255, 159, 64, 0.2)',
             'rgba(0, 0, 0, 1)'
           ],
           borderColor: [
-            'rgba(255, 26, 104, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
+            'rgba(255, 26, 104, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255,0.61)',
+            'rgba(255, 159, 64, 0.6)',
             'rgba(0, 0, 0, 1)'
           ],
-          barPercentage: .3
+          borderWidth: 2,
+          barPercentage: .5,
+          borderRadius: 100,
+          borderSkipped: false
         }]
       };
   
@@ -40,17 +43,45 @@ $(document).ready(function() {
       const _config = {
         type: 'bar',
         data: _data,
+        plugins: [ChartDataLabels],
         options: {
+          plugins: {
+            datalabels: {
+              formatter: (val, ctx) => {
+                var ticketPercentage = ctx.dataset.ticket_completion[ctx.dataIndex]
+                return `${ticketPercentage}%`
+              }
+            },
+            tooltip: {
+              yAlign: 'bottom',
+              callbacks: {
+                label: (ctx) => {
+                  var percentage = ctx.dataset.ticket_completion[ctx.dataIndex]
+                  var readableDate = new Date(ctx.parsed.x).toDateString();
+                  var leftPercentage = 100 - parseInt(percentage)
+                  var result = (percentage ===  100) ? `Ticket completed `:
+                              `${leftPercentage}% left before ${readableDate}`
+                  return result;
+                }
+              }
+            }
+            
+          },                    
           maintainAspectRatio: false,
           responsive: true,
           indexAxis: 'y',
           scales: {
             x: {
+              offset: false,
               position: 'top',
               min: data.min_date,
               type: 'time',
               time: {
-                unit: 'day'
+                unit: 'day',
+                stepSize: 1
+              },
+              ticks: {
+                align: 'start'
               }
             },
             y: {

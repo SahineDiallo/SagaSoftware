@@ -49,5 +49,5 @@ class timeLineDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = (
-            'key', 'subject', 'start_date', 'end_date',
+            'key', 'subject', 'progress', 'start_date', 'end_date',
         )
