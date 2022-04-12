@@ -2,7 +2,7 @@ $(document).ready(function() {
   var months =['Jan', 'Feb', 'Mar', 'Apr', 'Jun', "Jul", "Agu", "Oct", "Nov", "Dec"]
   var url_end = (window.location.pathname).split("/").at(-2)
   if (window.location.pathname.includes('home')) {
-
+    //need to fix the height of the chart box after draw.
     Date.prototype.addDays = function(days) {
       var date = new Date(this.valueOf());
       date.setDate(date.getDate() + days);
