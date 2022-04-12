@@ -216,6 +216,7 @@ def timelineApiData(request, project_key):
     labels  = []
     date_ranges = []
     start_dates = []
+    end_dates = []
     progress_list = []
     project = get_object_or_404(Project, key=project_key)
     tickets = Ticket.objects.filter(project=project)
@@ -226,10 +227,18 @@ def timelineApiData(request, project_key):
         start_date = f"{data['start_date']}"
         end_date = f"{data['end_date']}"
         new_start = datetime.datetime.strptime(start_date, '%b %d, %Y') if start_date != 'None' else start_date
+        new_end = datetime.datetime.strptime(end_date, '%b %d, %Y') if end_date != 'None' else end_date
         if new_start != 'None':
             start_dates.append(new_start)
+        if new_end != 'None':
+            end_dates.append(new_end)
+        
         date_ranges.append([start_date, end_date ])
-    return JsonResponse({'min_date': str(min(start_dates)),'progress':progress_list, 'labels': labels, 'success': True, 'date_ranges': date_ranges})
+    return JsonResponse({
+        'min_date': str(min(start_dates)),'progress':progress_list, 
+        'labels': labels, 'success': True, 'date_ranges': date_ranges,
+        'max_date': str(max(end_dates)),
+    })
 
 
 
