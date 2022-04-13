@@ -1286,12 +1286,14 @@ table.dataTable td:nth-child(1) {
     overflow-y: auto;
 }
 .p_home .updates,
-.p_home .chrt {
-    background: #fff;
-    border: 2px solid #ccc;
+.p_home .chrt,
+.cldr-chrt-box {
+    background: #f1f1f1;
+    border: 1px dashed #ccc;
     border-radius: 3px;
     padding: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 }
 .p_mil_bdwn.chrt .badge {
     min-width: 80px;
@@ -1848,11 +1850,11 @@ box-shadow: 0px 5px 8px rgb(0 0 0 / 24%);
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
-
-.cldr-chrt-box {
-    background: white;
-    padding:20px;
-    border: 2px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 20px;
+.proj_prog_don{
+    position: absolute;
+    bottom: 56px;
+    left: calc(50% - 20px);
+    display: block;
+    font-size: 25px;
+    font-weight: 600;
 }

@@ -13,7 +13,7 @@ $(document).ready(function() {
         inviteBtn.addEventListener("click", (e) => {
             e.preventDefault();
             var url = "/trackers/invite_members/"
-            data = new FormData(form)
+            var data = new FormData(form)
             console.log("this isthe data from the form", data)
             fetch(url, {
                     method: 'POST',

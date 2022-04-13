@@ -27,21 +27,21 @@ $(document).ready(function() {
           data: date_ranges,
           ticket_completion: data.progress,
           backgroundColor: [
-            'rgba(255, 26, 104, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255,0.2)',
-            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 26, 104, 0.9)',
+            'rgba(54, 162, 235, 0.9)',
+            'rgba(255, 206, 86, 0.9)',
+            'rgba(75, 192, 192, 0.9)',
+            'rgba(153, 102, 255,0.9)',
+            'rgba(255, 159, 64, 0.9)',
             'rgba(0, 0, 0, 1)'
           ],
           borderColor: [
-            'rgba(255, 26, 104, 0.6)',
-            'rgba(54, 162, 235, 0.6)',
-            'rgba(255, 206, 86, 0.6)',
-            'rgba(75, 192, 192, 0.6)',
-            'rgba(153, 102, 255,0.61)',
-            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 26, 104, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255,1)',
+            'rgba(255, 159, 64, 1)',
             'rgba(0, 0, 0, 1)'
           ],
           borderWidth: 2,
@@ -129,7 +129,7 @@ $(document).ready(function() {
               offset: false,
               position: 'top',
               min: data.min_date,
-              max: (new Date(data.min_date).addDays(15)),
+              max: (new Date(data.min_date).addDays(30)),
               type: 'time',
               time: {
                 unit: 'day',
@@ -159,8 +159,8 @@ $(document).ready(function() {
       ctx = $('#calendarChrt')
       ctx.height = '500'
       const myChart = new Chart( ctx, _config );
-
       myChart.ctx.onclick = moveScroll();
+      
       function moveScroll() {
         const {ctx, canvas, chartArea: {left, right, bottom, top, width, height} } = myChart;
         canvas.addEventListener('click', e => {
@@ -174,10 +174,9 @@ $(document).ready(function() {
           if(left_x_cercle_bounds && left_y_cercle_bounds ) {
             myChart.options.scales.x.min = (new Date(minDate)).removeDays(5);
             myChart.options.scales.x.max = (new Date(maxDate)).removeDays(5);
-            if ((new Date(maxDate)).removeDays(5) >= (new Date(data.min_date)).removeDays(2)) {
-              myChart.options.scales.x.min = (new Date(data.min_date)).removeDays(2);
-              myChart.options.scales.x.max = (new Date(data.min_date)).addDays(15);
-              console.log('Exceed')
+            if ((new Date(maxDate)).removeDays(5) >= (new Date(data.min_date)).removeDays(1)) {
+              myChart.options.scales.x.min = (new Date(data.min_date)).removeDays(1);
+              myChart.options.scales.x.max = (new Date(data.min_date)).addDays(30);
             }
             myChart.update();
           }
@@ -187,16 +186,16 @@ $(document).ready(function() {
           if(right_x_cercle_bounds && right_y_cercle_bounds ) {
             myChart.options.scales.x.min = (new Date(minDate)).addDays(5);
             myChart.options.scales.x.max = (new Date(maxDate)).addDays(5);
-            if ((new Date(maxDate)).addDays(5) >= (new Date(data.max_date)).addDays(2)) {
-              myChart.options.scales.x.min = (new Date(data.max_date)).removeDays(15);
-              myChart.options.scales.x.max = (new Date(data.max_date)).addDays(2);
-              console.log('Exceed')
+            if ((new Date(maxDate)).addDays(5) >= (new Date(data.max_date)).addDays(1)) {
+              myChart.options.scales.x.min = (new Date(data.max_date)).removeDays(30);
+              myChart.options.scales.x.max = (new Date(data.max_date)).addDays(1);
             }
             myChart.update();
           }
         })
       
       }
+
     })
     .catch(error => {console.log(error)})
   }
