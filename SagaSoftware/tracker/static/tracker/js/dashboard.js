@@ -27,12 +27,12 @@ $(document).ready(function() {
           data: date_ranges,
           ticket_completion: data.progress,
           backgroundColor: [
-            'rgba(255, 26, 104, 0.9)',
-            'rgba(54, 162, 235, 0.9)',
-            'rgba(255, 206, 86, 0.9)',
-            'rgba(75, 192, 192, 0.9)',
-            'rgba(153, 102, 255,0.9)',
-            'rgba(255, 159, 64, 0.9)',
+            'rgba(255, 26, 104, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255,1)',
+            'rgba(255, 159, 64, 1)',
             'rgba(0, 0, 0, 1)'
           ],
           borderColor: [
@@ -45,8 +45,8 @@ $(document).ready(function() {
             'rgba(0, 0, 0, 1)'
           ],
           borderWidth: 2,
-          barPercentage: .5,
-          borderRadius: 100,
+          barPercentage: .6,
+          //borderRadius: 100,
           borderSkipped: false
         }]
       };
@@ -101,9 +101,15 @@ $(document).ready(function() {
         options: {
           plugins: {
             datalabels: {
+              color: '#171d28',
               formatter: (val, ctx) => {
                 var ticketPercentage = ctx.dataset.ticket_completion[ctx.dataIndex]
-                return `${ticketPercentage}%`
+                
+                return ticketPercentage !== 'None' ? `${ticketPercentage}%` : '0%'
+              },
+              font: {
+                weight: 'bold',
+                size: 16,
               }
             },
             tooltip: {

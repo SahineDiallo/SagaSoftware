@@ -288,12 +288,17 @@ def project_home(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
     form = CreateTicketForm(request.POST or None, request=request)
     tickets = project.tickets.values('status').annotate(Count('status'))
+    tickets_priority = project.tickets.values('priority').annotate(Count('priority'))
+    prio_list = [c['priority__count'] for c in tickets_priority]
+    t_prog = project.tickets.values('progress')
+    project_percentage = sum([0 if not c['progress'] else int(c['progress']) for c in t_prog ]) // len(t_prog)
     members = project.members.all()[:3]
     left_members_count = project.members.all()[3:].count()
 
     context = {
         'project': project, 'tickets':tickets, 'form': form,
-        'members': members, 'count': left_members_count,
+        'members': members, 'count': left_members_count, 'p_list': prio_list,
+        'progress': project_percentage
     }
     return render(request, 'tracker/home.html', context)
 
