@@ -67,7 +67,7 @@ def register(request):
         instance.save()
 
         user = authenticate(email=email, password=password)
-        if invitation_slug != None:  # check invitation and redirect dashboard
+        if invitation_slug:  # check invitation and redirect dashboard
             try:
                 #we need the remove the last character of the invitation slug which is a slash
                 invitation = Invitation.objects.get(slug=invitation_slug[:-1])

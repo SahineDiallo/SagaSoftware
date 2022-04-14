@@ -31,8 +31,8 @@ User = get_user_model()
 def create_site(request):
     form = CreateSiteForm(request.POST or None)
     if form.is_valid():
-        if request.user.is_site_administrator == False:
-            request.user.is_site_administrator = True
+        if request.user.is_admin == False:
+            request.user.is_admin = True
             request.user.save()
             form.save(commit=False)
             form.instance.admin = request.user

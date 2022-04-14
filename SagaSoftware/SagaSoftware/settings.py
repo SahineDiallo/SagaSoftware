@@ -158,6 +158,7 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': '%b %d, %Y %H:%M',
     'DATE_FORMAT': '%b %d, %Y',
 }
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

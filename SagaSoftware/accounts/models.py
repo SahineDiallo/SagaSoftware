@@ -127,7 +127,7 @@ class Invitation(models.Model):
 
 class ConfirmationCode(models.Model):
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='confirmation_code')
+        User, on_delete=models.CASCADE, related_name='confirmation_code', null=True)
     code = models.CharField(max_length=200, blank=True, null=True)
     is_confirmed = models.BooleanField(default=False)
 

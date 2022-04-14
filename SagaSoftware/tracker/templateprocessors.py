@@ -20,7 +20,7 @@ def get_universalForms(request, *args, **kwargs):
         activeProjectBg = ""
         navbarBg = ""
     dashboard_page = False
-    site_slug = request.user.profile.site.slug if request.user.is_authenticated else  ""
+    site_slug = request.user.profile.site.slug if request.user.is_authenticated and request.user.profile.site else  ""
     if url_end == 'dashboard' or 'accounts' in request.get_full_path():
         dashboard_page = True
     helper = inviteHelper()
