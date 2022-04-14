@@ -12,17 +12,17 @@ from django.urls import reverse
 from .forms import CreateSiteForm, CreateProjectForm, MilestoneForm
 from django.forms import modelformset_factory
 from django.contrib import messages
-from accounts.utils import EmailThreading, allowedToEnterProject, allowedToEditProject
+from accounts.utils import EmailThreading 
 from django.template.loader import get_template
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage
 from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from tickets.models import Ticket
-from tickets.serializers import WriteTicketSerializer
 from tickets.forms import CreateTicketForm
 from django.db.models import Count
+from itertools import chain
 
 User = get_user_model()
 
@@ -61,13 +61,10 @@ class DashbaordView(LoginRequiredMixin, View):
         # need to get the site and check ifthe user is in the people of course
         user_projects = user.get_projects()
         site_slug = user.profile.site.slug
-        context = {'projects': user_projects, 'site_slug': site_slug}
+        dash_tickets = list(chain(user.tickets.all(), user.accountable_tickets.all()))[:20]
+        context = {'projects': user_projects, 'site_slug': site_slug, 'tickets': dash_tickets}
         return render(request, 'tracker/dashboard.html', context)
 
-    def post(self, request, site_slug, *args, **kwargs):
-        formset = invitationFormset(request.POST)
-        context = {}
-        return render(request, 'tracker/dashboard.html', context)
 
 
 def inviteMembers(request):
@@ -89,9 +86,9 @@ def inviteMembers(request):
                 url = f'{domain}/accounts/register/?invitation_refid={form.instance.slug}/'
                 context_data['url'] = url
                 #should use a function to get the role of the user
-                if form.instance.role == '1':
+                if form.instance.role == 'Admin':
                     role = 'Admin'
-                elif form.instance.role == '2': 
+                elif form.instance.role == 'Project Manager': 
                     role = 'Project Manager'
                 else: 
                     role = 'Developer'

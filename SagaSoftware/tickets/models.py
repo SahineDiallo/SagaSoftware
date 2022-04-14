@@ -119,6 +119,9 @@ class TicketHistory(models.Model):
     def __str__(self):
         return f'{self.author} updated {self.ticket.key}'
 
+    class Meta:
+        ordering = ('-created_on',)
+
 
 class Comment(models.Model):
     body = models.TextField()

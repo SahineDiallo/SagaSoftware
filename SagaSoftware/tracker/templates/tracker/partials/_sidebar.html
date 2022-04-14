@@ -18,7 +18,7 @@
           <li class="nav-item"> 
             <a class="nav-link" href="{% url 'home' site_slug=site_slug project_key=project.key %}">
               <i class="mdi mr-2 {{project.project_icon}}"></i>
-              {{project.key}}
+              {{project.name}}
             </a>
           </li>
           {% empty %}
@@ -30,7 +30,7 @@
     {% if not dashboard_page %}
     <li class="nav-item {% if 'home' in request.get_full_path %}active{% endif %}" id="activeProjectLi">
       <a class="nav-link" href="{% url 'home' site_slug=site_slug project_key=project_key %}">
-        <i class="mdi menu-icon {{project_icon}}"></i>
+        <i class="mdi menu-icon {{project.project_icon}}"></i>
         <span class="menu-title active-project">
           Home
         </span>
@@ -39,7 +39,7 @@
 
     <li class="nav-item">
       <a class="nav-link {% if 'tickets' in request.get_full_path %}active{% endif %}" data-toggle="collapse" href="#buckets" aria-expanded="false" aria-controls="auth">
-        <i class="mdi mdi-folder menu-icon project-child"></i>
+        <i class="mdi mdi-folder menu-icon"></i>
         <span class="menu-title">Tickets</span>
         <i class="menu-arrow"></i>
       </a>
@@ -54,7 +54,7 @@
 
     <li class="nav-item {% if 'backlog' in request.get_full_path %}active{% endif %}">
       <a class="nav-link" href="{% url 'backlog' site_slug=site_slug project_key=project_key %}">
-        <i class="mdi mdi-check-all menu-icon project-child"></i>
+        <i class="mdi mdi-check-all menu-icon"></i>
         <span class="menu-title">Backlog</span>
       </a>
     </li>
@@ -62,14 +62,14 @@
 
     <li class="nav-item {% if 'board' in request.get_full_path %}active{% endif %}">
       <a class="nav-link" href="{% url 'board' site_slug=site_slug project_key=project_key %}">
-        <i class="mdi mdi-view-week menu-icon project-child"></i>
+        <i class="mdi mdi-view-week menu-icon"></i>
         <span class="menu-title">Board</span>
       </a>
     </li>
 
     <li class="nav-item borderBottom {% if 'filters' in request.get_full_path %}active{% endif %}">
       <a class="nav-link" href="documentation/documentation.html">
-        <i class="mdi mdi-account-multiple-plus menu-icon project-child"></i>
+        <i class="mdi mdi-account-multiple-plus menu-icon"></i>
         <span class="menu-title">Members</span>
       </a>
     </li>

@@ -7,8 +7,8 @@
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
-        <div class="row flex-grow">
-          <div class="col-lg-6 d-flex align-items-center justify-content-center">
+        <div class="row flex-grow justify-content-center">
+          <div class="col-lg-6 d-flex align-items-center justify-content-center d-flex">
             <div class="auth-form-transparent text-left p-3">
               <div class="brand-logo">
                 <img src="{% static 'tracker/images/logo.svg' %}" alt="logo">
@@ -53,10 +53,8 @@
               <div class="text-center mt-3 font-weight-light">
                   Already have an account? <a href="{% url 'Userlogin' %}" class="text-primary">Login</a>
               </div>
+              <p  class="mt-3 text-black font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2022 All rights reserved.</p>
             </div>
-          </div>
-          <div class="col-lg-6 register-half-bg d-flex flex-row">
-            <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2020  All rights reserved.</p>
           </div>
         </div>
       </div>

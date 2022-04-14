@@ -67,9 +67,6 @@
         <div class="">
             <div class="_header">
                 <h4> <i class="mdi mdi-label-outline mr-2"></i>Tickets </h4>
-                <button type="button" class="btn btn-light bg-white btn-icon mb-2 mt-2 mt-xl-0">
-                <i class="mdi mdi-plus text-muted"></i>
-                </button>
             </div>
             <div class="card">
 
@@ -93,12 +90,6 @@
                                 </label>
                                 
                             </div>
-
-                            <select class="form-control" id="sort-by-filter">
-                                <option selected="true" value = "All">Priority </option>
-                                <option selected="true" value = "All">Status </option>
-                                <option selected="true" value = "All">Due date </option>
-                            </select>
                         </div>
                     
                     </div>
@@ -115,18 +106,25 @@
                         <table class="table table-hover">
                         <thead>
                             <tr>
-                            <th class="ticket_key">User</th>
-                            <th class="ticket_summary">Product</th>
-                            <th class="ticket_status">Sale</th>
+                            <th class="ticket_key">Id</th>
+                            <th class="ticket_summary">Subject</th>
+                            <th class="ticket_status">Priority</th>
                             <th class="ticket_priority">Status</th>
                             </tr>
                         </thead>
-                            
-
-                            <tbody>
-                                    
-                            </tbody>
-
+                        <tbody>
+                                
+                        </tbody>
+                            {% for ticket in tickets %}
+                                <tr>
+                                    <td class="text-center">{{ticket.key}}</td>
+                                    <td>{{ticket.subject}}</td>
+                                    <td class="text-center">{{ticket.priority}}</td>
+                                    <td class="text-center">{{ticket.status}}</td>
+                                </tr>
+                            {% empty %}
+                                <p class="empt">There no task assigned to you</p>
+                            {% endfor %}
                         </table>
                     </div>
                     {% endif %}
@@ -150,28 +148,15 @@
                         <p class="project-name" style="text-align: center;"> create projects first and follow their updates here</p>
                     
                     {% else %}
-                        <div class="trending d-flex justify-content-between align-items-center">
-                            <div class="d-flex flex-column">
-                                <div class="item-thumbnail">
-                                    <img src="/static/projectManagement/images/faces/face4.jpg" alt="image" class="profile-pic">
-                                    <span class="trending-action ml-2"> username updated the status of:
-                                </div>
-                                <div class="trending-values ml-5">
-                                    <span>somethong to another thing</span>
-                                </div>
-                            </div>
-                            <div>
-                                <span> 30 minutes ago </span>
-                            </div>
-                        </div>
+                        {% for project in projects %}
+                            {% for instance in project.ticket_histories.all %}
+                                {% include 'tracker/ticket_history.html' %}
+
+                            {% endfor %}
+                        
+                        {% endfor %}
                     {% endif %}
             </div>
-        </div>
-        <div class="show-only position-absolute">
-            <span class="show-only-item">Today</span>
-            <span class="show-only-item">All Week</span>
-            <span class="show-only-item">This Month</span>
-            <span class="show-only-item">Oldest</span>
         </div>
     </div>
 </div>

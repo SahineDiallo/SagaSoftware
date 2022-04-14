@@ -13,6 +13,8 @@ import string
 import random
 from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
+from django.conf.urls import handler404, handler500
+from django.http import HttpResponse
 
 User = get_user_model()
 
@@ -28,7 +30,7 @@ def Login(request):
         user = authenticate(email=email, password=password)
         # check if the user has been sent a code then he is an admin
         if user.confirmation_code.code:
-            # this means that this user is an admin
+            # this means that this user is the admin who created the site
             if user.confirmation_code.is_confirmed:
                 login(request, user)  # login the user before redirecting
                 site_slug = user.profile.site.slug if user.profile.site else ""
@@ -65,26 +67,27 @@ def register(request):
         instance.save()
 
         user = authenticate(email=email, password=password)
-        if invitation_slug != None:  # check invitationn and redirect dashboard
+        if invitation_slug != None:  # check invitation and redirect dashboard
             try:
                 #we need the remove the last character of the invitation slug which is a slash
                 invitation = Invitation.objects.get(slug=invitation_slug[:-1])
                 invitation.accepted = True
                 instance.role = invitation.role
-
                 instance.save()
                 invitation.save()
                 site = invitation.inviter.profile.site
                 instance.profile.site = site
                 instance.profile.save()
+                # check if the instance role is admin and add the user to all the projects
+                if instance.role == 'Admin': 
+                    for p in site.projects.all():
+                        p.members.add(instance)
                 login(request, user)
-                print(request.user)
-                # I neeed to loop ti see the site in which the user belongs
                 return redirect(
                     reverse("dashbaord", kwargs={"site_slug": site.slug})
                 )
             except Invitation.DoesNotExist:  # return an error to the user
-                pass #we need to raise 403 with a message
+                return HttpResponse(status=500)
 
         else:  # means we need to send an email confirmation
             code = "".join(random.choice(

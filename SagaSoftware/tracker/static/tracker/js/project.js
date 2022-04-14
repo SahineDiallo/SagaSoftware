@@ -12,7 +12,7 @@ $(document).ready(function() {
     var sidebar = document.querySelector("#sidebar")
     var navbar_ = document.querySelector("nav.navbar.col-lg-12")
     var style = $("#sidebar").attr('style')
-    if (!window.location.pathname.includes('dashboard')) {
+    if (!window.location.pathname.includes('dashboard') && !window.location.pathname.includes('profile')){
         if (style.includes("fff")) {
             if (sidebar.classList.contains("clr-wt")) {
                 $(sidebar).removeClass('clr-wt')

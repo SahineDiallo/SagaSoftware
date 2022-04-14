@@ -41,7 +41,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    Admin, Project_manager, Developer = '1', '2', '3'
+    Admin, Project_manager, Developer = 'Admin', 'Project Manager', 'Developer'
     role_choices = (
         (Admin, 'Admin'),
         (Project_manager, 'project Manager'),
@@ -84,9 +84,9 @@ class User(AbstractBaseUser):
         return True
 
     def get_projects(self):
-        if not self.role == "1":
+        if not self.role == "Admin":
             return self.projects.all()
-        return Project.objects.all()
+        return self.profile.site.projects.all()
 
     def get_first_letters(self):
         l = self.full_name.split(" ")
@@ -107,10 +107,10 @@ class Profile(models.Model):
 
 
 class Invitation(models.Model):
-    Admin, Project_manager, Developer = '1', '2', '3'
+    Admin, Project_manager, Developer = 'Admin', 'Project Manager', 'Developer'
     role_choices = (
         (Admin, 'Admin'),
-        (Project_manager, 'project Manager'),
+        (Project_manager, 'Project Manager'),
         (Developer, 'Developer'),
     )
     inviter = models.ForeignKey(
