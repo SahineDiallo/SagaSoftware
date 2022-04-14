@@ -11,10 +11,9 @@
           <div class="col-lg-6 d-flex align-items-center justify-content-center d-flex">
             <div class="auth-form-transparent text-left p-3">
               <div class="brand-logo">
-                <img src="{% static 'tracker/images/logo.svg' %}" alt="logo">
+                {% comment %} <img src="{% static 'tracker/images/lgo.png' %}" alt="logo"> {% endcomment %}
+                <h4 class="text_logo" style="margin-left: 100px;">Saga Software<h4>
               </div>
-              <h4>New here?</h4>
-              <h6 class="font-weight-light">Join us today! It takes only few steps</h6>
               <form method="POST">
                 {% csrf_token %}
 
