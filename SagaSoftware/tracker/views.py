@@ -31,20 +31,18 @@ User = get_user_model()
 def create_site(request):
     form = CreateSiteForm(request.POST or None)
     if form.is_valid():
-        if request.user.is_admin == False:
-            request.user.is_admin = True
+        if not request.user.role == 'Admin':
+            request.user.role = 'Admin'
             request.user.save()
-            form.save(commit=False)
-            form.instance.admin = request.user
             form.save()
             # assign the user's site or company
             request.user.profile.site = form.instance
             request.user.profile.save()
             return redirect(
-                reverse("dashbaord", kwargs={"site_slug": form.instance.slug})
+                reverse("dashboard", kwargs={"site_slug": form.instance.slug})
             )
         else:
-            site = Site.objects.get(admin=request.user)
+            site = request.user.profile.site
             messages.error(
                 request,
                 f"You are already the administrator of the site {site}. You cannot be the administrator of two sites!",

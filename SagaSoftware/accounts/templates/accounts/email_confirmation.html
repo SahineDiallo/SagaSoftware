@@ -9,6 +9,7 @@
             <div class="card col-md-6 login-widget m-auto p-3">
                 <h3 class="lead text-center m-3">Please Confirm your email</h3>
                 <form action="" method="POST">
+                    {% csrf_token %}
                     <input type="hidden" name="csrfmiddlewaretoken" value="n2t5g7xMFlsXZEdqqswLRolzIsskzobfmnzaLE5G9sag6Tq0e7srWeO0SmSlkBME">
                     <div class="form-group">
                         <label for="">Confirmation Code*</label>

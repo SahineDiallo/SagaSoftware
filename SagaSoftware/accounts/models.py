@@ -44,7 +44,7 @@ class User(AbstractBaseUser):
     Admin, Project_manager, Developer = 'Admin', 'Project Manager', 'Developer'
     role_choices = (
         (Admin, 'Admin'),
-        (Project_manager, 'project Manager'),
+        (Project_manager, 'Project Manager'),
         (Developer, 'Developer'),
     )
     email = models.EmailField(verbose_name="Email", unique=True)
@@ -56,7 +56,7 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    role = models.CharField(max_length=100, choices=role_choices, default="3")
+    role = models.CharField(max_length=100, choices=role_choices, default="Developer")
     background = models.CharField(max_length=30, default="#ffffff")
     last_login = models.DateTimeField(verbose_name="Last Login", auto_now=True)
     create_on = models.DateTimeField(

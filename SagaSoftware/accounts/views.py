@@ -7,7 +7,10 @@ from django.contrib.auth import get_user_model
 from tracker.models import Site
 from .forms import UserRegistrationForm, LoginForm, UserProfileForm
 from .models import ConfirmationCode, Invitation
-from .utils import send_emailConfirmation_code, EmailThreading, get_first_and_last_name
+from .utils import (
+    send_emailConfirmation_code, EmailThreading, 
+    get_first_and_last_name, colorPickerList
+)
 from django.template.loader import get_template
 import string
 import random
@@ -64,6 +67,8 @@ def register(request):
         first_name, last_name = get_first_and_last_name(full_name)
         instance.first_name = first_name
         instance.last_name = last_name
+        #give the user a background color
+        instance.background = random.choice(list(colorPickerList))
         instance.save()
 
         user = authenticate(email=email, password=password)
@@ -90,6 +95,7 @@ def register(request):
                 return HttpResponse(status=500)
 
         else:  # means we need to send an email confirmation
+            user.role = 'Admin'
             code = "".join(random.choice(
                 "".join(string.digits)) for _ in range(6))
             ConfirmationCode.objects.create(
@@ -132,7 +138,8 @@ def email_confirmation(request):
 
 def Logout(request):
     logout(request)
-    return render(request, 'accounts/logout.html')
+    messages.success(request, "You have logged out successfully")
+    return redirect('Userlogin')
 
 
 def Profile(request,site_slug, user_id):
