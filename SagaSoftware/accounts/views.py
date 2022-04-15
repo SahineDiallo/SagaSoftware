@@ -31,21 +31,22 @@ def Login(request):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
         user = authenticate(email=email, password=password)
-        # check if the user has been sent a code then he is an admin
+        site_slug = user.profile.site.slug if user.profile.site else ""
+        # check if the user has been sent a code then he is a site creator
         if user.is_site_creator:
             # this means that this user is the admin who created the site
             if user.confirmation_code.is_confirmed:
                 login(request, user)  # login the user before redirecting
-                site_slug = user.profile.site.slug if user.profile.site else ""
                 if site_slug != "":
                     if "next" in request.POST:
+                        print("there is the next b")
                         return redirect(request.POST.get("next"))
                     return redirect(reverse("dashboard", kwargs={"site_slug": site_slug}))
                 return redirect('site_creation')
             request.session['user_to_verify_id'] = user.id
             return redirect("email_confirmation")
-        site_slug = user.profile.site.slug if user.profile.site else ""
         # means the user has been invited to join the company or organization, or site whatever...
+        login(request, user)
         if "next" in request.POST:
             return redirect(request.POST.get("next"))
         return redirect(reverse("dashboard", kwargs={"site_slug": site_slug}))
@@ -147,6 +148,7 @@ def Profile(request,site_slug, user_id):
     form = UserProfileForm(request.POST or None, instance=user)
     if request.method == "POST":
         if form.is_valid():
+            form.instance.full_name = f"{form.instance.first_name} {form.instance.last_name}"
             form.save()
             return JsonResponse({'success': True}) 
         else:

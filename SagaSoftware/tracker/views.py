@@ -331,9 +331,10 @@ def project_backlog(request, site_slug, project_key):
     }
     return render(request, 'tracker/backlog.html', context)
 
-def project_tickets(request, site_slug, project_key):
+def project_members(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
-    
-    context = {}
-    return render(request, 'tracker/tickets.html', context)
+    form = CreateTicketForm(request.POST or None, request=request)
+    members = project.members.all()
+    context = {'project': project, 'form': form, 'members': members}
+    return render(request, 'tracker/members.html', context)
 

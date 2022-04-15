@@ -37,7 +37,7 @@
       </a>
     </li>
 
-    <li class="nav-item">
+    {% comment %} <li class="nav-item">
       <a class="nav-link {% if 'tickets' in request.get_full_path %}active{% endif %}" data-toggle="collapse" href="#buckets" aria-expanded="false" aria-controls="auth">
         <i class="mdi mdi-folder menu-icon"></i>
         <span class="menu-title">Tickets</span>
@@ -50,7 +50,7 @@
           <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Reported by me </a></li>
         </ul>
       </div>
-    </li>
+    </li> {% endcomment %}
 
     <li class="nav-item {% if 'backlog' in request.get_full_path %}active{% endif %}">
       <a class="nav-link" href="{% url 'backlog' site_slug=site_slug project_key=project_key %}">
@@ -68,17 +68,19 @@
     </li>
 
     <li class="nav-item borderBottom {% if 'filters' in request.get_full_path %}active{% endif %}">
-      <a class="nav-link" href="documentation/documentation.html">
+      <a class="nav-link" href="{% url 'members' site_slug=site_slug project_key=project_key %}">
         <i class="mdi mdi-account-multiple-plus menu-icon"></i>
         <span class="menu-title">Members</span>
       </a>
     </li>
+    {% if request.user.role == 'Admin' or request.user.role == 'Project Manager' %}
     <li class="nav-item {% if 'settings' in request.get_full_path %}active{% endif %}">
       <a class="nav-link" href="{% url 'project_details' site_slug=site_slug project_key=project_key %}">
         <i class="mdi mdi-settings menu-icon"></i>
         <span class="menu-title">Project Settings</span>
       </a>
     </li>
+    {% endif %}
     {% endif %}
   </ul>
 </nav>

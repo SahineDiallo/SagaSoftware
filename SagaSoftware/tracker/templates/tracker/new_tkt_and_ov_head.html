@@ -24,7 +24,7 @@
                     <span class="user-p-img" style="background:#f3f3f3; color:black;">+{{count}}</span>
                 {% endif %}
             </div>
-            {% if not request.user.is_developer %}
+            {% if not request.user.role == 'Developer' %}
               <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary btn-sm mr-2">Invite New members</button>
             {% endif %}
           </div>

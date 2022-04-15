@@ -195,7 +195,7 @@ class EditMemberRoleForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'username')
+        fields = ('email', 'first_name', 'last_name', 'username', 'background')
 
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
