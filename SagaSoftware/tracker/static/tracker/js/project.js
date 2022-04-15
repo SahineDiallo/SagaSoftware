@@ -713,4 +713,10 @@ $(document).ready(function() {
 
 
     }
+
+    $(".cmt_on.btn-block").on("click", (e)=> {
+        e.preventDefault();
+        var settings_page = window.location.pathname.includes('settings')
+        console.log("the comment btn has been clicked for sure");
+    })
 })

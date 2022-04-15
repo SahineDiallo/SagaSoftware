@@ -339,3 +339,17 @@ def project_members(request, site_slug, project_key):
     context = {'project': project, 'form': form, 'members': members}
     return render(request, 'tracker/members.html', context)
 
+
+@login_required
+def comments(request, project_key, ticket_key=None):
+    project = get_object_or_404(Project, key=project_key)
+    ticket = Project.tickets.get(key=ticket_key) if ticket_key else None
+    form = CommentForm(request.POST or None)
+    if form.is_valid():
+        p_comment = form.cleaned_data('p_comment')
+        if p_comment: #this mean that the user has commented on a project
+            form.istance.project = project
+        else:
+            project.instance.ticket = ticket
+        form.save()
+    return JsonResponse({"success": True})
