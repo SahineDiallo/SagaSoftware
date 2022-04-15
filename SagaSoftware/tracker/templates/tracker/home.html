@@ -204,7 +204,7 @@
 
   var data = {
     datasets: [{
-      data: [50, 50],
+      data: [ parseInt({{progress}}), 100 - parseInt({{progress}}) ],
       backgroundColor: ['rgba(75, 192, 192, 1)', '#ccc'],
       cutout: 40,
       borderWidth: 1,

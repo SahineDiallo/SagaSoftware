@@ -126,6 +126,7 @@ def createProject(request, site_slug):
         site = request.user.profile.site
         form.instance.project_site = site
         form.save()
+        form.instance.members.add(request.user)
         form_data = form.cleaned_data
         template = render_to_string("tracker/new_project.html", {'project': form.instance, 'site_slug': site_slug }, request=request)
         form_data["result"] = True
@@ -280,16 +281,17 @@ def delete_milestone(request, mil_id):
 
 @login_required   
 def project_home(request, site_slug, project_key):
+    project_percentage = 0
     project = get_object_or_404(Project, key=project_key)
     form = CreateTicketForm(request.POST or None, request=request)
     tickets = project.tickets.values('status').annotate(Count('status'))
     tickets_priority = project.tickets.values('priority').annotate(Count('priority'))
     prio_list = [c['priority__count'] for c in tickets_priority]
     t_prog = project.tickets.values('progress')
-    project_percentage = sum([0 if not c['progress'] else int(c['progress']) for c in t_prog ]) // len(t_prog)
+    if len(t_prog) != 0:
+        project_percentage = sum([0 if not c['progress'] else int(c['progress']) for c in t_prog ]) // len(t_prog)
     members = project.members.all()[:3]
     left_members_count = project.members.all()[3:].count()
-
     context = {
         'project': project, 'tickets':tickets, 'form': form,
         'members': members, 'count': left_members_count, 'p_list': prio_list,

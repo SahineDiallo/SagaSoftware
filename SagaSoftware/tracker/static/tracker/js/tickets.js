@@ -63,6 +63,9 @@ $(document).ready(function() {
         table.draw();
     });
     table = $("#tkts-bkl").DataTable({
+        "oLanguage": {
+            "sEmptyTable": "There are no tickets in this project...."
+        },
         'sScrollX': true,
         dom: 'lBfrtip',
         buttons: [

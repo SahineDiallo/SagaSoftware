@@ -42,7 +42,7 @@
               </h6>
             </div>
           </a>
-
+          {% if not 'dashboard' in request.get_full_path %}
           <a class="dropdown-item" id="add_tkt" style="align-items: center !important; display: flex !important;">
             <div class="">
                 <span>
@@ -50,12 +50,14 @@
                 </span>
 
             </div>
+            
             <div class="item-content flex-grow p-0">
               <h6 class="ellipsis mb-0">
                 Ticket
               </h6>
             </div>
           </a>
+          {% endif %}
         </div>
       </li>
       <li class="nav-item dropdown mr-4">

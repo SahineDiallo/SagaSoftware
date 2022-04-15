@@ -7,6 +7,10 @@ $(document).ready(function() {
         'width': '400px;'
     })
 
+    $(".add-project").on("click", (e)=> {
+        $("#createProject").modal()
+    })
+
     // /////////////  EventListeners  //////////////
     //.sidebar .nav .nav-item .nav-link
     var sidebar = document.querySelector("#sidebar")
@@ -326,7 +330,7 @@ $(document).ready(function() {
         e.preventDefault();
         var _form = document.getElementById("createProjectForm")
         var url = `/trackers/${site_slug}/create_project/`
-        data = new FormData(_form)
+        var data = new FormData(_form)
         fetch(url, {
                 method: 'POST',
                 body: data,

@@ -10,7 +10,7 @@
                 <h3 class="lead text-center m-3">Please Confirm your email</h3>
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <input type="hidden" name="csrfmiddlewaretoken" value="n2t5g7xMFlsXZEdqqswLRolzIsskzobfmnzaLE5G9sag6Tq0e7srWeO0SmSlkBME">
+                    {% comment %} <input type="hidden" name="csrfmiddlewaretoken" value="n2t5g7xMFlsXZEdqqswLRolzIsskzobfmnzaLE5G9sag6Tq0e7srWeO0SmSlkBME"> {% endcomment %}
                     <div class="form-group">
                         <label for="">Confirmation Code*</label>
                         <input type="text" class="form-control" name="entered_Code" id="" aria-describedby="helpId" placeholder="Enter confirmation code">

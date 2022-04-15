@@ -32,7 +32,7 @@ def Login(request):
         password = form.cleaned_data.get("password")
         user = authenticate(email=email, password=password)
         # check if the user has been sent a code then he is an admin
-        if user.confirmation_code.code:
+        if user.is_site_creator:
             # this means that this user is the admin who created the site
             if user.confirmation_code.is_confirmed:
                 login(request, user)  # login the user before redirecting
@@ -40,7 +40,7 @@ def Login(request):
                 if site_slug != "":
                     if "next" in request.POST:
                         return redirect(request.POST.get("next"))
-                    return redirect(reverse("dashbaord", kwargs={"site_slug": site_slug}))
+                    return redirect(reverse("dashboard", kwargs={"site_slug": site_slug}))
                 return redirect('site_creation')
             request.session['user_to_verify_id'] = user.id
             return redirect("email_confirmation")
@@ -48,7 +48,7 @@ def Login(request):
         # means the user has been invited to join the company or organization, or site whatever...
         if "next" in request.POST:
             return redirect(request.POST.get("next"))
-        return redirect(reverse("dashbaord", kwargs={"site_slug": site_slug}))
+        return redirect(reverse("dashboard", kwargs={"site_slug": site_slug}))
     return render(request, "accounts/login.html", {"form": form})
 
 
@@ -89,7 +89,7 @@ def register(request):
                         p.members.add(instance)
                 login(request, user)
                 return redirect(
-                    reverse("dashbaord", kwargs={"site_slug": site.slug})
+                    reverse("dashboard", kwargs={"site_slug": site.slug})
                 )
             except Invitation.DoesNotExist:  # return an error to the user
                 return HttpResponse(status=500)

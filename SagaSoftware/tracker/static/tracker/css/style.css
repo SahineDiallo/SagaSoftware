@@ -18765,45 +18765,11 @@ input:focus {
     outline: none;
 }
 
-@font-face {
-    font-family: 'Libre Franklin';
-    src: url("../fonts/Libre Franklin/Libre Franklin-Light.eot");
-    src: url("../fonts/Libre Franklin/Libre Franklin-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Light.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Light.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Light.ttf") format("truetype");
-    font-weight: 300;
-    font-style: normal;
+body {
+font-family: 'Libre Franklin';
 }
 
-@font-face {
-    font-family: 'Libre Franklin';
-    src: url("../fonts/Libre Franklin/Libre Franklin-Bold.eot");
-    src: url("../fonts/Libre Franklin/Libre Franklin-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Bold.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Bold.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Bold.ttf") format("truetype");
-    font-weight: bold;
-    font-style: normal;
-}
 
-@font-face {
-    font-family: 'Libre Franklin';
-    src: url("../fonts/Libre Franklin/Libre Franklin-Medium.eot");
-    src: url("../fonts/Libre Franklin/Libre Franklin-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Medium.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Medium.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Medium.ttf") format("truetype");
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Libre Franklin';
-    src: url("../fonts/Libre Franklin/Libre Franklin-Regular.eot");
-    src: url("../fonts/Libre Franklin/Libre Franklin-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Regular.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Regular.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Regular.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Libre Franklin';
-    src: url("../fonts/Libre Franklin/Libre Franklin-Black.eot");
-    src: url("../fonts/Libre Franklin/Libre Franklin-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Libre Franklin/Libre Franklin-Black.woff2") format("woff2"), url("../fonts/Libre Franklin/Libre Franklin-Black.woff") format("woff"), url("../fonts/Libre Franklin/Libre Franklin-Black.ttf") format("truetype");
-    font-weight: 900;
-    font-style: normal;
-}
 
 .bg-twitter {
     background: #2caae1;
