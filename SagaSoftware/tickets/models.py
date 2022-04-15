@@ -125,9 +125,9 @@ class TicketHistory(models.Model):
 
 class Comment(models.Model):
     body = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='comments')
-    ticket = models.ForeignKey(Ticket, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', blank=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
+    ticket = models.ForeignKey(Ticket, related_name='comments', on_delete=models.CASCADE, blank=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
 

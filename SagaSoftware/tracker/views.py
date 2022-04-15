@@ -341,15 +341,17 @@ def project_members(request, site_slug, project_key):
 
 
 @login_required
-def comments(request, project_key, ticket_key=None):
+def project_comments(request, project_key):
     project = get_object_or_404(Project, key=project_key)
-    ticket = Project.tickets.get(key=ticket_key) if ticket_key else None
     form = CommentForm(request.POST or None)
     if form.is_valid():
-        p_comment = form.cleaned_data('p_comment')
-        if p_comment: #this mean that the user has commented on a project
-            form.istance.project = project
-        else:
-            project.instance.ticket = ticket
+        form.save(commit=False)
+        form.instance.project = project
+        form.instance.author = request.user
+        template = render_to_string(
+                "tracker/new_comment.html", {'instance': form.instance, }, request=request)
         form.save()
-    return JsonResponse({"success": True})
+        return JsonResponse({'success': True, 'template': template})
+    context = csrf(request)
+    formWithErrors = render_crispy_form(form, context=context)
+    return JsonResponse({"success": False, "formErrors": formWithErrors})

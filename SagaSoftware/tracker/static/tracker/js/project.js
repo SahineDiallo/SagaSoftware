@@ -717,6 +717,22 @@ $(document).ready(function() {
     $(".cmt_on.btn-block").on("click", (e)=> {
         e.preventDefault();
         var settings_page = window.location.pathname.includes('settings')
+        var url = `/trackers/projects/comments/${url_end}/`
+        var _form = document.getElementById("ProjectCommentForm")
+        var _form_data = new FormData(_form)
+        fetch(url, {method:'POST', body: _form_data})
+            .then(res => res.json())
+            .then(data => {
+                var comments_place = $(".p_comments.flex-grow-1")
+                if (data.success ) {
+                    if (comments_place.find(".empt_hist").length) {$(".p_comments.flex-grow-1 .empt_hist").fadeOut();}
+                    comments_place.append(data.template)
+                }
+            })
+            .catch(error => {
+                alert("something went wrong. Please try later!")
+                console.log("error", error)
+            })
         console.log("the comment btn has been clicked for sure");
     })
 })

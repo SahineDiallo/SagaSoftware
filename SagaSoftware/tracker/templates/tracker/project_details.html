@@ -79,7 +79,7 @@
                 </div>
                 <div class="tab-pane fade" id="vert-tabs-right-members" role="tabpanel" aria-labelledby="vert-tabs-right-members-tab">
                     <div class="row">
-                      <div class="d-flex align-items-center justify-content-between flex-grow-1 mb-3">
+                      <div class="d-flex align-items-center justify-content-between flex-grow-1 mb-3 px-3">
                         <h3>Project Members</h3>
                         <button type="button" class="btn btn-secondary btn-sm add_new_users">
                         <i class="mdi mdi-plus"></i> Add users to project
@@ -231,9 +231,9 @@
                         {% empty %}
                         <p class="empt_hist mb-3"> Be the first one the comment one this project<p>
                       {% endfor %}
+                    </div>
                     <div>
-                    <div>
-                      <form method="POST" class="form-horizontal">
+                      <form method="POST" id="ProjectCommentForm" class="form-horizontal">
                         {% csrf_token %}
                         {{ commentForm |crispy }}
                         <button type="submit" class="btn btn-primary cmt_on btn-block">Comment</button>
@@ -242,7 +242,11 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="vert-tabs-right-history" role="tabpanel" aria-labelledby="vert-tabs-right-history-tab">
-                    history part
+                    {% for instance in project.ticket_histories.all %}
+                      {% include 'tracker/new_ticket_history.html' %}
+                      {% empty %}
+                        <p class="empt_hist mb-3"> It seems like there are not ticket history Here......<p>
+                    {% endfor %}
                 </div>
               </div>
         </div>

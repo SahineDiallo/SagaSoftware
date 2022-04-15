@@ -36,4 +36,6 @@ urlpatterns = [
           tracker_views.removeMember, name="remove_member"),
      path("delete-milestone/<int:mil_id>/",
           tracker_views.delete_milestone, name="delete_milestone"),
+     path("projects/comments/<slug:project_key>/",
+          tracker_views.project_comments, name="project_comments"),
 ]
