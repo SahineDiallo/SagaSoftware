@@ -96,7 +96,7 @@
                           </div>
 
                           <div class="card">
-                            <div class="card-header">          
+                            <div class="card-header cldr-chrt-box">          
                               <div class="card-tools d-flex align-items-center">
                                 <div class="input-group input-group-sm" style="width: 450px;">
                                   <input type="text" name="table_search" class="form-control float-right" placeholder="Search by email or last name">
@@ -111,7 +111,7 @@
                               </div>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
+                            <div class="card-body cldr-chrt-box table-responsive p-0">
                               <table class="table table-hover text-nowrap">
                                 <thead>
                                   <tr>
@@ -125,7 +125,7 @@
                                   </tr>
                                 </thead>
                                 <tbody id="proj_mem_list">
-                                  {% for member in proj_mem %}
+                                  {% for member in members %}
                                   <tr>
                                     <td>{{member.last_name}}</td>
                                     <td>{{member.first_name}}</td>
@@ -133,13 +133,18 @@
                                     <td>{{member.role}}</td>
                                     <td>{{member.create_on|date:"M d, Y"}}</td>
                                     <td>{{member.last_login|date:"M d, Y"}}</td>
-                                    <td>
-                                      <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
-                                        <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
-                                        <span><i class="mdi mdi-eye" ></i></span>
-                                        <span><i class="mdi mdi-trash-can"></i></span>
-                                      </span>
-                                    </td>
+                                    {% if not request.user.role == 'Developer' %}
+                    
+                                      <td>
+                                          {% if not member.is_site_creator or memmber == request.user %}
+                                          <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
+                                          <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
+                                          <span><i class="mdi mdi-trash-can"></i></span>
+                                          </span>
+                                          {% endif %}
+                                      </td>
+
+                                    {% endif %}
                                   </tr>
                                   {% empty %}
                                   <p class="empty-instance"> this project has no members currently. Please invite members or add existing ones to the project</p>
@@ -156,9 +161,11 @@
                 <div class="tab-pane fade" id="vert-tabs-right-milestone" role="tabpanel" aria-labelledby="vert-tabs-right-milestone-tab">
                     <div class="d-flex align-items-center justify-content-between py-3">
                       <h3 class="card-title m-0">Project Milestones</h3>
+                      {% if not request.user.role == 'Developer' %}
                       <button type="button" id="add_mil" class="btn btn-success btn-sm mr-2">
                         Add Milestone
                       </button>
+                      {% endif %}
                       <button type="button" id="edit_mil" class="btn btn-success btn-sm mr-2">
                         Edit Milestone
                       </button>
@@ -218,7 +225,21 @@
                       </div>
                 </div>
                 <div class="tab-pane fade" id="vert-tabs-right-comments" role="tabpanel" aria-labelledby="vert-tabs-right-comments-tab">
-                  comments parts
+                  <div class="col-lg-6 m-auto flex-column border p-3">
+                    <div class="p_comments flex-grow-1">
+                      {% for comment in project.comments.all %}
+                        {% empty %}
+                        <p class="empt_hist mb-3"> Be the first one the comment one this project<p>
+                      {% endfor %}
+                    <div>
+                    <div>
+                      <form method="POST" class="form-horizontal">
+                        {% csrf_token %}
+                        {{ commentForm |crispy }}
+                        <button type="submit" class="btn btn-primary cmt_on btn-block">Comment</button>
+                      </form>
+                    </div>
+                  </div>
                 </div>
                 <div class="tab-pane fade" id="vert-tabs-right-history" role="tabpanel" aria-labelledby="vert-tabs-right-history-tab">
                     history part

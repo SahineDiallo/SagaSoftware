@@ -1534,6 +1534,7 @@ table.dataTable td:nth-child(1) {
 
 #ex1-content label[for='id_status'],
 #ex1-content label[for='id_subject'],
+label[for='id_body'],
 #editFullTicketForm label[for='id_subject'] {
     display: none;
 }

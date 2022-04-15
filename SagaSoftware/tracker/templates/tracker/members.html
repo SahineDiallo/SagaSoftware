@@ -4,9 +4,11 @@
     {% include 'tracker/new_tkt_and_ov_head.html' %}
     <div class="d-flex align-items-center justify-content-between flex-grow-1 mb-3 mt-5 px-3">
         <h3>Project Members</h3>
+        {% if not request.user.role == 'Developer' %}
         <button type="button" class="btn btn-secondary btn-sm add_new_users">
         <i class="mdi mdi-plus"></i> Add users to project
         </button>
+        {% endif %}
       </div>
     <div class="col-12">
         <div class="card p-3 add_members_section" style="background: #f3f3f3;">
@@ -40,12 +42,16 @@
                   <td>{{member.create_on|date:"M d, Y"}}</td>
                   <td>{{member.last_login|date:"M d, Y"}}</td>
                   {% if not request.user.role == 'Developer' %}
-                  <td>
-                    <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
-                      <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
-                      <span><i class="mdi mdi-trash-can"></i></span>
-                    </span>
-                  </td>
+                    
+                    <td>
+                        {% if not member.is_site_creator or memmber == request.user %}
+                        <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
+                        <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
+                        <span><i class="mdi mdi-trash-can"></i></span>
+                        </span>
+                        {% endif %}
+                    </td>
+
                   {% endif %}
                 </tr>
                 {% empty %}

@@ -20,7 +20,7 @@ from crispy_forms.utils import render_crispy_form
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from tickets.models import Ticket
-from tickets.forms import CreateTicketForm
+from tickets.forms import CreateTicketForm, CommentForm
 from django.db.models import Count
 from itertools import chain
 
@@ -153,12 +153,13 @@ class ProjectDetailView(LoginRequiredMixin, View):
         navbarBg = project.project_theme.split(' ')[1]
         milestones = project.milestones.all()
         project_members = project.members.all()
+        commentForm = CommentForm(request.POST or None)
         context = {
             'site_slug': site_slug, 'project': project,
             'form': form, 'project_icon': project.project_icon,
             'project_color': project.project_color,
-            'activeProjectBg': activeProjectBg, 'proj_mem': project_members,
-            'activeNav': navbarBg,
+            'activeProjectBg': activeProjectBg, 'members': project_members,
+            'activeNav': navbarBg, 'commentForm': commentForm,
             'mile_form': milestone_form, 'milestones': milestones}
         return render(request, 'tracker/project_details.html', context)
 

@@ -4,6 +4,7 @@ from .models import Ticket
 from crispy_forms.helper import FormHelper
 from django_quill.forms import QuillFormField
 from tracker.models import Project
+from tickets.models import Comment
 
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 from django.forms.widgets import HiddenInput
@@ -52,6 +53,13 @@ class CreateTicketForm(forms.ModelForm):
         self.fields["progress"].widget.attrs["placeholder"] = "0"
         self.fields['assignee'].queryset = project.members.all()
         self.fields['accountable'].queryset = project.members.all()
+        if self.request.user.role == 'Developer':
+            self.fields['subject'].widget.attrs['disabled'] = True
+            self.fields['start_date'].widget.attrs['disabled'] = True
+            self.fields['end_date'].widget.attrs['disabled'] = True
+            self.fields['assignee'].widget.attrs['disabled'] = True
+            self.fields['accountable'].widget.attrs['disabled'] = True
+            self.fields['milestone'].widget.attrs['disabled'] = True
         if not instance:
             self.fields['status'].widget.attrs['disabled'] = True
             self.helper.layout = Layout(
@@ -100,3 +108,10 @@ class CreateTicketForm(forms.ModelForm):
                 Field("milestone"),
         
             )
+
+
+class CommentForm(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={'rows': 2}))
+    class Meta: 
+        model = Comment
+        fields = ('body',)
