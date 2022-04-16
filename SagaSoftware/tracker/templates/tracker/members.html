@@ -44,7 +44,7 @@
                   {% if not request.user.role == 'Developer' %}
                     
                     <td>
-                        {% if not member.is_site_creator or memmber == request.user %}
+                        {% if not member.is_site_creator or member == request.user %}
                         <span data-reg="{{member.id}}" class="d-flex align-items-center justify-content-around">
                         <span><i class="mdi mdi-pencil" data-toggle="modal" data-target="#editRoleModal" ></i></span>
                         <span><i class="mdi mdi-trash-can"></i></span>

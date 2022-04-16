@@ -443,7 +443,7 @@ $(document).ready(function() {
         alertify.success(`${type} <span class="alert-key">${key} </span>${message}`);
     };
 
-    ["#MainEquipDiv", '._stat__child'].forEach((selector, index)=> {
+    ["#MainEquipDiv", '._stat'].forEach((selector, index)=> {
         $(selector).on('click', ".tkt-dtls", (e)=> {
             $(".cr-edt-tkt.p-3.edt-tkt").show('slide', { direction: 'right' }, 500)
             let _key;
@@ -491,7 +491,7 @@ $(document).ready(function() {
         $(selector).on('click', ".tkt-delete", (e) => {
             $("#deleteTicketModal").modal();
             let key;
-            if(baord_page) {
+            if(board_page) {
                 key = e.target.closest('.card').getAttribute('data-key').trim().slice(2)
             } else {
                 var tr = e.target.closest('tr')
@@ -672,14 +672,16 @@ $(document).ready(function() {
     
                 } else if(data.fname === "assignee" | data.fname === "accountable"){
                     var ass_or_acc = document.querySelector(`${selector} .tkts-asg.ml-2.${data.fname.slice(0, 3)}`)
-                    if (ass_or_acc.classList.contains('d-none') ){
-                        $(ass_or_acc).removeClass('d-none') 
+                    if(ass_or_acc !== null) {
+                        if (ass_or_acc.classList.contains('d-none') ){
+                            $(ass_or_acc).removeClass('d-none') 
+                        }
+                        if (!data.fvalue) {
+                            ass_or_acc.classList.add('d-none')
+                        }
+                        ass_or_acc.style.background = data.background
+                        ass_or_acc.textContent = data.first_letters
                     }
-                    if (!data.fvalue) {
-                        ass_or_acc.classList.add('d-none')
-                    }
-                    ass_or_acc.style.background = data.background
-                    ass_or_acc.textContent = data.first_letters
                 }
                 alertUser(`${data.fname} `, 'has been updated with success', "Ticket's ")
                 if(index === 0 ) {

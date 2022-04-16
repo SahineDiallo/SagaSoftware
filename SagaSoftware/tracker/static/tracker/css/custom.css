@@ -1306,7 +1306,7 @@ table.dataTable td:nth-child(1) {
 }
 .tkts-asg,
 .tkts-rpt {
-    background: blueviolet;
+    background: #e8e8e9;
     border-radius: 50%;
     padding: 4px;
     font-size: 10px;
@@ -1318,6 +1318,7 @@ table.dataTable td:nth-child(1) {
     display: inline-block;
     text-align: center;
     line-height: 19px;
+    min-width: 26px;
 }
 ._stat__child {
     max-height: calc(100% - 40px);
@@ -1543,6 +1544,17 @@ label[for='id_body'],
 #editFullTicketForm #div_id_subject{
     margin-bottom: 0;
     flex-grow: 1;
+}
+.comment {
+    font-size: .9rem;
+    font-weight: 400;
+    letter-spacing: 0.03rem;
+    color: #3c3c3c;
+}
+.board_box {
+    max-width: 1450px;
+    overflow-x: auto;
+    min-width: 1450px;
 }
 
 #ex1-content {

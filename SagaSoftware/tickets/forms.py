@@ -53,18 +53,12 @@ class CreateTicketForm(forms.ModelForm):
         self.fields["progress"].widget.attrs["placeholder"] = "0"
         self.fields['assignee'].queryset = project.members.all()
         self.fields['accountable'].queryset = project.members.all()
-        if self.request.user.role == 'Developer':
-            self.fields['subject'].widget.attrs['disabled'] = True
-            self.fields['start_date'].widget.attrs['disabled'] = True
-            self.fields['end_date'].widget.attrs['disabled'] = True
-            self.fields['assignee'].widget.attrs['disabled'] = True
-            self.fields['accountable'].widget.attrs['disabled'] = True
-            self.fields['milestone'].widget.attrs['disabled'] = True
+
         if not instance:
             self.fields['status'].widget.attrs['disabled'] = True
             self.helper.layout = Layout(
 
-                Field("ticket_type"),
+                Field("ticket_type", css_class="col-md-4"),
                 Field("subject"),
                 Field("description"),
                 HTML(

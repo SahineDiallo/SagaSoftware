@@ -176,7 +176,7 @@ def get_tickets_by_kwargs(user, project, **kwargs):
     if order == 'des' or order == "desc":
         order_column = '-' + order_column
 
-    if user.role != '1' and user.role != '2':
+    if user.role != 'Admin' and user.role != 'Project Manager':
         queryset = queryset.filter(Q(assignee=user) | Q(accountable=user))
 
     if search_value:
@@ -222,6 +222,6 @@ def get_type_class(type):
 
 def get_val_from_ordDict(f_name, ord_dict):
     if f_name == 'assignee' or f_name == 'accountable':
-        return list(ord_dict[f_name].items())[0][1] #need to get the full_name
+        return list(ord_dict[f_name].items())[0][1] if ord_dict[f_name] else "None"  #need to get the full_name
     return ord_dict[f_name]
 
