@@ -1,7 +1,8 @@
 {% extends 'tracker/partials/base.html' %}
 {% block content %}
-    <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary mb-3">Invite New members</button>
-
+    {% if not request.user.role == 'Developer' %}
+        <button type="button" data-toggle="modal" data-target="#invitationsModal" class="btn btn-primary mb-3">Invite New members</button>
+    {% endif %}
 <!-- the project issues and trending row-->
 <div class="row mr-3">
     <!-- project issues div-->

@@ -7,7 +7,7 @@
     <div class="_stat open">
         <h5>Open</h5>
         <div class="_stat__child">
-        {% for ticket in project.tickets.all %}
+        {% for ticket in tickets %}
             {% if ticket.status == 'Open' %}
             {% include 'tracker/new_card.html' %}
             {% endif %}
@@ -17,7 +17,7 @@
     <div class="_stat todo">
         <h5>todo</h5>
         <div class="_stat__child">
-        {% for ticket in project.tickets.all %}
+        {% for ticket in tickets %}
             {% if ticket.status == 'Todo' %}
                 {% include 'tracker/new_card.html' %}
             {% endif %}
@@ -27,7 +27,7 @@
     <div class="_stat in_pro">
         <h5>In Progress</h5>
         <div class="_stat__child">
-        {% for ticket in project.tickets.all %}
+        {% for ticket in tickets %}
             {% if ticket.status == 'In Progress' %}
             {% include 'tracker/new_card.html' %}
             {% endif %}
@@ -37,7 +37,7 @@
     <div class="_stat resolved">
         <h5>Resolved</h5>
         <div class="_stat__child">
-        {% for ticket in project.tickets.all %}
+        {% for ticket in tickets %}
             {% if ticket.status == 'Resolved' %}
             {% include 'tracker/new_card.html' %}
             {% endif %}
@@ -47,7 +47,7 @@
     <div class="_stat closed">
         <h5>Closed</h5>
         <div class="_stat__child">
-        {% for ticket in project.tickets.all %}
+        {% for ticket in tickets %}
             {% if ticket.status == 'Closed' %}
             {% include 'tracker/new_card.html' %}
             {% endif %}

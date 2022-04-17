@@ -21,7 +21,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from tickets.models import Ticket, Comment
 from tickets.forms import CreateTicketForm, CommentForm
-from django.db.models import Count
+from django.db.models import Count, Q
 from itertools import chain
 
 User = get_user_model()
@@ -304,13 +304,16 @@ def project_home(request, site_slug, project_key):
 @login_required
 def project_board(request, site_slug, project_key):
     project = get_object_or_404(Project, key=project_key)
+    tickets = project.tickets.all()
     form = CreateTicketForm(request.POST or None, request=request)
     members = project.members.all()[:3]
     left_members_count = project.members.all()[3:].count()
+    if request.user.role == 'Developer':
+        tickets = tickets.filter(Q(assignee=request.user) | Q(accountable=request.user))
     context = {
         'project': project, 'form': form,
         'members': members,
-        'count':left_members_count
+        'count':left_members_count, 'tickets': tickets
     }
     return render(request, 'tracker/board.html', context)
 

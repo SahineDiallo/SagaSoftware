@@ -65,6 +65,21 @@
                   <div class="text-center mt-4 font-weight-light">
                     Don't have an account? <a href="{% url 'registration' %}" class="text-primary">Create</a>
                   </div>
+
+                  <p class="text-center my-2">You can try out the demo accounts</p>
+                  <div class="mb-2 d-flex">
+                    <a href="{% url 'demo' %}?user-case=Developer" style="color: white;" type="button" class="btn btn-facebook auth-form-btn flex-grow me-1">
+                      <i class="mdi mdi-user"></i>Developer
+                    </a>
+                    
+                    <a href="{% url 'demo' %}?user-case=Manager" style="color: white;" type="button" class="btn btn-google auth-form-btn flex-grow mx-1">
+                      <i class="mdi mdi-user mx-1"></i>Project Lead
+                   </a>
+                   <a href="{% url 'demo' %}?user-case=Admin" style="color: white;" type="button" class="btn btn-secondary auth-form-btn flex-grow mx-1">
+                    <i class="mdi mdi-user mx-1"></i>Admin
+                 </a>
+                    
+                  </div>
               </form>
             </div>
           </div>

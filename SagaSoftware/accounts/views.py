@@ -136,6 +136,18 @@ def email_confirmation(request):
     context = {}
     return render(request, 'accounts\email_confirmation.html', context)
 
+def demoUsers(request):
+    user_case = request.GET.get('user-case')
+    if user_case == 'Developer':
+        user = User.objects.get(email='demo-developer@demo.com')
+    elif user_case == 'Manager':
+        user = User.objects.get(email='projectmanager@demo.com')
+    else:
+        user = User.objects.get(email='demoAdmin@demo.com')
+
+    login(request, user)
+    return redirect(reverse("dashboard", kwargs={"site_slug": user.profile.site.slug}))
+
 
 def Logout(request):
     logout(request)
