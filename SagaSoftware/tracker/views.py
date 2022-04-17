@@ -19,7 +19,7 @@ from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
-from tickets.models import Ticket
+from tickets.models import Ticket, Comment
 from tickets.forms import CreateTicketForm, CommentForm
 from django.db.models import Count
 from itertools import chain
@@ -322,6 +322,7 @@ def project_backlog(request, site_slug, project_key):
     count = project.members.all()[3:].count()
     members = project.members.all()[:3]
     form = CreateTicketForm(request.POST or None, request=request)
+    commentForm = CommentForm(request.POST or None)
     type_list = [i[0] for i in Ticket.TicketType.choices]
     context = {
         'project': project, 
@@ -355,3 +356,29 @@ def project_comments(request, project_key):
     context = csrf(request)
     formWithErrors = render_crispy_form(form, context=context)
     return JsonResponse({"success": False, "formErrors": formWithErrors})
+
+@login_required
+def ticket_comments(request, project_key, ticket_key):
+    project = get_object_or_404(Project, key=project_key)
+    ticket = project.tickets.get(key=f"#.{ticket_key}")
+    form = CommentForm(request.POST or None)
+    if form.is_valid():
+        form.save(commit=False)
+        form.instance.ticket = ticket
+        form.instance.author = request.user
+        form.save()
+        template = render_to_string(
+                "tracker/new_comment.html", {'instance': form.instance, }, request=request)
+        form.save()
+        return JsonResponse({'success': True, 'template': template})
+    context = csrf(request)
+    formWithErrors = render_crispy_form(form, context=context)
+    return JsonResponse({"success": False, "formErrors": formWithErrors})
+
+
+
+def delete_comment(request): 
+    key = request.GET.get('key')
+    com = Comment.objects.get(id=key)
+    com.delete()
+    return JsonResponse({'success': True})

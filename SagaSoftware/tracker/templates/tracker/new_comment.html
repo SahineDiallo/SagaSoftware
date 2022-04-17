@@ -1,6 +1,6 @@
  <!-- Comment #1 //-->
  {% load customTimeSince %}
- <div class="">
+ <div class="com_inst" data-key="{{instance.id}}">
     <div class="py-3">
        <div class="d-flex comment" style="">
             <span class="user-p-img mr-2" style="background:{{instance.author.background}}; min-width: 32px">PD</span>
@@ -9,7 +9,7 @@
              <div class="mb-2">{{instance.body}}</div>
              {% if request.user == instance.author %}
              <div class="hstack align-items-center mb-2">
-                <a class="text-danger small mr-2" href="#"><i class="mdi mdi-trash-can-outline" ></i>Delete</a>
+                <a class="text-danger small mr-2 del_com"  href="#"><i class="mdi mdi-trash-can-outline" ></i>Delete</a>
              </div>
              {% endif %}
           </div>

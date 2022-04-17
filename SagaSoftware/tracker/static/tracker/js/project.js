@@ -714,11 +714,33 @@ $(document).ready(function() {
 
     }
 
+    $(".cr-edt-tkt.p-3.edt-tkt").on("click", ".cmt_on.btn-block", (e) => {
+        e.preventDefault();
+        var ticket_key = $("#editTicketForm .inst_key").text().trim().slice(2)
+        var _form = document.getElementById('TicketCommentForm')
+        var _form_data = new FormData(_form);
+        var url = `/trackers/tickets/comments/${url_end}/${ticket_key}/ `
+        fetch(url, {method:'POST', body: _form_data})
+            .then(res => res.json())
+            .then(data => {
+                var comments_place = $("#ex1-tabs-3 .p_comments.flex-grow-1")
+                if (data.success ) {
+                    if (comments_place.find(".empt_hist").length) {$(".p_comments.flex-grow-1 .empt_hist").fadeOut();}
+                    comments_place.append(data.template)
+                    $(_form)[0].reset();
+                }
+            })
+            .catch(error => {
+                alert("something went wrong. Please try later!")
+                console.log("error", error)
+            })
+    })
+
     $(".cmt_on.btn-block").on("click", (e)=> {
         e.preventDefault();
-        var settings_page = window.location.pathname.includes('settings')
-        var url = `/trackers/projects/comments/${url_end}/`
-        var _form = document.getElementById("ProjectCommentForm")
+        _form = document.getElementById("ProjectCommentForm");
+        url = `/trackers/projects/comments/${url_end}/`
+
         var _form_data = new FormData(_form)
         fetch(url, {method:'POST', body: _form_data})
             .then(res => res.json())
@@ -727,12 +749,34 @@ $(document).ready(function() {
                 if (data.success ) {
                     if (comments_place.find(".empt_hist").length) {$(".p_comments.flex-grow-1 .empt_hist").fadeOut();}
                     comments_place.append(data.template)
+                    $(_form)[0].reset();
                 }
             })
             .catch(error => {
                 alert("something went wrong. Please try later!")
                 console.log("error", error)
             })
-        console.log("the comment btn has been clicked for sure");
+    })
+    $(".cr-edt-tkt.p-3.edt-tkt").on("click", ".del_com", (e) => {
+        var com_id = e.target.closest('.com_inst').getAttribute('data-key');
+        $("#del_comment .modal-body").attr("data-key", com_id)
+        $("#del_comment").modal();
+    });
+    $("#del_com").on("click", (e) => {
+        var key = e.target.closest('.modal-body').getAttribute('data-key');
+        var url = `/trackers/tickets/comments/delete/?key=${key}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success ) {
+                    $("#del_comment").modal('hide');
+                    $(`.com_inst[data-key="${key}"]`).fadeOut();
+                    alertUser('Comment', 'deleted with sucess', 'Your')
+                }
+            })
+            .catch(error => {
+                alert("something went wrong. Please try later!")
+                console.log("error", error)
+            })
     })
 })

@@ -38,4 +38,8 @@ urlpatterns = [
           tracker_views.delete_milestone, name="delete_milestone"),
      path("projects/comments/<slug:project_key>/",
           tracker_views.project_comments, name="project_comments"),
+     path("tickets/comments/<slug:project_key>/<slug:ticket_key>/",
+          tracker_views.ticket_comments, name="ticket_comments"),
+     path("tickets/comments/delete/",
+          tracker_views.delete_comment, name="delete_comments"),
 ]

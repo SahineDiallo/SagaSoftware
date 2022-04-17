@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, render
 from rest_framework import viewsets, status
 from .serializers import ReadTicketSerializer, timeLineDataSerializer, WriteTicketSerializer, UserSerializer
 from .models import Ticket, TicketHistory
+from .forms import CommentForm
 from tracker.models import Project
 from accounts.utils import (
     get_tickets_by_kwargs, get_type_class, get_val_from_ordDict
@@ -83,6 +84,7 @@ def editTicket(request, project_key):
     result = dict()
     project = get_object_or_404(Project, key=project_key)
     key = '#' + request.GET.get('key')
+    commentForm = CommentForm(request.POST or None)
     try:
         instance = project.tickets.get(key=key)
         type_class = get_type_class(instance.ticket_type)
@@ -143,6 +145,7 @@ def editTicket(request, project_key):
     context = {
         'form': form, 'type_class': type_class, 
         'instance':instance, 'key': instance.key[2:],
+         'commentForm': commentForm,
     }
         
     template = render_to_string('tracker/edit_ticket.html', context, request=request)
