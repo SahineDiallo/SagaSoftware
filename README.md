@@ -45,3 +45,7 @@ or administration systems.
     - Jquery Multiselect
     - flatpickr
 
+
+## Preview Images
+
+![image](https://user-images.githubusercontent.com/101523484/163738412-c0bd3240-2e08-47c8-89c4-ae6da19ade30.gif)
