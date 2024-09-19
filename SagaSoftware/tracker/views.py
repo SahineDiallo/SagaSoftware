@@ -100,6 +100,8 @@ def inviteMembers(request):
                     'accounts/emailMessageTemplate.html').render(context_data)
                 subject = f"Invitation from {form.instance.inviter.profile.site.site_name}"
                 from_email = settings.EMAIL_HOST_USER
+                print("this is the from email", from_email)
+                print("this is the domain", domain)
                 email = EmailMessage(
                     subject, message_template, from_email, [email, ]
                 )
